@@ -5,10 +5,10 @@
 {% block body %}
     <div class="flex h-screen">
         <!-- Toolbar -->
-        <div id="toolbar" class="flex flex-col md:w-1/4 w-full bg-gray-900 text-white fixed inset-0 md:relative md:translate-x-0 -translate-x-full transition-transform duration-300 z-10">
+        <div id="toolbar" class="toolbar flex flex-col md:w-1/4 w-full bg-gray-900 text-white fixed inset-0 md:relative md:translate-x-0 -translate-x-full transition-transform duration-300 z-10" {{ stimulus_controller('container') }}>
             <div class="flex h-20 p-4 border-b border-r border-gray-700">
                 <!-- Toggle Button (visible on small screens) -->
-                <button class="md:hidden mr-2 text-white focus:outline-none" onclick="toggleToolbar()">
+                <button class="md:hidden mr-2 text-white focus:outline-none" {{ stimulus_controller('toggle', {}, {toggle: 'translate-x-0'}, {container: '.toolbar'}) }}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
@@ -49,7 +49,7 @@
        <div id="chatContainer" class="flex flex-col md:w-3/4 w-full bg-gray-800 text-white">
             <div class="flex h-20 items-center bg-gray-900 p-4 border-b border-gray-700">
                 <!-- Toggle Button (visible on small screens) -->
-                <button class="md:hidden text-white focus:outline-none" onclick="toggleToolbar()">
+                <button class="md:hidden text-white focus:outline-none" {{ stimulus_controller('toggle', {}, {toggle: 'translate-x-0'}, {container: '.toolbar'}) }}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
                     </svg>
@@ -116,12 +116,4 @@
             {% endif %}
         </div>
     </div>
-
-    <!-- JavaScript to toggle toolbar visibility -->
-    <script>
-        function toggleToolbar() {
-            var toolbar = document.getElementById('toolbar');
-            toolbar.classList.toggle('translate-x-0');
-        }
-    </script>
 {% endblock %}

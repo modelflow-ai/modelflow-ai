@@ -11,7 +11,7 @@ export default class extends Controller {
 
     toggleDropdown() {
         this.dropdownTarget.classList.toggle('hidden');
-        this.iconTarget.classList.toggle("rotate-180");
+        this.iconTarget.classList.toggle('rotate-180');
     }
 
     closeDropdown(event) {
