@@ -43,7 +43,7 @@ class AIChatRequestTest extends TestCase
 
         $request = new AIChatRequest($messages, $criteria, [], [], [], $requestHandler);
 
-        $this->assertTrue($request->matches(FeatureCriteria::IMAGE_TO_TEXT));
+        $this->assertTrue($request->matches([FeatureCriteria::IMAGE_TO_TEXT]));
     }
 
     public function testConstructorWithStreamed(): void
@@ -58,7 +58,7 @@ class AIChatRequestTest extends TestCase
 
         $request = new AIChatRequest($messages, $criteria, [], [], ['streamed' => true], $requestHandler);
 
-        $this->assertTrue($request->matches(FeatureCriteria::STREAM));
+        $this->assertTrue($request->matches([FeatureCriteria::STREAM]));
     }
 
     public function testExecute(): void
@@ -80,14 +80,14 @@ class AIChatRequestTest extends TestCase
     public function testMatches(): void
     {
         $criteria1 = CapabilityCriteria::BASIC;
-        $criteria2 = PrivacyCriteria::HIGH;
+        $criteria2 = PrivacyCriteria::LOW;
         $criteriaCollection = new AIRequestCriteriaCollection([$criteria1, $criteria2]);
 
         $requestHandler = fn () => null;
         $request = new AIChatRequest(new AIChatMessageCollection(), $criteriaCollection, [], [], [], $requestHandler);
 
-        $this->assertTrue($request->matches(CapabilityCriteria::BASIC));
-        $this->assertTrue($request->matches(PrivacyCriteria::LOW));
+        $this->assertTrue($request->matches([CapabilityCriteria::BASIC]));
+        $this->assertTrue($request->matches([PrivacyCriteria::HIGH]));
     }
 
     public function testOptions(): void

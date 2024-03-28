@@ -17,5 +17,8 @@ use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 
 interface AIRequestInterface
 {
-    public function matches(AiCriteriaInterface $criteria): bool;
+    /**
+     * @param AiCriteriaInterface[] $criteria
+     */
+    public function matches(array $criteria): bool;
 }

@@ -15,26 +15,9 @@ namespace ModelflowAi\Core\Request\Criteria;
 
 enum PrivacyCriteria: int implements AiCriteriaInterface
 {
+    use LevelCriteriaTrait;
+
     case HIGH = 4;
     case MEDIUM = 2;
     case LOW = 1;
-
-    public function matches(AiCriteriaInterface $toMatch): bool
-    {
-        if (!$toMatch instanceof self) {
-            return true;
-        }
-
-        return $this->value >= $toMatch->value;
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request;
 
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\Core\Response\AIResponseInterface;
 
@@ -47,7 +46,7 @@ abstract class AIRequest implements AIRequestInterface
         return $this->options[$key] ?? $default;
     }
 
-    public function matches(AiCriteriaInterface $criteria): bool
+    public function matches(array $criteria): bool
     {
         return $this->criteria->matches($criteria);
     }

@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
+
 interface AiCriteriaInterface
 {
-    public function matches(self $toMatch): bool;
+    public function matches(self $toMatch): DecisionEnum;
 
     public function getValue(): int|string;
 

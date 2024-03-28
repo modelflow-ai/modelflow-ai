@@ -15,7 +15,7 @@ namespace ModelflowAi\Core\Request\Criteria;
 
 use ModelflowAi\Core\DecisionTree\DecisionEnum;
 
-trait FlagCriteriaTrait
+trait LevelCriteriaTrait
 {
     public function matches(AiCriteriaInterface $toMatch): DecisionEnum
     {
@@ -23,10 +23,10 @@ trait FlagCriteriaTrait
             return DecisionEnum::ABSTAIN;
         }
 
-        return $this->getValue() === $toMatch->getValue() ? DecisionEnum::MATCH : DecisionEnum::SAME_TYPE;
+        return $this->value <= $toMatch->value ? DecisionEnum::MATCH : DecisionEnum::NO_MATCH;
     }
 
-    public function getValue(): string
+    public function getValue(): int
     {
         return $this->value;
     }

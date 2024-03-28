@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use PHPUnit\Framework\TestCase;
@@ -24,16 +25,16 @@ class CapabilityCriteriaTest extends TestCase
 
     public function testMatches(): void
     {
-        $capabilityRequirement = CapabilityCriteria::SMART;
+        $capabilityRequirement = CapabilityCriteria::BASIC;
 
-        $this->assertTrue($capabilityRequirement->matches(CapabilityCriteria::BASIC));
+        $this->assertSame(DecisionEnum::MATCH, $capabilityRequirement->matches(CapabilityCriteria::SMART));
     }
 
     public function testMatchesReturnsFalseWhenCriteriaDoesNotMatch(): void
     {
-        $capabilityRequirement = CapabilityCriteria::BASIC;
+        $capabilityRequirement = CapabilityCriteria::SMART;
 
-        $this->assertFalse($capabilityRequirement->matches(CapabilityCriteria::SMART));
+        $this->assertSame(DecisionEnum::NO_MATCH, $capabilityRequirement->matches(CapabilityCriteria::BASIC));
     }
 
     public function testMatchesReturnsTrueForADifferentCriteria(): void
@@ -42,6 +43,6 @@ class CapabilityCriteriaTest extends TestCase
 
         $capabilityRequirement = CapabilityCriteria::SMART;
 
-        $this->assertTrue($capabilityRequirement->matches($mockCriteria->reveal()));
+        $this->assertSame(DecisionEnum::ABSTAIN, $capabilityRequirement->matches($mockCriteria->reveal()));
     }
 }
