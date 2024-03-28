@@ -11,14 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Request\Criteria;
+namespace ModelflowAi\Core\DecisionTree;
 
-enum CapabilityCriteria: int implements AiCriteriaInterface
+enum DecisionEnum
 {
-    use LevelCriteriaTrait;
-
-    case SMART = 8;
-    case ADVANCED = 4;
-    case INTERMEDIATE = 2;
-    case BASIC = 1;
+    case MATCH;
+    case NO_MATCH;
+    case SAME_TYPE;
+    case ABSTAIN;
 }

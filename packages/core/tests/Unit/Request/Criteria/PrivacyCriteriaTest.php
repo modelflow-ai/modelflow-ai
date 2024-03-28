@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
 use PHPUnit\Framework\TestCase;
@@ -24,16 +25,16 @@ class PrivacyCriteriaTest extends TestCase
 
     public function testMatches(): void
     {
-        $privacyRequirement = PrivacyCriteria::HIGH;
+        $privacyRequirement = PrivacyCriteria::LOW;
 
-        $this->assertTrue($privacyRequirement->matches(PrivacyCriteria::LOW));
+        $this->assertSame(DecisionEnum::MATCH, $privacyRequirement->matches(PrivacyCriteria::HIGH));
     }
 
     public function testMatchesReturnsFalseWhenCriteriaDoesNotMatch(): void
     {
-        $privacyRequirement = PrivacyCriteria::LOW;
+        $privacyRequirement = PrivacyCriteria::HIGH;
 
-        $this->assertFalse($privacyRequirement->matches(PrivacyCriteria::HIGH));
+        $this->assertSame(DecisionEnum::NO_MATCH, $privacyRequirement->matches(PrivacyCriteria::LOW));
     }
 
     public function testMatchesReturnsTrueForADifferentCriteria(): void
@@ -42,6 +43,6 @@ class PrivacyCriteriaTest extends TestCase
 
         $privacyRequirement = PrivacyCriteria::HIGH;
 
-        $this->assertTrue($privacyRequirement->matches($mockCriteria->reveal()));
+        $this->assertSame(DecisionEnum::ABSTAIN, $privacyRequirement->matches($mockCriteria->reveal()));
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\DecisionTree;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
 use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIRequestInterface;
@@ -29,7 +30,7 @@ class DecisionRuleTest extends TestCase
         $adapter = $this->prophesize(AIModelAdapterInterface::class);
         $criteria = $this->prophesize(AiCriteriaInterface::class);
         $request = $this->prophesize(AIRequestInterface::class);
-        $request->matches($criteria->reveal())->willReturn(true);
+        $request->matches([$criteria->reveal()])->willReturn(true);
         $adapter->supports($request->reveal())->willReturn(true);
 
         $decisionRule = new DecisionRule($adapter->reveal(), [$criteria->reveal()]);
@@ -41,9 +42,9 @@ class DecisionRuleTest extends TestCase
     {
         $adapter = $this->prophesize(AIModelAdapterInterface::class);
         $criteria = $this->prophesize(AiCriteriaInterface::class);
-        $criteria->matches()->willReturn(false);
+        $criteria->matches()->willReturn(DecisionEnum::NO_MATCH);
         $request = $this->prophesize(AIRequestInterface::class);
-        $request->matches($criteria->reveal())->willReturn(false);
+        $request->matches([$criteria->reveal()])->willReturn(false);
         $adapter->supports($request->reveal())->willReturn(true);
 
         $decisionRule = new DecisionRule($adapter->reveal(), [$criteria->reveal()]);

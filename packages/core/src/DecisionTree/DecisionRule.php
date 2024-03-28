@@ -30,10 +30,8 @@ class DecisionRule implements DecisionRuleInterface
 
     public function matches(AIRequestInterface $request): bool
     {
-        foreach ($this->criteria as $criteria) {
-            if (!$request->matches($criteria)) {
-                return false;
-            }
+        if (!$request->matches($this->criteria)) {
+            return false;
         }
 
         return $this->adapter->supports($request);

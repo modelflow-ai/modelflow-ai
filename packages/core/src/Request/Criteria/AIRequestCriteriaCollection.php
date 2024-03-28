@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
+
 readonly class AIRequestCriteriaCollection
 {
     /**
@@ -23,10 +25,31 @@ readonly class AIRequestCriteriaCollection
     ) {
     }
 
-    public function matches(AiCriteriaInterface $toMatch): bool
+    /**
+     * @param AiCriteriaInterface[] $toMatch
+     */
+    public function matches(array $toMatch): bool
     {
+        $sameType = [];
         foreach ($this->criteria as $criteria) {
-            if (!$criteria->matches($toMatch)) {
+            foreach ($toMatch as $toMatchCriteria) {
+                $decision = $criteria->matches($toMatchCriteria);
+                if (DecisionEnum::NO_MATCH === $decision) {
+                    return false;
+                }
+                if (DecisionEnum::SAME_TYPE === $decision) {
+                    $sameType[$criteria::class] ??= 0;
+                    --$sameType[$criteria::class];
+                }
+                if (DecisionEnum::MATCH === $decision) {
+                    $sameType[$criteria::class] ??= 0;
+                    ++$sameType[$criteria::class];
+                }
+            }
+        }
+
+        foreach ($sameType as $match) {
+            if (0 > $match) {
                 return false;
             }
         }

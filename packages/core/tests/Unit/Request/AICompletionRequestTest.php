@@ -42,14 +42,14 @@ class AICompletionRequestTest extends TestCase
     public function testMatches(): void
     {
         $criteria1 = CapabilityCriteria::BASIC;
-        $criteria2 = PrivacyCriteria::HIGH;
+        $criteria2 = PrivacyCriteria::LOW;
         $criteriaCollection = new AIRequestCriteriaCollection([$criteria1, $criteria2]);
 
         $requestHandler = fn () => null;
         $request = new AICompletionRequest('Test content 1', $criteriaCollection, [], $requestHandler);
 
-        $this->assertTrue($request->matches(CapabilityCriteria::BASIC));
-        $this->assertTrue($request->matches(PrivacyCriteria::LOW));
+        $this->assertTrue($request->matches([CapabilityCriteria::BASIC]));
+        $this->assertTrue($request->matches([PrivacyCriteria::HIGH]));
     }
 
     public function testOptions(): void

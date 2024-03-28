@@ -48,8 +48,7 @@ class AIChatRequest extends AIRequest implements AIRequestInterface
         }
 
         if ([] !== $this->tools && ToolChoiceEnum::AUTO === $this->getOption('toolChoice', ToolChoiceEnum::AUTO)) {
-            // FIXME does not work currently when more than one criteria of feature is there
-            // $features[] = FeatureCriteria::TOOLS;
+            $features[] = FeatureCriteria::TOOLS;
         }
 
         parent::__construct($criteria->withFeatures($features), $options, $requestHandler);

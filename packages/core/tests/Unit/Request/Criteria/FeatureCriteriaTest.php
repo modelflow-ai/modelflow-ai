@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
+use ModelflowAi\Core\DecisionTree\DecisionEnum;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\FeatureCriteria;
 use PHPUnit\Framework\TestCase;
@@ -26,14 +27,14 @@ class FeatureCriteriaTest extends TestCase
     {
         $featureCriteria = FeatureCriteria::IMAGE_TO_TEXT;
 
-        $this->assertTrue($featureCriteria->matches(FeatureCriteria::IMAGE_TO_TEXT));
+        $this->assertSame(DecisionEnum::MATCH, $featureCriteria->matches(FeatureCriteria::IMAGE_TO_TEXT));
     }
 
     public function testMatchesReturnsFalseWhenCriteriaDoesNotMatch(): void
     {
         $featureCriteria = FeatureCriteria::IMAGE_TO_TEXT;
 
-        $this->assertFalse($featureCriteria->matches(FeatureCriteria::TOOLS));
+        $this->assertSame(DecisionEnum::SAME_TYPE, $featureCriteria->matches(FeatureCriteria::TOOLS));
     }
 
     public function testMatchesReturnsTrueForADifferentCriteria(): void
@@ -42,6 +43,6 @@ class FeatureCriteriaTest extends TestCase
 
         $featureCriteria = FeatureCriteria::IMAGE_TO_TEXT;
 
-        $this->assertTrue($featureCriteria->matches($mockCriteria->reveal()));
+        $this->assertSame(DecisionEnum::ABSTAIN, $featureCriteria->matches($mockCriteria->reveal()));
     }
 }
