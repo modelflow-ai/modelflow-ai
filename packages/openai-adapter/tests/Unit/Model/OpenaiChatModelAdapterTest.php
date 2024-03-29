@@ -20,6 +20,7 @@ use ModelflowAi\Core\Request\Message\AIChatMessage;
 use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Core\Response\AIChatResponse;
 use ModelflowAi\Core\Response\AIChatResponseStream;
+use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Core\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\Core\ToolInfo\ToolTypeEnum;
 use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
@@ -166,7 +167,7 @@ final class OpenaiChatModelAdapterTest extends TestCase
             'test' => [$this, 'toolMethod'],
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], [], fn () => null);
+        ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
 
         $adapter = new OpenaiChatModelAdapter($client);
         $result = $adapter->handleRequest($request);

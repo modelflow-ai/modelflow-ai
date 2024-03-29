@@ -21,6 +21,7 @@ use ModelflowAi\Core\Request\Message\AIChatMessage;
 use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Core\Response\AIChatResponse;
 use ModelflowAi\Core\Response\AIChatResponseStream;
+use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Core\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\Core\ToolInfo\ToolTypeEnum;
 use ModelflowAi\Mistral\ClientInterface;
@@ -297,6 +298,7 @@ final class MistralChatModelAdapterTest extends TestCase
             'messages' => [
                 ['role' => 'user', 'content' => 'User message'],
             ],
+            'tool_choice' => 'auto',
             'tools' => [
                 [
                     'type' => 'function',
@@ -366,7 +368,7 @@ final class MistralChatModelAdapterTest extends TestCase
             'test' => [$this, 'toolMethod'],
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], [], fn () => null);
+        ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
 
         $adapter = new MistralChatModelAdapter($client->reveal(), Model::LARGE);
         $result = $adapter->handleRequest($request);

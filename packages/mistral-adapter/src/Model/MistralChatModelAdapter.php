@@ -22,6 +22,7 @@ use ModelflowAi\Core\Response\AIChatResponseMessage;
 use ModelflowAi\Core\Response\AIChatResponseStream;
 use ModelflowAi\Core\Response\AIChatToolCall;
 use ModelflowAi\Core\Response\AIResponseInterface;
+use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Core\ToolInfo\ToolTypeEnum;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
@@ -61,8 +62,8 @@ final readonly class MistralChatModelAdapter implements AIModelAdapterInterface
             $parameters['tools'] = ToolFormatter::formatTools($request->getToolInfos());
             $toolChoice = $request->getOption('toolChoice');
             if (null !== $toolChoice) {
-                Assert::string($toolChoice);
-                $parameters['tool_choice'] = $toolChoice;
+                Assert::isInstanceOf($toolChoice, ToolChoiceEnum::class);
+                $parameters['tool_choice'] = $toolChoice->value;
             }
         }
 
