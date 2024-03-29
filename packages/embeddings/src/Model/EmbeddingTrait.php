@@ -15,6 +15,24 @@ namespace ModelflowAi\Embeddings\Model;
 
 trait EmbeddingTrait
 {
+    public static function fromArray(array $data): self
+    {
+        $class = new \ReflectionClass(static::class);
+        $instance = $class->newInstanceWithoutConstructor();
+
+        foreach ($data as $key => $value) {
+            if (!$class->hasProperty($key)) {
+                continue;
+            }
+
+            $property = $class->getProperty($key);
+            $property->setAccessible(true);
+            $property->setValue($instance, $value);
+        }
+
+        return $instance;
+    }
+
     protected string $content;
 
     protected ?string $formattedContent = null;
@@ -38,6 +56,16 @@ trait EmbeddingTrait
         $embedding->chunkNumber = $chunkNumber;
 
         return $embedding;
+    }
+
+    /**
+     * @return string[]
+     */
+    abstract public function getIdentifierParts(): array;
+
+    public function getIdentifier(): string
+    {
+        return \implode('-', $this->getIdentifierParts()) . '-' . $this->chunkNumber;
     }
 
     public function getContent(): string
@@ -73,6 +101,18 @@ trait EmbeddingTrait
     public function getChunkNumber(): int
     {
         return $this->chunkNumber;
+    }
+
+    public function toArray(): array
+    {
+        $result = [];
+
+        $class = new \ReflectionClass($this);
+        foreach ($class->getProperties() as $property) {
+            $result[$property->getName()] = $property->getValue($this);
+        }
+
+        return $result;
     }
 
     protected function hash(string $content): string

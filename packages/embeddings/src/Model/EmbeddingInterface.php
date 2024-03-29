@@ -15,6 +15,13 @@ namespace ModelflowAi\Embeddings\Model;
 
 interface EmbeddingInterface
 {
+    /**
+     * @param array<string, mixed> $data
+     */
+    public static function fromArray(array $data): self;
+
+    public function getIdentifier(): string;
+
     public function split(string $content, int $chunkNumber): self;
 
     public function getContent(): string;
@@ -36,4 +43,9 @@ interface EmbeddingInterface
     public function getHash(): string;
 
     public function getChunkNumber(): int;
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(): array;
 }
