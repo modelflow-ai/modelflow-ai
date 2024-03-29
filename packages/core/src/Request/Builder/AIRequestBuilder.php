@@ -16,6 +16,7 @@ namespace ModelflowAi\Core\Request\Builder;
 use ModelflowAi\Core\Request\AIRequest;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
+use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
 
 abstract class AIRequestBuilder
 {
@@ -23,7 +24,9 @@ abstract class AIRequestBuilder
 
     /**
      * @var array{
-     *     format?: "json"|null
+     *     format?: "json"|null,
+     *     streamed?: bool,
+     *     toolChoice?: ToolChoiceEnum,
      * }
      */
     protected array $options = [];

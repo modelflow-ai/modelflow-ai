@@ -15,6 +15,7 @@ namespace ModelflowAi\Core\Request;
 
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\Core\Response\AIResponseInterface;
+use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
 
 abstract class AIRequest implements AIRequestInterface
 {
@@ -27,7 +28,7 @@ abstract class AIRequest implements AIRequestInterface
      * @param array{
      *     streamed?: boolean,
      *     format?: "json"|null,
-     *     toolChoice?: "none"|"auto"|null,
+     *     toolChoice?: ToolChoiceEnum,
      * } $options
      */
     public function __construct(

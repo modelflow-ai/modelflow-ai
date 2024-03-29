@@ -1,3 +1,4 @@
 title: OpenAI Adapter
 description: The adapter integrates OpenAI models into Modelflow AI.
 shortDescription: The adapter for integrating OpenAI models.
+examples: true
