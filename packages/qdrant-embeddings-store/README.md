@@ -11,6 +11,11 @@ machine. Then, you can add the package to your project by running the following 
 composer require modelflow-ai/qdrant-embeddings-store
 ```
 
+## Examples
+
+Here are some examples of how you can use the Mistral package in your PHP applications. You can find more detailed
+examples in the [examples directory](examples).
+
 ## Usage
 
 Detailed usage instructions will be provided in the future. For now, you can refer to the source code and unit tests for

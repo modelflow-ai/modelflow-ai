@@ -1,3 +1,4 @@
 title: Qdrant Embeddings Store
 description: This package stores embeddings in Qdrant.
 shortDescription: This package stores embeddings in Qdrant.
+examples: true
