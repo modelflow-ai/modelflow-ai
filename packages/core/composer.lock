@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "faa934416c358fb6a448b260fbc893b2",
+    "content-hash": "e3e21bf0b7aa22fecc4545eb5b17aad3",
     "packages": [
         {
             "name": "webmozart/assert",
@@ -1967,12 +1967,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3"
+                "reference": "58c3825286d552a4309b88426d0d636c4bb82876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3",
-                "reference": "91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/58c3825286d552a4309b88426d0d636c4bb82876",
+                "reference": "58c3825286d552a4309b88426d0d636c4bb82876",
                 "shasum": ""
             },
             "require": {
@@ -2037,7 +2037,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-29T07:01:53+00:00"
+            "time": "2024-03-31T06:20:24+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -2512,5 +2512,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

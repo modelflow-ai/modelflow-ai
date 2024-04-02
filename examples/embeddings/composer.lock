@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "306504404596b1e6d325866691871339",
+    "content-hash": "1ab308424185712c484d4b3cdd969a60",
     "packages": [
         {
             "name": "modelflow-ai/api-client",
@@ -12,22 +12,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/api-client",
-                "reference": "0b09e3de0ea7eb4bceaa9fb5b3cfc8d850fb991e"
+                "reference": "e6288e00d0210c80a28b6cfbee7f69ebd3a5354b"
             },
             "require": {
                 "php": "^8.2",
                 "symfony/http-client": "^6.4 || ^7.0",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.0@dev",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -102,21 +99,18 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/core",
-                "reference": "11dced9a9fc1da63b356ca2fd257880d91079193"
+                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
             },
             "require": {
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
-            },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3@stable",
                 "rector/rector": "^0.18.1"
@@ -197,7 +191,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/embeddings",
-                "reference": "dcdd8d310b670d04c292e24a4f3c123c52d85ec0"
+                "reference": "95922ac542b61311dcf45badb8462baff7ff3f76"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -205,13 +199,10 @@
                 "psr/cache": "^3.0@dev",
                 "symfony/property-access": "^6.4 || ^7.0"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -296,22 +287,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama",
-                "reference": "c6c231de95ee0842bea95c78396685a02b6b9142"
+                "reference": "cbd4544d04091b68b0b3d05fd5e380b16438fc9f"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.1",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -388,7 +376,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama-adapter",
-                "reference": "cabffee1691aa9cc9adc883b4a4abd32436c2628"
+                "reference": "473309c32c9ef87e9e4f6ae40c920717f80bb56f"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -401,7 +389,7 @@
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -3644,5 +3632,5 @@
         "php": ">=8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
