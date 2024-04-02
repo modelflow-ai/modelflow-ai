@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8a3f60fa46597313456c02a986ac1bd",
+    "content-hash": "7375a96e80ea81141fd93d6942c0379e",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -82,22 +82,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/api-client",
-                "reference": "0b09e3de0ea7eb4bceaa9fb5b3cfc8d850fb991e"
+                "reference": "e6288e00d0210c80a28b6cfbee7f69ebd3a5354b"
             },
             "require": {
                 "php": "^8.2",
                 "symfony/http-client": "^6.4 || ^7.0",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.0@dev",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -172,21 +169,18 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/core",
-                "reference": "11dced9a9fc1da63b356ca2fd257880d91079193"
+                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
             },
             "require": {
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
-            },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3@stable",
                 "rector/rector": "^0.18.1"
@@ -267,21 +261,18 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/experts",
-                "reference": "d477b9fbb8ddb8bfdcf241a64d6f08d72d9e5d67"
+                "reference": "317774a09f9e7be759a8045ceeca24f45bf6438b"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
                 "php": "^8.2"
-            },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -362,22 +353,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/mistral",
-                "reference": "8ad610c2a7dc9dcc0007eb9647e5e899b303b38a"
+                "reference": "b60c99f6c514426540d8d825aed629d3dbb2431e"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.1",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1",
@@ -455,7 +443,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/mistral-adapter",
-                "reference": "47c0009c14bd6f45108c96db9bf4670b3143a372"
+                "reference": "60ade96f74c541f0d9044b3ed78013879ab6d253"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -468,7 +456,7 @@
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1",
@@ -545,22 +533,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama",
-                "reference": "c6c231de95ee0842bea95c78396685a02b6b9142"
+                "reference": "cbd4544d04091b68b0b3d05fd5e380b16438fc9f"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.1",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -637,7 +622,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama-adapter",
-                "reference": "cabffee1691aa9cc9adc883b4a4abd32436c2628"
+                "reference": "473309c32c9ef87e9e4f6ae40c920717f80bb56f"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -650,7 +635,7 @@
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -727,7 +712,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/openai-adapter",
-                "reference": "da54a9ebb109334dd5460440f5ad4453891706ea"
+                "reference": "382aacb7222e9559c5b98e12dd1b684efe5711d4"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -743,7 +728,7 @@
                 "phpspec/prophecy": "^1.0@dev",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1",
@@ -821,19 +806,16 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/prompt-template",
-                "reference": "b7d0edd86fdd00be207b03bb149b6649db6314c6"
+                "reference": "b3fc0fbf85ebea0db7579e23a6faab606b892e74"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
                 "php": "^8.2"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -3757,5 +3739,5 @@
         "php": ">=8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

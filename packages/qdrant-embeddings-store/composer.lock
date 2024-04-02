@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acfffa7aa83cae7a7cbe43f41ffe921c",
+    "content-hash": "7a92c390444a7442d677f892ac2febcf",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104"
+                "reference": "1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/41042bc7ab002487b876a0683fc8dce04ddce104",
-                "reference": "41042bc7ab002487b876a0683fc8dce04ddce104",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93",
+                "reference": "1ee81e5fc8613ba1ad0b095f40e17c119dd4cc93",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,7 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.2",
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "guzzle/client-integration-tests": "3.0.2",
                 "php-http/message-factory": "^1.1",
                 "phpunit/phpunit": "^8.5.36 || ^9.6.15",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
@@ -114,7 +114,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.8.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.9"
             },
             "funding": [
                 {
@@ -130,7 +130,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:35:24+00:00"
+            "time": "2024-03-31T19:57:34+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -138,12 +138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223"
+                "reference": "ab801747cbf7d394d4d435c34364704f9bf048e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/bbff78d96034045e58e13dedd6ad91b5d1253223",
-                "reference": "bbff78d96034045e58e13dedd6ad91b5d1253223",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/ab801747cbf7d394d4d435c34364704f9bf048e6",
+                "reference": "ab801747cbf7d394d4d435c34364704f9bf048e6",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.2"
+                "source": "https://github.com/guzzle/promises/tree/2.0"
             },
             "funding": [
                 {
@@ -214,7 +214,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:19:20+00:00"
+            "time": "2024-03-31T10:06:07+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -222,12 +222,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221"
+                "reference": "a243f80a1ca7fe8ceed4deee17f12c1930efe662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/45b30f99ac27b5ca93cb4831afe16285f57b8221",
-                "reference": "45b30f99ac27b5ca93cb4831afe16285f57b8221",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a243f80a1ca7fe8ceed4deee17f12c1930efe662",
+                "reference": "a243f80a1ca7fe8ceed4deee17f12c1930efe662",
                 "shasum": ""
             },
             "require": {
@@ -315,7 +315,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.6.2"
+                "source": "https://github.com/guzzle/psr7/tree/2.6"
             },
             "funding": [
                 {
@@ -331,7 +331,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-03T20:05:35+00:00"
+            "time": "2024-03-31T10:09:24+00:00"
         },
         {
             "name": "hkulekci/qdrant",
@@ -392,21 +392,18 @@
             "dist": {
                 "type": "path",
                 "url": "./../core",
-                "reference": "11dced9a9fc1da63b356ca2fd257880d91079193"
+                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
             },
             "require": {
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
-            },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3@stable",
                 "rector/rector": "^0.18.1"
@@ -487,7 +484,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../embeddings",
-                "reference": "dcdd8d310b670d04c292e24a4f3c123c52d85ec0"
+                "reference": "95922ac542b61311dcf45badb8462baff7ff3f76"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -495,13 +492,10 @@
                 "psr/cache": "^3.0@dev",
                 "symfony/property-access": "^6.4 || ^7.0"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -1363,12 +1357,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "67c3bc02c09e1ac71b63db97e7a63a5422d23840"
+                "reference": "8d32db6d7e9ef9bda977569af2d83c75a01973d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/67c3bc02c09e1ac71b63db97e7a63a5422d23840",
-                "reference": "67c3bc02c09e1ac71b63db97e7a63a5422d23840",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/8d32db6d7e9ef9bda977569af2d83c75a01973d1",
+                "reference": "8d32db6d7e9ef9bda977569af2d83c75a01973d1",
                 "shasum": ""
             },
             "require": {
@@ -1438,7 +1432,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-28T22:31:42+00:00"
+            "time": "2024-04-01T11:34:39+00:00"
         },
         {
             "name": "symfony/string",
@@ -1648,22 +1642,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../api-client",
-                "reference": "0b09e3de0ea7eb4bceaa9fb5b3cfc8d850fb991e"
+                "reference": "e6288e00d0210c80a28b6cfbee7f69ebd3a5354b"
             },
             "require": {
                 "php": "^8.2",
                 "symfony/http-client": "^6.4 || ^7.0",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.0@dev",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -1738,22 +1729,19 @@
             "dist": {
                 "type": "path",
                 "url": "./../ollama",
-                "reference": "c6c231de95ee0842bea95c78396685a02b6b9142"
+                "reference": "cbd4544d04091b68b0b3d05fd5e380b16438fc9f"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.1",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
-            "conflict": {
-                "phpstan/phpstan": "^1.10.55"
-            },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -1830,7 +1818,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../ollama-adapter",
-                "reference": "cabffee1691aa9cc9adc883b4a4abd32436c2628"
+                "reference": "473309c32c9ef87e9e4f6ae40c920717f80bb56f"
             },
             "require": {
                 "modelflow-ai/core": "^0.1",
@@ -1843,7 +1831,7 @@
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
@@ -2692,12 +2680,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "18f8d4a5f52b61fdd9370aaae3167daa0eeb69cd"
+                "reference": "b24c32d0bca9e16979dd486d16ca64261bddbdf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/18f8d4a5f52b61fdd9370aaae3167daa0eeb69cd",
-                "reference": "18f8d4a5f52b61fdd9370aaae3167daa0eeb69cd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b24c32d0bca9e16979dd486d16ca64261bddbdf9",
+                "reference": "b24c32d0bca9e16979dd486d16ca64261bddbdf9",
                 "shasum": ""
             },
             "require": {
@@ -2785,7 +2773,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-28T10:08:10+00:00"
+            "time": "2024-04-02T09:17:27+00:00"
         },
         {
             "name": "psr/container",
@@ -3429,12 +3417,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3"
+                "reference": "58c3825286d552a4309b88426d0d636c4bb82876"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3",
-                "reference": "91cd41d1aebcea0bca6dbba73a3c4ed1c5bdcbc3",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/58c3825286d552a4309b88426d0d636c4bb82876",
+                "reference": "58c3825286d552a4309b88426d0d636c4bb82876",
                 "shasum": ""
             },
             "require": {
@@ -3499,7 +3487,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-29T07:01:53+00:00"
+            "time": "2024-03-31T06:20:24+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -3916,12 +3904,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "5688edc7f53f429974982db54eb474b5c66b8c7d"
+                "reference": "d06896b7c6980fa9557ffa4a55f4f321c35e2b53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/5688edc7f53f429974982db54eb474b5c66b8c7d",
-                "reference": "5688edc7f53f429974982db54eb474b5c66b8c7d",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/d06896b7c6980fa9557ffa4a55f4f321c35e2b53",
+                "reference": "d06896b7c6980fa9557ffa4a55f4f321c35e2b53",
                 "shasum": ""
             },
             "require": {
@@ -4005,7 +3993,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-27T21:03:56+00:00"
+            "time": "2024-04-01T11:34:39+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -4090,18 +4078,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "4ae8ff485b8c9e0ffc3de88cb9f14c0df1447b32"
+                "reference": "6b89def054e3332130ee51f2481b5d297645d5ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/4ae8ff485b8c9e0ffc3de88cb9f14c0df1447b32",
-                "reference": "4ae8ff485b8c9e0ffc3de88cb9f14c0df1447b32",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/6b89def054e3332130ee51f2481b5d297645d5ab",
+                "reference": "6b89def054e3332130ee51f2481b5d297645d5ab",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
                 "psr/log": "^1|^2|^3",
-                "symfony/http-client-contracts": "^3",
+                "symfony/http-client-contracts": "^3.4.1",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "conflict": {
@@ -4175,7 +4163,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-03-21T07:56:42+00:00"
+            "time": "2024-04-01T20:51:40+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -4183,12 +4171,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client-contracts.git",
-                "reference": "80c5a0381d1f2207277208277dd4a8abc0f302c4"
+                "reference": "46a7e30d7c89c4c894c7eaf7eeada4cc77b50817"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/80c5a0381d1f2207277208277dd4a8abc0f302c4",
-                "reference": "80c5a0381d1f2207277208277dd4a8abc0f302c4",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/46a7e30d7c89c4c894c7eaf7eeada4cc77b50817",
+                "reference": "46a7e30d7c89c4c894c7eaf7eeada4cc77b50817",
                 "shasum": ""
             },
             "require": {
@@ -4254,7 +4242,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-23T15:06:13+00:00"
+            "time": "2024-04-01T18:51:41+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4478,5 +4466,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
