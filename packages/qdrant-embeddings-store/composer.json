@@ -39,7 +39,7 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^0.18.1",
         "symfony/cache": "^7.0",
-        "ramsey/uuid": "5.x-dev"
+        "ramsey/uuid": "^4.7"
     },
     "scripts": {
         "test": [

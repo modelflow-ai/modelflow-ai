@@ -127,9 +127,12 @@ class AddChatMessageHandler
                 $toolCalls = $message->toolCalls;
                 $additionalMessages = [];
 
-                foreach ($responses as $nextMessage) {
-                    $toolCalls[] = $nextMessage->toolCalls[0];
-                    $additionalMessages[] = $this->toolExecutor->execute($builder->build(), $nextMessage->toolCalls[0]);
+                while ($nextMessage = $responses->next()) {
+                    $toolCalls = array_merge($toolCalls, $nextMessage->toolCalls);
+                }
+
+                foreach ($toolCalls as $toolCall) {
+                    $additionalMessages[] = $this->toolExecutor->execute($builder->build(), $toolCall);
                 }
 
                 $builder->addMessage(

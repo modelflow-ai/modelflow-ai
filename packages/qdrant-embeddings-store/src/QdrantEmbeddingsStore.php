@@ -25,7 +25,6 @@ use Qdrant\Models\Request\SearchRequest;
 use Qdrant\Models\Request\VectorParams;
 use Qdrant\Models\VectorStruct;
 use Qdrant\Qdrant;
-use Ramsey\Uuid\Uuid;
 
 class QdrantEmbeddingsStore implements EmbeddingsStoreInterface
 {
@@ -142,7 +141,7 @@ class QdrantEmbeddingsStore implements EmbeddingsStoreInterface
             throw new \Exception('Impossible to save a document without its vectors.');
         }
 
-        $id = $this->formatUUIDFromUniqueId($embedding->getIdentifier());
+        $id = $embedding->getIdentifier();
 
         $payload = $embedding->toArray();
         $payload['id'] = $id;
@@ -155,24 +154,5 @@ class QdrantEmbeddingsStore implements EmbeddingsStoreInterface
                 $payload,
             ),
         );
-    }
-
-    protected function formatUUIDFromUniqueId(string $identifier): string
-    {
-        // 1. Generate a SHA-256 hash of the data.
-        $hash = \hash('sha256', $identifier);
-
-        // 2. Extract portions of the hash to form the UUID.
-        $part1 = \substr($hash, 0, 8);
-        $part2 = \substr($hash, 8, 4);
-
-        // For parts 3 and 4, we're making adjustments to ensure the UUID is a valid version 5 UUID.
-        $part3 = (\hexdec(\substr($hash, 12, 4)) & 0x0FFF) | 0x5000;
-        $part4 = (\hexdec(\substr($hash, 16, 4)) & 0x3FFF) | 0x8000;
-
-        $part5 = \substr($hash, 20, 12);
-
-        // 3. Combine the parts to form the UUID.
-        return \sprintf('%08s-%04s-%04x-%04x-%12s', $part1, $part2, $part3, $part4, $part5);
     }
 }
