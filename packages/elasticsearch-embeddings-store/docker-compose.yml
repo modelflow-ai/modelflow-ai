@@ -1,6 +1,6 @@
 services:
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
         environment:
             discovery.type: single-node
             xpack.security.enabled: 'false'
@@ -15,5 +15,13 @@ services:
         volumes:
             - elasticsearch-data:/usr/share/elasticsearch/data
 
+    ollama:
+        image: ollama/ollama
+        ports:
+            - "21434:11434"
+        volumes:
+            - ollama-data:/root/.ollama
+
 volumes:
     elasticsearch-data:
+    ollama-data:
