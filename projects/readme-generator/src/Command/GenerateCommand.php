@@ -45,6 +45,8 @@ class GenerateCommand extends Command
             throw new \RuntimeException('Could not find any package.');
         }
 
+        $globalConfig = Yaml::parse((string) \file_get_contents($rootPath . '/.readme.yaml'));
+
         $packages = [];
         foreach ($packagePaths as $packagePath) {
             if (!\is_file($packagePath . '/.readme.yaml')) {
@@ -68,7 +70,7 @@ class GenerateCommand extends Command
             $io->section($config['title'] . ' ' . $type);
             $io->text('Generating readme for ' . $package);
 
-            $content = $this->twig->render($type . '.md.twig', $config);
+            $content = $this->twig->render($type . '.md.twig', [...$config, 'global' => $globalConfig]);
             \file_put_contents($packagePath . '/README.md', $content);
 
             $io->success('Readme generated');

@@ -1,6 +1,29 @@
-# ModelflowAI<br/>Mistral Adapter
+<br/>
+<div align="center">
+ <img alt="Mistral Adapter Logo" src="https://avatars.githubusercontent.com/u/152068817?s=768&amp;v=4" width="200" height="200">
+</div>
 
+<h1 align="center">
+Modelflow AI<br/>
+Mistral Adapter<br/>
+<br/>
+</h1>
+
+<br/>
+
+<div align="center">
 The adapter integrates Mistral AI models into Modelflow  AI.
+</div>
+
+<br/>
+
+> **Note**:
+> This is part of the `modelflow-ai` project create issues in the [main repository](https://github.com/modelflow-ai/.github).
+
+> **Note**:
+> This project is heavily under development and any feedback is greatly appreciated.
+
+<br/>
 
 ## Installation
 

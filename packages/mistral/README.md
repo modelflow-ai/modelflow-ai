@@ -1,5 +1,17 @@
-# ModelflowAI<br/>Mistral
+<br/>
+<div align="center">
+ <img alt="Mistral Logo" src="https://avatars.githubusercontent.com/u/152068817?s=768&amp;v=4" width="200" height="200">
+</div>
 
+<h1 align="center">
+Modelflow AI<br/>
+Mistral<br/>
+<br/>
+</h1>
+
+<br/>
+
+<div align="center">
 The Mistral package is a comprehensive API client for [Mistral AI](https://mistral.ai/), developed using PHP. It
 provides a robust and efficient interface for interacting with the Mistral AI model, enabling developers to seamlessly
 integrate AI capabilities into their PHP applications.
@@ -11,6 +23,17 @@ simple and intuitive API.
 While the Mistral package can be used in conjunction with other packages, it is important to note that it operates
 independently and is not directly connected to any other package or system. This independence ensures that developers
 can integrate the Mistral package into their projects without any dependencies or conflicts.
+</div>
+
+<br/>
+
+> **Note**:
+> This is part of the `modelflow-ai` project create issues in the [main repository](https://github.com/modelflow-ai/.github).
+
+> **Note**:
+> This project is heavily under development and any feedback is greatly appreciated.
+
+<br/>
 
 ## Installation
 
