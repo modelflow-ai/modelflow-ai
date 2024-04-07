@@ -12,8 +12,8 @@ Modelflow AI<br/><br/>
 <div align="center">
 <strong>Monorepository</strong> for **Modelflow AI**
 <br/><br/>
-Modelflow AI is a comprehensive AI package that integrates various AI models and embeddings into a unified interface. It
-is written in PHP and uses Composer for dependency management.
+Modelflow AI is a set of comprehensive AI packages that integrates various AI models and embeddings into a unified
+interface. It is written in PHP and uses Composer for dependency management.
 <br/><br/>
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/modelflow-ai/.github/quality-assurance.yml) ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/modelflow-ai/.github) ![License](https://img.shields.io/github/license/modelflow-ai/modelflow-ai)
