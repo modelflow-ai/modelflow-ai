@@ -194,7 +194,7 @@
                 "reference": "cbd4544d04091b68b0b3d05fd5e380b16438fc9f"
             },
             "require": {
-                "modelflow-ai/api-client": "^0.1",
+                "modelflow-ai/api-client": "^0.2",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
