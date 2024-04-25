@@ -82,11 +82,6 @@ usage: |
     The Model API is another area that we are actively working on. Once completed, this will provide users with the ability
     to manage and interact with their AI models directly from the Mistral package.
 
-    ### Streaming Responses
-
-    We are currently working on implementing a feature to stream responses. This will allow users to receive data in
-    real-time, improving the efficiency and responsiveness of their applications.
-
     ## Testing
 
     To run the tests, use PHPUnit:

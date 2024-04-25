@@ -11,13 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpClient\HttpClient;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+(new Dotenv())->loadEnv(__DIR__ . '/.env');
+
 $client = HttpClient::create()
     ->withOptions([
-        'base_uri' => 'http://localhost:21434/api/',
+        'base_uri' => $_ENV['OLLAMA_URL'],
     ]);
 
 $client->request('POST', 'pull', [

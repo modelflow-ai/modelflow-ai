@@ -86,8 +86,12 @@ class SymfonyHttpTransporter implements TransportInterface
 
         $response = $this->request($payload);
 
-        // @phpstan-ignore-next-line
-        $metaInformation = MetaInformation::from($response->getHeaders());
+        try {
+            // @phpstan-ignore-next-line
+            $metaInformation = MetaInformation::from($response->getHeaders());
+        } catch (ClientException $exception) {
+            throw new TransportException($exception->getResponse(), $exception->getCode(), $exception);
+        }
 
         foreach ($this->client->stream($response) as $chunk) {
             if ($chunk->isFirst() || $chunk->isLast()) {

@@ -44,6 +44,7 @@ This repository consists of several packages, each residing in its own directory
 
 Independent packages:
 
+- **Anthropic**: A comprehensive API client for Anthropic AI. [More Info](https://github.com/modelflow-ai/anthropic)
 - **Api-Client**: A basic API client. [More Info](https://github.com/modelflow-ai/api-client)
 - **Mistral**: A comprehensive API client for Mistral AI. [More Info](https://github.com/modelflow-ai/mistral)
 - **Ollama**: A comprehensive API client for Ollama. [More Info](https://github.com/modelflow-ai/ollama)

@@ -1,0 +1,73 @@
+title: Anthropic
+description: |
+    The Anthropic package is a comprehensive API client for the Anthropic AI model. It provides a simple and intuitive
+    interface to interact with the Anthropic AI model, allowing you to create chat conversations.
+shortDescription: A comprehensive API client for Anthropic AI.
+examples: true
+usage: |
+    ### Creating a Client
+
+    First, you need to create a client. The client is the main entry point to interact with the Anthropic AI model. You can
+    create a client using the `Anthropic` class:
+
+    ```php
+    use ModelflowAi\Anthropic\Anthropic;
+
+    $client = Anthropic::client('your-api-key');
+    ```
+
+    ### Using the Chat Resource
+
+    The Chat resource allows you to create chat conversations and get chat completions.
+
+    ```php
+    $chat = $client->chat();
+
+    // Create a chat conversation
+    $parameters = [
+        'model' => Model::CLAUDE_3_OPUS,
+        'messages' => [
+            [
+                'role' => 'system',
+                'content' => 'You are a helpful assistant.'
+            ],
+            [
+                'role' => 'user',
+                'content' => 'Who won the world series in 2020?'
+            ]
+        ]
+    ];
+    $response = $chat->create($parameters);
+
+    // The response is an instance of CreateResponse
+    echo $response->content[0]->text;
+    ```
+
+    ## API Documentation
+
+    For more detailed information about the Anthropic API, please refer to
+    the [official API documentation](https://docs.anthropic.com/claude/reference/getting-started-with-the-api).
+
+    ## Open Points
+    
+    ### Tools
+    
+    The messages resource does not support tools until now.
+
+    ### Text completions
+    
+    The Text Completions resource is not yet in this package.
+
+    ### Embeddings
+
+    The Embeddings resource is not yet in the Anthropic API. As soon as it is available, we will provide a resource to
+    generate and manipulate embeddings for your data.
+    
+    ## Testing
+
+    To run the tests, use PHPUnit:
+
+    ```bash
+    composer test
+    ```
+independent: true

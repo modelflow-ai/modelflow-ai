@@ -26,4 +26,24 @@ final class ResourceUriTest extends TestCase
         $this->assertSame($uri, $resourceUri->uri);
         $this->assertSame($uri, $resourceUri->__toString());
     }
+
+    public function testGet(): void
+    {
+        $uri = 'chat/completions';
+        $resourceUri = ResourceUri::get($uri);
+
+        $this->assertSame($uri, $resourceUri->uri);
+        $this->assertSame($uri, $resourceUri->__toString());
+    }
+
+    public function testEquals(): void
+    {
+        $uri = 'chat/completions';
+        $resourceUri1 = ResourceUri::get($uri);
+        $resourceUri2 = ResourceUri::get($uri);
+        $resourceUri3 = ResourceUri::get('chat/messages');
+
+        $this->assertTrue($resourceUri1->equals($resourceUri2));
+        $this->assertFalse($resourceUri1->equals($resourceUri3));
+    }
 }

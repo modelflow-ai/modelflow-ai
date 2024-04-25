@@ -37,7 +37,7 @@ class QdrantEmbeddingsStoreTest extends TestCase
         parent::setUp();
 
         $this->embeddingAdapter = new OllamaEmbeddingAdapter(
-            Ollama::factory()->withBaseUrl('http://localhost:21434/api/')->make(),
+            Ollama::factory()->withBaseUrl($_ENV['OLLAMA_URL'])->make(),
             'all-minilm',
         );
         $this->client = new Qdrant(new GuzzleClient(new Config('http://localhost', 6333)));

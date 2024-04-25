@@ -39,7 +39,8 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^0.18.1",
         "symfony/cache": "^7.0",
-        "ramsey/uuid": "^4.7"
+        "ramsey/uuid": "^4.7",
+        "symfony/dotenv": "^7.1"
     },
     "scripts": {
         "test": [

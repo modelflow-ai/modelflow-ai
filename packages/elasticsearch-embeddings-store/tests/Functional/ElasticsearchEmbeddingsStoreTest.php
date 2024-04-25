@@ -35,7 +35,7 @@ class ElasticsearchEmbeddingsStoreTest extends TestCase
         parent::setUp();
 
         $this->embeddingAdapter = new OllamaEmbeddingAdapter(
-            Ollama::factory()->withBaseUrl('http://localhost:21434/api/')->make(),
+            Ollama::factory()->withBaseUrl($_ENV['OLLAMA_URL'])->make(),
             'all-minilm',
         );
         $this->client = ClientBuilder::create()->build();
