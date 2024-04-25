@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/api-client": "^0.1",
+        "modelflow-ai/api-client": "^0.2",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {

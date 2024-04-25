@@ -5,7 +5,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
-        "modelflow-ai/prompt-template": "^0.1"
+        "modelflow-ai/prompt-template": "^0.2"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.15",
