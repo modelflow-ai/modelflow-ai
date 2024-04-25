@@ -25,6 +25,15 @@ interface ChatInterface
      *         role: "system"|"user"|"assistant"|"tool",
      *         content: string,
      *     }>,
+     *     tools?: array<array{
+     *         type: string,
+     *         function: array{
+     *             name: string,
+     *             description?: string,
+     *             parameters?: array<string, mixed>,
+     *         },
+     *     }>,
+     *     tools_choice?: "auto"|"enum",
      *     temperature?: float,
      *     top_p?: float,
      *     max_tokens?: int,
@@ -42,6 +51,15 @@ interface ChatInterface
      *         role: "system"|"user"|"assistant"|"tool",
      *         content: string,
      *     }>,
+     *     tools?: array<array{
+     *         type: string,
+     *         function: array{
+     *             name: string,
+     *             description?: string,
+     *             parameters?: array<string, mixed>,
+     *         },
+     *     }>,
+     *     tools_choice?: "auto"|"enum",
      *     temperature?: float,
      *     top_p?: float,
      *     max_tokens?: int,

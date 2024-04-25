@@ -32,4 +32,9 @@ final readonly class MetaInformation
             $headers,
         );
     }
+
+    public static function empty(): self
+    {
+        return new self([]);
+    }
 }

@@ -20,6 +20,11 @@ readonly class ResourceUri implements \Stringable
     ) {
     }
 
+    public function equals(self $resource): bool
+    {
+        return $this->uri === $resource->uri;
+    }
+
     public static function get(string $resource): self
     {
         return new self($resource);

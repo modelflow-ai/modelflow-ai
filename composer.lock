@@ -684,7 +684,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/elasticsearch-embeddings-store",
-                "reference": "91a450ef8d9fc13e02a933f03210152611f0504d"
+                "reference": "4d0f4d9826c216fe6bc1727d139e6864323bfc0c"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^8.13.0",
@@ -702,7 +702,8 @@
                 "phpunit/phpunit": "^10.3",
                 "ramsey/uuid": "^4.7",
                 "rector/rector": "^0.18.1",
-                "symfony/cache": "^7.0"
+                "symfony/cache": "^7.0",
+                "symfony/dotenv": "^7.1"
             },
             "type": "library",
             "autoload": {
@@ -1502,7 +1503,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/qdrant-embeddings-store",
-                "reference": "4398eff78d99b06504197deee3217912aa5de99c"
+                "reference": "790634ddf402c2da07342d517a992ac1df138e0e"
             },
             "require": {
                 "hkulekci/qdrant": "^0.5",
@@ -1519,7 +1520,8 @@
                 "phpunit/phpunit": "^10.3",
                 "ramsey/uuid": "^4.7",
                 "rector/rector": "^0.18.1",
-                "symfony/cache": "^7.0"
+                "symfony/cache": "^7.0",
+                "symfony/dotenv": "^7.1"
             },
             "type": "library",
             "autoload": {

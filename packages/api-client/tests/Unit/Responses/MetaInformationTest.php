@@ -29,4 +29,12 @@ final class MetaInformationTest extends TestCase
         $this->assertInstanceOf(MetaInformation::class, $meta);
         $this->assertSame($headers, $meta->headers);
     }
+
+    public function testEmpty(): void
+    {
+        $meta = MetaInformation::empty();
+
+        $this->assertInstanceOf(MetaInformation::class, $meta);
+        $this->assertSame([], $meta->headers);
+    }
 }

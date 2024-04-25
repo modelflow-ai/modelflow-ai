@@ -1,0 +1,94 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the Modelflow AI package.
+ *
+ * (c) Johannes Wachter <johannes@sulu.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace ModelflowAi\Anthropic\Tests\Unit\Resources;
+
+use ModelflowAi\Anthropic\Resources\Messages;
+use ModelflowAi\Anthropic\Resources\MessagesInterface;
+use ModelflowAi\Anthropic\Tests\DataFixtures;
+use ModelflowAi\ApiClient\Responses\MetaInformation;
+use ModelflowAi\ApiClient\Transport\Response\ObjectResponse;
+use ModelflowAi\ApiClient\Transport\Testing\MockResponseMatcher;
+use ModelflowAi\ApiClient\Transport\Testing\MockTransport;
+use ModelflowAi\ApiClient\Transport\Testing\PartialPayload;
+use ModelflowAi\ApiClient\Transport\Testing\StreamedResponse;
+use PHPUnit\Framework\TestCase;
+
+final class MessagesTest extends TestCase
+{
+    public function testCreate(): void
+    {
+        $mockResponseMatcher = new MockResponseMatcher();
+        $instance = $this->createInstance($mockResponseMatcher);
+
+        $mockResponseMatcher->addResponse(PartialPayload::create(
+            'messages',
+            DataFixtures::MESSAGES_CREATE_REQUEST,
+        ), new ObjectResponse(DataFixtures::MESSAGES_CREATE_RESPONSE, MetaInformation::empty()));
+
+        $response = $instance->create(DataFixtures::MESSAGES_CREATE_REQUEST_RAW);
+
+        $responseData = DataFixtures::MESSAGES_CREATE_RESPONSE;
+        $this->assertSame($responseData['id'], $response->id);
+        $this->assertSame($responseData['type'], $response->type);
+        $this->assertSame($responseData['role'], $response->role);
+        $this->assertSame($responseData['model'], $response->model);
+        $this->assertSame($responseData['stop_sequence'], $response->stopSequence);
+        $this->assertSame($responseData['usage']['input_tokens'], $response->usage->promptTokens);
+        $this->assertSame($responseData['usage']['output_tokens'], $response->usage->completionTokens);
+        $this->assertSame($responseData['usage']['input_tokens'] + $responseData['usage']['output_tokens'], $response->usage->totalTokens);
+        $this->assertSame($responseData['content'][0]['type'], $response->content[0]->type);
+        $this->assertSame($responseData['content'][0]['text'], $response->content[0]->text);
+        $this->assertSame($responseData['stop_reason'], $response->stopReason);
+    }
+
+    public function testCreateStreamed(): void
+    {
+        $mockResponseMatcher = new MockResponseMatcher();
+        $instance = $this->createInstance($mockResponseMatcher);
+
+        $responseChunks = [];
+        foreach (DataFixtures::MESSAGES_CREATE_STREAMED_RESPONSES_RAW as $response) {
+            $responseChunks[] = \implode(\PHP_EOL, $response);
+        }
+
+        $mockResponseMatcher->addResponse(PartialPayload::create(
+            'messages',
+            DataFixtures::MESSAGES_CREATE_STREAMED_REQUEST,
+        ), new StreamedResponse($responseChunks, MetaInformation::empty()));
+
+        $responses = $instance->createStreamed(DataFixtures::MESSAGES_CREATE_REQUEST_RAW);
+        foreach ($responses as $index => $response) {
+            $responseData = DataFixtures::MESSAGES_CREATE_STREAMED_RESPONSES[$index];
+            $this->assertSame($responseData['id'], $response->id);
+            $this->assertSame($responseData['type'], $response->type);
+            $this->assertSame($responseData['role'], $response->role);
+            $this->assertSame($responseData['model'], $response->model);
+            $this->assertSame($responseData['stop_sequence'], $response->stopSequence);
+            $this->assertSame($responseData['usage']['input_tokens'], $response->usage->promptTokens);
+            $this->assertSame($responseData['usage']['output_tokens'], $response->usage->completionTokens);
+            $this->assertSame($responseData['usage']['input_tokens'] + $responseData['usage']['output_tokens'], $response->usage->totalTokens);
+            if (isset($responseData['content'])) {
+                $this->assertSame($responseData['content']['index'], $response->content?->index);
+                $this->assertSame($responseData['content']['type'], $response->content->type);
+                $this->assertSame($responseData['content']['text'], $response->content->text);
+            }
+            $this->assertSame($responseData['stop_reason'], $response->stopReason);
+        }
+    }
+
+    private function createInstance(MockResponseMatcher $responseMatcher): MessagesInterface
+    {
+        return new Messages(new MockTransport($responseMatcher));
+    }
+}

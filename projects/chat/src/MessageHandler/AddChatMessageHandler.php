@@ -127,8 +127,10 @@ class AddChatMessageHandler
                 $toolCalls = $message->toolCalls;
                 $additionalMessages = [];
 
-                while ($nextMessage = $responses->next()) {
+                while ($responses->valid()) {
+                    $nextMessage = $responses->current();
                     $toolCalls = array_merge($toolCalls, $nextMessage->toolCalls);
+                    $responses->next();
                 }
 
                 foreach ($toolCalls as $toolCall) {

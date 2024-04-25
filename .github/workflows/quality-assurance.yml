@@ -7,6 +7,13 @@ on:
             - '[0-9]+.[0-9]+'
 
 jobs:
+    anthropic:
+        name: Anthropic
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/anthropic'
+            docker: false
+
     api-client:
         name: Api-Client
         uses: ./.github/workflows/test.yml
