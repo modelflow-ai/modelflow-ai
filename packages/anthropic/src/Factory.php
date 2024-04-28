@@ -25,6 +25,8 @@ final class Factory
 
     private string $version = '2023-06-01';
 
+    private string $beta = 'tools-2024-04-04';
+
     private string $apiKey;
 
     public function withHttpClient(HttpClientInterface $client): self
@@ -55,11 +57,19 @@ final class Factory
         return $this;
     }
 
+    public function withBeta(string $beta): self
+    {
+        $this->beta = $beta;
+
+        return $this;
+    }
+
     public function make(): ClientInterface
     {
         $transporter = new SymfonyHttpTransporter($this->httpClient ?? HttpClient::create(), $this->baseUrl, [
             'x-api-key' => $this->apiKey,
             'anthropic-version' => $this->version,
+            'anthropic-beta' => $this->beta,
             'content-type' => 'application/json',
         ]);
 

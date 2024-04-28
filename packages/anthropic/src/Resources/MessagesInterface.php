@@ -18,6 +18,7 @@ use ModelflowAi\Anthropic\Responses\Messages\CreateStreamedResponse;
 
 /**
  * @phpstan-type TextMessage array{type: "text", text: string}
+ * @phpstan-type ToolUseMessage array{type: "tool_use", id: string, name: string, input: array<string, mixed>}
  * @phpstan-type ImageMessage array{type: "image", source: array{type: "base64", media_type: string, data: string}}
  * @phpstan-type MessageContent string|TextMessage|ImageMessage
  * @phpstan-type Message array{role: "system"|"assistant"|"user", content: MessageContent}

@@ -48,7 +48,7 @@ final readonly class CreateStreamedResponse
      *         output_tokens: int,
      *     },
      *     content: array{index:int, type: "text"|"text_delta", text: string},
-     *     stop_reason: "end_turn"|"max_tokens"|"stop_sequence"|null,
+     *     stop_reason: "end_turn"|"max_tokens"|"stop_sequence"|"tool_use"|null,
      * } $attributes
      */
     public static function from(int $index, array $attributes, MetaInformation $meta): self
