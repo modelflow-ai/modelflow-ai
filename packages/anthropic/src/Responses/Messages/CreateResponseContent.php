@@ -15,23 +15,36 @@ namespace ModelflowAi\Anthropic\Responses\Messages;
 
 /**
  * @phpstan-import-type TextMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
+ * @phpstan-import-type ToolUseMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
  */
 final readonly class CreateResponseContent
 {
-    private function __construct(
+    public function __construct(
         public string $type,
-        public string $text,
+        public ?string $text,
+        public ?CreateResponseContentToolUse $toolUse = null,
     ) {
     }
 
     /**
-     * @param TextMessage $attributes
+     * @param TextMessage|ToolUseMessage $attributes
      */
     public static function from(array $attributes): self
     {
-        return new self(
-            $attributes['type'],
-            $attributes['text'],
-        );
+        if ('text' === $attributes['type']) {
+            return new self(
+                $attributes['type'],
+                $attributes['text'],
+            );
+        } elseif ('tool_use' === $attributes['type']) {
+            return new self(
+                $attributes['type'],
+                null,
+                CreateResponseContentToolUse::from($attributes),
+            );
+        }
+
+        // @phpstan-ignore-next-line
+        throw new \InvalidArgumentException('Invalid type');
     }
 }

@@ -25,7 +25,9 @@ final class Factory
 
     private string $version = '2023-06-01';
 
-    private string $apiKey;
+    private ?string $beta = null;
+
+    private ?string $apiKey = null;
 
     public function withHttpClient(HttpClientInterface $client): self
     {
@@ -55,13 +57,25 @@ final class Factory
         return $this;
     }
 
+    public function withBeta(string $beta): self
+    {
+        $this->beta = $beta;
+
+        return $this;
+    }
+
     public function make(): ClientInterface
     {
-        $transporter = new SymfonyHttpTransporter($this->httpClient ?? HttpClient::create(), $this->baseUrl, [
+        if (!$this->apiKey) {
+            throw new \RuntimeException('API key is required to create a client');
+        }
+
+        $transporter = new SymfonyHttpTransporter($this->httpClient ?? HttpClient::create(), $this->baseUrl, \array_filter([
             'x-api-key' => $this->apiKey,
             'anthropic-version' => $this->version,
+            'anthropic-beta' => $this->beta,
             'content-type' => 'application/json',
-        ]);
+        ]));
 
         return new Client($transporter);
     }

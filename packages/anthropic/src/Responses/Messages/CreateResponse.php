@@ -19,6 +19,7 @@ use ModelflowAi\ApiClient\Responses\Usage;
 
 /**
  * @phpstan-import-type TextMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
+ * @phpstan-import-type ToolUseMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
  */
 final readonly class CreateResponse
 {
@@ -49,8 +50,8 @@ final readonly class CreateResponse
      *         input_tokens: int,
      *         output_tokens: int,
      *     },
-     *     content: array<TextMessage>,
-     *     stop_reason: "end_turn"|"max_tokens"|"stop_sequence",
+     *     content: array<TextMessage|ToolUseMessage>,
+     *     stop_reason: "end_turn"|"max_tokens"|"stop_sequence"|"tool_use",
      * } $attributes
      */
     public static function from(array $attributes, MetaInformation $meta): self

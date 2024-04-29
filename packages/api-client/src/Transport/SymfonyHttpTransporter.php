@@ -31,12 +31,12 @@ class SymfonyHttpTransporter implements TransportInterface
      */
     public function __construct(
         HttpClientInterface $client,
-        string $baseUrl,
-        array $headers = [],
+        private readonly string $baseUrl,
+        private readonly array $headers = [],
     ) {
         $this->client = $client->withOptions([
-            'base_uri' => $baseUrl,
-            'headers' => $headers,
+            'base_uri' => $this->baseUrl,
+            'headers' => $this->headers,
         ]);
     }
 

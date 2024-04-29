@@ -50,6 +50,8 @@ final readonly class Messages implements MessagesInterface
 
     public function createStreamed(array $parameters): \Iterator
     {
+        Assert::keyNotExists($parameters, 'tools');
+
         $this->validateParameters($parameters);
         $parameters['stream'] = true;
 
@@ -186,8 +188,10 @@ final readonly class Messages implements MessagesInterface
             if ('system' === $message['role']) {
                 $content = $message['content'];
                 if (\is_array($content)) {
-                    if ('image' === $content['type']) {
-                        throw new \InvalidArgumentException('Invalid message content type for a system message.');
+                    if (\in_array($content['type'], ['image', 'tool_use', 'tool_result'], true)) {
+                        throw new \InvalidArgumentException(
+                            'Invalid message content type for a system message. Allowed: "text", Given: "' . $content['type'] . '".',
+                        );
                     }
                     $content = $content['text'];
                 }
@@ -199,6 +203,8 @@ final readonly class Messages implements MessagesInterface
 
             $messages[] = $message;
         }
+
+        Assert::allString($systemPrompts);
 
         $parameters['messages'] = $messages;
         $parameters['system'] = \implode(\PHP_EOL, \array_filter($systemPrompts));
@@ -226,25 +232,51 @@ final readonly class Messages implements MessagesInterface
                 continue;
             }
 
-            Assert::isArray($message['content']);
-            Assert::keyExists($message['content'], 'type');
-            Assert::string($message['content']['type']);
+            $messageContent = $message['content'];
+            Assert::isArray($messageContent);
+            if (null !== ($messageContent['type'] ?? null)) {
+                $messageContent = [$messageContent];
+            }
 
-            if ('text' === $message['content']['type']) {
-                Assert::keyExists($message['content'], 'text');
-                Assert::string($message['content']['text']);
-            } elseif ('image' === $message['content']['type']) {
-                Assert::keyExists($message['content'], 'source');
-                Assert::isArray($message['content']['source']);
-                Assert::keyExists($message['content']['source'], 'type');
-                Assert::string($message['content']['source']['type']);
-                Assert::same($message['content']['source']['type'], 'base64');
-                Assert::keyExists($message['content']['source'], 'media_type');
-                Assert::string($message['content']['source']['media_type']);
-                Assert::keyExists($message['content']['source'], 'data');
-                Assert::string($message['content']['source']['data']);
-            } else {
-                throw new \InvalidArgumentException('Invalid message content type');
+            foreach ($messageContent as $content) {
+                Assert::isArray($content);
+                Assert::keyExists($content, 'type');
+                Assert::string($content['type']);
+
+                if ('text' === $content['type']) {
+                    Assert::keyExists($content, 'text');
+                    Assert::string($content['text']);
+                } elseif ('image' === $content['type']) {
+                    Assert::keyExists($content, 'source');
+                    Assert::isArray($content['source']);
+                    Assert::keyExists($content['source'], 'type');
+                    Assert::string($content['source']['type']);
+                    Assert::same($content['source']['type'], 'base64');
+                    Assert::keyExists($content['source'], 'media_type');
+                    Assert::string($content['source']['media_type']);
+                    Assert::keyExists($content['source'], 'data');
+                    Assert::string($content['source']['data']);
+                } elseif ('tool_use' === $content['type']) {
+                    Assert::keyExists($content, 'id');
+                    Assert::string($content['id']);
+                    Assert::keyExists($content, 'name');
+                    Assert::string($content['name']);
+                    Assert::keyExists($content, 'input');
+                    Assert::isArray($content['input']);
+                } elseif ('tool_result' === $content['type']) {
+                    Assert::keyExists($content, 'tool_use_id');
+                    Assert::string($content['tool_use_id']);
+                    Assert::keyExists($content, 'content');
+                    foreach ($content['content'] as $contentContent) {
+                        Assert::isArray($contentContent);
+                        Assert::keyExists($contentContent, 'type');
+                        Assert::inArray($contentContent['type'], ['text']);
+                        Assert::keyExists($contentContent, 'text');
+                        Assert::string($contentContent['text']);
+                    }
+                } else {
+                    throw new \InvalidArgumentException('Invalid message content type');
+                }
             }
         }
 

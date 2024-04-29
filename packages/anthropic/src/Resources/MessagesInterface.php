@@ -19,36 +19,39 @@ use ModelflowAi\Anthropic\Responses\Messages\CreateStreamedResponse;
 /**
  * @phpstan-type TextMessage array{type: "text", text: string}
  * @phpstan-type ImageMessage array{type: "image", source: array{type: "base64", media_type: string, data: string}}
- * @phpstan-type MessageContent string|TextMessage|ImageMessage
+ * @phpstan-type ToolUseMessage array{type: "tool_use", id: string, name: string, input: array<string, mixed>}
+ * @phpstan-type ToolResultMessage array{type: "tool_result", tool_use_id: string, content: array<array{type: "text", text: string|null}>}
+ * @phpstan-type MessageContent string|TextMessage|ImageMessage|ToolUseMessage|ToolResultMessage|array<ToolUseMessage>
  * @phpstan-type Message array{role: "system"|"assistant"|"user", content: MessageContent}
+ * @phpstan-type Tool array{
+ *     name: string,
+ *     description: string,
+ *     input_schema: array{
+ *         type: string,
+ *         properties: array<string, array{type: string, description: string}>,
+ *     }
+ * }
+ * @phpstan-type Parameters array{
+ *     model: string,
+ *     messages: Message[],
+ *     tools?: Tool[],
+ *     max_tokens: int,
+ *     metadata?: array{user_id: string},
+ *     stop_sequences?: string[],
+ *     temperature?: float,
+ *     top_k?: int,
+ *     top_p?: float,
+ * }
  */
 interface MessagesInterface
 {
     /**
-     * @param array{
-     *     model: string,
-     *     messages: Message[],
-     *     max_tokens: int,
-     *     metadata?: array{user_id: string},
-     *     stop_sequences?: string[],
-     *     temperature?: float,
-     *     top_k?: int,
-     *     top_p?: float,
-     * } $parameters
+     * @param Parameters $parameters
      */
     public function create(array $parameters): CreateResponse;
 
     /**
-     * @param array{
-     *      model: string,
-     *      messages: Message[],
-     *      max_tokens: int,
-     *      metadata?: array{user_id: string},
-     *      stop_sequences?: string[],
-     *      temperature?: float,
-     *      top_k?: int,
-     *      top_p?: float,
-     * } $parameters
+     * @param Parameters $parameters
      *
      * @return \Iterator<int, CreateStreamedResponse>
      */
