@@ -50,6 +50,8 @@ final readonly class Messages implements MessagesInterface
 
     public function createStreamed(array $parameters): \Iterator
     {
+        Assert::keyNotExists($parameters, 'tools');
+
         $this->validateParameters($parameters);
         $parameters['stream'] = true;
 
@@ -186,8 +188,10 @@ final readonly class Messages implements MessagesInterface
             if ('system' === $message['role']) {
                 $content = $message['content'];
                 if (\is_array($content)) {
-                    if ('image' === $content['type']) {
-                        throw new \InvalidArgumentException('Invalid message content type for a system message.');
+                    if (\in_array($content['type'], ['image', 'tool_use', 'tool_result'], true)) {
+                        throw new \InvalidArgumentException(
+                            'Invalid message content type for a system message. Allowed: "text", Given: "' . $content['type'] . '".',
+                        );
                     }
                     $content = $content['text'];
                 }
@@ -199,6 +203,8 @@ final readonly class Messages implements MessagesInterface
 
             $messages[] = $message;
         }
+
+        Assert::allString($systemPrompts);
 
         $parameters['messages'] = $messages;
         $parameters['system'] = \implode(\PHP_EOL, \array_filter($systemPrompts));

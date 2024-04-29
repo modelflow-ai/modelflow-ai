@@ -17,10 +17,12 @@ namespace ModelflowAi\Anthropic\Responses\Messages;
  * @phpstan-import-type TextMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
  * @phpstan-import-type ToolUseMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
  */
-abstract readonly class CreateResponseContent
+final readonly class CreateResponseContent
 {
     public function __construct(
         public string $type,
+        public ?string $text,
+        public ?CreateResponseContentToolUse $toolUse = null,
     ) {
     }
 
@@ -30,11 +32,19 @@ abstract readonly class CreateResponseContent
     public static function from(array $attributes): self
     {
         if ('text' === $attributes['type']) {
-            return CreateResponseContentText::textFrom($attributes);
+            return new self(
+                $attributes['type'],
+                $attributes['text'],
+            );
         } elseif ('tool_use' === $attributes['type']) {
-            return CreateResponseContentToolUse::toolUseFrom($attributes);
+            return new self(
+                $attributes['type'],
+                null,
+                CreateResponseContentToolUse::from($attributes),
+            );
         }
 
+        // @phpstan-ignore-next-line
         throw new \InvalidArgumentException('Invalid type');
     }
 }

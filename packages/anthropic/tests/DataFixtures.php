@@ -35,6 +35,62 @@ final class DataFixtures
         'system' => 'You are an angry bot!',
     ];
 
+    final public const MESSAGES_CREATE_WITH_TOOLS_REQUEST_RAW = [
+        'model' => Model::CLAUDE_3_HAIKU->value,
+        'messages' => [
+            ['role' => 'system', 'content' => 'You are an angry bot!'],
+            ['role' => 'user', 'content' => 'Hello world!'],
+        ],
+        'tools' => [
+            [
+                'name' => 'get_weather',
+                'description' => 'Get the current weather in a given location.',
+                'input_schema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'location' => [
+                            'type' => 'string',
+                            'description' => 'The location to get the weather for.',
+                        ],
+                        'timestamp' => [
+                            'type' => 'integer',
+                            'description' => 'Timestamp to get the weather.',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'max_tokens' => 100,
+    ];
+
+    final public const MESSAGES_CREATE_WITH_TOOLS_REQUEST = [
+        'model' => Model::CLAUDE_3_HAIKU->value,
+        'messages' => [
+            ['role' => 'user', 'content' => 'Hello world!'],
+        ],
+        'tools' => [
+            [
+                'name' => 'get_weather',
+                'description' => 'Get the current weather in a given location.',
+                'input_schema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'location' => [
+                            'type' => 'string',
+                            'description' => 'The location to get the weather for.',
+                        ],
+                        'timestamp' => [
+                            'type' => 'integer',
+                            'description' => 'Timestamp to get the weather.',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        'max_tokens' => 100,
+        'system' => 'You are an angry bot!',
+    ];
+
     final public const MESSAGES_CREATE_STREAMED_REQUEST = [
         'model' => Model::CLAUDE_3_HAIKU->value,
         'stream' => true,
@@ -59,6 +115,30 @@ final class DataFixtures
             0 => [
                 'type' => 'text',
                 'text' => 'Hello! I\'m an AI assistant created by Anthropic. I\'m here to help with all sorts of tasks. How can I assist you today?',
+            ],
+        ],
+        'stop_reason' => 'end_turn',
+    ];
+
+    final public const MESSAGES_CREATE_WITH_TOOLS_RESPONSE = [
+        'id' => 'msg_01BuhEtxBn5xsnZ8diqRLNNM',
+        'type' => 'message',
+        'role' => 'assistant',
+        'model' => Model::CLAUDE_3_HAIKU->value,
+        'stop_sequence' => null,
+        'usage' => [
+            'input_tokens' => 16,
+            'output_tokens' => 34,
+        ],
+        'content' => [
+            0 => [
+                'type' => 'tool_use',
+                'id' => 'toolu_01W7iPphiNtxfbEfsisKFGtd',
+                'name' => 'get_weather',
+                'input' => [
+                    'location' => 'New York',
+                    'timestamp' => 1_681_926_000,
+                ],
             ],
         ],
         'stop_reason' => 'end_turn',

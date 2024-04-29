@@ -13,15 +13,18 @@ declare(strict_types=1);
 
 use ModelflowAi\Anthropic\Anthropic;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContentText;
 use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContentToolUse;
 use Symfony\Component\Dotenv\Dotenv;
+use Webmozart\Assert\Assert;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
 
-$client = Anthropic::client($_ENV['ANTHROPIC_API_KEY']);
+$client = Anthropic::factory()
+    ->withApiKey($_ENV['ANTHROPIC_API_KEY'])
+    ->withBeta('tools-2024-04-04')
+    ->make();
 
 /**
  * @return array{
@@ -73,14 +76,18 @@ $response = $client->messages()->create([
 
 $items = [];
 foreach ($response->content as $content) {
-    if ($content instanceof CreateResponseContentToolUse) {
+    if ('tool_use' === $content->type) {
+        /** @var CreateResponseContentToolUse|null $tooluse */
+        $toolUse = $content->toolUse;
+        Assert::notNull($toolUse);
+
         $items[] = [
             'type' => $content->type,
-            'id' => $content->id,
-            'name' => $content->name,
-            'input' => $content->input,
+            'id' => $toolUse->id,
+            'name' => $toolUse->name,
+            'input' => $toolUse->input,
         ];
-    } elseif ($content instanceof CreateResponseContentText) {
+    } elseif ('text' === $content->type) {
         $items[] = [
             'type' => $content->type,
             'text' => $content->text,
@@ -89,28 +96,35 @@ foreach ($response->content as $content) {
 }
 
 $messages[] = [
-    'role' => $response->role,
+    'role' => 'assistant',
     'content' => $items,
 ];
 
-foreach ($response->content as $message) {
-    if ($message instanceof CreateResponseContentToolUse) {
-        $timestamp = $message->input['timestamp'] ?? null;
+foreach ($response->content as $content) {
+    if ('tool_use' === $content->type) {
+        /** @var CreateResponseContentToolUse|null $tooluse */
+        $toolUse = $content->toolUse;
+        Assert::notNull($toolUse);
+
+        /** @var array{timestamp?: string, location: string} $input */
+        $input = $toolUse->input;
+
+        $timestamp = $input['timestamp'] ?? null;
         if (\is_string($timestamp)) {
             $timestamp = (int) $timestamp;
         }
-        $result = getCurrentWeather($message->input['location'], $timestamp);
+        $result = getCurrentWeather($input['location'], $timestamp);
         $messages[] = [
             'role' => 'user',
             'content' => [
                 [
                     'type' => 'tool_result',
-                    'tool_use_id' => $message->id,
+                    'tool_use_id' => $toolUse->id,
                     'content' => [['type' => 'text', 'text' => \json_encode($result)]],
                 ],
             ],
         ];
-    } elseif ($content instanceof CreateResponseContentText) {
+    } elseif ('text' === $content->type) {
         echo $response->role . ': ' . $content->text . \PHP_EOL;
     }
 }

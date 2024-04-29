@@ -15,6 +15,8 @@ namespace ModelflowAi\Anthropic\Tests\Unit\Resources;
 
 use ModelflowAi\Anthropic\Resources\Messages;
 use ModelflowAi\Anthropic\Resources\MessagesInterface;
+use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContent;
+use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContentToolUse;
 use ModelflowAi\Anthropic\Tests\DataFixtures;
 use ModelflowAi\ApiClient\Responses\MetaInformation;
 use ModelflowAi\ApiClient\Transport\Response\ObjectResponse;
@@ -49,6 +51,41 @@ final class MessagesTest extends TestCase
         $this->assertSame($responseData['usage']['input_tokens'] + $responseData['usage']['output_tokens'], $response->usage->totalTokens);
         $this->assertSame($responseData['content'][0]['type'], $response->content[0]->type);
         $this->assertSame($responseData['content'][0]['text'], $response->content[0]->text);
+        $this->assertSame($responseData['stop_reason'], $response->stopReason);
+    }
+
+    public function testCreateWithTools(): void
+    {
+        $mockResponseMatcher = new MockResponseMatcher();
+        $instance = $this->createInstance($mockResponseMatcher);
+
+        $mockResponseMatcher->addResponse(PartialPayload::create(
+            'messages',
+            DataFixtures::MESSAGES_CREATE_WITH_TOOLS_REQUEST,
+        ), new ObjectResponse(DataFixtures::MESSAGES_CREATE_WITH_TOOLS_RESPONSE, MetaInformation::empty()));
+
+        $response = $instance->create(DataFixtures::MESSAGES_CREATE_WITH_TOOLS_REQUEST_RAW);
+
+        $responseData = DataFixtures::MESSAGES_CREATE_WITH_TOOLS_RESPONSE;
+        $this->assertSame($responseData['id'], $response->id);
+        $this->assertSame($responseData['type'], $response->type);
+        $this->assertSame($responseData['role'], $response->role);
+        $this->assertSame($responseData['model'], $response->model);
+        $this->assertSame($responseData['stop_sequence'], $response->stopSequence);
+        $this->assertSame($responseData['usage']['input_tokens'], $response->usage->promptTokens);
+        $this->assertSame($responseData['usage']['output_tokens'], $response->usage->completionTokens);
+        $this->assertSame($responseData['usage']['input_tokens'] + $responseData['usage']['output_tokens'], $response->usage->totalTokens);
+
+        $content = $response->content[0];
+        $this->assertInstanceOf(CreateResponseContent::class, $content);
+        $toolUse = $content->toolUse;
+        $this->assertInstanceOf(CreateResponseContentToolUse::class, $toolUse);
+
+        $this->assertSame($responseData['content'][0]['type'], $content->type);
+        $this->assertNull($content->text);
+        $this->assertSame($responseData['content'][0]['id'], $toolUse->id);
+        $this->assertSame($responseData['content'][0]['name'], $toolUse->name);
+        $this->assertSame($responseData['content'][0]['input'], $toolUse->input);
         $this->assertSame($responseData['stop_reason'], $response->stopReason);
     }
 

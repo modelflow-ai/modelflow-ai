@@ -16,27 +16,24 @@ namespace ModelflowAi\Anthropic\Responses\Messages;
 /**
  * @phpstan-import-type ToolUseMessage from \ModelflowAi\Anthropic\Resources\MessagesInterface
  */
-final readonly class CreateResponseContentToolUse extends CreateResponseContent
+final readonly class CreateResponseContentToolUse
 {
     /**
      * @param array<string, mixed> $input
      */
     private function __construct(
-        string $type,
         public string $id,
         public string $name,
         public array $input,
     ) {
-        parent::__construct($type);
     }
 
     /**
      * @param ToolUseMessage $attributes
      */
-    public static function toolUseFrom(array $attributes): self
+    public static function from(array $attributes): self
     {
         return new self(
-            $attributes['type'],
             $attributes['id'],
             $attributes['name'],
             $attributes['input'],
