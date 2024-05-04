@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Anthropic\Tests\Unit\Resources;
 
+use ModelflowAi\Anthropic\DataFixtures;
 use ModelflowAi\Anthropic\Resources\Messages;
 use ModelflowAi\Anthropic\Resources\MessagesInterface;
 use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContent;
 use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContentToolUse;
-use ModelflowAi\Anthropic\Tests\DataFixtures;
 use ModelflowAi\ApiClient\Responses\MetaInformation;
 use ModelflowAi\ApiClient\Transport\Response\ObjectResponse;
 use ModelflowAi\ApiClient\Transport\Testing\MockResponseMatcher;

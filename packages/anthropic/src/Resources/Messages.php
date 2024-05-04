@@ -188,15 +188,19 @@ final readonly class Messages implements MessagesInterface
             if ('system' === $message['role']) {
                 $content = $message['content'];
                 if (\is_array($content)) {
-                    if (\in_array($content['type'], ['image', 'tool_use', 'tool_result'], true)) {
-                        throw new \InvalidArgumentException(
-                            'Invalid message content type for a system message. Allowed: "text", Given: "' . $content['type'] . '".',
-                        );
-                    }
-                    $content = $content['text'];
-                }
+                    /** @var array{type: string, text: string} $part */
+                    foreach ($content as $part) {
+                        if (\in_array($part['type'], ['image', 'tool_use', 'tool_result'], true)) {
+                            throw new \InvalidArgumentException(
+                                'Invalid message content type for a system message. Allowed: "text", Given: "' . $part['type'] . '".',
+                            );
+                        }
 
-                $systemPrompts[] = $content;
+                        $systemPrompts[] = $part['text'];
+                    }
+                } elseif (\is_string($content)) {
+                    $systemPrompts[] = $content;
+                }
 
                 continue;
             }

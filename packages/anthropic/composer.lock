@@ -272,17 +272,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "135615800e2f4573b5402d01c2040dd368d333b1"
+                "reference": "699730653571e7d2d95ca8587104bc6701d4859f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/135615800e2f4573b5402d01c2040dd368d333b1",
-                "reference": "135615800e2f4573b5402d01c2040dd368d333b1",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/699730653571e7d2d95ca8587104bc6701d4859f",
+                "reference": "699730653571e7d2d95ca8587104bc6701d4859f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.2",
                 "psr/log": "^1|^2|^3",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/http-client-contracts": "^3.4.1",
                 "symfony/service-contracts": "^2.5|^3"
             },
@@ -357,7 +358,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-19T07:13:57+00:00"
+            "time": "2024-05-02T11:58:01+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -1884,12 +1885,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7f89a3442aa0ef7c9821bf6cf48e4b1998bea563"
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7f89a3442aa0ef7c9821bf6cf48e4b1998bea563",
-                "reference": "7f89a3442aa0ef7c9821bf6cf48e4b1998bea563",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/acee377ae876fcf24a9a5a0d321707c89f006fcf",
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf",
                 "shasum": ""
             },
             "require": {
@@ -1977,7 +1978,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-29T06:51:02+00:00"
+            "time": "2024-05-02T06:24:40+00:00"
         },
         {
             "name": "rector/rector",
@@ -2964,12 +2965,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "04aa55c9ec386458dcd8e71584bcb22fd7ccbd0c"
+                "reference": "83026885fde02508235fc9dd175f227290542c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/04aa55c9ec386458dcd8e71584bcb22fd7ccbd0c",
-                "reference": "04aa55c9ec386458dcd8e71584bcb22fd7ccbd0c",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/83026885fde02508235fc9dd175f227290542c99",
+                "reference": "83026885fde02508235fc9dd175f227290542c99",
                 "shasum": ""
             },
             "require": {
@@ -3030,7 +3031,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T11:50:29+00:00"
+            "time": "2024-05-02T08:41:59+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3095,5 +3096,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

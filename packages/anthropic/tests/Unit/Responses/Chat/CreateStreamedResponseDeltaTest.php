@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Anthropic\tests\Unit\Responses\Chat;
 
+use ModelflowAi\Anthropic\DataFixtures;
 use ModelflowAi\Anthropic\Responses\Messages\CreateStreamedResponseDelta;
-use ModelflowAi\Anthropic\Tests\DataFixtures;
 use PHPUnit\Framework\TestCase;
 
 final class CreateStreamedResponseDeltaTest extends TestCase

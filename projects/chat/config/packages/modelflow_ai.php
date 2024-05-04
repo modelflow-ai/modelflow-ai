@@ -67,17 +67,32 @@ return static function (ContainerConfigurator $container): void {
         ]);
     }
 
+    if (isset($_ENV['ANTHROPIC_API_KEY'])) {
+        $providers['anthropic'] = [
+            'enabled' => true,
+            'credentials' => [
+                'api_key' => '%env(ANTHROPIC_API_KEY)%',
+            ],
+        ];
+
+        $adapters = array_merge($adapters, [
+            'claude_3_opus' => [
+                'enabled' => true,
+            ],
+            'claude_3_sonnet' => [
+                'enabled' => true,
+            ],
+            'claude_3_haiku' => [
+                'enabled' => true,
+            ],
+        ]);
+    }
+
     $container->extension('modelflow_ai', [
         'providers' => $providers,
         'adapters' => $adapters,
         'chat' => [
             'adapters' => array_keys($adapters),
-        ],
-    ]);
-
-    $container->extension('twig', [
-        'globals' => [
-            'MODELS' => array_keys($adapters),
         ],
     ]);
 };

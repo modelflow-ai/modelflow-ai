@@ -15,7 +15,7 @@ namespace ModelflowAi\Anthropic\Tests\Functional;
 
 use ModelflowAi\Anthropic\Client;
 use ModelflowAi\Anthropic\ClientInterface;
-use ModelflowAi\Anthropic\Tests\DataFixtures;
+use ModelflowAi\Anthropic\DataFixtures;
 use ModelflowAi\ApiClient\Responses\MetaInformation;
 use ModelflowAi\ApiClient\Transport\Response\ObjectResponse;
 use ModelflowAi\ApiClient\Transport\Testing\MockResponseMatcher;

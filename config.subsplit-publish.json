@@ -1,6 +1,16 @@
 {
     "sub-splits": [
         {
+            "name": "Anthropic",
+            "directory": "packages/anthropic",
+            "target": "git@github.com:modelflow-ai/anthropic.git"
+        },
+        {
+            "name": "Anthropic Adapter",
+            "directory": "packages/anthropic-adapter",
+            "target": "git@github.com:modelflow-ai/anthropic-adapter.git"
+        },
+        {
             "name": "ApiClient",
             "directory": "packages/api-client",
             "target": "git@github.com:modelflow-ai/api-client.git"

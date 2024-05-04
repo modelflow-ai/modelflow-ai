@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Anthropic\Tests\Unit\Responses\Chat;
 
+use ModelflowAi\Anthropic\DataFixtures;
 use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContent;
 use ModelflowAi\Anthropic\Responses\Messages\CreateResponseContentToolUse;
-use ModelflowAi\Anthropic\Tests\DataFixtures;
 use PHPUnit\Framework\TestCase;
 
 final class CreateResponseContentTest extends TestCase

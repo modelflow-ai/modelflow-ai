@@ -12,9 +12,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../core",
-                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
+                "reference": "0c7d3ce23a6908ca52b1a832f76e87fd83b31f92"
             },
             "require": {
+                "ext-fileinfo": "*",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
@@ -677,12 +678,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "96094ad5cc4bb179a5d0efbc4fde4fcc96074079"
+                "reference": "a534b15605687c9bf4a3972d0498beb2ff9c60f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/96094ad5cc4bb179a5d0efbc4fde4fcc96074079",
-                "reference": "96094ad5cc4bb179a5d0efbc4fde4fcc96074079",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/a534b15605687c9bf4a3972d0498beb2ff9c60f3",
+                "reference": "a534b15605687c9bf4a3972d0498beb2ff9c60f3",
                 "shasum": ""
             },
             "require": {
@@ -754,7 +755,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-05T06:22:58+00:00"
+            "time": "2024-05-02T08:34:06+00:00"
         },
         {
             "name": "symfony/string",
@@ -762,12 +763,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "236b450c00ab6560e6cda684853d2db3c6b41731"
+                "reference": "ffe3085b909b72708bf57eae13b64570fe9fd7af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/236b450c00ab6560e6cda684853d2db3c6b41731",
-                "reference": "236b450c00ab6560e6cda684853d2db3c6b41731",
+                "url": "https://api.github.com/repos/symfony/string/zipball/ffe3085b909b72708bf57eae13b64570fe9fd7af",
+                "reference": "ffe3085b909b72708bf57eae13b64570fe9fd7af",
                 "shasum": ""
             },
             "require": {
@@ -841,7 +842,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-05-02T08:41:59+00:00"
         },
         {
             "name": "symfony/type-info",
@@ -849,12 +850,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/type-info.git",
-                "reference": "6c806b880b863479d9cf24ef39ce1ee716073e4f"
+                "reference": "b429d0710588fc396ba5def5329cf637d9861f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/type-info/zipball/6c806b880b863479d9cf24ef39ce1ee716073e4f",
-                "reference": "6c806b880b863479d9cf24ef39ce1ee716073e4f",
+                "url": "https://api.github.com/repos/symfony/type-info/zipball/b429d0710588fc396ba5def5329cf637d9861f9f",
+                "reference": "b429d0710588fc396ba5def5329cf637d9861f9f",
                 "shasum": ""
             },
             "require": {
@@ -924,7 +925,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-24T06:50:28+00:00"
+            "time": "2024-05-02T10:19:13+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -1764,12 +1765,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "547d314dc24ec1e177720d45c6263fb226cc2ae3"
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/547d314dc24ec1e177720d45c6263fb226cc2ae3",
-                "reference": "547d314dc24ec1e177720d45c6263fb226cc2ae3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/acee377ae876fcf24a9a5a0d321707c89f006fcf",
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf",
                 "shasum": ""
             },
             "require": {
@@ -1841,7 +1842,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.20"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1857,7 +1858,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-24T06:32:35+00:00"
+            "time": "2024-05-02T06:24:40+00:00"
         },
         {
             "name": "rector/rector",
@@ -2901,5 +2902,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
