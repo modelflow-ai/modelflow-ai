@@ -6,7 +6,7 @@
             "target": "git@github.com:modelflow-ai/anthropic.git"
         },
         {
-            "name": "Anthropic Adapter",
+            "name": "AnthropicAdapter",
             "directory": "packages/anthropic-adapter",
             "target": "git@github.com:modelflow-ai/anthropic-adapter.git"
         },
