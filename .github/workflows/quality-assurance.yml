@@ -14,6 +14,13 @@ jobs:
             directory: 'packages/anthropic'
             docker: false
 
+    anthropic-adapter:
+        name: Anthropic Adapter
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/anthropic-adapter'
+            docker: false
+
     api-client:
         name: Api-Client
         uses: ./.github/workflows/test.yml

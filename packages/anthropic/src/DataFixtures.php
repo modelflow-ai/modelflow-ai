@@ -11,9 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Anthropic\Tests;
-
-use ModelflowAi\Anthropic\Model;
+namespace ModelflowAi\Anthropic;
 
 final class DataFixtures
 {

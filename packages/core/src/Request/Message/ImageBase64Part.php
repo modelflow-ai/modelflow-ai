@@ -20,14 +20,20 @@ readonly class ImageBase64Part extends MessagePart
     public static function create(
         string $path,
     ): self {
+        $mimeType = \mime_content_type($path);
+        if (false === $mimeType) {
+            throw new \RuntimeException('Could not determine mime type of image.');
+        }
+
         $content = \file_get_contents($path);
         Assert::string($content);
 
-        return new self(\base64_encode($content));
+        return new self(\base64_encode($content), $mimeType);
     }
 
     public function __construct(
         public string $content,
+        public string $mimeType,
     ) {
         parent::__construct(MessagePartTypeEnum::BASE64_IMAGE);
     }

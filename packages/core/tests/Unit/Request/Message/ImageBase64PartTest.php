@@ -27,12 +27,13 @@ class ImageBase64PartTest extends TestCase
         $imagePart = ImageBase64Part::create($path);
 
         $this->assertSame($content, $imagePart->content);
+        $this->assertSame('image/jpeg', $imagePart->mimeType);
     }
 
     public function testEnhanceMessage(): void
     {
         $content = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='; // This is a 1x1 pixel white image in base64 format
-        $imagePart = new ImageBase64Part($content);
+        $imagePart = new ImageBase64Part($content, 'image/jpeg');
 
         $result = [
             'role' => AIChatMessageRoleEnum::USER->value,

@@ -54,7 +54,7 @@ class AIChatMessageTest extends TestCase
     public function testConstructAndToArrayWithImageBase64Content(): void
     {
         $role = AIChatMessageRoleEnum::USER;
-        $imagePart = new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='); // This is a 1x1 pixel white image in base64 format
+        $imagePart = new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'image/jpeg'); // This is a 1x1 pixel white image in base64 format
 
         $message = new AIChatMessage($role, $imagePart);
 
@@ -71,7 +71,7 @@ class AIChatMessageTest extends TestCase
     {
         $role = AIChatMessageRoleEnum::USER;
         $textPart = new TextPart('Test content');
-        $imagePart = new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='); // This is a 1x1 pixel white image in base64 format
+        $imagePart = new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'image/jpeg'); // This is a 1x1 pixel white image in base64 format
 
         $message = new AIChatMessage($role, [$textPart, $imagePart]);
 

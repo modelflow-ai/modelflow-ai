@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.18",
+        "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/core": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",
         "modelflow-ai/ollama-adapter": "^0.2",

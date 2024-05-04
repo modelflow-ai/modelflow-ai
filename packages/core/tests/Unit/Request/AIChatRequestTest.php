@@ -35,7 +35,7 @@ class AIChatRequestTest extends TestCase
     {
         $message = new AIChatMessage(
             AIChatMessageRoleEnum::USER,
-            new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='), // This is a 1x1 pixel white image in base64 format
+            new ImageBase64Part('iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==', 'image/jpeg'), // This is a 1x1 pixel white image in base64 format
         );
         $messages = new AIChatMessageCollection($message);
         $criteria = new AIRequestCriteriaCollection();

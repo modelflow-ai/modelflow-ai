@@ -87,9 +87,10 @@ the [official API documentation](https://docs.anthropic.com/claude/reference/get
 
 ## Open Points
 
-### Tools
+### Streaming Tools
 
-The messages resource does not support tools until now.
+Streaming of tools are not yet available in the Anthropic API. As soon as they are available, we will provide a
+the stream option with the tools.
 
 ### Text completions
 

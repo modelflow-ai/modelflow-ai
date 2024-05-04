@@ -65,8 +65,8 @@
                     </button>
                     <div {{ stimulus_target('dropdown-button', 'dropdown') }} class="hidden absolute mt-1 w-56 origin-top-right bg-gray-800 border border-gray-700 rounded-md shadow-lg z-50">
                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            {% for model in MODELS %}
-                                <a href="?model={{ model }}" class="block px-4 py-2 text-sm text-white hover:bg-gray-700{% if chatModel == model %} bg-gray-700{% endif %}" role="menuitem">{{ model }}{% if feature_enabled(model, 'tools') %} (Tools available){% endif %}</a>
+                            {% for model,key in MODELS %}
+                                <a href="?model={{ model }}" class="block px-4 py-2 text-sm text-white hover:bg-gray-700{% if chatModel == model %} bg-gray-700{% endif %}" role="menuitem">{{ model }}{% if feature_enabled(key, 'tools') %} (Tools available){% endif %}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -93,13 +93,13 @@
             {% endif %}
                 {{ form_start(form) }}
                 <div class="p-4 flex items-center border-t border-gray-700">
-                    {% if feature_enabled(chatModel, 'image_to_text') %}
+                    {% if feature_enabled(MODELS[chatModel], 'image_to_text') %}
                         {{ form_row(form.file) }}
                     {% else %}
                         {{ form_row(form.file, {label_attr: {class: 'hidden'}, attr: {disabled: true}}) }}
                     {% endif %}
                     {{ form_row(form.message) }}
-                    {% if feature_enabled(chatModel, 'tools') %}
+                    {% if feature_enabled(MODELS[chatModel], 'tools') %}
                         {% if chat.isToolsEnabled|default(true) == true %}
                             {{ form_row(form.enableTools, {attr: {checked: 'checked'}}) }}
                         {% else %}

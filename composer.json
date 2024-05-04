@@ -10,6 +10,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
+        "modelflow-ai/anthropic": "^0.2",
+        "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/api-client": "^0.2",
         "modelflow-ai/core": "^0.2",
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",

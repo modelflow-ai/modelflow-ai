@@ -49,22 +49,34 @@ use ModelflowAi\Mistral\Mistral;
 $client = Mistral::client('your-api-key');
 ```
 
-Then, you can use the `ModelAdapter`:
+Then, you can use the `MistralChatModelAdapter`:
 
 ```php
+use ModelflowAi\Core\AIRequestHandler;
+use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
+use ModelflowAi\Core\DecisionTree\DecisionRule;
+use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
 
-$modelAdapter = new MistralChatModelAdapter($client);
-$response = $modelAdapter->create([
-    'model' => Model::TINY->value,
-    'messages' => [
-        [
-            'role' => 'system',
-            'content' => 'your-content',
-        ],
-    ],
-]);
+$modelAdapter = new MistralChatModelAdapter($client, Model::LARGE);
+$decisionTree = new AIModelDecisionTree([
+    new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
+]]);
+$handler = new AIRequestHandler($decisionTree);
+
+/** @var AIChatResponse $response */
+$response = $handler->createChatRequest(
+    ...ChatPromptTemplate::create(
+        new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
+        new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
+    )->format(['where' => 'world', 'feeling' => 'angry']),
+)
+    ->addCriteria(PrivacyCriteria::MEDIUM)
+    ->build()
+    ->execute();
+
+echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);
 ```
 
 And the `EmbeddingsAdapter`:
@@ -73,12 +85,8 @@ And the `EmbeddingsAdapter`:
 use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter;
 
 $embeddingsAdapter = new MistralEmbeddingAdapter($client);
-$response = $embeddingsAdapter->create([
-    'input' => ['your-input'],
-]);
+$vector = $embeddingsAdapter->embedText('your-input');
 ```
-
-Remember to replace `'your-content'`, and `'your-input'` with the actual values you want to use.
 
 ## Contributing
 

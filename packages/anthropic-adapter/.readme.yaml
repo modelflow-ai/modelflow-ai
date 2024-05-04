@@ -1,0 +1,42 @@
+title: Anthropic Adapter
+description: The adapter integrates Anthropic AI models into Modelflow  AI.
+shortDescription: The adapter for the Anthropic API client.
+examples: true
+usage: |
+    First, initialize the client:
+
+    ```php
+    use ModelflowAi\Anthropic\Anthropic;
+
+    $client = Anthropic::client('your-api-key');
+    ```
+
+    Then, you can use the `AnthropicChatModelAdapter`:
+
+    ```php
+    use ModelflowAi\Core\AIRequestHandler;
+    use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
+    use ModelflowAi\Core\DecisionTree\DecisionRule;
+    use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+    use ModelflowAi\Anthropic\Model;
+    use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
+
+    $modelAdapter = new AnthropicChatModelAdapter($client, Model::LARGE);
+    $decisionTree = new AIModelDecisionTree([
+        new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
+    ]]);
+    $handler = new AIRequestHandler($decisionTree);
+
+    /** @var AIChatResponse $response */
+    $response = $handler->createChatRequest(
+        ...ChatPromptTemplate::create(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
+        )->format(['where' => 'world', 'feeling' => 'angry']),
+    )
+        ->addCriteria(PrivacyCriteria::MEDIUM)
+        ->build()
+        ->execute();
+    
+    echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);
+    ```

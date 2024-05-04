@@ -68,7 +68,7 @@ class AddChatMessageHandler
             ];
 
             foreach ($chatMessage->getFiles() as $file) {
-                $parts[] = new ImageBase64Part($file->getContent());
+                $parts[] = new ImageBase64Part($file->getContent(), $file->getMimeType());
             }
 
             $messages[] = new AIChatMessage($chatMessage->getRole(), $parts);

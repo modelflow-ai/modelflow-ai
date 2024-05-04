@@ -169,9 +169,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/core",
-                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
+                "reference": "0c7d3ce23a6908ca52b1a832f76e87fd83b31f92"
             },
             "require": {
+                "ext-fileinfo": "*",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
@@ -1456,16 +1457,16 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v7.0.6",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "6e70473909f46fe5dd3b994a0f1b20ecb6b2f858"
+                "reference": "6ce3c4c899051b3d7326ea1a1dda3729e29ae6d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/6e70473909f46fe5dd3b994a0f1b20ecb6b2f858",
-                "reference": "6e70473909f46fe5dd3b994a0f1b20ecb6b2f858",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/6ce3c4c899051b3d7326ea1a1dda3729e29ae6d7",
+                "reference": "6ce3c4c899051b3d7326ea1a1dda3729e29ae6d7",
                 "shasum": ""
             },
             "require": {
@@ -1528,7 +1529,7 @@
                 "http"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client/tree/v7.0.6"
+                "source": "https://github.com/symfony/http-client/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -1544,7 +1545,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-01T20:49:44+00:00"
+            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -3607,16 +3608,16 @@
         },
         {
             "name": "symfony/dotenv",
-            "version": "v7.0.4",
+            "version": "v7.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "8017ea2f0ff4fbda6ae1bf3f5409d5ecff982067"
+                "reference": "0fd573c141e1990848702d56329050efd5bf25cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/8017ea2f0ff4fbda6ae1bf3f5409d5ecff982067",
-                "reference": "8017ea2f0ff4fbda6ae1bf3f5409d5ecff982067",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/0fd573c141e1990848702d56329050efd5bf25cc",
+                "reference": "0fd573c141e1990848702d56329050efd5bf25cc",
                 "shasum": ""
             },
             "require": {
@@ -3661,7 +3662,7 @@
                 "environment"
             ],
             "support": {
-                "source": "https://github.com/symfony/dotenv/tree/v7.0.4"
+                "source": "https://github.com/symfony/dotenv/tree/v7.0.7"
             },
             "funding": [
                 {
@@ -3677,7 +3678,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T10:53:15+00:00"
+            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -3739,5 +3740,5 @@
         "php": ">=8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

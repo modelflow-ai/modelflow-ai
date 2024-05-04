@@ -12,9 +12,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../core",
-                "reference": "57f3573575cc44186743d09028f48aad7be7cab2"
+                "reference": "0c7d3ce23a6908ca52b1a832f76e87fd83b31f92"
             },
             "require": {
+                "ext-fileinfo": "*",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
@@ -936,12 +937,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "547d314dc24ec1e177720d45c6263fb226cc2ae3"
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/547d314dc24ec1e177720d45c6263fb226cc2ae3",
-                "reference": "547d314dc24ec1e177720d45c6263fb226cc2ae3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/acee377ae876fcf24a9a5a0d321707c89f006fcf",
+                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf",
                 "shasum": ""
             },
             "require": {
@@ -1013,7 +1014,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.20"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1029,7 +1030,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-24T06:32:35+00:00"
+            "time": "2024-05-02T06:24:40+00:00"
         },
         {
             "name": "rector/rector",
@@ -2072,5 +2073,5 @@
         "php": "^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
