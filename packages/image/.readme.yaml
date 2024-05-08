@@ -1,0 +1,4 @@
+title: Image
+description: The image package integrates image requests to Modelflow-AI.
+shortDescription: Handles image requests like generation or edits.
+examples: true

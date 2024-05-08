@@ -202,12 +202,6 @@ final readonly class MistralChatModelAdapter implements AIModelAdapterInterface
         }
     }
 
-    public function supports(AIRequestInterface $request): bool
-    {
-        return $request instanceof AIChatRequest
-            && (!$request->hasTools() || $this->model->toolsSupported());
-    }
-
     /**
      * @return \Iterator<int, AIChatToolCall>
      */
@@ -232,5 +226,11 @@ final readonly class MistralChatModelAdapter implements AIModelAdapterInterface
         $result = \json_decode($arguments, true);
 
         return $result;
+    }
+
+    public function supports(object $request): bool
+    {
+        return $request instanceof AIChatRequest
+            && (!$request->hasTools() || $this->model->toolsSupported());
     }
 }

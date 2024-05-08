@@ -13,12 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request;
 
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
+use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
 
-interface AIRequestInterface
+interface AIRequestInterface extends CriteriaBehaviour
 {
-    /**
-     * @param AiCriteriaInterface[] $criteria
-     */
-    public function matches(array $criteria): bool;
 }

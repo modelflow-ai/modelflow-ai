@@ -13,22 +13,29 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\DecisionTree;
 
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
+use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
+use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 
+/**
+ * @template T of CriteriaBehaviour
+ * @template U of SupportsBehaviour
+ *
+ * @implements DecisionRuleInterface<T, U>
+ */
 class DecisionRule implements DecisionRuleInterface
 {
     /**
+     * @param U $adapter
      * @param AiCriteriaInterface[] $criteria
      */
     public function __construct(
-        private readonly AIModelAdapterInterface $adapter,
+        private readonly object $adapter,
         private readonly array $criteria = [],
     ) {
     }
 
-    public function matches(AIRequestInterface $request): bool
+    public function matches(object $request): bool
     {
         if (!$request->matches($this->criteria)) {
             return false;
@@ -37,7 +44,7 @@ class DecisionRule implements DecisionRuleInterface
         return $this->adapter->supports($request);
     }
 
-    public function getAdapter(): AIModelAdapterInterface
+    public function getAdapter(): object
     {
         return $this->adapter;
     }

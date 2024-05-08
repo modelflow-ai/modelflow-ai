@@ -13,12 +13,22 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\DecisionTree;
 
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
+use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
+use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 
+/**
+ * @template T of CriteriaBehaviour
+ * @template U of SupportsBehaviour
+ */
 interface DecisionRuleInterface
 {
-    public function matches(AIRequestInterface $request): bool;
+    /**
+     * @param T $request
+     */
+    public function matches(object $request): bool;
 
-    public function getAdapter(): AIModelAdapterInterface;
+    /**
+     * @return U
+     */
+    public function getAdapter(): object;
 }

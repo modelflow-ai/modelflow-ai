@@ -13,10 +13,19 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\DecisionTree;
 
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
+use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
+use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 
+/**
+ * @template T of CriteriaBehaviour
+ * @template U of SupportsBehaviour
+ */
 interface AIModelDecisionTreeInterface
 {
-    public function determineAdapter(AIRequestInterface $request): AIModelAdapterInterface;
+    /**
+     * @param T $request
+     *
+     * @return U
+     */
+    public function determineAdapter(object $request): object;
 }

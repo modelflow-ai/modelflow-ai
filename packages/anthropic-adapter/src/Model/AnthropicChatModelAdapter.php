@@ -164,8 +164,9 @@ final readonly class AnthropicChatModelAdapter implements AIModelAdapterInterfac
         }
     }
 
-    public function supports(AIRequestInterface $request): bool
+    public function supports(object $request): bool
     {
-        return $request instanceof AIChatRequest && !$request->hasTools();
+        return $request instanceof AIChatRequest
+            && !$request->hasTools();
     }
 }

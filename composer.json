@@ -10,6 +10,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
+        "ext-gd": "*",
         "modelflow-ai/anthropic": "^0.2",
         "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/api-client": "^0.2",
@@ -17,6 +18,7 @@
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/experts": "^0.2",
+        "modelflow-ai/image": "^0.2",
         "modelflow-ai/mistral": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",
         "modelflow-ai/ollama": "^0.2",
@@ -25,10 +27,10 @@
         "modelflow-ai/prompt-template": "^0.2",
         "modelflow-ai/qdrant-embeddings-store": "^0.2",
         "modelflow-ai/symfony-bundle": "^0.2"
-
     },
     "require-dev": {
-        "schranz/mono": "^2.0.1"
+        "schranz/mono": "^2.0.1",
+        "symfony/dotenv": "*"
     },
     "scripts": {
         "post-install-cmd": "@php vendor/bin/mono run composer install",
