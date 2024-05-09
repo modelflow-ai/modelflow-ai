@@ -22,7 +22,7 @@ use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Builder\AIImageRequestBuilder;
 use ModelflowAi\Image\Response\AIImageResponse;
 
-final readonly class AIImageRequestHandler
+final readonly class AIImageRequestHandler implements AIImageRequestHandlerInterface
 {
     private MiddlewareInterface $handler;
 

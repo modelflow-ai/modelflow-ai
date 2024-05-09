@@ -126,6 +126,7 @@ class AddChatMessageHandler
             if (null !== $message->toolCalls && 0 < \count($message->toolCalls)) {
                 $toolCalls = $message->toolCalls;
                 $additionalMessages = [];
+                $responses->next();
 
                 while ($responses->valid()) {
                     $nextMessage = $responses->current();

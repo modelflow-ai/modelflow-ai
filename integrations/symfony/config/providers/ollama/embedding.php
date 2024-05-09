@@ -23,16 +23,7 @@ use ModelflowAi\OllamaAdapter\OllamaAdapterFactory;
  */
 return static function (ContainerConfigurator $container) {
     $container->services()
-        ->set('modelflow_ai.providers.ollama.client_factory', Factory::class)
-        ->factory([Ollama::class, 'factory'])
-        ->call('withBaseUrl', ['%modelflow_ai.providers.ollama.url%']);
-
-    $container->services()
-        ->set('modelflow_ai.providers.ollama.client', ClientInterface::class)
-        ->factory([service('modelflow_ai.providers.ollama.client_factory'), 'make']);
-
-    $container->services()
-        ->set('modelflow_ai.providers.ollama.adapter_factory', OllamaAdapterFactory::class)
+        ->set('modelflow_ai.providers.ollama.embedding_adapter_factory', OllamaAdapterFactory::class)
         ->args([
             service('modelflow_ai.providers.ollama.client'),
         ]);

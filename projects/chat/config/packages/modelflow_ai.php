@@ -40,6 +40,9 @@ return static function (ContainerConfigurator $container): void {
             'gpt3.5' => [
                 'enabled' => true,
             ],
+            'dall_e_2' => [
+                'enabled' => true,
+            ],
         ]);
     }
 
@@ -91,8 +94,5 @@ return static function (ContainerConfigurator $container): void {
     $container->extension('modelflow_ai', [
         'providers' => $providers,
         'adapters' => $adapters,
-        'chat' => [
-            'adapters' => array_keys($adapters),
-        ],
     ]);
 };

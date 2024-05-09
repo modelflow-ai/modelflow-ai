@@ -67,9 +67,9 @@ final class AIImageRequestBuilder
         return $this;
     }
 
-    public function textToImage(string $string): TextToImageBuilder
+    public function textToImage(string $prompt): TextToImageBuilder
     {
-        return new TextToImageBuilder($this, $string);
+        return new TextToImageBuilder($this, $prompt);
     }
 
     public function as(OutputFormat $format): self

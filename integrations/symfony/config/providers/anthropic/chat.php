@@ -23,16 +23,7 @@ use ModelflowAi\AnthropicAdapter\AnthropicAdapterFactory;
  */
 return static function (ContainerConfigurator $container) {
     $container->services()
-        ->set('modelflow_ai.providers.anthropic.client_factory', Factory::class)
-        ->factory([Anthropic::class, 'factory'])
-        ->call('withApiKey', ['%modelflow_ai.providers.anthropic.credentials.api_key%']);
-
-    $container->services()
-        ->set('modelflow_ai.providers.anthropic.client', ClientInterface::class)
-        ->factory([service('modelflow_ai.providers.anthropic.client_factory'), 'make']);
-
-    $container->services()
-        ->set('modelflow_ai.providers.anthropic.adapter_factory', AnthropicAdapterFactory::class)
+        ->set('modelflow_ai.providers.anthropic.chat_adapter_factory', AnthropicAdapterFactory::class)
         ->args([
             service('modelflow_ai.providers.anthropic.client'),
             '%modelflow_ai.providers.anthropic.max_tokens%',
