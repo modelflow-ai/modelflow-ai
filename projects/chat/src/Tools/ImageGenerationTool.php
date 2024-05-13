@@ -11,15 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Image\Tools;
+namespace App\Tools;
 
 use ModelflowAi\Image\AIImageRequestHandlerInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 readonly class ImageGenerationTool
 {
     public function __construct(
        private AIImageRequestHandlerInterface $imageRequestHandler,
+       private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -32,21 +34,20 @@ readonly class ImageGenerationTool
      * TODO improve this description to be sure that the prompt will be as good as possible.
      * @param string $prompt Well structured prompt to generate the image from.
      *
-     * @return string Generated image as base64.
+     * @return string Url to the generated image.
      */
-    public function generateImage(string $prompt, string $imageFormat): string
+    public function generateImage(string $prompt): string
     {
-        $imageFormat = ImageFormat::tryFrom($imageFormat) ? ImageFormat::from($imageFormat) : ImageFormat::JPEG;
-
         $response = $this->imageRequestHandler->createRequest()
-            ->imageFormat($imageFormat)
+            ->imageFormat(ImageFormat::JPEG)
             ->textToImage($prompt)
             ->asStream()
             ->build()
             ->execute();
 
-        // TODO add storage layer for the image and return the URL to the image.
+        $hash = \md5(\time() . $prompt);
+        \file_put_contents(\dirname(__DIR__, 2) . '/var/images/' . $hash . '.jpeg', \stream_get_contents($response->stream()));
 
-        return $response->stream();
+        return $this->urlGenerator->generate('image', ['hash' => $hash], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 }

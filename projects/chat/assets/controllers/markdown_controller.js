@@ -14,7 +14,8 @@ export default class extends Controller {
             p: 'mb-4',
             blockquote: 'border-l-4 border-gray-900 pl-4 italic',
             code: 'bg-gray-100 text-red-500 p-2 rounded-lg shadow',
-            a: 'text-blue-500 hover:text-blue-800'
+            a: 'text-blue-500 hover:text-blue-800',
+            img: 'aspect-[3/2] w-half rounded-2xl object-cover'
         }
 
         const bindings = Object.keys(classMap).map(key => ({

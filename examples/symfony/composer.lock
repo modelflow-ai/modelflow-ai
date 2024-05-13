@@ -739,7 +739,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/openai-adapter",
-                "reference": "ecb6d3ebaf8c417c57e14d7434933e8da3be8b89"
+                "reference": "909ac6bc1b337738e8feecbad751d4787a0324ac"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -750,6 +750,7 @@
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/image": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy": "^1.0@dev",
@@ -759,7 +760,8 @@
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1",
-                "symfony/dotenv": "7.1.x-dev"
+                "symfony/console": "^7.1",
+                "symfony/dotenv": "^7.1"
             },
             "type": "library",
             "autoload": {
@@ -1449,20 +1451,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -1486,7 +1488,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -1498,9 +1500,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -4488,16 +4490,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.56.0",
+            "version": "v3.56.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530"
+                "reference": "98c0b531f2e7a43a4da2449498398f484b29df50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/a0ae562ea8ec4ae831a404bb67ba9af248fde530",
-                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/98c0b531f2e7a43a4da2449498398f484b29df50",
+                "reference": "98c0b531f2e7a43a4da2449498398f484b29df50",
                 "shasum": ""
             },
             "require": {
@@ -4534,9 +4536,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.56.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.56.1"
             },
-            "time": "2024-05-07T15:50:26+00:00"
+            "time": "2024-05-10T11:31:44+00:00"
         },
         {
             "name": "phpstan/extension-installer",

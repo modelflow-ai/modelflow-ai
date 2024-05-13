@@ -20,7 +20,7 @@ services:
                     - '@ModelflowAi\Tools\GoogleSearch\GoogleSearchTool'
                     - 'search'
                 generate_image:
-                    - '@modelflow_ai.image_generation_tool'
+                    - '@App\Tools\ImageGenerationTool'
                     - 'generateImage'
 
     _instanceof:
