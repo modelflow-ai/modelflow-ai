@@ -27,6 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "ext-gd": "*",
         "modelflow-ai/core": "^0.2",
         "webmozart/assert": "^1.11"
     },
