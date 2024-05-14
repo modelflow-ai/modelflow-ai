@@ -24,6 +24,7 @@ use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\AIImageRequestHandler;
+use ModelflowAi\Image\Middleware\HandleMiddleware;
 use ModelflowAi\OpenaiAdapter\Image\OpenAIImageGenerationAdapter;
 use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
 use Symfony\Component\HttpClient\HttpClient;
@@ -41,4 +42,4 @@ $adapter[] = new DecisionRule($dalle3, [CapabilityCriteria::SMART]);
 /** @var AIModelDecisionTreeInterface<AIRequestInterface, AIImageAdapterInterface> $decisionTree */
 $decisionTree = new AIModelDecisionTree($adapter);
 
-return new AIImageRequestHandler($decisionTree);
+return new AIImageRequestHandler(new HandleMiddleware($decisionTree));

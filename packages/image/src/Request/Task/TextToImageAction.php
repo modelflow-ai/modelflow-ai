@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Request\Task;
 
-interface AIImageRequestTaskInterface
+final readonly class TextToImageAction implements AIImageRequestActionInterface
 {
+    public function __construct(
+        public string $prompt,
+    ) {
+    }
 }

@@ -16,7 +16,7 @@ namespace ModelflowAi\Image\Request\Builder;
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\Image\Request\AIImageRequest;
-use ModelflowAi\Image\Request\Task\AIImageRequestTaskInterface;
+use ModelflowAi\Image\Request\Task\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 
@@ -79,7 +79,7 @@ final class AIImageRequestBuilder
         return $this;
     }
 
-    public function build(AIImageRequestTaskInterface $task): AIImageRequest
+    public function build(AIImageRequestActionInterface $task): AIImageRequest
     {
         return new AIImageRequest($task, $this->imageFormat, $this->format, $this->criteria, $this->requestHandler);
     }

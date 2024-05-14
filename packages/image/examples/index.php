@@ -20,6 +20,7 @@ use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Adapter\Fake\FakeAdapter;
 use ModelflowAi\Image\AIImageRequestHandler;
+use ModelflowAi\Image\Middleware\HandleMiddleware;
 use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -55,7 +56,7 @@ $decisionTree = new AIModelDecisionTree([
         PrivacyCriteria::HIGH,
     ]),
 ]);
-$handler = new AIImageRequestHandler($decisionTree);
+$handler = new AIImageRequestHandler(new HandleMiddleware($decisionTree));
 
 $definition = new InputDefinition([
     new InputArgument('prompt', InputArgument::REQUIRED, 'The prompt to generate an image for'),

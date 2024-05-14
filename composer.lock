@@ -1148,7 +1148,6 @@
                 "reference": "30c1bb9965dd66bf49f93d980b5fd364e9df3bc4"
             },
             "require": {
-                "ext-gd": "*",
                 "modelflow-ai/core": "^0.2",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
@@ -5494,8 +5493,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2",
-        "ext-gd": "*"
+        "php": "^8.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

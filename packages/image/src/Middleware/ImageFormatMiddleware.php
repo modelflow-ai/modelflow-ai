@@ -17,6 +17,9 @@ use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Response\AIImageResponse;
 
+/**
+ * TODO remove this and move it to an own PR where the formation can be done in an adapter (maybe own package?)
+ */
 class ImageFormatMiddleware implements MiddlewareInterface
 {
     public function __construct(

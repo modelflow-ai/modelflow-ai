@@ -10,7 +10,6 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
-        "ext-gd": "*",
         "modelflow-ai/anthropic": "^0.2",
         "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/api-client": "^0.2",

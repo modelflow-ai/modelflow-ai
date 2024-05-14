@@ -15,7 +15,7 @@ namespace ModelflowAi\Image\Request;
 
 use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
-use ModelflowAi\Image\Request\Task\AIImageRequestTaskInterface;
+use ModelflowAi\Image\Request\Task\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 use ModelflowAi\Image\Response\AIImageResponse;
@@ -28,7 +28,7 @@ class AIImageRequest implements CriteriaBehaviour
     protected $requestHandler;
 
     public function __construct(
-        public AIImageRequestTaskInterface $task,
+        public AIImageRequestActionInterface $task,
         public ImageFormat $imageFormat,
         public OutputFormat $format,
         private readonly AIRequestCriteriaCollection $criteria,

@@ -24,16 +24,9 @@ use ModelflowAi\Image\Response\AIImageResponse;
 
 final readonly class AIImageRequestHandler implements AIImageRequestHandlerInterface
 {
-    private MiddlewareInterface $handler;
-
-    /**
-     * @param AIModelDecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree
-     */
     public function __construct(
-        AIModelDecisionTreeInterface $decisionTree,
+        private MiddlewareInterface $handler,
     ) {
-        // TODO make middleware configurable
-        $this->handler = new ImageFormatMiddleware(new HandleMiddleware($decisionTree));
     }
 
     private function handle(AIImageRequest $request): AIImageResponse

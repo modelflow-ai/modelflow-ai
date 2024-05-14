@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace ModelflowAi\Image\Request\Builder;
 
 use ModelflowAi\Image\Request\AIImageRequest;
-use ModelflowAi\Image\Request\Task\TextToImageTask;
+use ModelflowAi\Image\Request\Task\TextToImageAction;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 
@@ -49,6 +49,6 @@ final class TextToImageBuilder
 
     public function build(): AIImageRequest
     {
-        return $this->builder->build(new TextToImageTask($this->prompt));
+        return $this->builder->build(new TextToImageAction($this->prompt));
     }
 }

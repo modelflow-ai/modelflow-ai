@@ -15,7 +15,7 @@ namespace ModelflowAi\Image\Adapter\Fake;
 
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Request\AIImageRequest;
-use ModelflowAi\Image\Request\Task\TextToImageTask;
+use ModelflowAi\Image\Request\Task\TextToImageAction;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Response\AIImageResponse;
 
@@ -35,7 +35,7 @@ class FakeAdapter implements AIImageAdapterInterface
 
     public function handleRequest(AIImageRequest $request): AIImageResponse
     {
-        /** @var TextToImageTask $task */
+        /** @var TextToImageAction $task */
         $task = $request->task;
 
         foreach ($this->responses as $response) {
@@ -53,6 +53,6 @@ class FakeAdapter implements AIImageAdapterInterface
             return false;
         }
 
-        return $request->task instanceof TextToImageTask;
+        return $request->task instanceof TextToImageAction;
     }
 }
