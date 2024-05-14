@@ -15,7 +15,7 @@ namespace ModelflowAi\Image\Request;
 
 use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
-use ModelflowAi\Image\Request\Task\AIImageRequestActionInterface;
+use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 use ModelflowAi\Image\Response\AIImageResponse;
@@ -28,10 +28,10 @@ class AIImageRequest implements CriteriaBehaviour
     protected $requestHandler;
 
     public function __construct(
-        public AIImageRequestActionInterface $task,
-        public ImageFormat $imageFormat,
-        public OutputFormat $format,
-        private readonly AIRequestCriteriaCollection $criteria,
+        public readonly AIImageRequestActionInterface $action,
+        public readonly ImageFormat $imageFormat,
+        public readonly OutputFormat $outputFormat,
+        public readonly AIRequestCriteriaCollection $criteriaCollection,
         callable $requestHandler,
     ) {
         $this->requestHandler = $requestHandler;
@@ -39,7 +39,7 @@ class AIImageRequest implements CriteriaBehaviour
 
     public function matches(array $criteria): bool
     {
-        return $this->criteria->matches($criteria);
+        return $this->criteriaCollection->matches($criteria);
     }
 
     public function execute(): AIImageResponse

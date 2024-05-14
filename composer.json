@@ -28,6 +28,7 @@
         "modelflow-ai/symfony-bundle": "^0.2"
     },
     "require-dev": {
+        "phpspec/prophecy-phpunit": "^2.1@stable",
         "schranz/mono": "^2.0.1",
         "symfony/dotenv": "*"
     },

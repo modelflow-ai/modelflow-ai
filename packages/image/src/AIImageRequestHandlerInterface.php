@@ -13,14 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
-use ModelflowAi\Image\Middleware\HandleMiddleware;
-use ModelflowAi\Image\Middleware\ImageFormatMiddleware;
-use ModelflowAi\Image\Middleware\MiddlewareInterface;
-use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Builder\AIImageRequestBuilder;
-use ModelflowAi\Image\Response\AIImageResponse;
 
 interface AIImageRequestHandlerInterface
 {

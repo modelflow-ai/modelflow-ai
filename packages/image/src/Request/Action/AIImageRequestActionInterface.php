@@ -11,12 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Image\Request\Task;
+namespace ModelflowAi\Image\Request\Action;
 
-final readonly class TextToImageAction implements AIImageRequestActionInterface
+interface AIImageRequestActionInterface
 {
-    public function __construct(
-        public string $prompt,
-    ) {
-    }
 }

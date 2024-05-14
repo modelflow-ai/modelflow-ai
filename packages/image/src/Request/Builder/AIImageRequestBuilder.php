@@ -15,14 +15,14 @@ namespace ModelflowAi\Image\Request\Builder;
 
 use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
+use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\AIImageRequest;
-use ModelflowAi\Image\Request\Task\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 
 final class AIImageRequestBuilder
 {
-    private AIRequestCriteriaCollection $criteria;
+    private AIRequestCriteriaCollection $criteriaCollection;
 
     private ImageFormat $imageFormat = ImageFormat::PNG;
 
@@ -33,12 +33,12 @@ final class AIImageRequestBuilder
      */
     private $requestHandler;
 
-    public function __construct(
+    private function __construct(
         callable $requestHandler,
     ) {
         $this->requestHandler = $requestHandler;
 
-        $this->criteria = new AIRequestCriteriaCollection();
+        $this->criteriaCollection = new AIRequestCriteriaCollection();
     }
 
     public static function create(\Closure $handler): self
@@ -60,16 +60,16 @@ final class AIImageRequestBuilder
     {
         $criteria = \is_array($criteria) ? $criteria : [$criteria];
 
-        $this->criteria = new AIRequestCriteriaCollection(
-            \array_merge($this->criteria->criteria, $criteria),
+        $this->criteriaCollection = new AIRequestCriteriaCollection(
+            \array_merge($this->criteriaCollection->all, $criteria),
         );
 
         return $this;
     }
 
-    public function textToImage(string $prompt): TextToImageBuilder
+    public function textToImage(string $prompt): TextToImageActionBuilder
     {
-        return new TextToImageBuilder($this, $prompt);
+        return new TextToImageActionBuilder($this, $prompt);
     }
 
     public function as(OutputFormat $format): self
@@ -81,6 +81,6 @@ final class AIImageRequestBuilder
 
     public function build(AIImageRequestActionInterface $task): AIImageRequest
     {
-        return new AIImageRequest($task, $this->imageFormat, $this->format, $this->criteria, $this->requestHandler);
+        return new AIImageRequest($task, $this->imageFormat, $this->format, $this->criteriaCollection, $this->requestHandler);
     }
 }

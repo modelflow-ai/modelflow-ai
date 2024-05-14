@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Request\Builder;
 
+use ModelflowAi\Image\Request\Action\TextToImageAction;
 use ModelflowAi\Image\Request\AIImageRequest;
-use ModelflowAi\Image\Request\Task\TextToImageAction;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
 
-final class TextToImageBuilder
+final class TextToImageActionBuilder
 {
     public function __construct(
         private readonly AIImageRequestBuilder $builder,

@@ -1831,7 +1831,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/image",
-                "reference": "30c1bb9965dd66bf49f93d980b5fd364e9df3bc4"
+                "reference": "244e56bdcfa6de81de6d80f17f621777ad55e7a2"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -3136,20 +3136,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -3173,7 +3173,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -3185,9 +3185,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -7838,16 +7838,16 @@
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.9.3",
+            "version": "v3.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "ef6869adf1fdab66f7e495771a7ba01496ffc0d5"
+                "reference": "cdc6e23aeb7f4953c1039568c3439aab60c56454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/ef6869adf1fdab66f7e495771a7ba01496ffc0d5",
-                "reference": "ef6869adf1fdab66f7e495771a7ba01496ffc0d5",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/cdc6e23aeb7f4953c1039568c3439aab60c56454",
+                "reference": "cdc6e23aeb7f4953c1039568c3439aab60c56454",
                 "shasum": ""
             },
             "require": {
@@ -7896,7 +7896,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.9.3"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.10.0"
             },
             "funding": [
                 {
@@ -7908,20 +7908,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:24:21+00:00"
+            "time": "2024-05-11T07:35:57+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v3.9.3",
+            "version": "v3.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "a842d75fed59cdbcbd3a3ad7fb9eb768fc350d58"
+                "reference": "7aaed0b8311a557cc8c4047a71fd03153a00e755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a842d75fed59cdbcbd3a3ad7fb9eb768fc350d58",
-                "reference": "a842d75fed59cdbcbd3a3ad7fb9eb768fc350d58",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7aaed0b8311a557cc8c4047a71fd03153a00e755",
+                "reference": "7aaed0b8311a557cc8c4047a71fd03153a00e755",
                 "shasum": ""
             },
             "require": {
@@ -7975,7 +7975,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.9.3"
+                "source": "https://github.com/twigphp/Twig/tree/v3.10.2"
             },
             "funding": [
                 {
@@ -7987,7 +7987,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T11:59:33+00:00"
+            "time": "2024-05-14T06:04:16+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -8387,16 +8387,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.56.0",
+            "version": "v3.56.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530"
+                "reference": "98c0b531f2e7a43a4da2449498398f484b29df50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/a0ae562ea8ec4ae831a404bb67ba9af248fde530",
-                "reference": "a0ae562ea8ec4ae831a404bb67ba9af248fde530",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/98c0b531f2e7a43a4da2449498398f484b29df50",
+                "reference": "98c0b531f2e7a43a4da2449498398f484b29df50",
                 "shasum": ""
             },
             "require": {
@@ -8433,9 +8433,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.56.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.56.1"
             },
-            "time": "2024-05-07T15:50:26+00:00"
+            "time": "2024-05-10T11:31:44+00:00"
         },
         {
             "name": "phpstan/extension-installer",
