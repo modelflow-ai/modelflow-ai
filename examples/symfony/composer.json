@@ -39,6 +39,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "test-with-coverage": "@test",
         "test": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpunit"
