@@ -16,6 +16,7 @@ phpstan.neon
 ###> php-cs-fixer/shim ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
+/var/reports
 ###< php-cs-fixer/shim ###
 
 ###> phpunit/phpunit ###

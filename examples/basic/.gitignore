@@ -7,3 +7,5 @@
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
 /.env.local
+/var/reports
+/var/cobertura-coverage.xml/var/cobertura-coverage.xml

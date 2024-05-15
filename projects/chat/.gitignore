@@ -16,7 +16,7 @@ phpstan.neon
 ###> php-cs-fixer/shim ###
 /.php-cs-fixer.php
 /.php-cs-fixer.cache
-###< php-cs-fixer/shim ###
+/var/reports###< php-cs-fixer/shim ###
 
 ###> phpunit/phpunit ###
 /phpunit.xml
@@ -32,3 +32,4 @@ yarn-error.log
 
 .idea
 .docker
+.phpunit.cache

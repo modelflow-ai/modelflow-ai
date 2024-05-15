@@ -16,6 +16,7 @@
         "rector/rector": "^0.18.1"
     },
     "scripts": {
+        "test-with-coverage": "@test",
         "test": [
             "Composer\\Config::disableProcessTimeout",
             "vendor/bin/phpunit"
