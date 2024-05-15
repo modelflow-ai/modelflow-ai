@@ -43,6 +43,9 @@
         "ramsey/uuid": "^4.7",
         "symfony/dotenv": "^7.1"
     },
+    "conflict": {
+        "hkulekci/qdrant": "0.5.3"
+    },
     "scripts": {
         "test": [
             "Composer\\Config::disableProcessTimeout",
