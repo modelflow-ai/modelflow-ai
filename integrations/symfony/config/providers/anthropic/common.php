@@ -16,7 +16,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use ModelflowAi\Anthropic\Anthropic;
 use ModelflowAi\Anthropic\ClientInterface;
 use ModelflowAi\Anthropic\Factory;
-use ModelflowAi\AnthropicAdapter\AnthropicAdapterFactory;
 
 /*
  * @internal

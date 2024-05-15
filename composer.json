@@ -29,6 +29,7 @@
     },
     "require-dev": {
         "phpspec/prophecy-phpunit": "^2.1@stable",
+        "phpunit/phpunit": "^10.3",
         "schranz/mono": "^2.0.1",
         "symfony/dotenv": "*"
     },

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.97014925373134" branch-rate="0" lines-covered="65" lines-valid="67" branches-covered="0" branches-valid="0" complexity="20" version="0.4" timestamp="1715720042">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/ollama-adapter/src</source>
+  </sources>
+  <packages>
+    <package name="Embeddings/OllamaEmbeddingAdapter.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingAdapter" filename="Embeddings/OllamaEmbeddingAdapter.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Ollama\ClientInterface $client, string $model" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="25" hits="2"/>
+              </lines>
+            </method>
+            <method name="embedText" signature="string $text" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="1"/>
+                <line number="30" hits="1"/>
+                <line number="31" hits="1"/>
+                <line number="32" hits="1"/>
+                <line number="34" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="2"/>
+            <line number="29" hits="1"/>
+            <line number="30" hits="1"/>
+            <line number="31" hits="1"/>
+            <line number="32" hits="1"/>
+            <line number="34" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Model/OllamaChatModelAdapter.php" line-rate="0.97142857142857" branch-rate="0" complexity="10">
+      <classes>
+        <class name="ModelflowAi\OllamaAdapter\Model\OllamaChatModelAdapter" filename="Model/OllamaChatModelAdapter.php" line-rate="0.97142857142857" branch-rate="0" complexity="10">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Ollama\ClientInterface $client, string $model" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="4"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Core\Request\AIRequestInterface $request" line-rate="1" branch-rate="0" complexity="3">
+              <lines>
+                <line number="41" hits="3"/>
+                <line number="44" hits="3"/>
+                <line number="45" hits="3"/>
+                <line number="47" hits="3"/>
+                <line number="48" hits="3"/>
+                <line number="49" hits="3"/>
+                <line number="50" hits="3"/>
+                <line number="52" hits="3"/>
+                <line number="53" hits="2"/>
+                <line number="56" hits="3"/>
+                <line number="57" hits="1"/>
+                <line number="60" hits="2"/>
+              </lines>
+            </method>
+            <method name="create" signature="ModelflowAi\Core\Request\AIChatRequest $request, array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="75" hits="2"/>
+                <line number="77" hits="2"/>
+                <line number="78" hits="2"/>
+                <line number="79" hits="2"/>
+                <line number="80" hits="2"/>
+                <line number="81" hits="2"/>
+                <line number="82" hits="2"/>
+                <line number="83" hits="2"/>
+              </lines>
+            </method>
+            <method name="createStreamed" signature="ModelflowAi\Core\Request\AIChatRequest $request, array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="98" hits="1"/>
+                <line number="100" hits="1"/>
+                <line number="101" hits="1"/>
+                <line number="102" hits="1"/>
+                <line number="103" hits="1"/>
+              </lines>
+            </method>
+            <method name="createStreamedMessages" signature="Iterator $responses" line-rate="1" branch-rate="0" complexity="3">
+              <lines>
+                <line number="113" hits="1"/>
+                <line number="115" hits="1"/>
+                <line number="116" hits="1"/>
+                <line number="117" hits="1"/>
+                <line number="120" hits="1"/>
+                <line number="121" hits="1"/>
+                <line number="122" hits="1"/>
+                <line number="123" hits="1"/>
+              </lines>
+            </method>
+            <method name="supports" signature="object $request" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="129" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="4"/>
+            <line number="41" hits="3"/>
+            <line number="44" hits="3"/>
+            <line number="45" hits="3"/>
+            <line number="47" hits="3"/>
+            <line number="48" hits="3"/>
+            <line number="49" hits="3"/>
+            <line number="50" hits="3"/>
+            <line number="52" hits="3"/>
+            <line number="53" hits="2"/>
+            <line number="56" hits="3"/>
+            <line number="57" hits="1"/>
+            <line number="60" hits="2"/>
+            <line number="75" hits="2"/>
+            <line number="77" hits="2"/>
+            <line number="78" hits="2"/>
+            <line number="79" hits="2"/>
+            <line number="80" hits="2"/>
+            <line number="81" hits="2"/>
+            <line number="82" hits="2"/>
+            <line number="83" hits="2"/>
+            <line number="98" hits="1"/>
+            <line number="100" hits="1"/>
+            <line number="101" hits="1"/>
+            <line number="102" hits="1"/>
+            <line number="103" hits="1"/>
+            <line number="113" hits="1"/>
+            <line number="115" hits="1"/>
+            <line number="116" hits="1"/>
+            <line number="117" hits="1"/>
+            <line number="120" hits="1"/>
+            <line number="121" hits="1"/>
+            <line number="122" hits="1"/>
+            <line number="123" hits="1"/>
+            <line number="129" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Model/OllamaCompletionModelAdapter.php" line-rate="0.92307692307692" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\OllamaAdapter\Model\OllamaCompletionModelAdapter" filename="Model/OllamaCompletionModelAdapter.php" line-rate="0.92307692307692" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Ollama\ClientInterface $client, string $model" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="3"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Core\Request\AIRequestInterface $request" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="37" hits="2"/>
+                <line number="40" hits="2"/>
+                <line number="41" hits="2"/>
+                <line number="43" hits="2"/>
+                <line number="44" hits="2"/>
+                <line number="45" hits="2"/>
+                <line number="46" hits="2"/>
+                <line number="48" hits="2"/>
+                <line number="49" hits="1"/>
+                <line number="52" hits="2"/>
+                <line number="54" hits="2"/>
+              </lines>
+            </method>
+            <method name="supports" signature="object $request" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="59" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="3"/>
+            <line number="37" hits="2"/>
+            <line number="40" hits="2"/>
+            <line number="41" hits="2"/>
+            <line number="43" hits="2"/>
+            <line number="44" hits="2"/>
+            <line number="45" hits="2"/>
+            <line number="46" hits="2"/>
+            <line number="48" hits="2"/>
+            <line number="49" hits="1"/>
+            <line number="52" hits="2"/>
+            <line number="54" hits="2"/>
+            <line number="59" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="OllamaAdapterFactory.php" line-rate="1" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\OllamaAdapter\OllamaAdapterFactory" filename="OllamaAdapterFactory.php" line-rate="1" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Ollama\ClientInterface $client" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="31" hits="3"/>
+              </lines>
+            </method>
+            <method name="createChatAdapter" signature="array $options" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="35" hits="1"/>
+                <line number="36" hits="1"/>
+                <line number="37" hits="1"/>
+                <line number="38" hits="1"/>
+              </lines>
+            </method>
+            <method name="createCompletionAdapter" signature="array $options" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="43" hits="1"/>
+                <line number="44" hits="1"/>
+                <line number="45" hits="1"/>
+                <line number="46" hits="1"/>
+              </lines>
+            </method>
+            <method name="createEmbeddingAdapter" signature="array $options" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="51" hits="1"/>
+                <line number="52" hits="1"/>
+                <line number="53" hits="1"/>
+                <line number="54" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="3"/>
+            <line number="35" hits="1"/>
+            <line number="36" hits="1"/>
+            <line number="37" hits="1"/>
+            <line number="38" hits="1"/>
+            <line number="43" hits="1"/>
+            <line number="44" hits="1"/>
+            <line number="45" hits="1"/>
+            <line number="46" hits="1"/>
+            <line number="51" hits="1"/>
+            <line number="52" hits="1"/>
+            <line number="53" hits="1"/>
+            <line number="54" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

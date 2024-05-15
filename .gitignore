@@ -3,4 +3,3 @@ composer.phar
 phpunit.xml
 composer.json.bak
 .phpunit.cache/
-

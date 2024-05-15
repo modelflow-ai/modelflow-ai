@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIModelAdapterInterface\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIModelDecisionTreeInterface\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIRequestInterface\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Core\\\\AIRequestHandler constructor expects ModelflowAi\\\\Core\\\\DecisionTree\\\\AIModelDecisionTreeInterface\\<ModelflowAi\\\\Core\\\\Request\\\\AIRequestInterface, ModelflowAi\\\\Core\\\\Model\\\\AIModelAdapterInterface\\>, AIModelDecisionTreeInterface\\<AIRequestInterface, AIModelAdapterInterface\\> given\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIImageAdapterInterface\\.$#"
+			count: 1
+			path: examples/image/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIImageRequest\\.$#"
+			count: 1
+			path: examples/image/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIModelDecisionTreeInterface\\.$#"
+			count: 1
+			path: examples/image/bootstrap.php
+
+		-
+			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Image\\\\Middleware\\\\HandleMiddleware constructor expects ModelflowAi\\\\Core\\\\DecisionTree\\\\AIModelDecisionTreeInterface\\<ModelflowAi\\\\Image\\\\Request\\\\AIImageRequest, ModelflowAi\\\\Image\\\\Adapter\\\\AIImageAdapterInterface\\>, AIModelDecisionTreeInterface\\<AIImageRequest, AIImageAdapterInterface\\> given\\.$#"
+			count: 1
+			path: examples/image/bootstrap.php

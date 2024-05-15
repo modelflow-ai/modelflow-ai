@@ -25,7 +25,7 @@ class HandleMiddlewareTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testHandleRequest()
+    public function testHandleRequest(): void
     {
         $response = $this->prophesize(AIImageResponse::class);
 

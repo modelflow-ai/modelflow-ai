@@ -15,6 +15,7 @@ namespace ModelflowAi\Image\Tests\Unit\Request\Builder;
 
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
+use ModelflowAi\Image\Request\Action\TextToImageAction;
 use ModelflowAi\Image\Request\Builder\AIImageRequestBuilder;
 use ModelflowAi\Image\Request\Builder\TextToImageActionBuilder;
 use ModelflowAi\Image\Request\Value\ImageFormat;
@@ -62,10 +63,9 @@ class AIImageRequestBuilderTest extends TestCase
             $actionBuilder,
         );
 
-        $this->assertSame(
-            'cute cat',
-            $actionBuilder->build()->action->prompt,
-        );
+        $action = $actionBuilder->build()->action;
+        $this->assertInstanceOf(TextToImageAction::class, $action);
+        $this->assertSame('cute cat', $action->prompt);
     }
 
     public function testAs(): void

@@ -16,7 +16,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use ModelflowAi\Ollama\ClientInterface;
 use ModelflowAi\Ollama\Factory;
 use ModelflowAi\Ollama\Ollama;
-use ModelflowAi\OllamaAdapter\OllamaAdapterFactory;
 
 /*
  * @internal

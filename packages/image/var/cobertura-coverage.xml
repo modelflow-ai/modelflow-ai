@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0" branch-rate="0" lines-covered="0" lines-valid="83" branches-covered="0" branches-valid="0" complexity="44" version="0.4" timestamp="1715720027">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/image/src</source>
+  </sources>
+  <packages>
+    <package name="AIImageRequestHandler.php" line-rate="0" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\Image\AIImageRequestHandler" filename="AIImageRequestHandler.php" line-rate="0" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface $decisionTree" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="36" hits="0"/>
+              </lines>
+            </method>
+            <method name="handle" signature="ModelflowAi\Image\Request\AIImageRequest $request" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+                <line number="46" hits="0"/>
+              </lines>
+            </method>
+            <method name="createRequest" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="51" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="36" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="51" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="AIImageRequestHandlerInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Adapter/AIImageAdapterInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Adapter/Fake/FakeAdapter.php" line-rate="0" branch-rate="0" complexity="6">
+      <classes>
+        <class name="ModelflowAi\Image\Adapter\Fake\FakeAdapter" filename="Adapter/Fake/FakeAdapter.php" line-rate="0" branch-rate="0" complexity="6">
+          <methods>
+            <method name="__construct" signature="array $responses" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="0"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Image\Request\AIImageRequest $request" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="39" hits="0"/>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+                <line number="47" hits="0"/>
+              </lines>
+            </method>
+            <method name="supports" signature="object $request" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="52" hits="0"/>
+                <line number="53" hits="0"/>
+                <line number="56" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="52" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="56" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Adapter/ImageAdapterFactoryInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="ImagePackage.php" line-rate="0" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\Image\ImagePackage" filename="ImagePackage.php" line-rate="0" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="23" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Middleware/HandleMiddleware.php" line-rate="0" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Image\Middleware\HandleMiddleware" filename="Middleware/HandleMiddleware.php" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface $decisionTree" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="0"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Image\Request\AIImageRequest $request" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="0"/>
+                <line number="36" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="36" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Middleware/ImageFormatMiddleware.php" line-rate="0" branch-rate="0" complexity="9">
+      <classes>
+        <class name="ModelflowAi\Image\Middleware\ImageFormatMiddleware" filename="Middleware/ImageFormatMiddleware.php" line-rate="0" branch-rate="0" complexity="9">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Image\Middleware\MiddlewareInterface $next" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="25" hits="0"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Image\Request\AIImageRequest $request" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="29" hits="0"/>
+                <line number="30" hits="0"/>
+                <line number="31" hits="0"/>
+                <line number="34" hits="0"/>
+              </lines>
+            </method>
+            <method name="convertImageFormat" signature="ModelflowAi\Image\Response\AIImageResponse $response, ModelflowAi\Image\Request\Value\ImageFormat $imageFormat" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+                <line number="49" hits="0"/>
+                <line number="50" hits="0"/>
+                <line number="51" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="56" hits="0"/>
+                <line number="57" hits="0"/>
+                <line number="58" hits="0"/>
+                <line number="61" hits="0"/>
+                <line number="62" hits="0"/>
+                <line number="65" hits="0"/>
+                <line number="66" hits="0"/>
+                <line number="69" hits="0"/>
+                <line number="72" hits="0"/>
+                <line number="73" hits="0"/>
+                <line number="74" hits="0"/>
+                <line number="76" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="30" hits="0"/>
+            <line number="31" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="49" hits="0"/>
+            <line number="50" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="56" hits="0"/>
+            <line number="57" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="61" hits="0"/>
+            <line number="62" hits="0"/>
+            <line number="65" hits="0"/>
+            <line number="66" hits="0"/>
+            <line number="69" hits="0"/>
+            <line number="72" hits="0"/>
+            <line number="73" hits="0"/>
+            <line number="74" hits="0"/>
+            <line number="76" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Middleware/MiddlewareInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Request/AIImageRequest.php" line-rate="0" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Image\Request\AIImageRequest" filename="Request/AIImageRequest.php" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Image\Request\Task\AIImageRequestTaskInterface $task, ModelflowAi\Image\Request\Value\ImageFormat $imageFormat, ModelflowAi\Image\Request\Value\OutputFormat $format, ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection $criteria, callable $requestHandler" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="37" hits="0"/>
+              </lines>
+            </method>
+            <method name="matches" signature="array $criteria" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="42" hits="0"/>
+              </lines>
+            </method>
+            <method name="execute" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="47" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="37" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="47" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Request/Builder/AIImageRequestBuilder.php" line-rate="0" branch-rate="0" complexity="8">
+      <classes>
+        <class name="ModelflowAi\Image\Request\Builder\AIImageRequestBuilder" filename="Request/Builder/AIImageRequestBuilder.php" line-rate="0" branch-rate="0" complexity="8">
+          <methods>
+            <method name="__construct" signature="callable $requestHandler" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="39" hits="0"/>
+                <line number="41" hits="0"/>
+              </lines>
+            </method>
+            <method name="create" signature="Closure $handler" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="46" hits="0"/>
+              </lines>
+            </method>
+            <method name="imageFormat" signature="ModelflowAi\Image\Request\Value\ImageFormat $imageFormat" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="51" hits="0"/>
+                <line number="53" hits="0"/>
+              </lines>
+            </method>
+            <method name="addCriteria" signature="\ModelflowAi\Core\Request\Criteria\AiCriteriaInterface|array $criteria" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="61" hits="0"/>
+                <line number="63" hits="0"/>
+                <line number="64" hits="0"/>
+                <line number="65" hits="0"/>
+                <line number="67" hits="0"/>
+              </lines>
+            </method>
+            <method name="textToImage" signature="string $prompt" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="72" hits="0"/>
+              </lines>
+            </method>
+            <method name="as" signature="ModelflowAi\Image\Request\Value\OutputFormat $format" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="77" hits="0"/>
+                <line number="79" hits="0"/>
+              </lines>
+            </method>
+            <method name="build" signature="ModelflowAi\Image\Request\Task\AIImageRequestTaskInterface $task" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="84" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="39" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="61" hits="0"/>
+            <line number="63" hits="0"/>
+            <line number="64" hits="0"/>
+            <line number="65" hits="0"/>
+            <line number="67" hits="0"/>
+            <line number="72" hits="0"/>
+            <line number="77" hits="0"/>
+            <line number="79" hits="0"/>
+            <line number="84" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Request/Builder/TextToImageBuilder.php" line-rate="0" branch-rate="0" complexity="5">
+      <classes>
+        <class name="ModelflowAi\Image\Request\Builder\TextToImageBuilder" filename="Request/Builder/TextToImageBuilder.php" line-rate="0" branch-rate="0" complexity="5">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Image\Request\Builder\AIImageRequestBuilder $builder, string $prompt" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="27" hits="0"/>
+              </lines>
+            </method>
+            <method name="imageFormat" signature="ModelflowAi\Image\Request\Value\ImageFormat $imageFormat" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="31" hits="0"/>
+                <line number="33" hits="0"/>
+              </lines>
+            </method>
+            <method name="asStream" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="0"/>
+                <line number="40" hits="0"/>
+              </lines>
+            </method>
+            <method name="asBase64" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="45" hits="0"/>
+                <line number="47" hits="0"/>
+              </lines>
+            </method>
+            <method name="build" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="52" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="27" hits="0"/>
+            <line number="31" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="40" hits="0"/>
+            <line number="45" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="52" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Request/Task/AIImageRequestTaskInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Request/Task/TextToImageTask.php" line-rate="0" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\Image\Request\Task\TextToImageTask" filename="Request/Task/TextToImageTask.php" line-rate="0" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="string $prompt" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="21" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="21" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Request/Value/ImageFormat.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Request/Value/OutputFormat.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Response/AIImageResponse.php" line-rate="0" branch-rate="0" complexity="5">
+      <classes>
+        <class name="ModelflowAi\Image\Response\AIImageResponse" filename="Response/AIImageResponse.php" line-rate="0" branch-rate="0" complexity="5">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Image\Request\AIImageRequest $request, ModelflowAi\Image\Request\Value\ImageFormat $imageFormat, $resource" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="26" hits="0"/>
+              </lines>
+            </method>
+            <method name="stream" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="33" hits="0"/>
+                <line number="34" hits="0"/>
+                <line number="38" hits="0"/>
+                <line number="39" hits="0"/>
+                <line number="40" hits="0"/>
+                <line number="42" hits="0"/>
+              </lines>
+            </method>
+            <method name="base64" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+                <line number="51" hits="0"/>
+                <line number="53" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="40" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="53" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

@@ -20,8 +20,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 readonly class ImageGenerationTool
 {
     public function __construct(
-       private AIImageRequestHandlerInterface $imageRequestHandler,
-       private UrlGeneratorInterface $urlGenerator,
+        private AIImageRequestHandlerInterface $imageRequestHandler,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -32,9 +32,10 @@ readonly class ImageGenerationTool
      * - User is asking to generate an image.
      *
      * TODO improve this description to be sure that the prompt will be as good as possible.
-     * @param string $prompt Well structured prompt to generate the image from.
      *
-     * @return string Url to the generated image.
+     * @param string $prompt well structured prompt to generate the image from
+     *
+     * @return string url to the generated image
      */
     public function generateImage(string $prompt): string
     {
@@ -45,8 +46,8 @@ readonly class ImageGenerationTool
             ->build()
             ->execute();
 
-        $hash = \md5(\time() . $prompt);
-        \file_put_contents(\dirname(__DIR__, 2) . '/var/images/' . $hash . '.jpeg', \stream_get_contents($response->stream()));
+        $hash = \md5(\time().$prompt);
+        \file_put_contents(\dirname(__DIR__, 2).'/var/images/'.$hash.'.jpeg', \stream_get_contents($response->stream()));
 
         return $this->urlGenerator->generate('image', ['hash' => $hash], UrlGeneratorInterface::ABSOLUTE_URL);
     }

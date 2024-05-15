@@ -27,7 +27,7 @@ final readonly class OpenaiImageAdapterFactory implements ImageAdapterFactoryInt
     ) {
     }
 
-    public function createImageAdapter(array $options): AiImageAdapterInterface
+    public function createImageAdapter(array $options): AIImageAdapterInterface
     {
         return new OpenAIImageGenerationAdapter(
             $this->httpClient,

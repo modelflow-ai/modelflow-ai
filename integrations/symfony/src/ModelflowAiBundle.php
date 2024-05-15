@@ -50,16 +50,16 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class ModelflowAiBundle extends AbstractBundle
 {
-    const TAG_IMAGE_DECISION_TREE_RULE = 'modelflow_ai.image_request_handler.decision_tree.rule';
+    final public const TAG_IMAGE_DECISION_TREE_RULE = 'modelflow_ai.image_request_handler.decision_tree.rule';
 
     protected string $extensionAlias = 'modelflow_ai';
 
     final public const DEFAULT_ADAPTER_KEY_ORDER = [
         'enabled',
+        'model',
         'provider',
         'chat',
         'completion',
-        'model',
         'tools',
         'image_to_text',
         'text_to_image',
@@ -294,11 +294,13 @@ class ModelflowAiBundle extends AbstractBundle
      */
     public function createCriteriaNode(array $default, bool $isReferenceDumping): ArrayNodeDefinition
     {
-        return (new ArrayNodeDefinition('criteria'))
+        $nodeDefinition = new ArrayNodeDefinition('criteria');
+        $nodeDefinition
             ->defaultValue(\array_map(
                 fn (AiCriteriaInterface $criteria) => $this->getCriteria(PrivacyCriteria::LOW, $isReferenceDumping),
                 $default,
-            ))
+            ));
+        $nodeDefinition
             ->beforeNormalization()
                 ->ifArray()
                 ->then(function ($value) use ($isReferenceDumping): array {
@@ -313,13 +315,16 @@ class ModelflowAiBundle extends AbstractBundle
 
                     return $result;
                 })
-            ->end()
+            ->end();
+        $nodeDefinition
             ->variablePrototype()
                 ->validate()
                     ->ifTrue(static fn ($value): bool => !$value instanceof AiCriteriaInterface)
                     ->thenInvalid('The value has to be an instance of AiCriteriaInterface')
                 ->end()
             ->end();
+
+        return $nodeDefinition;
     }
 
     public function configure(DefinitionConfigurator $definition): void
@@ -555,10 +560,13 @@ class ModelflowAiBundle extends AbstractBundle
      *         enabled: bool,
      *         provider: string,
      *         model: string,
+     *         chat: bool,
+     *         completion: bool,
      *         priority: int,
      *         stream: bool,
      *         tools: bool,
      *         image_to_text: bool,
+     *         text_to_image: bool,
      *         criteria: AiCriteriaInterface[]
      *     }>,
      *     embeddings?: array{
@@ -635,7 +643,7 @@ class ModelflowAiBundle extends AbstractBundle
             throw new \Exception('Embeddings package is enabled but the package is not installed. Please install it with composer require modelflow-ai/embeddings');
         }
 
-        if (\count($imageAdapters) > 0 && !\class_exists(ImagePackage::class)) {
+        if ([] !== $imageAdapters && !\class_exists(ImagePackage::class)) {
             throw new \Exception('Image adapters are enabled but the image adapter library is not installed. Please install it with composer require modelflow-ai/image');
         }
 
@@ -643,29 +651,20 @@ class ModelflowAiBundle extends AbstractBundle
             ->set('modelflow_ai.adapters', $adapters)
             ->set('modelflow_ai.providers', $providers);
 
-
-        if ($providers['openai']['enabled'] ?? false) {
-            if (!\class_exists(OpenaiAdapterFactory::class)) {
-                throw new \Exception('OpenAi adapter is enabled but the OpenAi adapter library is not installed. Please install it with composer require modelflow-ai/openai-adapter');
-            }
+        if (($providers['openai']['enabled'] ?? false) && !\class_exists(OpenaiAdapterFactory::class)) {
+            throw new \Exception('OpenAi adapter is enabled but the OpenAi adapter library is not installed. Please install it with composer require modelflow-ai/openai-adapter');
         }
 
-        if ($providers['mistral']['enabled'] ?? false) {
-            if (!\class_exists(MistralAdapterFactory::class)) {
-                throw new \Exception('Mistral adapter is enabled but the Mistral adapter library is not installed. Please install it with composer require modelflow-ai/mistral-adapter');
-            }
+        if (($providers['mistral']['enabled'] ?? false) && !\class_exists(MistralAdapterFactory::class)) {
+            throw new \Exception('Mistral adapter is enabled but the Mistral adapter library is not installed. Please install it with composer require modelflow-ai/mistral-adapter');
         }
 
-        if ($providers['anthropic']['enabled'] ?? false) {
-            if (!\class_exists(AnthropicAdapterFactory::class)) {
-                throw new \Exception('Anthropic adapter is enabled but the Anthropic adapter library is not installed. Please install it with composer require modelflow-ai/anthropic-adapter');
-            }
+        if (($providers['anthropic']['enabled'] ?? false) && !\class_exists(AnthropicAdapterFactory::class)) {
+            throw new \Exception('Anthropic adapter is enabled but the Anthropic adapter library is not installed. Please install it with composer require modelflow-ai/anthropic-adapter');
         }
 
-        if ($providers['ollama']['enabled'] ?? false) {
-            if (!\class_exists(OllamaAdapterFactory::class)) {
-                throw new \Exception('Ollama adapter is enabled but the Ollama adapter library is not installed. Please install it with composer require modelflow-ai/ollama-adapter');
-            }
+        if (($providers['ollama']['enabled'] ?? false) && !\class_exists(OllamaAdapterFactory::class)) {
+            throw new \Exception('Ollama adapter is enabled but the Ollama adapter library is not installed. Please install it with composer require modelflow-ai/ollama-adapter');
         }
 
         foreach (\array_unique($configFiles) as $configFile) {
@@ -737,7 +736,7 @@ class ModelflowAiBundle extends AbstractBundle
                 ->tag('modelflow_ai.decision_tree.rule');
         }
 
-        if(\count($imageAdapters) > 0) {
+        if ([] !== $imageAdapters) {
             $container->import(\dirname(__DIR__) . '/config/image.php');
         }
 
@@ -765,7 +764,7 @@ class ModelflowAiBundle extends AbstractBundle
                     service('modelflow_ai.image_adapter.' . $key . '.adapter'),
                     \array_merge($provider['criteria'], $adapter['criteria']),
                 ])
-                ->tag(ModelflowAiBundle::TAG_IMAGE_DECISION_TREE_RULE);
+                ->tag(self::TAG_IMAGE_DECISION_TREE_RULE);
         }
 
         foreach ($generators as $key => $embedding) {

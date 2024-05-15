@@ -14,11 +14,15 @@ declare(strict_types=1);
 namespace ModelflowAi\Image\Tests\Functional;
 
 use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
+use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\DecisionTree\DecisionRuleInterface;
+use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Adapter\Fake\FakeAdapter;
 use ModelflowAi\Image\AIImageRequestHandler;
 use ModelflowAi\Image\Middleware\HandleMiddleware;
+use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Value\ImageFormat;
+use ModelflowAi\Image\Tests\ResourceTrait;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -26,20 +30,12 @@ use Prophecy\PhpUnit\ProphecyTrait;
 class AiImageRequestHandlerTest extends TestCase
 {
     use ProphecyTrait;
+    use ResourceTrait;
 
-    public function testRequestResponse()
+    public function testRequestResponse(): void
     {
-        $dogFileName = \dirname(__DIR__, 2) . '/examples/resources/dog.jpeg';
-        $dogFile = \fopen($dogFileName, 'r');
-        if (!$dogFile) {
-            throw new \RuntimeException('Could not open image "dog.jpeg"');
-        }
-
-        $catFileName = \dirname(__DIR__, 2) . '/examples/resources/cat.png';
-        $catFile = \fopen($catFileName, 'r');
-        if (!$catFile) {
-            throw new \RuntimeException('Could not open image "cat.png"');
-        }
+        $dogFile = $this->getDogImageResource();
+        $catFile = $this->getCatImageResource();
 
         $adapter = new FakeAdapter([
             [
@@ -58,6 +54,7 @@ class AiImageRequestHandlerTest extends TestCase
         $rule->matches(Argument::any())->willReturn(true);
         $rule->getAdapter()->willReturn($adapter);
 
+        /** @var AIModelDecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree */
         $decisionTree = new AIModelDecisionTree([$rule->reveal()]);
         $handler = new HandleMiddleware($decisionTree);
 
@@ -69,6 +66,6 @@ class AiImageRequestHandlerTest extends TestCase
             ->build()
             ->execute();
 
-        $this->assertSame(\base64_encode(\file_get_contents($catFileName)), $response->base64());
+        $this->assertSame($this->getCatImageBase64(), $response->base64());
     }
 }

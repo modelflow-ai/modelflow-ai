@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 
 class TextToImageActionTest extends TestCase
 {
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $action = new TextToImageAction('prompt');
 

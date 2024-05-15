@@ -27,7 +27,8 @@
     "require": {
         "php": "^8.2",
         "hkulekci/qdrant": "^0.5",
-        "modelflow-ai/embeddings": "^0.2"
+        "modelflow-ai/embeddings": "^0.2",
+        "nyholm/psr7": "^1.8@dev"
     },
     "require-dev": {
         "modelflow-ai/ollama": "^0.2",

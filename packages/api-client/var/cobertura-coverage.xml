@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.51260504201681" branch-rate="0" lines-covered="61" lines-valid="119" branches-covered="0" branches-valid="0" complexity="61" version="0.4" timestamp="1715720028">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/api-client/src</source>
+  </sources>
+  <packages>
+    <package name="Exceptions/TransportException.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Exceptions\TransportException" filename="Exceptions/TransportException.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="Symfony\Contracts\HttpClient\ResponseInterface $response, int $code, ?Throwable $previous" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="25" hits="4"/>
+                <line number="26" hits="4"/>
+                <line number="27" hits="4"/>
+                <line number="28" hits="4"/>
+                <line number="29" hits="4"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="4"/>
+            <line number="26" hits="4"/>
+            <line number="27" hits="4"/>
+            <line number="28" hits="4"/>
+            <line number="29" hits="4"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Resources/Concerns/Streamable.php" line-rate="0" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Resources\Concerns\Streamable" filename="Resources/Concerns/Streamable.php" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="ensureNotStreamed" signature="array $parameters" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="23" hits="0"/>
+                <line number="24" hits="0"/>
+                <line number="27" hits="0"/>
+                <line number="28" hits="0"/>
+                <line number="31" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0"/>
+            <line number="24" hits="0"/>
+            <line number="27" hits="0"/>
+            <line number="28" hits="0"/>
+            <line number="31" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/MetaInformation.php" line-rate="1" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Responses\MetaInformation" filename="Responses/MetaInformation.php" line-rate="1" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="array $headers" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="24" hits="7"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $headers" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="31" hits="6"/>
+                <line number="32" hits="6"/>
+                <line number="33" hits="6"/>
+              </lines>
+            </method>
+            <method name="empty" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="7"/>
+            <line number="31" hits="6"/>
+            <line number="32" hits="6"/>
+            <line number="33" hits="6"/>
+            <line number="38" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Usage.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Responses\Usage" filename="Responses/Usage.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="int $promptTokens, ?int $completionTokens, int $totalTokens" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="23" hits="1"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="1"/>
+                <line number="35" hits="1"/>
+                <line number="36" hits="1"/>
+                <line number="37" hits="1"/>
+                <line number="38" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="1"/>
+            <line number="34" hits="1"/>
+            <line number="35" hits="1"/>
+            <line number="36" hits="1"/>
+            <line number="37" hits="1"/>
+            <line number="38" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Enums/ContentType.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Transport/Enums/Method.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Transport/Payload.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Payload" filename="Transport/Payload.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\Enums\ContentType $contentType, ModelflowAi\ApiClient\Transport\Enums\Method $method, ModelflowAi\ApiClient\Transport\ValueObjects\ResourceUri $resourceUri, array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="31" hits="6"/>
+              </lines>
+            </method>
+            <method name="create" signature="string $resource, array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="6"/>
+                <line number="39" hits="6"/>
+                <line number="40" hits="6"/>
+                <line number="41" hits="6"/>
+                <line number="42" hits="6"/>
+                <line number="43" hits="6"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="6"/>
+            <line number="38" hits="6"/>
+            <line number="39" hits="6"/>
+            <line number="40" hits="6"/>
+            <line number="41" hits="6"/>
+            <line number="42" hits="6"/>
+            <line number="43" hits="6"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Response/ObjectResponse.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Response\ObjectResponse" filename="Transport/Response/ObjectResponse.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="array $data, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="27" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="27" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Response/Response.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Response\Response" filename="Transport/Response/Response.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="23" hits="5"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="5"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Response/TextResponse.php" line-rate="1" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Response\TextResponse" filename="Transport/Response/TextResponse.php" line-rate="1" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="string $text, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="24" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/SymfonyHttpTransporter.php" line-rate="0.93939393939394" branch-rate="0" complexity="13">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\SymfonyHttpTransporter" filename="Transport/SymfonyHttpTransporter.php" line-rate="0.93939393939394" branch-rate="0" complexity="13">
+          <methods>
+            <method name="__construct" signature="Symfony\Contracts\HttpClient\HttpClientInterface $client, string $baseUrl, array $headers" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="37" hits="5"/>
+                <line number="38" hits="5"/>
+                <line number="39" hits="5"/>
+                <line number="40" hits="5"/>
+              </lines>
+            </method>
+            <method name="request" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="45" hits="5"/>
+                <line number="46" hits="5"/>
+                <line number="47" hits="5"/>
+                <line number="48" hits="5"/>
+                <line number="49" hits="5"/>
+                <line number="50" hits="5"/>
+                <line number="51" hits="5"/>
+                <line number="52" hits="5"/>
+                <line number="53" hits="5"/>
+                <line number="54" hits="5"/>
+              </lines>
+            </method>
+            <method name="requestText" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="59" hits="2"/>
+                <line number="63" hits="2"/>
+                <line number="64" hits="1"/>
+                <line number="65" hits="1"/>
+              </lines>
+            </method>
+            <method name="requestObject" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="71" hits="2"/>
+                <line number="75" hits="2"/>
+                <line number="76" hits="1"/>
+                <line number="77" hits="1"/>
+              </lines>
+            </method>
+            <method name="requestStream" signature="ModelflowAi\ApiClient\Transport\Payload $payload, ?callable $decoder" line-rate="0.81818181818182" branch-rate="0" complexity="7">
+              <lines>
+                <line number="83" hits="1"/>
+                <line number="84" hits="1"/>
+                <line number="87" hits="1"/>
+                <line number="91" hits="1"/>
+                <line number="92" hits="0"/>
+                <line number="93" hits="0"/>
+                <line number="96" hits="1"/>
+                <line number="97" hits="1"/>
+                <line number="98" hits="1"/>
+                <line number="101" hits="1"/>
+                <line number="102" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="37" hits="5"/>
+            <line number="38" hits="5"/>
+            <line number="39" hits="5"/>
+            <line number="40" hits="5"/>
+            <line number="45" hits="5"/>
+            <line number="46" hits="5"/>
+            <line number="47" hits="5"/>
+            <line number="48" hits="5"/>
+            <line number="49" hits="5"/>
+            <line number="50" hits="5"/>
+            <line number="51" hits="5"/>
+            <line number="52" hits="5"/>
+            <line number="53" hits="5"/>
+            <line number="54" hits="5"/>
+            <line number="59" hits="2"/>
+            <line number="63" hits="2"/>
+            <line number="64" hits="1"/>
+            <line number="65" hits="1"/>
+            <line number="71" hits="2"/>
+            <line number="75" hits="2"/>
+            <line number="76" hits="1"/>
+            <line number="77" hits="1"/>
+            <line number="83" hits="1"/>
+            <line number="84" hits="1"/>
+            <line number="87" hits="1"/>
+            <line number="91" hits="1"/>
+            <line number="92" hits="0"/>
+            <line number="93" hits="0"/>
+            <line number="96" hits="1"/>
+            <line number="97" hits="1"/>
+            <line number="98" hits="1"/>
+            <line number="101" hits="1"/>
+            <line number="102" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Testing/MockResponseMatcher.php" line-rate="0" branch-rate="0" complexity="17">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Testing\MockResponseMatcher" filename="Transport/Testing/MockResponseMatcher.php" line-rate="0" branch-rate="0" complexity="17">
+          <methods>
+            <method name="addResponse" signature="ModelflowAi\ApiClient\Transport\Testing\PartialPayload $partialPayload, ModelflowAi\ApiClient\Transport\Response\Response $response" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="0"/>
+              </lines>
+            </method>
+            <method name="matchResponse" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="35" hits="0"/>
+                <line number="36" hits="0"/>
+                <line number="37" hits="0"/>
+                <line number="41" hits="0"/>
+              </lines>
+            </method>
+            <method name="matchTextResponse" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+                <line number="51" hits="0"/>
+              </lines>
+            </method>
+            <method name="matchObjectResponse" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="56" hits="0"/>
+                <line number="57" hits="0"/>
+                <line number="58" hits="0"/>
+                <line number="61" hits="0"/>
+              </lines>
+            </method>
+            <method name="matchStreamedResponse" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="66" hits="0"/>
+                <line number="67" hits="0"/>
+                <line number="68" hits="0"/>
+                <line number="71" hits="0"/>
+              </lines>
+            </method>
+            <method name="payloadMatches" signature="ModelflowAi\ApiClient\Transport\Payload $payload, ModelflowAi\ApiClient\Transport\Testing\PartialPayload $partialPayload" line-rate="0" branch-rate="0" complexity="7">
+              <lines>
+                <line number="76" hits="0"/>
+                <line number="77" hits="0"/>
+                <line number="78" hits="0"/>
+                <line number="80" hits="0"/>
+                <line number="83" hits="0"/>
+                <line number="84" hits="0"/>
+                <line number="85" hits="0"/>
+                <line number="87" hits="0"/>
+                <line number="91" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="36" hits="0"/>
+            <line number="37" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="56" hits="0"/>
+            <line number="57" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="61" hits="0"/>
+            <line number="66" hits="0"/>
+            <line number="67" hits="0"/>
+            <line number="68" hits="0"/>
+            <line number="71" hits="0"/>
+            <line number="76" hits="0"/>
+            <line number="77" hits="0"/>
+            <line number="78" hits="0"/>
+            <line number="80" hits="0"/>
+            <line number="83" hits="0"/>
+            <line number="84" hits="0"/>
+            <line number="85" hits="0"/>
+            <line number="87" hits="0"/>
+            <line number="91" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Testing/MockTransport.php" line-rate="0" branch-rate="0" complexity="10">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Testing\MockTransport" filename="Transport/Testing/MockTransport.php" line-rate="0" branch-rate="0" complexity="10">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\Testing\MockResponseMatcher $matcher" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="0"/>
+              </lines>
+            </method>
+            <method name="requestText" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="33" hits="0"/>
+                <line number="34" hits="0"/>
+                <line number="35" hits="0"/>
+                <line number="38" hits="0"/>
+              </lines>
+            </method>
+            <method name="requestObject" signature="ModelflowAi\ApiClient\Transport\Payload $payload" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="43" hits="0"/>
+                <line number="44" hits="0"/>
+                <line number="45" hits="0"/>
+                <line number="48" hits="0"/>
+              </lines>
+            </method>
+            <method name="requestStream" signature="ModelflowAi\ApiClient\Transport\Payload $payload, ?callable $decoder" line-rate="0" branch-rate="0" complexity="5">
+              <lines>
+                <line number="53" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="55" hits="0"/>
+                <line number="58" hits="0"/>
+                <line number="59" hits="0"/>
+                <line number="62" hits="0"/>
+                <line number="63" hits="0"/>
+                <line number="64" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="44" hits="0"/>
+            <line number="45" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="55" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="59" hits="0"/>
+            <line number="62" hits="0"/>
+            <line number="63" hits="0"/>
+            <line number="64" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Testing/PartialPayload.php" line-rate="0" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Testing\PartialPayload" filename="Transport/Testing/PartialPayload.php" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\Enums\ContentType $contentType, ModelflowAi\ApiClient\Transport\Enums\Method $method, ModelflowAi\ApiClient\Transport\ValueObjects\ResourceUri $resourceUri, ?array $partialParameters" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="31" hits="0"/>
+              </lines>
+            </method>
+            <method name="create" signature="string $resource, array $partialParameters" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="0"/>
+                <line number="39" hits="0"/>
+                <line number="40" hits="0"/>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="31" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="40" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/Testing/StreamedResponse.php" line-rate="0" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\Testing\StreamedResponse" filename="Transport/Testing/StreamedResponse.php" line-rate="0" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="array $chunks, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="28" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Transport/TransportInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Transport/ValueObjects/ResourceUri.php" line-rate="1" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\ApiClient\Transport\ValueObjects\ResourceUri" filename="Transport/ValueObjects/ResourceUri.php" line-rate="1" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="string $uri" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="21" hits="9"/>
+              </lines>
+            </method>
+            <method name="equals" signature="self $resource" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="25" hits="1"/>
+              </lines>
+            </method>
+            <method name="get" signature="string $resource" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="8"/>
+              </lines>
+            </method>
+            <method name="__toString" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="35" hits="7"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="21" hits="9"/>
+            <line number="25" hits="1"/>
+            <line number="30" hits="8"/>
+            <line number="35" hits="7"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

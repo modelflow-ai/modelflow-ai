@@ -11,6 +11,6 @@ class ImageController
     #[Route('/image/{hash}.jpeg', name: 'image')]
     public function __invoke(string $hash): Response
     {
-        return new BinaryFileResponse(dirname(__DIR__, 2) . '/var/images/' . $hash . '.jpeg');
+        return new BinaryFileResponse(dirname(__DIR__, 2).'/var/images/'.$hash.'.jpeg');
     }
 }

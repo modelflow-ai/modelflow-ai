@@ -21,13 +21,13 @@ use ModelflowAi\Image\Response\AIImageResponse;
 final readonly class AIImageRequestHandler implements AIImageRequestHandlerInterface
 {
     public function __construct(
-        private MiddlewareInterface $handler,
+        private MiddlewareInterface $middleware,
     ) {
     }
 
     private function handle(AIImageRequest $request): AIImageResponse
     {
-        $response = $this->handler->handleRequest($request);
+        $response = $this->middleware->handleRequest($request);
         if ($request->imageFormat !== $response->imageFormat) {
             throw new \RuntimeException('Image format mismatch');
         }

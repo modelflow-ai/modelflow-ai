@@ -21,8 +21,11 @@ class AIImageResponse
     /**
      * @param resource|string $resource
      */
-    public function __construct(public AIImageRequest $request, public ImageFormat $imageFormat, public $resource)
-    {
+    public function __construct(
+        public AIImageRequest $request,
+        public ImageFormat $imageFormat,
+        public $resource,
+    ) {
     }
 
     /**

@@ -16,7 +16,6 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Factory;
 use ModelflowAi\Mistral\Mistral;
-use ModelflowAi\MistralAdapter\MistralAdapterFactory;
 
 /*
  * @internal

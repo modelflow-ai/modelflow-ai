@@ -11,8 +11,6 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App;
-
 use ModelflowAi\Core\AIRequestHandlerInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Core\Request\Message\AIChatMessage;

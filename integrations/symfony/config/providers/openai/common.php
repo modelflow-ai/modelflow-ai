@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use ModelflowAi\OpenaiAdapter\OpenaiAdapterFactory;
 use OpenAI\Client;
 use OpenAI\Factory;
 

@@ -13,15 +13,7 @@ declare(strict_types=1);
 
 $handler = require_once __DIR__ . '/bootstrap.php';
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
-use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
-use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
-use ModelflowAi\Image\Adapter\Fake\FakeAdapter;
-use ModelflowAi\Image\AIImageRequestHandler;
-use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;
