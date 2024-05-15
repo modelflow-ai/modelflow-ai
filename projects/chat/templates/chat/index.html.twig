@@ -66,7 +66,9 @@
                     <div {{ stimulus_target('dropdown-button', 'dropdown') }} class="hidden absolute mt-1 w-56 origin-top-right bg-gray-800 border border-gray-700 rounded-md shadow-lg z-50">
                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                             {% for model,key in MODELS %}
-                                <a href="?model={{ model }}" class="block px-4 py-2 text-sm text-white hover:bg-gray-700{% if chatModel == model %} bg-gray-700{% endif %}" role="menuitem">{{ model }}{% if feature_enabled(key, 'tools') %} (Tools available){% endif %}</a>
+                                {% if feature_enabled(key, 'chat') %}
+                                    <a href="?model={{ model }}" class="block px-4 py-2 text-sm text-white hover:bg-gray-700{% if chatModel == model %} bg-gray-700{% endif %}" role="menuitem">{{ model }}{% if feature_enabled(key, 'tools') %} (Tools available){% endif %}</a>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>

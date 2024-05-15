@@ -17,7 +17,10 @@ require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
 use ModelflowAi\Core\AIRequestHandler;
 use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
+use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\DecisionTree\DecisionRule;
+use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Mistral\Mistral;
 use ModelflowAi\Mistral\Model;
@@ -45,6 +48,7 @@ $adapter[] = new DecisionRule($mediumAdapter, [CapabilityCriteria::ADVANCED]);
 $adapter[] = new DecisionRule($smallAdapter, [CapabilityCriteria::INTERMEDIATE]);
 $adapter[] = new DecisionRule($tinyAdapter, [CapabilityCriteria::BASIC]);
 
+/** @var AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
 $decisionTree = new AIModelDecisionTree($adapter);
 
 return new AIRequestHandler($decisionTree);

@@ -27,7 +27,8 @@
     "require": {
         "php": "^8.2",
         "hkulekci/qdrant": "^0.5",
-        "modelflow-ai/embeddings": "^0.2"
+        "modelflow-ai/embeddings": "^0.2",
+        "nyholm/psr7": "^1.8@dev"
     },
     "require-dev": {
         "modelflow-ai/ollama": "^0.2",
@@ -41,6 +42,9 @@
         "symfony/cache": "^7.0",
         "ramsey/uuid": "^4.7",
         "symfony/dotenv": "^7.1"
+    },
+    "conflict": {
+        "hkulekci/qdrant": "0.5.3"
     },
     "scripts": {
         "test": [

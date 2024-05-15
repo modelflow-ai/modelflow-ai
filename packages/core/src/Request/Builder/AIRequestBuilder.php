@@ -66,7 +66,7 @@ abstract class AIRequestBuilder
         $criteria = \is_array($criteria) ? $criteria : [$criteria];
 
         $this->criteria = new AIRequestCriteriaCollection(
-            \array_merge($this->criteria->criteria, $criteria),
+            \array_merge($this->criteria->all, $criteria),
         );
 
         return $this;

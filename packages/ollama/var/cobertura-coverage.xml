@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.94904458598726" branch-rate="0" lines-covered="149" lines-valid="157" branches-covered="0" branches-valid="0" complexity="45" version="0.4" timestamp="1715720039">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/ollama/src</source>
+  </sources>
+  <packages>
+    <package name="Client.php" line-rate="1" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\Ollama\Client" filename="Client.php" line-rate="1" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\TransportInterface $transport" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="8"/>
+              </lines>
+            </method>
+            <method name="chat" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="33" hits="2"/>
+              </lines>
+            </method>
+            <method name="completion" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="2"/>
+              </lines>
+            </method>
+            <method name="embeddings" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="43" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="8"/>
+            <line number="33" hits="2"/>
+            <line number="38" hits="2"/>
+            <line number="43" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="ClientInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Factory.php" line-rate="1" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Ollama\Factory" filename="Factory.php" line-rate="1" branch-rate="0" complexity="3">
+          <methods>
+            <method name="withHttpClient" signature="Symfony\Contracts\HttpClient\HttpClientInterface $client" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="28" hits="1"/>
+                <line number="30" hits="1"/>
+              </lines>
+            </method>
+            <method name="withBaseUrl" signature="string $baseUrl" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="35" hits="1"/>
+                <line number="37" hits="1"/>
+              </lines>
+            </method>
+            <method name="make" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="42" hits="2"/>
+                <line number="44" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="1"/>
+            <line number="30" hits="1"/>
+            <line number="35" hits="1"/>
+            <line number="37" hits="1"/>
+            <line number="42" hits="2"/>
+            <line number="44" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Ollama.php" line-rate="0.66666666666667" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Ollama\Ollama" filename="Ollama.php" line-rate="0.66666666666667" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="20" hits="0"/>
+              </lines>
+            </method>
+            <method name="client" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="24" hits="1"/>
+              </lines>
+            </method>
+            <method name="factory" signature="" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="20" hits="0"/>
+            <line number="24" hits="1"/>
+            <line number="29" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Resources/Chat.php" line-rate="0.9" branch-rate="0" complexity="9">
+      <classes>
+        <class name="ModelflowAi\Ollama\Resources\Chat" filename="Resources/Chat.php" line-rate="0.9" branch-rate="0" complexity="9">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\TransportInterface $transport" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="10"/>
+              </lines>
+            </method>
+            <method name="create" signature="array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="6"/>
+                <line number="35" hits="5"/>
+                <line number="36" hits="3"/>
+                <line number="38" hits="3"/>
+                <line number="40" hits="3"/>
+                <line number="43" hits="3"/>
+              </lines>
+            </method>
+            <method name="createStreamed" signature="array $parameters" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="48" hits="3"/>
+                <line number="49" hits="1"/>
+                <line number="51" hits="1"/>
+                <line number="53" hits="1"/>
+                <line number="55" hits="1"/>
+              </lines>
+            </method>
+            <method name="validateParameters" signature="array $parameters" line-rate="0.83333333333333" branch-rate="0" complexity="5">
+              <lines>
+                <line number="64" hits="8"/>
+                <line number="65" hits="6"/>
+                <line number="67" hits="6"/>
+                <line number="68" hits="4"/>
+                <line number="69" hits="4"/>
+                <line number="70" hits="4"/>
+                <line number="71" hits="4"/>
+                <line number="72" hits="4"/>
+                <line number="73" hits="4"/>
+                <line number="74" hits="4"/>
+                <line number="76" hits="4"/>
+                <line number="77" hits="1"/>
+                <line number="78" hits="1"/>
+                <line number="82" hits="4"/>
+                <line number="83" hits="0"/>
+                <line number="84" hits="0"/>
+                <line number="87" hits="4"/>
+                <line number="88" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="10"/>
+            <line number="34" hits="6"/>
+            <line number="35" hits="5"/>
+            <line number="36" hits="3"/>
+            <line number="38" hits="3"/>
+            <line number="40" hits="3"/>
+            <line number="43" hits="3"/>
+            <line number="48" hits="3"/>
+            <line number="49" hits="1"/>
+            <line number="51" hits="1"/>
+            <line number="53" hits="1"/>
+            <line number="55" hits="1"/>
+            <line number="64" hits="8"/>
+            <line number="65" hits="6"/>
+            <line number="67" hits="6"/>
+            <line number="68" hits="4"/>
+            <line number="69" hits="4"/>
+            <line number="70" hits="4"/>
+            <line number="71" hits="4"/>
+            <line number="72" hits="4"/>
+            <line number="73" hits="4"/>
+            <line number="74" hits="4"/>
+            <line number="76" hits="4"/>
+            <line number="77" hits="1"/>
+            <line number="78" hits="1"/>
+            <line number="82" hits="4"/>
+            <line number="83" hits="0"/>
+            <line number="84" hits="0"/>
+            <line number="87" hits="4"/>
+            <line number="88" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Resources/ChatInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Resources/Completion.php" line-rate="0.82608695652174" branch-rate="0" complexity="8">
+      <classes>
+        <class name="ModelflowAi\Ollama\Resources\Completion" filename="Resources/Completion.php" line-rate="0.82608695652174" branch-rate="0" complexity="8">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\TransportInterface $transport" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="9"/>
+              </lines>
+            </method>
+            <method name="create" signature="array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="5"/>
+                <line number="35" hits="4"/>
+                <line number="36" hits="2"/>
+                <line number="38" hits="2"/>
+                <line number="40" hits="2"/>
+                <line number="43" hits="2"/>
+              </lines>
+            </method>
+            <method name="createStreamed" signature="array $parameters" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="48" hits="3"/>
+                <line number="49" hits="1"/>
+                <line number="51" hits="1"/>
+                <line number="53" hits="1"/>
+                <line number="55" hits="1"/>
+              </lines>
+            </method>
+            <method name="validateParameters" signature="array $parameters" line-rate="0.63636363636364" branch-rate="0" complexity="4">
+              <lines>
+                <line number="64" hits="7"/>
+                <line number="65" hits="5"/>
+                <line number="67" hits="5"/>
+                <line number="68" hits="3"/>
+                <line number="70" hits="3"/>
+                <line number="71" hits="0"/>
+                <line number="72" hits="0"/>
+                <line number="75" hits="3"/>
+                <line number="76" hits="0"/>
+                <line number="79" hits="3"/>
+                <line number="80" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="9"/>
+            <line number="34" hits="5"/>
+            <line number="35" hits="4"/>
+            <line number="36" hits="2"/>
+            <line number="38" hits="2"/>
+            <line number="40" hits="2"/>
+            <line number="43" hits="2"/>
+            <line number="48" hits="3"/>
+            <line number="49" hits="1"/>
+            <line number="51" hits="1"/>
+            <line number="53" hits="1"/>
+            <line number="55" hits="1"/>
+            <line number="64" hits="7"/>
+            <line number="65" hits="5"/>
+            <line number="67" hits="5"/>
+            <line number="68" hits="3"/>
+            <line number="70" hits="3"/>
+            <line number="71" hits="0"/>
+            <line number="72" hits="0"/>
+            <line number="75" hits="3"/>
+            <line number="76" hits="0"/>
+            <line number="79" hits="3"/>
+            <line number="80" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Resources/CompletionInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Resources/Embeddings.php" line-rate="1" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Ollama\Resources\Embeddings" filename="Resources/Embeddings.php" line-rate="1" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\ApiClient\Transport\TransportInterface $transport" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="26" hits="5"/>
+              </lines>
+            </method>
+            <method name="create" signature="array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="4"/>
+                <line number="32" hits="2"/>
+                <line number="34" hits="2"/>
+                <line number="37" hits="2"/>
+              </lines>
+            </method>
+            <method name="validateParameters" signature="array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="45" hits="4"/>
+                <line number="46" hits="3"/>
+                <line number="48" hits="3"/>
+                <line number="49" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="5"/>
+            <line number="30" hits="4"/>
+            <line number="32" hits="2"/>
+            <line number="34" hits="2"/>
+            <line number="37" hits="2"/>
+            <line number="45" hits="4"/>
+            <line number="46" hits="3"/>
+            <line number="48" hits="3"/>
+            <line number="49" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Resources/EmbeddingsInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Responses/Chat/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Chat\CreateResponse" filename="Responses/Chat/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="string $model, int $createdAt, ModelflowAi\Ollama\Responses\Chat\CreateResponseMessage $message, bool $done, int $totalDuration, int $loadDuration, int $promptEvalDuration, int $evalDuration, ModelflowAi\ApiClient\Responses\Usage $usage, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="33" hits="4"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="54" hits="4"/>
+                <line number="55" hits="4"/>
+                <line number="56" hits="4"/>
+                <line number="57" hits="4"/>
+                <line number="58" hits="4"/>
+                <line number="59" hits="4"/>
+                <line number="60" hits="4"/>
+                <line number="61" hits="4"/>
+                <line number="62" hits="4"/>
+                <line number="63" hits="4"/>
+                <line number="64" hits="4"/>
+                <line number="65" hits="4"/>
+                <line number="66" hits="4"/>
+                <line number="67" hits="4"/>
+                <line number="68" hits="4"/>
+                <line number="69" hits="4"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="33" hits="4"/>
+            <line number="54" hits="4"/>
+            <line number="55" hits="4"/>
+            <line number="56" hits="4"/>
+            <line number="57" hits="4"/>
+            <line number="58" hits="4"/>
+            <line number="59" hits="4"/>
+            <line number="60" hits="4"/>
+            <line number="61" hits="4"/>
+            <line number="62" hits="4"/>
+            <line number="63" hits="4"/>
+            <line number="64" hits="4"/>
+            <line number="65" hits="4"/>
+            <line number="66" hits="4"/>
+            <line number="67" hits="4"/>
+            <line number="68" hits="4"/>
+            <line number="69" hits="4"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Chat/CreateResponseMessage.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Chat\CreateResponseMessage" filename="Responses/Chat/CreateResponseMessage.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="string $role, ?string $content" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="22" hits="5"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="32" hits="5"/>
+                <line number="33" hits="5"/>
+                <line number="34" hits="5"/>
+                <line number="35" hits="5"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="5"/>
+            <line number="32" hits="5"/>
+            <line number="33" hits="5"/>
+            <line number="34" hits="5"/>
+            <line number="35" hits="5"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Chat/CreateStreamedResponse.php" line-rate="1" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Chat\CreateStreamedResponse" filename="Responses/Chat/CreateStreamedResponse.php" line-rate="1" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="string $model, int $createdAt, int $index, ModelflowAi\Ollama\Responses\Chat\CreateStreamedResponseMessage $message, bool $done, ?int $totalDuration, ?int $loadDuration, ?int $promptEvalDuration, ?int $evalDuration, ?ModelflowAi\ApiClient\Responses\Usage $usage, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="2"/>
+              </lines>
+            </method>
+            <method name="from" signature="int $index, array $attributes, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="55" hits="2"/>
+                <line number="56" hits="2"/>
+                <line number="57" hits="2"/>
+                <line number="58" hits="2"/>
+                <line number="59" hits="2"/>
+                <line number="60" hits="2"/>
+                <line number="61" hits="2"/>
+                <line number="62" hits="2"/>
+                <line number="63" hits="2"/>
+                <line number="64" hits="2"/>
+                <line number="65" hits="2"/>
+                <line number="66" hits="2"/>
+                <line number="67" hits="2"/>
+                <line number="68" hits="2"/>
+                <line number="69" hits="2"/>
+                <line number="70" hits="2"/>
+                <line number="71" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="2"/>
+            <line number="55" hits="2"/>
+            <line number="56" hits="2"/>
+            <line number="57" hits="2"/>
+            <line number="58" hits="2"/>
+            <line number="59" hits="2"/>
+            <line number="60" hits="2"/>
+            <line number="61" hits="2"/>
+            <line number="62" hits="2"/>
+            <line number="63" hits="2"/>
+            <line number="64" hits="2"/>
+            <line number="65" hits="2"/>
+            <line number="66" hits="2"/>
+            <line number="67" hits="2"/>
+            <line number="68" hits="2"/>
+            <line number="69" hits="2"/>
+            <line number="70" hits="2"/>
+            <line number="71" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Chat/CreateStreamedResponseMessage.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Chat\CreateStreamedResponseMessage" filename="Responses/Chat/CreateStreamedResponseMessage.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="string $role, ?string $delta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="22" hits="3"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="32" hits="3"/>
+                <line number="33" hits="3"/>
+                <line number="34" hits="3"/>
+                <line number="35" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="3"/>
+            <line number="32" hits="3"/>
+            <line number="33" hits="3"/>
+            <line number="34" hits="3"/>
+            <line number="35" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Completion/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Completion\CreateResponse" filename="Responses/Completion/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="string $model, int $createdAt, string $response, array $context, bool $done, int $totalDuration, int $loadDuration, int $promptEvalDuration, int $evalDuration, ModelflowAi\ApiClient\Responses\Usage $usage, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="37" hits="3"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="56" hits="3"/>
+                <line number="57" hits="3"/>
+                <line number="58" hits="3"/>
+                <line number="59" hits="3"/>
+                <line number="60" hits="3"/>
+                <line number="61" hits="3"/>
+                <line number="62" hits="3"/>
+                <line number="63" hits="3"/>
+                <line number="64" hits="3"/>
+                <line number="65" hits="3"/>
+                <line number="66" hits="3"/>
+                <line number="67" hits="3"/>
+                <line number="68" hits="3"/>
+                <line number="69" hits="3"/>
+                <line number="70" hits="3"/>
+                <line number="71" hits="3"/>
+                <line number="72" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="37" hits="3"/>
+            <line number="56" hits="3"/>
+            <line number="57" hits="3"/>
+            <line number="58" hits="3"/>
+            <line number="59" hits="3"/>
+            <line number="60" hits="3"/>
+            <line number="61" hits="3"/>
+            <line number="62" hits="3"/>
+            <line number="63" hits="3"/>
+            <line number="64" hits="3"/>
+            <line number="65" hits="3"/>
+            <line number="66" hits="3"/>
+            <line number="67" hits="3"/>
+            <line number="68" hits="3"/>
+            <line number="69" hits="3"/>
+            <line number="70" hits="3"/>
+            <line number="71" hits="3"/>
+            <line number="72" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Completion/CreateStreamedResponse.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Completion\CreateStreamedResponse" filename="Responses/Completion/CreateStreamedResponse.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="string $model, int $createdAt, int $index, string $delta, bool $done, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="28" hits="2"/>
+              </lines>
+            </method>
+            <method name="from" signature="int $index, array $attributes, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="41" hits="2"/>
+                <line number="42" hits="2"/>
+                <line number="43" hits="2"/>
+                <line number="44" hits="2"/>
+                <line number="45" hits="2"/>
+                <line number="46" hits="2"/>
+                <line number="47" hits="2"/>
+                <line number="48" hits="2"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="2"/>
+            <line number="41" hits="2"/>
+            <line number="42" hits="2"/>
+            <line number="43" hits="2"/>
+            <line number="44" hits="2"/>
+            <line number="45" hits="2"/>
+            <line number="46" hits="2"/>
+            <line number="47" hits="2"/>
+            <line number="48" hits="2"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Responses/Embeddings/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\Ollama\Responses\Embeddings\CreateResponse" filename="Responses/Embeddings/CreateResponse.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="array $embedding, ModelflowAi\ApiClient\Responses\Usage $usage, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="29" hits="3"/>
+              </lines>
+            </method>
+            <method name="from" signature="array $attributes, ModelflowAi\ApiClient\Responses\MetaInformation $meta" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="38" hits="3"/>
+                <line number="39" hits="3"/>
+                <line number="40" hits="3"/>
+                <line number="41" hits="3"/>
+                <line number="42" hits="3"/>
+                <line number="43" hits="3"/>
+                <line number="44" hits="3"/>
+                <line number="45" hits="3"/>
+                <line number="46" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="29" hits="3"/>
+            <line number="38" hits="3"/>
+            <line number="39" hits="3"/>
+            <line number="40" hits="3"/>
+            <line number="41" hits="3"/>
+            <line number="42" hits="3"/>
+            <line number="43" hits="3"/>
+            <line number="44" hits="3"/>
+            <line number="45" hits="3"/>
+            <line number="46" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

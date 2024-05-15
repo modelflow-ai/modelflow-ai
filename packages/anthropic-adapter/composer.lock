@@ -455,12 +455,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "e750b7c4cc078ee65c2c6451dec970d6907e3d48"
+                "reference": "2266f9813ed7d8c84e04627edead7b7fd249d6e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/e750b7c4cc078ee65c2c6451dec970d6907e3d48",
-                "reference": "e750b7c4cc078ee65c2c6451dec970d6907e3d48",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/2266f9813ed7d8c84e04627edead7b7fd249d6e9",
+                "reference": "2266f9813ed7d8c84e04627edead7b7fd249d6e9",
                 "shasum": ""
             },
             "require": {
@@ -541,7 +541,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-03T12:44:22+00:00"
+            "time": "2024-05-13T15:35:37+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -820,12 +820,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e"
+                "reference": "9955122a490d18ce723cf9014b196c126222c180"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/9955122a490d18ce723cf9014b196c126222c180",
+                "reference": "9955122a490d18ce723cf9014b196c126222c180",
                 "shasum": ""
             },
             "require": {
@@ -883,7 +883,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-09T14:19:21+00:00"
+            "time": "2024-05-05T15:09:38+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -1271,16 +1271,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.54.0",
+            "version": "v3.57.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "887c350fccbadb2b84278fdb963c25a0c304ac9c"
+                "reference": "6c2a95613861cd5208f2a609395b064f208566dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/887c350fccbadb2b84278fdb963c25a0c304ac9c",
-                "reference": "887c350fccbadb2b84278fdb963c25a0c304ac9c",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/6c2a95613861cd5208f2a609395b064f208566dd",
+                "reference": "6c2a95613861cd5208f2a609395b064f208566dd",
                 "shasum": ""
             },
             "require": {
@@ -1317,9 +1317,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.54.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.57.0"
             },
-            "time": "2024-04-17T08:23:10+00:00"
+            "time": "2024-05-15T14:45:59+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1380,12 +1380,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "298d2febfe79d03fe714eb871d5538da55205b1a"
+                "reference": "88a07d262854c827db22f2eac8b072138e492f65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/298d2febfe79d03fe714eb871d5538da55205b1a",
-                "reference": "298d2febfe79d03fe714eb871d5538da55205b1a",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/88a07d262854c827db22f2eac8b072138e492f65",
+                "reference": "88a07d262854c827db22f2eac8b072138e492f65",
                 "shasum": ""
             },
             "require": {
@@ -1435,9 +1435,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.4.0"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.x"
             },
-            "time": "2024-04-09T21:13:58+00:00"
+            "time": "2024-05-08T18:52:15+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -1666,16 +1666,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.28.0",
+            "version": "1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb"
+                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb",
-                "reference": "cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/536889f2b340489d328f5ffb7b02bb6b183ddedc",
+                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc",
                 "shasum": ""
             },
             "require": {
@@ -1707,9 +1707,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.28.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.29.0"
             },
-            "time": "2024-04-03T18:51:33+00:00"
+            "time": "2024-05-06T12:04:23+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2154,12 +2154,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1e4641d2c92471e28da2fc8994f141f5b1f6b267"
+                "reference": "4a801ecbfd15a7cffdb05abae50d413b808ab110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1e4641d2c92471e28da2fc8994f141f5b1f6b267",
-                "reference": "1e4641d2c92471e28da2fc8994f141f5b1f6b267",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4a801ecbfd15a7cffdb05abae50d413b808ab110",
+                "reference": "4a801ecbfd15a7cffdb05abae50d413b808ab110",
                 "shasum": ""
             },
             "require": {
@@ -2247,7 +2247,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-03T06:58:22+00:00"
+            "time": "2024-05-11T05:32:49+00:00"
         },
         {
             "name": "rector/rector",

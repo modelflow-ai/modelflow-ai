@@ -17,6 +17,7 @@
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/experts": "^0.2",
+        "modelflow-ai/image": "^0.2",
         "modelflow-ai/mistral": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",
         "modelflow-ai/ollama": "^0.2",
@@ -25,10 +26,12 @@
         "modelflow-ai/prompt-template": "^0.2",
         "modelflow-ai/qdrant-embeddings-store": "^0.2",
         "modelflow-ai/symfony-bundle": "^0.2"
-
     },
     "require-dev": {
-        "schranz/mono": "^2.0.1"
+        "phpspec/prophecy-phpunit": "^2.1@stable",
+        "phpunit/phpunit": "^10.3",
+        "schranz/mono": "^2.0.1",
+        "symfony/dotenv": "*"
     },
     "scripts": {
         "post-install-cmd": "@php vendor/bin/mono run composer install",

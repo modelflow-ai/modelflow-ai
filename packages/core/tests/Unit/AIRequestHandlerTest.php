@@ -18,6 +18,7 @@ use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIChatRequest;
 use ModelflowAi\Core\Request\AICompletionRequest;
+use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Core\Request\Builder\AICompletionRequestBuilder;
 use ModelflowAi\Core\Request\Message\AIChatMessage;
@@ -40,7 +41,7 @@ class AIRequestHandlerTest extends TestCase
     private ObjectProphecy $adapter;
 
     /**
-     * @var ObjectProphecy<AIModelDecisionTreeInterface>
+     * @var ObjectProphecy<AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>>
      */
     private ObjectProphecy $decisionTree;
 
@@ -49,7 +50,9 @@ class AIRequestHandlerTest extends TestCase
     protected function setUp(): void
     {
         $this->adapter = $this->prophesize(AIModelAdapterInterface::class);
-        $this->decisionTree = $this->prophesize(AIModelDecisionTreeInterface::class);
+        /** @var ObjectProphecy<AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>> $decisionTree */
+        $decisionTree = $this->prophesize(AIModelDecisionTreeInterface::class);
+        $this->decisionTree = $decisionTree;
         $this->aiRequestHandler = new AIRequestHandler($this->decisionTree->reveal());
     }
 

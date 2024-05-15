@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.82352941176471" branch-rate="0" lines-covered="126" lines-valid="153" branches-covered="0" branches-valid="0" complexity="40" version="0.4" timestamp="1715720026">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/mistral-adapter/src</source>
+  </sources>
+  <packages>
+    <package name="Embeddings/MistralEmbeddingAdapter.php" line-rate="1" branch-rate="0" complexity="2">
+      <classes>
+        <class name="ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter" filename="Embeddings/MistralEmbeddingAdapter.php" line-rate="1" branch-rate="0" complexity="2">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Mistral\ClientInterface $client, ModelflowAi\Mistral\Model $model" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="26" hits="2"/>
+              </lines>
+            </method>
+            <method name="embedText" signature="string $text" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="1"/>
+                <line number="31" hits="1"/>
+                <line number="32" hits="1"/>
+                <line number="33" hits="1"/>
+                <line number="35" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="26" hits="2"/>
+            <line number="30" hits="1"/>
+            <line number="31" hits="1"/>
+            <line number="32" hits="1"/>
+            <line number="33" hits="1"/>
+            <line number="35" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="MistralAdapterFactory.php" line-rate="1" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\MistralAdapter\MistralAdapterFactory" filename="MistralAdapterFactory.php" line-rate="1" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Mistral\ClientInterface $client" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="2"/>
+              </lines>
+            </method>
+            <method name="createChatAdapter" signature="array $options" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="1"/>
+                <line number="35" hits="1"/>
+                <line number="36" hits="1"/>
+                <line number="37" hits="1"/>
+              </lines>
+            </method>
+            <method name="createEmbeddingAdapter" signature="array $options" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="42" hits="1"/>
+                <line number="43" hits="1"/>
+                <line number="44" hits="1"/>
+                <line number="45" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="2"/>
+            <line number="34" hits="1"/>
+            <line number="35" hits="1"/>
+            <line number="36" hits="1"/>
+            <line number="37" hits="1"/>
+            <line number="42" hits="1"/>
+            <line number="43" hits="1"/>
+            <line number="44" hits="1"/>
+            <line number="45" hits="1"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Model/MistralChatModelAdapter.php" line-rate="1" branch-rate="0" complexity="21">
+      <classes>
+        <class name="ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter" filename="Model/MistralChatModelAdapter.php" line-rate="1" branch-rate="0" complexity="21">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Mistral\ClientInterface $client, ModelflowAi\Mistral\Model $model" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="40" hits="10"/>
+              </lines>
+            </method>
+            <method name="handleRequest" signature="ModelflowAi\Core\Request\AIRequestInterface $request" line-rate="1" branch-rate="0" complexity="6">
+              <lines>
+                <line number="44" hits="6"/>
+                <line number="46" hits="6"/>
+                <line number="47" hits="6"/>
+                <line number="48" hits="6"/>
+                <line number="49" hits="6"/>
+                <line number="51" hits="6"/>
+                <line number="53" hits="3"/>
+                <line number="54" hits="3"/>
+                <line number="56" hits="3"/>
+                <line number="57" hits="1"/>
+                <line number="61" hits="6"/>
+                <line number="62" hits="2"/>
+                <line number="63" hits="2"/>
+                <line number="64" hits="2"/>
+                <line number="65" hits="1"/>
+                <line number="66" hits="1"/>
+                <line number="70" hits="6"/>
+                <line number="71" hits="2"/>
+                <line number="74" hits="4"/>
+              </lines>
+            </method>
+            <method name="create" signature="ModelflowAi\Core\Request\AIChatRequest $request, array $parameters" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="104" hits="4"/>
+                <line number="106" hits="4"/>
+                <line number="107" hits="4"/>
+                <line number="108" hits="1"/>
+                <line number="109" hits="1"/>
+                <line number="110" hits="1"/>
+                <line number="111" hits="1"/>
+                <line number="112" hits="1"/>
+                <line number="113" hits="1"/>
+                <line number="114" hits="1"/>
+                <line number="115" hits="1"/>
+                <line number="116" hits="1"/>
+                <line number="117" hits="1"/>
+                <line number="118" hits="1"/>
+                <line number="119" hits="1"/>
+                <line number="120" hits="1"/>
+                <line number="121" hits="1"/>
+                <line number="122" hits="1"/>
+                <line number="123" hits="1"/>
+                <line number="126" hits="3"/>
+                <line number="127" hits="3"/>
+                <line number="128" hits="3"/>
+                <line number="129" hits="3"/>
+                <line number="130" hits="3"/>
+                <line number="131" hits="3"/>
+                <line number="132" hits="3"/>
+              </lines>
+            </method>
+            <method name="createStreamed" signature="ModelflowAi\Core\Request\AIChatRequest $request, array $parameters" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="162" hits="2"/>
+                <line number="164" hits="2"/>
+                <line number="165" hits="2"/>
+                <line number="166" hits="2"/>
+                <line number="167" hits="2"/>
+              </lines>
+            </method>
+            <method name="createStreamedMessages" signature="Iterator $responses" line-rate="1" branch-rate="0" complexity="5">
+              <lines>
+                <line number="177" hits="2"/>
+                <line number="179" hits="2"/>
+                <line number="180" hits="2"/>
+                <line number="182" hits="2"/>
+                <line number="183" hits="2"/>
+                <line number="186" hits="2"/>
+                <line number="187" hits="1"/>
+                <line number="188" hits="1"/>
+                <line number="189" hits="1"/>
+                <line number="190" hits="1"/>
+                <line number="191" hits="1"/>
+                <line number="192" hits="1"/>
+                <line number="195" hits="1"/>
+                <line number="198" hits="1"/>
+                <line number="199" hits="1"/>
+                <line number="200" hits="1"/>
+                <line number="201" hits="1"/>
+              </lines>
+            </method>
+            <method name="determineToolCall" signature="ModelflowAi\Mistral\Responses\Chat\CreateStreamedResponse $response" line-rate="1" branch-rate="0" complexity="2">
+              <lines>
+                <line number="210" hits="1"/>
+                <line number="211" hits="1"/>
+                <line number="212" hits="1"/>
+                <line number="213" hits="1"/>
+                <line number="214" hits="1"/>
+                <line number="215" hits="1"/>
+                <line number="216" hits="1"/>
+              </lines>
+            </method>
+            <method name="decodeArguments" signature="string $arguments" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="226" hits="2"/>
+                <line number="228" hits="2"/>
+              </lines>
+            </method>
+            <method name="supports" signature="object $request" line-rate="1" branch-rate="0" complexity="3">
+              <lines>
+                <line number="233" hits="3"/>
+                <line number="234" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="40" hits="10"/>
+            <line number="44" hits="6"/>
+            <line number="46" hits="6"/>
+            <line number="47" hits="6"/>
+            <line number="48" hits="6"/>
+            <line number="49" hits="6"/>
+            <line number="51" hits="6"/>
+            <line number="53" hits="3"/>
+            <line number="54" hits="3"/>
+            <line number="56" hits="3"/>
+            <line number="57" hits="1"/>
+            <line number="61" hits="6"/>
+            <line number="62" hits="2"/>
+            <line number="63" hits="2"/>
+            <line number="64" hits="2"/>
+            <line number="65" hits="1"/>
+            <line number="66" hits="1"/>
+            <line number="70" hits="6"/>
+            <line number="71" hits="2"/>
+            <line number="74" hits="4"/>
+            <line number="104" hits="4"/>
+            <line number="106" hits="4"/>
+            <line number="107" hits="4"/>
+            <line number="108" hits="1"/>
+            <line number="109" hits="1"/>
+            <line number="110" hits="1"/>
+            <line number="111" hits="1"/>
+            <line number="112" hits="1"/>
+            <line number="113" hits="1"/>
+            <line number="114" hits="1"/>
+            <line number="115" hits="1"/>
+            <line number="116" hits="1"/>
+            <line number="117" hits="1"/>
+            <line number="118" hits="1"/>
+            <line number="119" hits="1"/>
+            <line number="120" hits="1"/>
+            <line number="121" hits="1"/>
+            <line number="122" hits="1"/>
+            <line number="123" hits="1"/>
+            <line number="126" hits="3"/>
+            <line number="127" hits="3"/>
+            <line number="128" hits="3"/>
+            <line number="129" hits="3"/>
+            <line number="130" hits="3"/>
+            <line number="131" hits="3"/>
+            <line number="132" hits="3"/>
+            <line number="162" hits="2"/>
+            <line number="164" hits="2"/>
+            <line number="165" hits="2"/>
+            <line number="166" hits="2"/>
+            <line number="167" hits="2"/>
+            <line number="177" hits="2"/>
+            <line number="179" hits="2"/>
+            <line number="180" hits="2"/>
+            <line number="182" hits="2"/>
+            <line number="183" hits="2"/>
+            <line number="186" hits="2"/>
+            <line number="187" hits="1"/>
+            <line number="188" hits="1"/>
+            <line number="189" hits="1"/>
+            <line number="190" hits="1"/>
+            <line number="191" hits="1"/>
+            <line number="192" hits="1"/>
+            <line number="195" hits="1"/>
+            <line number="198" hits="1"/>
+            <line number="199" hits="1"/>
+            <line number="200" hits="1"/>
+            <line number="201" hits="1"/>
+            <line number="210" hits="1"/>
+            <line number="211" hits="1"/>
+            <line number="212" hits="1"/>
+            <line number="213" hits="1"/>
+            <line number="214" hits="1"/>
+            <line number="215" hits="1"/>
+            <line number="216" hits="1"/>
+            <line number="226" hits="2"/>
+            <line number="228" hits="2"/>
+            <line number="233" hits="3"/>
+            <line number="234" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Tool/ToolFormatter.php" line-rate="0.54237288135593" branch-rate="0" complexity="14">
+      <classes>
+        <class name="ModelflowAi\MistralAdapter\Tool\ToolFormatter" filename="Tool/ToolFormatter.php" line-rate="0.54237288135593" branch-rate="0" complexity="14">
+          <methods>
+            <method name="formatTool" signature="ModelflowAi\Core\ToolInfo\ToolInfo $tool" line-rate="1" branch-rate="0" complexity="3">
+              <lines>
+                <line number="34" hits="4"/>
+                <line number="35" hits="4"/>
+                <line number="36" hits="4"/>
+                <line number="37" hits="4"/>
+                <line number="40" hits="4"/>
+                <line number="41" hits="4"/>
+                <line number="42" hits="4"/>
+                <line number="45" hits="4"/>
+                <line number="46" hits="4"/>
+                <line number="47" hits="4"/>
+                <line number="48" hits="4"/>
+                <line number="49" hits="4"/>
+                <line number="50" hits="4"/>
+                <line number="51" hits="4"/>
+                <line number="52" hits="4"/>
+                <line number="53" hits="4"/>
+              </lines>
+            </method>
+            <method name="formatTools" signature="array $tools" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="74" hits="3"/>
+                <line number="75" hits="3"/>
+                <line number="76" hits="3"/>
+                <line number="77" hits="3"/>
+                <line number="78" hits="3"/>
+                <line number="79" hits="3"/>
+                <line number="80" hits="3"/>
+              </lines>
+            </method>
+            <method name="formatParameter" signature="ModelflowAi\Core\ToolInfo\Parameter $parameter" line-rate="0.25" branch-rate="0" complexity="10">
+              <lines>
+                <line number="105" hits="4"/>
+                <line number="106" hits="4"/>
+                <line number="107" hits="4"/>
+                <line number="108" hits="4"/>
+                <line number="110" hits="4"/>
+                <line number="111" hits="0"/>
+                <line number="112" hits="0"/>
+                <line number="115" hits="0"/>
+                <line number="116" hits="0"/>
+                <line number="117" hits="0"/>
+                <line number="118" hits="0"/>
+                <line number="120" hits="0"/>
+                <line number="122" hits="0"/>
+                <line number="123" hits="0"/>
+                <line number="124" hits="0"/>
+                <line number="125" hits="0"/>
+                <line number="126" hits="0"/>
+                <line number="129" hits="0"/>
+                <line number="130" hits="0"/>
+                <line number="131" hits="0"/>
+                <line number="132" hits="0"/>
+                <line number="136" hits="4"/>
+                <line number="137" hits="0"/>
+                <line number="138" hits="0"/>
+                <line number="141" hits="0"/>
+                <line number="143" hits="0"/>
+                <line number="144" hits="0"/>
+                <line number="145" hits="0"/>
+                <line number="146" hits="0"/>
+                <line number="147" hits="0"/>
+                <line number="150" hits="0"/>
+                <line number="153" hits="4"/>
+                <line number="154" hits="0"/>
+                <line number="157" hits="4"/>
+                <line number="158" hits="0"/>
+                <line number="161" hits="4"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="34" hits="4"/>
+            <line number="35" hits="4"/>
+            <line number="36" hits="4"/>
+            <line number="37" hits="4"/>
+            <line number="40" hits="4"/>
+            <line number="41" hits="4"/>
+            <line number="42" hits="4"/>
+            <line number="45" hits="4"/>
+            <line number="46" hits="4"/>
+            <line number="47" hits="4"/>
+            <line number="48" hits="4"/>
+            <line number="49" hits="4"/>
+            <line number="50" hits="4"/>
+            <line number="51" hits="4"/>
+            <line number="52" hits="4"/>
+            <line number="53" hits="4"/>
+            <line number="74" hits="3"/>
+            <line number="75" hits="3"/>
+            <line number="76" hits="3"/>
+            <line number="77" hits="3"/>
+            <line number="78" hits="3"/>
+            <line number="79" hits="3"/>
+            <line number="80" hits="3"/>
+            <line number="105" hits="4"/>
+            <line number="106" hits="4"/>
+            <line number="107" hits="4"/>
+            <line number="108" hits="4"/>
+            <line number="110" hits="4"/>
+            <line number="111" hits="0"/>
+            <line number="112" hits="0"/>
+            <line number="115" hits="0"/>
+            <line number="116" hits="0"/>
+            <line number="117" hits="0"/>
+            <line number="118" hits="0"/>
+            <line number="120" hits="0"/>
+            <line number="122" hits="0"/>
+            <line number="123" hits="0"/>
+            <line number="124" hits="0"/>
+            <line number="125" hits="0"/>
+            <line number="126" hits="0"/>
+            <line number="129" hits="0"/>
+            <line number="130" hits="0"/>
+            <line number="131" hits="0"/>
+            <line number="132" hits="0"/>
+            <line number="136" hits="4"/>
+            <line number="137" hits="0"/>
+            <line number="138" hits="0"/>
+            <line number="141" hits="0"/>
+            <line number="143" hits="0"/>
+            <line number="144" hits="0"/>
+            <line number="145" hits="0"/>
+            <line number="146" hits="0"/>
+            <line number="147" hits="0"/>
+            <line number="150" hits="0"/>
+            <line number="153" hits="4"/>
+            <line number="154" hits="0"/>
+            <line number="157" hits="4"/>
+            <line number="158" hits="0"/>
+            <line number="161" hits="4"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

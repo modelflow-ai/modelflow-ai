@@ -13,19 +13,25 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\DecisionTree;
 
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
+use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
+use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 
+/**
+ * @template T of CriteriaBehaviour
+ * @template U of SupportsBehaviour
+ *
+ * @implements AIModelDecisionTreeInterface<T, U>
+ */
 final readonly class AIModelDecisionTree implements AIModelDecisionTreeInterface
 {
     /**
-     * @param DecisionRuleInterface[] $rules
+     * @param DecisionRuleInterface<T, U>[] $rules
      */
     public function __construct(private array $rules)
     {
     }
 
-    public function determineAdapter(AIRequestInterface $request): AIModelAdapterInterface
+    public function determineAdapter(object $request): object
     {
         foreach ($this->rules as $rule) {
             if ($rule->matches($request)) {

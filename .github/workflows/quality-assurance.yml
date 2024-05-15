@@ -56,6 +56,13 @@ jobs:
             directory: 'packages/experts'
             docker: false
 
+    image:
+        name: Image
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/image'
+            docker: false
+
     mistral:
         name: Mistral
         uses: ./.github/workflows/test.yml

@@ -204,12 +204,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "2c438b99bb2753c1628c1e6f523991edea5b03a4"
+                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/2c438b99bb2753c1628c1e6f523991edea5b03a4",
-                "reference": "2c438b99bb2753c1628c1e6f523991edea5b03a4",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
+                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
                 "shasum": ""
             },
             "require": {
@@ -248,7 +248,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/main"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.0"
             },
             "funding": [
                 {
@@ -264,7 +264,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-02T14:07:37+00:00"
+            "time": "2024-04-18T09:32:20+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -272,12 +272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "699730653571e7d2d95ca8587104bc6701d4859f"
+                "reference": "2266f9813ed7d8c84e04627edead7b7fd249d6e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/699730653571e7d2d95ca8587104bc6701d4859f",
-                "reference": "699730653571e7d2d95ca8587104bc6701d4859f",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/2266f9813ed7d8c84e04627edead7b7fd249d6e9",
+                "reference": "2266f9813ed7d8c84e04627edead7b7fd249d6e9",
                 "shasum": ""
             },
             "require": {
@@ -358,7 +358,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-02T11:58:01+00:00"
+            "time": "2024-05-13T15:35:37+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -366,12 +366,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client-contracts.git",
-                "reference": "46a7e30d7c89c4c894c7eaf7eeada4cc77b50817"
+                "reference": "20414d96f391677bf80078aa55baece78b82647d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/46a7e30d7c89c4c894c7eaf7eeada4cc77b50817",
-                "reference": "46a7e30d7c89c4c894c7eaf7eeada4cc77b50817",
+                "url": "https://api.github.com/repos/symfony/http-client-contracts/zipball/20414d96f391677bf80078aa55baece78b82647d",
+                "reference": "20414d96f391677bf80078aa55baece78b82647d",
                 "shasum": ""
             },
             "require": {
@@ -421,7 +421,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/http-client-contracts/tree/main"
+                "source": "https://github.com/symfony/http-client-contracts/tree/v3.5.0"
             },
             "funding": [
                 {
@@ -437,7 +437,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-01T18:51:41+00:00"
+            "time": "2024-04-18T09:32:20+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -445,12 +445,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/service-contracts.git",
-                "reference": "a17e69656265139c2ab4a62529f495a2a41fd6ce"
+                "reference": "bd1d9e59a81d8fa4acdcea3f617c581f7475a80f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/a17e69656265139c2ab4a62529f495a2a41fd6ce",
-                "reference": "a17e69656265139c2ab4a62529f495a2a41fd6ce",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/bd1d9e59a81d8fa4acdcea3f617c581f7475a80f",
+                "reference": "bd1d9e59a81d8fa4acdcea3f617c581f7475a80f",
                 "shasum": ""
             },
             "require": {
@@ -505,7 +505,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/service-contracts/tree/main"
+                "source": "https://github.com/symfony/service-contracts/tree/v3.5.0"
             },
             "funding": [
                 {
@@ -521,7 +521,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-05T09:39:30+00:00"
+            "time": "2024-04-18T09:32:20+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -637,12 +637,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e"
+                "reference": "9955122a490d18ce723cf9014b196c126222c180"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
-                "reference": "6c0ee619435c5d4f3bc515ab1514cf4cf1006c6e",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/9955122a490d18ce723cf9014b196c126222c180",
+                "reference": "9955122a490d18ce723cf9014b196c126222c180",
                 "shasum": ""
             },
             "require": {
@@ -700,7 +700,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-12-09T14:19:21+00:00"
+            "time": "2024-05-05T15:09:38+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -1002,16 +1002,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.54.0",
+            "version": "v3.57.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "887c350fccbadb2b84278fdb963c25a0c304ac9c"
+                "reference": "6c2a95613861cd5208f2a609395b064f208566dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/887c350fccbadb2b84278fdb963c25a0c304ac9c",
-                "reference": "887c350fccbadb2b84278fdb963c25a0c304ac9c",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/6c2a95613861cd5208f2a609395b064f208566dd",
+                "reference": "6c2a95613861cd5208f2a609395b064f208566dd",
                 "shasum": ""
             },
             "require": {
@@ -1048,9 +1048,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.54.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.57.0"
             },
-            "time": "2024-04-17T08:23:10+00:00"
+            "time": "2024-05-15T14:45:59+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1111,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "298d2febfe79d03fe714eb871d5538da55205b1a"
+                "reference": "88a07d262854c827db22f2eac8b072138e492f65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/298d2febfe79d03fe714eb871d5538da55205b1a",
-                "reference": "298d2febfe79d03fe714eb871d5538da55205b1a",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/88a07d262854c827db22f2eac8b072138e492f65",
+                "reference": "88a07d262854c827db22f2eac8b072138e492f65",
                 "shasum": ""
             },
             "require": {
@@ -1166,9 +1166,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.4.0"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.x"
             },
-            "time": "2024-04-09T21:13:58+00:00"
+            "time": "2024-05-08T18:52:15+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -1397,16 +1397,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.28.0",
+            "version": "1.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb"
+                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb",
-                "reference": "cd06d6b1a1b3c75b0b83f97577869fd85a3cd4fb",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/536889f2b340489d328f5ffb7b02bb6b183ddedc",
+                "reference": "536889f2b340489d328f5ffb7b02bb6b183ddedc",
                 "shasum": ""
             },
             "require": {
@@ -1438,9 +1438,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.28.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.29.0"
             },
-            "time": "2024-04-03T18:51:33+00:00"
+            "time": "2024-05-06T12:04:23+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1885,12 +1885,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf"
+                "reference": "4a801ecbfd15a7cffdb05abae50d413b808ab110"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/acee377ae876fcf24a9a5a0d321707c89f006fcf",
-                "reference": "acee377ae876fcf24a9a5a0d321707c89f006fcf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4a801ecbfd15a7cffdb05abae50d413b808ab110",
+                "reference": "4a801ecbfd15a7cffdb05abae50d413b808ab110",
                 "shasum": ""
             },
             "require": {
@@ -1978,7 +1978,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-02T06:24:40+00:00"
+            "time": "2024-05-11T05:32:49+00:00"
         },
         {
             "name": "rector/rector",

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.89393939393939" branch-rate="0" lines-covered="59" lines-valid="66" branches-covered="0" branches-valid="0" complexity="20" version="0.4" timestamp="1715720034">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/qdrant-embeddings-store/src</source>
+  </sources>
+  <packages>
+    <package name="QdrantEmbeddingsStore.php" line-rate="0.89393939393939" branch-rate="0" complexity="20">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Store\Qdrant\QdrantEmbeddingsStore" filename="QdrantEmbeddingsStore.php" line-rate="0.89393939393939" branch-rate="0" complexity="20">
+          <methods>
+            <method name="__construct" signature="Qdrant\Qdrant $client, string $collectionName" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="35" hits="3"/>
+              </lines>
+            </method>
+            <method name="createCollection" signature="int $embeddingLength" line-rate="1" branch-rate="0" complexity="1">
+              <lines>
+                <line number="39" hits="3"/>
+                <line number="41" hits="3"/>
+                <line number="42" hits="3"/>
+                <line number="43" hits="3"/>
+                <line number="44" hits="3"/>
+                <line number="45" hits="3"/>
+                <line number="46" hits="3"/>
+                <line number="48" hits="3"/>
+              </lines>
+            </method>
+            <method name="checkCollection" signature="" line-rate="0.83333333333333" branch-rate="0" complexity="3">
+              <lines>
+                <line number="54" hits="3"/>
+                <line number="56" hits="1"/>
+                <line number="57" hits="3"/>
+                <line number="58" hits="3"/>
+                <line number="59" hits="3"/>
+                <line number="62" hits="0"/>
+              </lines>
+            </method>
+            <method name="addDocument" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding" line-rate="0.85714285714286" branch-rate="0" complexity="3">
+              <lines>
+                <line number="68" hits="1"/>
+                <line number="69" hits="0"/>
+                <line number="72" hits="1"/>
+                <line number="73" hits="1"/>
+                <line number="76" hits="1"/>
+                <line number="77" hits="1"/>
+                <line number="78" hits="1"/>
+              </lines>
+            </method>
+            <method name="addDocuments" signature="array $embeddings" line-rate="0.8" branch-rate="0" complexity="5">
+              <lines>
+                <line number="83" hits="2"/>
+                <line number="85" hits="2"/>
+                <line number="86" hits="0"/>
+                <line number="89" hits="2"/>
+                <line number="90" hits="0"/>
+                <line number="93" hits="2"/>
+                <line number="94" hits="2"/>
+                <line number="97" hits="2"/>
+                <line number="98" hits="2"/>
+                <line number="101" hits="2"/>
+              </lines>
+            </method>
+            <method name="similaritySearch" signature="array $vector, int $k, array $additionalArguments" line-rate="0.9047619047619" branch-rate="0" complexity="5">
+              <lines>
+                <line number="106" hits="1"/>
+                <line number="107" hits="1"/>
+                <line number="109" hits="1"/>
+                <line number="110" hits="0"/>
+                <line number="113" hits="1"/>
+                <line number="114" hits="1"/>
+                <line number="115" hits="1"/>
+                <line number="116" hits="1"/>
+                <line number="117" hits="1"/>
+                <line number="118" hits="1"/>
+                <line number="119" hits="1"/>
+                <line number="120" hits="1"/>
+                <line number="122" hits="1"/>
+                <line number="123" hits="1"/>
+                <line number="124" hits="1"/>
+                <line number="126" hits="1"/>
+                <line number="127" hits="0"/>
+                <line number="130" hits="1"/>
+                <line number="131" hits="1"/>
+                <line number="132" hits="1"/>
+                <line number="135" hits="1"/>
+              </lines>
+            </method>
+            <method name="createPointFromDocument" signature="Qdrant\Models\PointsStruct $points, ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding" line-rate="0.92307692307692" branch-rate="0" complexity="2">
+              <lines>
+                <line number="140" hits="3"/>
+                <line number="141" hits="0"/>
+                <line number="144" hits="3"/>
+                <line number="146" hits="3"/>
+                <line number="147" hits="3"/>
+                <line number="148" hits="3"/>
+                <line number="150" hits="3"/>
+                <line number="151" hits="3"/>
+                <line number="152" hits="3"/>
+                <line number="153" hits="3"/>
+                <line number="154" hits="3"/>
+                <line number="155" hits="3"/>
+                <line number="156" hits="3"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="35" hits="3"/>
+            <line number="39" hits="3"/>
+            <line number="41" hits="3"/>
+            <line number="42" hits="3"/>
+            <line number="43" hits="3"/>
+            <line number="44" hits="3"/>
+            <line number="45" hits="3"/>
+            <line number="46" hits="3"/>
+            <line number="48" hits="3"/>
+            <line number="54" hits="3"/>
+            <line number="56" hits="1"/>
+            <line number="57" hits="3"/>
+            <line number="58" hits="3"/>
+            <line number="59" hits="3"/>
+            <line number="62" hits="0"/>
+            <line number="68" hits="1"/>
+            <line number="69" hits="0"/>
+            <line number="72" hits="1"/>
+            <line number="73" hits="1"/>
+            <line number="76" hits="1"/>
+            <line number="77" hits="1"/>
+            <line number="78" hits="1"/>
+            <line number="83" hits="2"/>
+            <line number="85" hits="2"/>
+            <line number="86" hits="0"/>
+            <line number="89" hits="2"/>
+            <line number="90" hits="0"/>
+            <line number="93" hits="2"/>
+            <line number="94" hits="2"/>
+            <line number="97" hits="2"/>
+            <line number="98" hits="2"/>
+            <line number="101" hits="2"/>
+            <line number="106" hits="1"/>
+            <line number="107" hits="1"/>
+            <line number="109" hits="1"/>
+            <line number="110" hits="0"/>
+            <line number="113" hits="1"/>
+            <line number="114" hits="1"/>
+            <line number="115" hits="1"/>
+            <line number="116" hits="1"/>
+            <line number="117" hits="1"/>
+            <line number="118" hits="1"/>
+            <line number="119" hits="1"/>
+            <line number="120" hits="1"/>
+            <line number="122" hits="1"/>
+            <line number="123" hits="1"/>
+            <line number="124" hits="1"/>
+            <line number="126" hits="1"/>
+            <line number="127" hits="0"/>
+            <line number="130" hits="1"/>
+            <line number="131" hits="1"/>
+            <line number="132" hits="1"/>
+            <line number="135" hits="1"/>
+            <line number="140" hits="3"/>
+            <line number="141" hits="0"/>
+            <line number="144" hits="3"/>
+            <line number="146" hits="3"/>
+            <line number="147" hits="3"/>
+            <line number="148" hits="3"/>
+            <line number="150" hits="3"/>
+            <line number="151" hits="3"/>
+            <line number="152" hits="3"/>
+            <line number="153" hits="3"/>
+            <line number="154" hits="3"/>
+            <line number="155" hits="3"/>
+            <line number="156" hits="3"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

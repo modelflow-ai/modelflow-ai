@@ -54,7 +54,7 @@ final readonly class OllamaCompletionModelAdapter implements AIModelAdapterInter
         return new AICompletionResponse($request, $response->response);
     }
 
-    public function supports(AIRequestInterface $request): bool
+    public function supports(object $request): bool
     {
         return $request instanceof AICompletionRequest;
     }

@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Model;
 
+use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Response\AIResponseInterface;
 
-interface AIModelAdapterInterface
+interface AIModelAdapterInterface extends SupportsBehaviour
 {
     public function handleRequest(AIRequestInterface $request): AIResponseInterface;
-
-    public function supports(AIRequestInterface $request): bool;
 }

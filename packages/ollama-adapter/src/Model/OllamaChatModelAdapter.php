@@ -124,7 +124,7 @@ final readonly class OllamaChatModelAdapter implements AIModelAdapterInterface
         }
     }
 
-    public function supports(AIRequestInterface $request): bool
+    public function supports(object $request): bool
     {
         return $request instanceof AIChatRequest;
     }

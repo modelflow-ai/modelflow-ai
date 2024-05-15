@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0" branch-rate="0" lines-covered="0" lines-valid="159" branches-covered="0" branches-valid="0" complexity="73" version="0.4" timestamp="1715720024">
+  <sources>
+    <source>/Users/johannes/Development/ai/modelflow-ai/packages/embeddings/src</source>
+  </sources>
+  <packages>
+    <package name="Adapter/Cache/CacheEmbeddingAdapter.php" line-rate="0" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Adapter\Cache\CacheEmbeddingAdapter" filename="Adapter/Cache/CacheEmbeddingAdapter.php" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface $adapter, Psr\Cache\CacheItemPoolInterface $cacheItemPool" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="25" hits="0"/>
+              </lines>
+            </method>
+            <method name="embedText" signature="string $text" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="29" hits="0"/>
+                <line number="30" hits="0"/>
+                <line number="31" hits="0"/>
+                <line number="33" hits="0"/>
+                <line number="35" hits="0"/>
+                <line number="38" hits="0"/>
+                <line number="39" hits="0"/>
+                <line number="40" hits="0"/>
+                <line number="42" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="25" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="30" hits="0"/>
+            <line number="31" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="39" hits="0"/>
+            <line number="40" hits="0"/>
+            <line number="42" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Algorithm/DistanceL2Utils.php" line-rate="0" branch-rate="0" complexity="4">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Algorithm\DistanceL2Utils" filename="Algorithm/DistanceL2Utils.php" line-rate="0" branch-rate="0" complexity="4">
+          <methods>
+            <method name="__construct" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="20" hits="0"/>
+              </lines>
+            </method>
+            <method name="euclideanDistanceL2" signature="array $vector1, array $vector2" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="28" hits="0"/>
+                <line number="29" hits="0"/>
+                <line number="32" hits="0"/>
+                <line number="33" hits="0"/>
+                <line number="34" hits="0"/>
+                <line number="37" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="20" hits="0"/>
+            <line number="28" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="32" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="37" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="EmbeddingsPackage.php" line-rate="0" branch-rate="0" complexity="1">
+      <classes>
+        <class name="ModelflowAi\Embeddings\EmbeddingsPackage" filename="EmbeddingsPackage.php" line-rate="0" branch-rate="0" complexity="1">
+          <methods>
+            <method name="__construct" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="23" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Formatter/EmbeddingFormatter.php" line-rate="0" branch-rate="0" complexity="3">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Formatter\EmbeddingFormatter" filename="Formatter/EmbeddingFormatter.php" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="formatEmbedding" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding, string $header" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="22" hits="0"/>
+                <line number="24" hits="0"/>
+              </lines>
+            </method>
+            <method name="formatEmbeddings" signature="array $embeddings, string $header" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="29" hits="0"/>
+                <line number="30" hits="0"/>
+                <line number="31" hits="0"/>
+                <line number="34" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="22" hits="0"/>
+            <line number="24" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="30" hits="0"/>
+            <line number="31" hits="0"/>
+            <line number="34" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Formatter/EmbeddingFormatterInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Generator/EmbeddingGenerator.php" line-rate="0" branch-rate="0" complexity="6">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Generator\EmbeddingGenerator" filename="Generator/EmbeddingGenerator.php" line-rate="0" branch-rate="0" complexity="6">
+          <methods>
+            <method name="__construct" signature="ModelflowAi\Embeddings\Splitter\EmbeddingSplitterInterface $embeddingSplitter, ModelflowAi\Embeddings\Formatter\EmbeddingFormatterInterface $embeddingFormatter, ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface $embeddingAdapter" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="28" hits="0"/>
+              </lines>
+            </method>
+            <method name="generateEmbedding" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding, ?callable $headerGenerator" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="32" hits="0"/>
+                <line number="33" hits="0"/>
+                <line number="34" hits="0"/>
+                <line number="35" hits="0"/>
+                <line number="36" hits="0"/>
+                <line number="37" hits="0"/>
+                <line number="38" hits="0"/>
+                <line number="41" hits="0"/>
+              </lines>
+            </method>
+            <method name="generateEmbeddings" signature="array $embeddings, ?callable $headerGenerator" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+                <line number="51" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="0"/>
+            <line number="32" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="36" hits="0"/>
+            <line number="37" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="51" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Generator/EmbeddingGeneratorInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Model/EmbeddingInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Model/EmbeddingTrait.php" line-rate="0" branch-rate="0" complexity="17">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Model\EmbeddingTrait" filename="Model/EmbeddingTrait.php" line-rate="0" branch-rate="0" complexity="17">
+          <methods>
+            <method name="fromArray" signature="array $data" line-rate="0" branch-rate="0" complexity="3">
+              <lines>
+                <line number="20" hits="0"/>
+                <line number="21" hits="0"/>
+                <line number="23" hits="0"/>
+                <line number="24" hits="0"/>
+                <line number="25" hits="0"/>
+                <line number="28" hits="0"/>
+                <line number="29" hits="0"/>
+                <line number="30" hits="0"/>
+                <line number="33" hits="0"/>
+              </lines>
+            </method>
+            <method name="split" signature="string $content, int $chunkNumber" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="51" hits="0"/>
+                <line number="52" hits="0"/>
+                <line number="53" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="55" hits="0"/>
+                <line number="56" hits="0"/>
+                <line number="58" hits="0"/>
+              </lines>
+            </method>
+            <method name="getIdentifierParts" signature="" line-rate="0" branch-rate="0" complexity="0">
+              <lines>
+                <line number="64" hits="0"/>
+              </lines>
+            </method>
+            <method name="getIdentifier" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="68" hits="0"/>
+              </lines>
+            </method>
+            <method name="formatUuid" signature="string $identifier" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="74" hits="0"/>
+                <line number="77" hits="0"/>
+                <line number="78" hits="0"/>
+                <line number="81" hits="0"/>
+                <line number="82" hits="0"/>
+                <line number="84" hits="0"/>
+                <line number="87" hits="0"/>
+              </lines>
+            </method>
+            <method name="getContent" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="92" hits="0"/>
+              </lines>
+            </method>
+            <method name="getFormattedContent" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="97" hits="0"/>
+              </lines>
+            </method>
+            <method name="setFormattedContent" signature="string $formattedContent" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="102" hits="0"/>
+              </lines>
+            </method>
+            <method name="getVector" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="107" hits="0"/>
+              </lines>
+            </method>
+            <method name="setVector" signature="array $vector" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="112" hits="0"/>
+              </lines>
+            </method>
+            <method name="getHash" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="117" hits="0"/>
+              </lines>
+            </method>
+            <method name="getChunkNumber" signature="" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="122" hits="0"/>
+              </lines>
+            </method>
+            <method name="toArray" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="127" hits="0"/>
+                <line number="129" hits="0"/>
+                <line number="130" hits="0"/>
+                <line number="131" hits="0"/>
+                <line number="134" hits="0"/>
+              </lines>
+            </method>
+            <method name="hash" signature="string $content" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="139" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="20" hits="0"/>
+            <line number="21" hits="0"/>
+            <line number="23" hits="0"/>
+            <line number="24" hits="0"/>
+            <line number="25" hits="0"/>
+            <line number="28" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="30" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="52" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="55" hits="0"/>
+            <line number="56" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="64" hits="0"/>
+            <line number="68" hits="0"/>
+            <line number="74" hits="0"/>
+            <line number="77" hits="0"/>
+            <line number="78" hits="0"/>
+            <line number="81" hits="0"/>
+            <line number="82" hits="0"/>
+            <line number="84" hits="0"/>
+            <line number="87" hits="0"/>
+            <line number="92" hits="0"/>
+            <line number="97" hits="0"/>
+            <line number="102" hits="0"/>
+            <line number="107" hits="0"/>
+            <line number="112" hits="0"/>
+            <line number="117" hits="0"/>
+            <line number="122" hits="0"/>
+            <line number="127" hits="0"/>
+            <line number="129" hits="0"/>
+            <line number="130" hits="0"/>
+            <line number="131" hits="0"/>
+            <line number="134" hits="0"/>
+            <line number="139" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Splitter/EmbeddingSplitter.php" line-rate="0" branch-rate="0" complexity="18">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Splitter\EmbeddingSplitter" filename="Splitter/EmbeddingSplitter.php" line-rate="0" branch-rate="0" complexity="18">
+          <methods>
+            <method name="__construct" signature="int $maxLength, string $separator" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="24" hits="0"/>
+              </lines>
+            </method>
+            <method name="splitEmbedding" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding" line-rate="0" branch-rate="0" complexity="15">
+              <lines>
+                <line number="29" hits="0"/>
+                <line number="30" hits="0"/>
+                <line number="31" hits="0"/>
+                <line number="33" hits="0"/>
+                <line number="34" hits="0"/>
+                <line number="37" hits="0"/>
+                <line number="38" hits="0"/>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="45" hits="0"/>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="49" hits="0"/>
+                <line number="50" hits="0"/>
+                <line number="51" hits="0"/>
+                <line number="52" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="57" hits="0"/>
+                <line number="58" hits="0"/>
+                <line number="62" hits="0"/>
+                <line number="63" hits="0"/>
+                <line number="65" hits="0"/>
+                <line number="66" hits="0"/>
+                <line number="67" hits="0"/>
+                <line number="68" hits="0"/>
+                <line number="69" hits="0"/>
+                <line number="70" hits="0"/>
+                <line number="73" hits="0"/>
+              </lines>
+            </method>
+            <method name="splitEmbeddings" signature="array $embeddings" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="78" hits="0"/>
+                <line number="79" hits="0"/>
+                <line number="80" hits="0"/>
+                <line number="81" hits="0"/>
+                <line number="82" hits="0"/>
+                <line number="83" hits="0"/>
+                <line number="86" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="0"/>
+            <line number="29" hits="0"/>
+            <line number="30" hits="0"/>
+            <line number="31" hits="0"/>
+            <line number="33" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="37" hits="0"/>
+            <line number="38" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="45" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="49" hits="0"/>
+            <line number="50" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="52" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="57" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="62" hits="0"/>
+            <line number="63" hits="0"/>
+            <line number="65" hits="0"/>
+            <line number="66" hits="0"/>
+            <line number="67" hits="0"/>
+            <line number="68" hits="0"/>
+            <line number="69" hits="0"/>
+            <line number="70" hits="0"/>
+            <line number="73" hits="0"/>
+            <line number="78" hits="0"/>
+            <line number="79" hits="0"/>
+            <line number="80" hits="0"/>
+            <line number="81" hits="0"/>
+            <line number="82" hits="0"/>
+            <line number="83" hits="0"/>
+            <line number="86" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Splitter/EmbeddingSplitterInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Store/EmbeddingsStoreInterface.php" line-rate="0" branch-rate="0" complexity="0">
+      <classes/>
+    </package>
+    <package name="Store/Filesystem/FilesystemEmbeddingsStore.php" line-rate="0" branch-rate="0" complexity="12">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Store\Filesystem\FilesystemEmbeddingsStore" filename="Store/Filesystem/FilesystemEmbeddingsStore.php" line-rate="0" branch-rate="0" complexity="12">
+          <methods>
+            <method name="__construct" signature="string $filePath" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="0"/>
+              </lines>
+            </method>
+            <method name="addDocument" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="34" hits="0"/>
+                <line number="35" hits="0"/>
+                <line number="36" hits="0"/>
+              </lines>
+            </method>
+            <method name="addDocuments" signature="array $embeddings" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="41" hits="0"/>
+                <line number="42" hits="0"/>
+                <line number="43" hits="0"/>
+              </lines>
+            </method>
+            <method name="similaritySearch" signature="array $vector, int $k, array $additionalArguments" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="48" hits="0"/>
+                <line number="49" hits="0"/>
+                <line number="51" hits="0"/>
+                <line number="53" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="55" hits="0"/>
+                <line number="56" hits="0"/>
+                <line number="60" hits="0"/>
+                <line number="61" hits="0"/>
+                <line number="64" hits="0"/>
+                <line number="65" hits="0"/>
+                <line number="68" hits="0"/>
+                <line number="70" hits="0"/>
+                <line number="72" hits="0"/>
+                <line number="73" hits="0"/>
+                <line number="74" hits="0"/>
+                <line number="77" hits="0"/>
+              </lines>
+            </method>
+            <method name="readDocumentsFromFile" signature="" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="85" hits="0"/>
+                <line number="86" hits="0"/>
+                <line number="90" hits="0"/>
+                <line number="92" hits="0"/>
+              </lines>
+            </method>
+            <method name="saveDocumentsToFile" signature="array $embeddings" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="100" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="0"/>
+            <line number="34" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="36" hits="0"/>
+            <line number="41" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="43" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="49" hits="0"/>
+            <line number="51" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="55" hits="0"/>
+            <line number="56" hits="0"/>
+            <line number="60" hits="0"/>
+            <line number="61" hits="0"/>
+            <line number="64" hits="0"/>
+            <line number="65" hits="0"/>
+            <line number="68" hits="0"/>
+            <line number="70" hits="0"/>
+            <line number="72" hits="0"/>
+            <line number="73" hits="0"/>
+            <line number="74" hits="0"/>
+            <line number="77" hits="0"/>
+            <line number="85" hits="0"/>
+            <line number="86" hits="0"/>
+            <line number="90" hits="0"/>
+            <line number="92" hits="0"/>
+            <line number="100" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Store/Memory/MemoryEmbeddingsStore.php" line-rate="0" branch-rate="0" complexity="9">
+      <classes>
+        <class name="ModelflowAi\Embeddings\Store\Memory\MemoryEmbeddingsStore" filename="Store/Memory/MemoryEmbeddingsStore.php" line-rate="0" branch-rate="0" complexity="9">
+          <methods>
+            <method name="addDocument" signature="ModelflowAi\Embeddings\Model\EmbeddingInterface $embedding" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="30" hits="0"/>
+              </lines>
+            </method>
+            <method name="addDocuments" signature="array $embeddings" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="35" hits="0"/>
+                <line number="36" hits="0"/>
+              </lines>
+            </method>
+            <method name="similaritySearch" signature="array $vector, int $k, array $additionalArguments" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="42" hits="0"/>
+                <line number="44" hits="0"/>
+                <line number="46" hits="0"/>
+                <line number="47" hits="0"/>
+                <line number="48" hits="0"/>
+                <line number="49" hits="0"/>
+                <line number="53" hits="0"/>
+                <line number="54" hits="0"/>
+                <line number="57" hits="0"/>
+                <line number="58" hits="0"/>
+                <line number="61" hits="0"/>
+                <line number="63" hits="0"/>
+                <line number="65" hits="0"/>
+                <line number="66" hits="0"/>
+                <line number="67" hits="0"/>
+                <line number="70" hits="0"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="30" hits="0"/>
+            <line number="35" hits="0"/>
+            <line number="36" hits="0"/>
+            <line number="42" hits="0"/>
+            <line number="44" hits="0"/>
+            <line number="46" hits="0"/>
+            <line number="47" hits="0"/>
+            <line number="48" hits="0"/>
+            <line number="49" hits="0"/>
+            <line number="53" hits="0"/>
+            <line number="54" hits="0"/>
+            <line number="57" hits="0"/>
+            <line number="58" hits="0"/>
+            <line number="61" hits="0"/>
+            <line number="63" hits="0"/>
+            <line number="65" hits="0"/>
+            <line number="66" hits="0"/>
+            <line number="67" hits="0"/>
+            <line number="70" hits="0"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

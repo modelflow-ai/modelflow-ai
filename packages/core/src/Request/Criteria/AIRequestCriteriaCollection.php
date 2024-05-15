@@ -18,10 +18,10 @@ use ModelflowAi\Core\DecisionTree\DecisionEnum;
 readonly class AIRequestCriteriaCollection
 {
     /**
-     * @param AiCriteriaInterface[] $criteria
+     * @param AiCriteriaInterface[] $all
      */
     public function __construct(
-        public array $criteria = [],
+        public array $all = [],
     ) {
     }
 
@@ -31,7 +31,7 @@ readonly class AIRequestCriteriaCollection
     public function matches(array $toMatch): bool
     {
         $sameType = [];
-        foreach ($this->criteria as $criteria) {
+        foreach ($this->all as $criteria) {
             foreach ($toMatch as $toMatchCriteria) {
                 $decision = $criteria->matches($toMatchCriteria);
                 if (DecisionEnum::NO_MATCH === $decision) {
@@ -62,6 +62,6 @@ readonly class AIRequestCriteriaCollection
      */
     public function withFeatures(array $features): self
     {
-        return new self(\array_merge($this->criteria, $features));
+        return new self(\array_merge($this->all, $features));
     }
 }

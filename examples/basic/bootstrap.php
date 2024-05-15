@@ -18,7 +18,10 @@ require_once __DIR__ . '/ProviderCriteria.php';
 
 use ModelflowAi\Core\AIRequestHandler;
 use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
+use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\DecisionTree\DecisionRule;
+use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
 use ModelflowAi\Mistral\Mistral;
@@ -39,7 +42,9 @@ if ($mistralApiKey) {
     $mistralClient = Mistral::client($mistralApiKey);
     $mistralChatAdapter = new MistralChatModelAdapter($mistralClient, Model::LARGE);
 
-    $adapter[] = new DecisionRule($mistralChatAdapter, [ProviderCriteria::MISTRAL, PrivacyCriteria::MEDIUM]);
+    /** @var DecisionRule<AIRequestInterface, AIModelAdapterInterface> $rule */
+    $rule = new DecisionRule($mistralChatAdapter, [ProviderCriteria::MISTRAL, PrivacyCriteria::MEDIUM]);
+    $adapter[] = $rule;
 }
 
 $openaiApiKey = $_ENV['OPENAI_API_KEY'];
@@ -47,16 +52,24 @@ if ($openaiApiKey) {
     $openAiClient = \OpenAI::client($openaiApiKey);
     $gpt4Adapter = new OpenaiChatModelAdapter($openAiClient, 'gpt-3.5-turbo-0125');
 
-    $adapter[] = new DecisionRule($gpt4Adapter, [ProviderCriteria::OPENAI, PrivacyCriteria::LOW, CapabilityCriteria::SMART]);
+    /** @var DecisionRule<AIRequestInterface, AIModelAdapterInterface> $rule */
+    $rule = new DecisionRule($gpt4Adapter, [ProviderCriteria::OPENAI, PrivacyCriteria::LOW, CapabilityCriteria::SMART]);
+    $adapter[] = $rule;
 }
 
 $client = Ollama::client();
 $llama2ChatAdapter = new OllamaChatModelAdapter($client);
 $llama2TextAdapter = new OllamaCompletionModelAdapter($client);
 
-$adapter[] = new DecisionRule($llama2TextAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
-$adapter[] = new DecisionRule($llama2ChatAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
+/** @var DecisionRule<AIRequestInterface, AIModelAdapterInterface> $rule */
+$rule = new DecisionRule($llama2TextAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
+$adapter[] = $rule;
 
+/** @var DecisionRule<AIRequestInterface, AIModelAdapterInterface> $rule */
+$rule = new DecisionRule($llama2ChatAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
+$adapter[] = $rule;
+
+/** @var AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
 $decisionTree = new AIModelDecisionTree($adapter);
 
 return new AIRequestHandler($decisionTree);

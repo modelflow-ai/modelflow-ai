@@ -19,6 +19,9 @@ services:
                 google_search:
                     - '@ModelflowAi\Tools\GoogleSearch\GoogleSearchTool'
                     - 'search'
+                generate_image:
+                    - '@App\Tools\ImageGenerationTool'
+                    - 'generateImage'
 
     _instanceof:
         Twig\Extension\AbstractExtension:
