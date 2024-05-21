@@ -53,14 +53,14 @@ Then, you can use the `MistralChatModelAdapter`:
 
 ```php
 use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
 
 $modelAdapter = new MistralChatModelAdapter($client, Model::LARGE);
-$decisionTree = new AIModelDecisionTree([
+$decisionTree = new DecisionTree([
     new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
 ]]);
 $handler = new AIRequestHandler($decisionTree);

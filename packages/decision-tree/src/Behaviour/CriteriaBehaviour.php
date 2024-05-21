@@ -11,12 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\DecisionTree;
+namespace ModelflowAi\DecisionTree\Behaviour;
 
-enum DecisionEnum
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+
+interface CriteriaBehaviour
 {
-    case MATCH;
-    case NO_MATCH;
-    case SAME_TYPE;
-    case ABSTAIN;
+    /**
+     * @param CriteriaInterface[] $criteria
+     */
+    public function matches(array $criteria): bool;
 }

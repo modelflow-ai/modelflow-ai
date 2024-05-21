@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Tests\Unit\Middleware;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Middleware\HandleMiddleware;
 use ModelflowAi\Image\Request\AIImageRequest;
@@ -33,7 +33,7 @@ class HandleMiddlewareTest extends TestCase
         $adapter = $this->prophesize(AIImageAdapterInterface::class);
         $adapter->handleRequest($request->reveal())->willReturn($response->reveal());
 
-        $decisionTree = $this->prophesize(AIModelDecisionTreeInterface::class);
+        $decisionTree = $this->prophesize(DecisionTreeInterface::class);
         $decisionTree->determineAdapter($request->reveal())->willReturn($adapter->reveal());
 
         $middleware = new HandleMiddleware($decisionTree->reveal());

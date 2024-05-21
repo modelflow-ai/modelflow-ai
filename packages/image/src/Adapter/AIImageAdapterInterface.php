@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Adapter;
 
-use ModelflowAi\Core\Behaviour\SupportsBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\SupportsBehaviour;
 use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Response\AIImageResponse;
 

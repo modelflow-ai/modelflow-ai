@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace ModelflowAi\Core\Tests\Unit;
 
 use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIChatRequest;
 use ModelflowAi\Core\Request\AICompletionRequest;
@@ -26,6 +25,7 @@ use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Core\Response\AIChatResponse;
 use ModelflowAi\Core\Response\AIChatResponseMessage;
 use ModelflowAi\Core\Response\AICompletionResponse;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -41,7 +41,7 @@ class AIRequestHandlerTest extends TestCase
     private ObjectProphecy $adapter;
 
     /**
-     * @var ObjectProphecy<AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>>
+     * @var ObjectProphecy<DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>>
      */
     private ObjectProphecy $decisionTree;
 
@@ -50,8 +50,8 @@ class AIRequestHandlerTest extends TestCase
     protected function setUp(): void
     {
         $this->adapter = $this->prophesize(AIModelAdapterInterface::class);
-        /** @var ObjectProphecy<AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>> $decisionTree */
-        $decisionTree = $this->prophesize(AIModelDecisionTreeInterface::class);
+        /** @var ObjectProphecy<DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface>> $decisionTree */
+        $decisionTree = $this->prophesize(DecisionTreeInterface::class);
         $this->decisionTree = $decisionTree;
         $this->aiRequestHandler = new AIRequestHandler($this->decisionTree->reveal());
     }

@@ -17,13 +17,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/ProviderCriteria.php';
 
 use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
+use ModelflowAi\DecisionTree\DecisionRule;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Mistral\Mistral;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
@@ -69,7 +69,7 @@ $adapter[] = $rule;
 $rule = new DecisionRule($llama2ChatAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
 $adapter[] = $rule;
 
-/** @var AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
-$decisionTree = new AIModelDecisionTree($adapter);
+/** @var DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
+$decisionTree = new DecisionTree($adapter);
 
 return new AIRequestHandler($decisionTree);

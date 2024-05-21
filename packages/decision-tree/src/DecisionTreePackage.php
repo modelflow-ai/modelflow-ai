@@ -11,9 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Behaviour;
+namespace ModelflowAi\DecisionTree;
 
-interface SupportsBehaviour
+/**
+ * @internal
+ */
+final class DecisionTreePackage
 {
-    public function supports(object $request): bool;
+    private function __construct()
+    {
+    }
 }

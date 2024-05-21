@@ -18,7 +18,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 /**
  * TODO: https://github.com/Significant-Gravitas/AutoGPT/blob/fd2c26188f681ae5afa47105098af4d1202a5562/autogpts/autogpt/autogpt/commands/web_selenium.py.
  */
-class WebScrappingTool
+readonly class WebScrappingTool
 {
     public function __construct(
         private readonly HttpClientInterface $client,

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Tests\Functional;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRuleInterface;
+use ModelflowAi\DecisionTree\DecisionRuleInterface;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Adapter\Fake\FakeAdapter;
 use ModelflowAi\Image\AIImageRequestHandler;
@@ -54,8 +54,8 @@ class AiImageRequestHandlerTest extends TestCase
         $rule->matches(Argument::any())->willReturn(true);
         $rule->getAdapter()->willReturn($adapter);
 
-        /** @var AIModelDecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree */
-        $decisionTree = new AIModelDecisionTree([$rule->reveal()]);
+        /** @var DecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree */
+        $decisionTree = new DecisionTree([$rule->reveal()]);
         $handler = new HandleMiddleware($decisionTree);
 
         $requestHandler = new AIImageRequestHandler($handler);

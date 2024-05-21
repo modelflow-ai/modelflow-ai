@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace ModelflowAi\Core\Request\Builder;
 
 use ModelflowAi\Core\Request\AIRequest;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 
 abstract class AIRequestBuilder
 {
@@ -59,9 +59,9 @@ abstract class AIRequestBuilder
     }
 
     /**
-     * @param AiCriteriaInterface|AiCriteriaInterface[] $criteria
+     * @param CriteriaInterface|CriteriaInterface[] $criteria
      */
-    public function addCriteria(AiCriteriaInterface|array $criteria): self
+    public function addCriteria(CriteriaInterface|array $criteria): self
     {
         $criteria = \is_array($criteria) ? $criteria : [$criteria];
 

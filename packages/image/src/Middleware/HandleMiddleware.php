@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Middleware;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Response\AIImageResponse;
@@ -21,10 +21,10 @@ use ModelflowAi\Image\Response\AIImageResponse;
 class HandleMiddleware implements MiddlewareInterface
 {
     /**
-     * @param AIModelDecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree
+     * @param DecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree
      */
     public function __construct(
-        private readonly AIModelDecisionTreeInterface $decisionTree,
+        private readonly DecisionTreeInterface $decisionTree,
     ) {
     }
 

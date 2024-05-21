@@ -11,15 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Request\Criteria;
+namespace ModelflowAi\DecisionTree;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
-
-interface AiCriteriaInterface
+enum DecisionEnum
 {
-    public function matches(self $toMatch): DecisionEnum;
-
-    public function getValue(): int|string;
-
-    public function getName(): string;
+    case MATCH;
+    case NO_MATCH;
+    case SAME_TYPE;
+    case ABSTAIN;
 }

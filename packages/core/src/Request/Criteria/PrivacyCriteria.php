@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
-enum PrivacyCriteria: int implements AiCriteriaInterface
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+
+enum PrivacyCriteria: int implements CriteriaInterface
 {
     use LevelCriteriaTrait;
 

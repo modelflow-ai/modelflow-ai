@@ -1,0 +1,3 @@
+title: Decision Tree
+description: A decision tree represents a series of decisions and the possible outcome of those decisions. In modelflow-ai we use decision trees to decide which adapter is responsible to the request.
+shortDescription: A decision tree represents a series of decisions and the possible outcome of those decisions.

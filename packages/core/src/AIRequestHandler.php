@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIChatRequest;
 use ModelflowAi\Core\Request\AICompletionRequest;
@@ -24,15 +23,16 @@ use ModelflowAi\Core\Request\Message\AIChatMessage;
 use ModelflowAi\Core\Response\AIChatResponse;
 use ModelflowAi\Core\Response\AICompletionResponse;
 use ModelflowAi\Core\Response\AIResponseInterface;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class AIRequestHandler implements AIRequestHandlerInterface
 {
     /**
-     * @param AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree
+     * @param DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree
      */
     public function __construct(
-        private AIModelDecisionTreeInterface $decisionTree,
+        private DecisionTreeInterface $decisionTree,
     ) {
     }
 

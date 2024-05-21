@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
 
 trait FlagCriteriaTrait
 {
-    public function matches(AiCriteriaInterface $toMatch): DecisionEnum
+    public function matches(CriteriaInterface $toMatch): DecisionEnum
     {
         if (!$toMatch instanceof self) {
             return DecisionEnum::ABSTAIN;

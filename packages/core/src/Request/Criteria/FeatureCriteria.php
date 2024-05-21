@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
-enum FeatureCriteria: string implements AiCriteriaInterface
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+
+enum FeatureCriteria: string implements CriteriaInterface
 {
     use FlagCriteriaTrait;
 

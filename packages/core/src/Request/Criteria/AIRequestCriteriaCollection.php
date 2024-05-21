@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
 
 readonly class AIRequestCriteriaCollection
 {
     /**
-     * @param AiCriteriaInterface[] $all
+     * @param CriteriaInterface[] $all
      */
     public function __construct(
         public array $all = [],
@@ -26,7 +27,7 @@ readonly class AIRequestCriteriaCollection
     }
 
     /**
-     * @param AiCriteriaInterface[] $toMatch
+     * @param CriteriaInterface[] $toMatch
      */
     public function matches(array $toMatch): bool
     {

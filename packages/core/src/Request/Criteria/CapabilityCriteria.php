@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request\Criteria;
 
-enum CapabilityCriteria: int implements AiCriteriaInterface
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+
+enum CapabilityCriteria: int implements CriteriaInterface
 {
     use LevelCriteriaTrait;
 
