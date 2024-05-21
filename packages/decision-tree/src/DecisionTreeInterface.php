@@ -11,24 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\DecisionTree;
+namespace ModelflowAi\DecisionTree;
 
-use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
-use ModelflowAi\Core\Behaviour\SupportsBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\SupportsBehaviour;
 
 /**
  * @template T of CriteriaBehaviour
  * @template U of SupportsBehaviour
  */
-interface DecisionRuleInterface
+interface DecisionTreeInterface
 {
     /**
      * @param T $request
-     */
-    public function matches(object $request): bool;
-
-    /**
+     *
      * @return U
      */
-    public function getAdapter(): object;
+    public function determineAdapter(object $request): object;
 }

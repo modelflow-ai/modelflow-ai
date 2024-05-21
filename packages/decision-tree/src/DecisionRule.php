@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\DecisionTree;
+namespace ModelflowAi\DecisionTree;
 
-use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
-use ModelflowAi\Core\Behaviour\SupportsBehaviour;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\SupportsBehaviour;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 
 /**
  * @template T of CriteriaBehaviour
@@ -27,7 +27,7 @@ class DecisionRule implements DecisionRuleInterface
 {
     /**
      * @param U $adapter
-     * @param AiCriteriaInterface[] $criteria
+     * @param CriteriaInterface[] $criteria
      */
     public function __construct(
         private readonly object $adapter,

@@ -11,28 +11,27 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Tests\Unit\DecisionTree;
+namespace ModelflowAi\DecisionTree\Tests\Unit;
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\DecisionRuleInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\DecisionRuleInterface;
+use ModelflowAi\DecisionTree\DecisionTree;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class AIModelDecisionTreeTest extends TestCase
+class DecisionTreeTest extends TestCase
 {
     use ProphecyTrait;
 
     public function testDetermineAdapter(): void
     {
-        $adapter = $this->prophesize(AIModelAdapterInterface::class);
+        $adapter = $this->prophesize(\stdClass::class);
         $rule = $this->prophesize(DecisionRuleInterface::class);
         $rule->getAdapter()->willReturn($adapter->reveal());
-        $request = $this->prophesize(AIRequestInterface::class);
+        $request = $this->prophesize(CriteriaBehaviour::class);
         $rule->matches($request->reveal())->willReturn(true);
 
-        $decisionTree = new AIModelDecisionTree([$rule->reveal()]);
+        $decisionTree = new DecisionTree([$rule->reveal()]);
 
         $this->assertSame($adapter->reveal(), $decisionTree->determineAdapter($request->reveal()));
     }
@@ -43,10 +42,10 @@ class AIModelDecisionTreeTest extends TestCase
         $this->expectExceptionMessage('No matching adapter found.');
 
         $rule = $this->prophesize(DecisionRuleInterface::class);
-        $request = $this->prophesize(AIRequestInterface::class);
+        $request = $this->prophesize(CriteriaBehaviour::class);
         $rule->matches($request->reveal())->willReturn(false);
 
-        $decisionTree = new AIModelDecisionTree([$rule->reveal()]);
+        $decisionTree = new DecisionTree([$rule->reveal()]);
         $decisionTree->determineAdapter($request->reveal());
     }
 }

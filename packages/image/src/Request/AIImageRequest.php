@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Request;
 
-use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;

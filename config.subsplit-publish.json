@@ -21,6 +21,11 @@
             "target": "git@github.com:modelflow-ai/core.git"
         },
         {
+            "name": "DecisionTree",
+            "directory": "packages/decision-tree",
+            "target": "git@github.com:modelflow-ai/decision-tree.git"
+        },
+        {
             "name": "ElasticsearchEmbeddingsStore",
             "directory": "packages/elasticsearch-embeddings-store",
             "target": "git@github.com:modelflow-ai/elasticsearch-embeddings-store.git"

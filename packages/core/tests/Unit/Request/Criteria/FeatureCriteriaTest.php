@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\FeatureCriteria;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -39,7 +39,7 @@ class FeatureCriteriaTest extends TestCase
 
     public function testMatchesReturnsTrueForADifferentCriteria(): void
     {
-        $mockCriteria = $this->prophesize(AiCriteriaInterface::class);
+        $mockCriteria = $this->prophesize(CriteriaInterface::class);
 
         $featureCriteria = FeatureCriteria::IMAGE_TO_TEXT;
 

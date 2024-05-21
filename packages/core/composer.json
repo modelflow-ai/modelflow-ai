@@ -32,7 +32,8 @@
     "require": {
         "php": "^8.2",
         "ext-fileinfo": "*",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "^1.11",
+        "modelflow-ai/decision-tree": "^0.2"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.15",

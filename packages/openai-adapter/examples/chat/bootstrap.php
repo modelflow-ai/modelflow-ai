@@ -14,12 +14,12 @@ declare(strict_types=1);
 $openaiClient = require_once \dirname(__DIR__) . '/bootstrap.php';
 
 use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\DecisionRule;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
 
 $adapter = [];
@@ -30,7 +30,7 @@ $gpt35Adapter = new OpenaiChatModelAdapter($openaiClient, 'gpt-3.5');
 $adapter[] = new DecisionRule($gpt4Adapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($gpt35Adapter, [CapabilityCriteria::BASIC]);
 
-/** @var AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
-$decisionTree = new AIModelDecisionTree($adapter);
+/** @var DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
+$decisionTree = new DecisionTree($adapter);
 
 return new AIRequestHandler($decisionTree);

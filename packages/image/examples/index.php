@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
+use ModelflowAi\DecisionTree\DecisionRule;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
 use ModelflowAi\Image\Adapter\Fake\FakeAdapter;
 use ModelflowAi\Image\AIImageRequestHandler;
@@ -50,8 +50,8 @@ $adapter = new FakeAdapter([
         'image' => $catFile,
     ],
 ]);
-/** @var AIModelDecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree */
-$decisionTree = new AIModelDecisionTree([
+/** @var DecisionTreeInterface<AIImageRequest, AIImageAdapterInterface> $decisionTree */
+$decisionTree = new DecisionTree([
     new DecisionRule($adapter, [
         PrivacyCriteria::HIGH,
     ]),

@@ -19,12 +19,12 @@ use ModelflowAi\Anthropic\Anthropic;
 use ModelflowAi\Anthropic\Model;
 use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
 use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTree;
-use ModelflowAi\Core\DecisionTree\AIModelDecisionTreeInterface;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\DecisionRule;
+use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
@@ -46,7 +46,7 @@ $adapter[] = new DecisionRule($opusAdapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($sonnetAdapter, [CapabilityCriteria::INTERMEDIATE]);
 $adapter[] = new DecisionRule($haikuAdapter, [CapabilityCriteria::BASIC]);
 
-/** @var AIModelDecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
-$decisionTree = new AIModelDecisionTree($adapter);
+/** @var DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
+$decisionTree = new DecisionTree($adapter);
 
 return new AIRequestHandler($decisionTree);

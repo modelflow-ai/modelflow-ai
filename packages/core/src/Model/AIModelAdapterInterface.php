@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Model;
 
-use ModelflowAi\Core\Behaviour\SupportsBehaviour;
 use ModelflowAi\Core\Request\AIRequestInterface;
 use ModelflowAi\Core\Response\AIResponseInterface;
+use ModelflowAi\DecisionTree\Behaviour\SupportsBehaviour;
 
 interface AIModelAdapterInterface extends SupportsBehaviour
 {

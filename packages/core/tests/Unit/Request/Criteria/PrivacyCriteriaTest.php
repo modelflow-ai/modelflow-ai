@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -39,7 +39,7 @@ class PrivacyCriteriaTest extends TestCase
 
     public function testMatchesReturnsTrueForADifferentCriteria(): void
     {
-        $mockCriteria = $this->prophesize(AiCriteriaInterface::class);
+        $mockCriteria = $this->prophesize(CriteriaInterface::class);
 
         $privacyRequirement = PrivacyCriteria::HIGH;
 

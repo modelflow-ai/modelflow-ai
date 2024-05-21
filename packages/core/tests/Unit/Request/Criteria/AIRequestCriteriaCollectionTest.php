@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Tests\Unit\Request\Criteria;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
 use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Core\Request\Criteria\FeatureCriteria;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -27,11 +27,11 @@ class AIRequestCriteriaCollectionTest extends TestCase
 
     public function testMatchesWithMocks(): void
     {
-        $toMatch = $this->prophesize(AiCriteriaInterface::class);
+        $toMatch = $this->prophesize(CriteriaInterface::class);
 
-        $criteria1 = $this->prophesize(AiCriteriaInterface::class);
+        $criteria1 = $this->prophesize(CriteriaInterface::class);
         $criteria1->matches($toMatch->reveal())->willReturn(DecisionEnum::MATCH);
-        $criteria2 = $this->prophesize(AiCriteriaInterface::class);
+        $criteria2 = $this->prophesize(CriteriaInterface::class);
         $criteria2->matches($toMatch->reveal())->willReturn(DecisionEnum::MATCH);
 
         $criteriaCollection = new AIRequestCriteriaCollection([$criteria1->reveal(), $criteria2->reveal()]);
@@ -41,11 +41,11 @@ class AIRequestCriteriaCollectionTest extends TestCase
 
     public function testMatchesReturnsFalseWhenCriteriaDoesNotMatch(): void
     {
-        $toMatch = $this->prophesize(AiCriteriaInterface::class);
+        $toMatch = $this->prophesize(CriteriaInterface::class);
 
-        $mockCriteria1 = $this->prophesize(AiCriteriaInterface::class);
+        $mockCriteria1 = $this->prophesize(CriteriaInterface::class);
         $mockCriteria1->matches($toMatch->reveal())->willReturn(DecisionEnum::MATCH);
-        $mockCriteria2 = $this->prophesize(AiCriteriaInterface::class);
+        $mockCriteria2 = $this->prophesize(CriteriaInterface::class);
         $mockCriteria2->matches($toMatch->reveal())->willReturn(DecisionEnum::NO_MATCH);
 
         $criteriaCollection = new AIRequestCriteriaCollection([$mockCriteria1->reveal(), $mockCriteria2->reveal()]);
@@ -65,8 +65,8 @@ class AIRequestCriteriaCollectionTest extends TestCase
 
     /**
      * @return array<array{
-     *     0: AiCriteriaInterface[],
-     *     1: AiCriteriaInterface[],
+     *     0: CriteriaInterface[],
+     *     1: CriteriaInterface[],
      *     2: bool,
      * }>
      */
@@ -149,8 +149,8 @@ class AIRequestCriteriaCollectionTest extends TestCase
     /**
      * @dataProvider provideMatches
      *
-     * @param AiCriteriaInterface[] $requestCriteria
-     * @param AiCriteriaInterface[] $ruleCriteria
+     * @param CriteriaInterface[] $requestCriteria
+     * @param CriteriaInterface[] $ruleCriteria
      */
     public function testMatchesWithDifferentCombinations(
         array $requestCriteria,

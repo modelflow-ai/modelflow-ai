@@ -35,6 +35,13 @@ jobs:
             directory: 'packages/core'
             docker: false
 
+    decision-tree:
+        name: Core
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/decision-tree'
+            docker: false
+
     elasticsearch-embeddings-store:
         name: Elasticsearch Embeddings Store
         uses: ./.github/workflows/test.yml

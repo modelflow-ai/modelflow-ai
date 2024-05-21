@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Core\Request;
 
-use ModelflowAi\Core\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
 
 interface AIRequestInterface extends CriteriaBehaviour
 {

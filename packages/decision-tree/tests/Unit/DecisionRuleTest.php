@@ -11,14 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Tests\Unit\DecisionTree;
+namespace ModelflowAi\DecisionTree\Tests\Unit;
 
-use ModelflowAi\Core\DecisionTree\DecisionEnum;
-use ModelflowAi\Core\DecisionTree\DecisionRule;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
-use ModelflowAi\Core\Request\Criteria\AiCriteriaInterface;
+use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\Behaviour\SupportsBehaviour;
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\DecisionEnum;
+use ModelflowAi\DecisionTree\DecisionRule;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 
 class DecisionRuleTest extends TestCase
@@ -27,9 +28,9 @@ class DecisionRuleTest extends TestCase
 
     public function testMatches(): void
     {
-        $adapter = $this->prophesize(AIModelAdapterInterface::class);
-        $criteria = $this->prophesize(AiCriteriaInterface::class);
-        $request = $this->prophesize(AIRequestInterface::class);
+        $adapter = $this->prophesize(SupportsBehaviour::class);
+        $criteria = $this->prophesize(CriteriaInterface::class);
+        $request = $this->prophesize(CriteriaBehaviour::class);
         $request->matches([$criteria->reveal()])->willReturn(true);
         $adapter->supports($request->reveal())->willReturn(true);
 
@@ -40,10 +41,10 @@ class DecisionRuleTest extends TestCase
 
     public function testMatchesReturnsFalseWhenCriteriaDoesNotMatch(): void
     {
-        $adapter = $this->prophesize(AIModelAdapterInterface::class);
-        $criteria = $this->prophesize(AiCriteriaInterface::class);
-        $criteria->matches()->willReturn(DecisionEnum::NO_MATCH);
-        $request = $this->prophesize(AIRequestInterface::class);
+        $adapter = $this->prophesize(SupportsBehaviour::class);
+        $criteria = $this->prophesize(CriteriaInterface::class);
+        $criteria->matches(Argument::any())->willReturn(DecisionEnum::NO_MATCH);
+        $request = $this->prophesize(CriteriaBehaviour::class);
         $request->matches([$criteria->reveal()])->willReturn(false);
         $adapter->supports($request->reveal())->willReturn(true);
 
@@ -54,7 +55,7 @@ class DecisionRuleTest extends TestCase
 
     public function testGetAdapter(): void
     {
-        $adapter = $this->prophesize(AIModelAdapterInterface::class);
+        $adapter = $this->prophesize(SupportsBehaviour::class);
         $decisionRule = new DecisionRule($adapter->reveal(), []);
 
         $this->assertSame($adapter->reveal(), $decisionRule->getAdapter());
