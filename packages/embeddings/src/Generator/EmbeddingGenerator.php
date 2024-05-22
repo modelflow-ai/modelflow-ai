@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Embeddings\Generator;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Embeddings\Formatter\EmbeddingFormatterInterface;
 use ModelflowAi\Embeddings\Model\EmbeddingInterface;
 use ModelflowAi\Embeddings\Splitter\EmbeddingSplitterInterface;

@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter\Tests\Unit;
 
-use ModelflowAi\OpenaiAdapter\Embeddings\OpenaiEmbeddingAdapter;
 use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
-use ModelflowAi\OpenaiAdapter\OpenaiAdapterFactory;
+use ModelflowAi\OpenaiAdapter\OpenaiChatAdapterFactory;
 use OpenAI\Contracts\ClientContract;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class OpenaiAdapterFactoryTest extends TestCase
+class OpenaiChatAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -28,7 +27,7 @@ class OpenaiAdapterFactoryTest extends TestCase
     {
         $client = $this->prophesize(ClientContract::class);
 
-        $factory = new OpenaiAdapterFactory($client->reveal());
+        $factory = new OpenaiChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
             'model' => 'gpt-4',
@@ -37,17 +36,5 @@ class OpenaiAdapterFactoryTest extends TestCase
             'priority' => 0,
         ]);
         $this->assertInstanceOf(OpenaiChatModelAdapter::class, $adapter);
-    }
-
-    public function testCreateEmbeddingAdapter(): void
-    {
-        $client = $this->prophesize(ClientContract::class);
-
-        $factory = new OpenaiAdapterFactory($client->reveal());
-
-        $adapter = $factory->createEmbeddingAdapter([
-            'model' => 'gpt-4',
-        ]);
-        $this->assertInstanceOf(OpenaiEmbeddingAdapter::class, $adapter);
     }
 }

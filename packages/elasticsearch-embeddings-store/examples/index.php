@@ -37,7 +37,7 @@ $embeddingAdapter = new CacheEmbeddingAdapter(
 $embeddingGenerator = new EmbeddingGenerator($embeddingSplitter, $embeddingFormatter, $embeddingAdapter);
 
 $client = ClientBuilder::create()->build();
-$client->indices()->delete(['index' => 'books']);
+// $client->indices()->delete(['index' => 'books']);
 $store = new ElasticsearchEmbeddingsStore($client, 'books', ['fileName' => ['type' => 'keyword']]);
 
 $input = [
@@ -49,7 +49,7 @@ $output = $embeddingGenerator->generateEmbeddings($input);
 $store->addDocuments($output);
 
 $vector = $embeddingAdapter->embedText('Welches Tier hat die Wittwe?');
-$result = $store->similaritySearch($vector, 4); // , ['fileName' => 'schildbuerger.txt']);
+$result = $store->similaritySearch($vector, 4, ['fileName' => 'schildbuerger.txt']);
 
 foreach ($result as $item) {
     echo $item->getContent() . \PHP_EOL . \PHP_EOL;

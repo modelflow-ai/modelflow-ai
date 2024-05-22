@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Embeddings\Adapter\Cache;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
 class CacheEmbeddingAdapter implements EmbeddingAdapterInterface

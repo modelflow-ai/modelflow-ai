@@ -16,7 +16,7 @@ namespace ModelflowAi\Embeddings\Store\Elasticsearch\Tests\Functional;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
 use Elastic\Elasticsearch\Response\Elasticsearch;
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Embeddings\Model\EmbeddingInterface;
 use ModelflowAi\Embeddings\Model\EmbeddingTrait;
 use ModelflowAi\Embeddings\Store\Elasticsearch\ElasticsearchEmbeddingsStore;

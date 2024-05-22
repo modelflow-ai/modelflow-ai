@@ -3,7 +3,9 @@ includes:
 
 parameters:
     paths:
-        - .
+        - examples
+        - src
+        - tests
     level: max
     excludePaths:
         - vendor/*

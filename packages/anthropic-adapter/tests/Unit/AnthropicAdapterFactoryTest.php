@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\AnthropicAdapter\Tests\Unit\Model;
+namespace ModelflowAi\AnthropicAdapter\Tests\Unit;
 
 use ModelflowAi\Anthropic\ClientInterface;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\AnthropicAdapter\AnthropicAdapterFactory;
+use ModelflowAi\AnthropicAdapter\AnthropicChatAdapterFactory;
 use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -28,7 +28,7 @@ class AnthropicAdapterFactoryTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $factory = new AnthropicAdapterFactory($client->reveal());
+        $factory = new AnthropicChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
             'model' => Model::CLAUDE_3_SONNET->value,

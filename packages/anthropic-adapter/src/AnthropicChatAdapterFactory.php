@@ -19,7 +19,7 @@ use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
 use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
 
-final readonly class AnthropicAdapterFactory implements ChatAdapterFactoryInterface
+final readonly class AnthropicChatAdapterFactory implements ChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,

@@ -15,13 +15,11 @@ namespace App;
 
 use ModelflowAi\PromptTemplate\PromptTemplate;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
-$promptTemplate = new PromptTemplate(
-    <<<'PROMPT'
+$promptTemplate = new PromptTemplate(<<<'PROMPT'
 Human: What is the capital of {place}?
 AI: The capital of {place} is {capital}
-PROMPT
-);
+PROMPT);
 
 echo $promptTemplate->format(['place' => 'Germany', 'capital' => 'Berlin']) . "\n";
