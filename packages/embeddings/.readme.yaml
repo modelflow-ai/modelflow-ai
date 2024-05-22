@@ -1,3 +1,4 @@
 title: Embeddings
 description: The Embeddings package handles the embeddings for the AI models in Modelflow AI.
 shortDescription: Handles the embeddings for the AI models.
+examples: true

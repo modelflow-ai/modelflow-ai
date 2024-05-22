@@ -33,9 +33,11 @@ This repository consists of several packages, each residing in its own directory
 
 - **Anthropic Adapter**: The adapter for the Anthropic API client. [More Info](https://github.com/modelflow-ai/anthropic-adapter)
 - **Core**: The core functionalities of Modelflow AI. [More Info](https://github.com/modelflow-ai/core)
+- **Decision Tree**: A decision tree represents a series of decisions and the possible outcome of those decisions. [More Info](https://github.com/modelflow-ai/decision-tree)
 - **Elasticsearch Embeddings Store**: This package stores embeddings in Elasticsearch. [More Info](https://github.com/modelflow-ai/elasticsearch-embeddings-store)
 - **Embeddings**: Handles the embeddings for the AI models. [More Info](https://github.com/modelflow-ai/embeddings)
 - **Experts**: It provides a set of tools for so called experts comparable to OpenAI GPTs or OpenGPTs. [More Info](https://github.com/modelflow-ai/experts)
+- **Image**: Handles image requests like generation or edits. [More Info](https://github.com/modelflow-ai/image)
 - **Mistral Adapter**: The adapter for the Mistral API client. [More Info](https://github.com/modelflow-ai/mistral-adapter)
 - **Ollama Adapter**: The adapter for the Ollama API client. [More Info](https://github.com/modelflow-ai/ollama-adapter)
 - **OpenAI Adapter**: The adapter for integrating OpenAI models. [More Info](https://github.com/modelflow-ai/openai-adapter)

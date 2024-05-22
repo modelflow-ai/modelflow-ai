@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OllamaAdapter\Embeddings;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Ollama\ClientInterface;
 
 final readonly class OllamaEmbeddingAdapter implements EmbeddingAdapterInterface

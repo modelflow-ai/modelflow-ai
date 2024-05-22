@@ -11,9 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Rector\Config\RectorConfig;
+namespace ModelflowAi\OllamaAdapter;
 
-return static function (RectorConfig $rectorConfig): void {
-    $config = require __DIR__ . '/../../rector.php';
-    $config($rectorConfig, __DIR__);
-};
+/**
+ * @internal
+ */
+final class OllamaAdapterPackage
+{
+    private function __construct()
+    {
+    }
+}

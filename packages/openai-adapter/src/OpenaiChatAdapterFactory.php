@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
 use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
-use ModelflowAi\Core\Factory\EmbeddingAdapterFactoryInterface;
 use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\OpenaiAdapter\Embeddings\OpenaiEmbeddingAdapter;
 use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
 use OpenAI\Contracts\ClientContract;
 
-final readonly class OpenaiAdapterFactory implements ChatAdapterFactoryInterface, EmbeddingAdapterFactoryInterface
+final readonly class OpenaiChatAdapterFactory implements ChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientContract $client,
@@ -33,16 +30,6 @@ final readonly class OpenaiAdapterFactory implements ChatAdapterFactoryInterface
         $model = \str_replace('gpt', 'gpt-', $options['model']);
 
         return new OpenaiChatModelAdapter(
-            $this->client,
-            $model,
-        );
-    }
-
-    public function createEmbeddingAdapter(array $options): EmbeddingAdapterInterface
-    {
-        $model = \str_replace('gpt', 'gpt-', $options['model']);
-
-        return new OpenaiEmbeddingAdapter(
             $this->client,
             $model,
         );

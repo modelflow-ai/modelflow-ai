@@ -4,19 +4,19 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "daa8272d209c8ad2a49cfae88e56eb0b",
+    "content-hash": "bef3ac1cc92fcb9e9cdd2111e01cd9b5",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
             "version": "v5.2.13",
             "source": {
                 "type": "git",
-                "url": "https://github.com/justinrainbow/json-schema.git",
+                "url": "https://github.com/jsonrainbow/json-schema.git",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/justinrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "reference": "fbbe7e5d79f618997bc3332a6f49246036c45793",
                 "shasum": ""
             },
@@ -71,8 +71,8 @@
                 "schema"
             ],
             "support": {
-                "issues": "https://github.com/justinrainbow/json-schema/issues",
-                "source": "https://github.com/justinrainbow/json-schema/tree/v5.2.13"
+                "issues": "https://github.com/jsonrainbow/json-schema/issues",
+                "source": "https://github.com/jsonrainbow/json-schema/tree/v5.2.13"
             },
             "time": "2023-09-26T02:20:38+00:00"
         },
@@ -82,7 +82,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/api-client",
-                "reference": "0b55d0b46e7c51a4e32952814d95478b723a3194"
+                "reference": "f206f81f9bf5bbcc9da8c700bc38605ca6aee2df"
             },
             "require": {
                 "php": "^8.2",
@@ -162,7 +162,7 @@
                 "client"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -172,7 +172,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/core",
-                "reference": "332c2e6dce0e37c6d1e0570185cc65272dd0d834"
+                "reference": "57cbb9507cc7dcf361ab5ce062bb6df51f7e922c"
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -259,7 +259,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -269,7 +269,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/decision-tree",
-                "reference": "e0dfb232a35d764719dd5c86319fdd7ab568828c"
+                "reference": "6b76d91fc30138d0a3cef9f961e146e486370045"
             },
             "require": {
                 "php": "^8.2"
@@ -347,7 +347,7 @@
                 "decision-tree"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -357,7 +357,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/experts",
-                "reference": "f9042cfcd826ba873fa2450f0373d76ee8878c9d"
+                "reference": "db977286b16f41b72f9a3e1e04550c86c2b73686"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -442,7 +442,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -452,7 +452,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/mistral",
-                "reference": "366141a8d17e9d51559a98447c535cd38a9df807"
+                "reference": "f15d6738d71432f6011097de272ed47ebe1c0071"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.2",
@@ -535,7 +535,7 @@
                 "mistral"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -545,7 +545,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/mistral-adapter",
-                "reference": "bef485201fc913b4428a42304082b62977929985"
+                "reference": "675a9d2176b851ff32794238172ab287c6a3fa1b"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -554,6 +554,7 @@
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/embeddings": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -563,6 +564,9 @@
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1",
                 "symfony/dotenv": "7.1.x-dev"
+            },
+            "suggest": {
+                "modelflow-ai/embeddings": "To use the embeddings."
             },
             "type": "library",
             "autoload": {
@@ -628,7 +632,7 @@
                 "modelflow-ai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -638,7 +642,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama",
-                "reference": "63fb8f187231f1ed69dcaf7df21584d0f628606b"
+                "reference": "b1a145b088c14d66f84feb46a5f01f0242e491d2"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.2",
@@ -720,7 +724,7 @@
                 "ollama"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -730,7 +734,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama-adapter",
-                "reference": "1bc94b2a992532174fb7f2bd155e95fe4c622f1e"
+                "reference": "a151e56d834362fefa935d9da854e971b9ac7aed"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -740,6 +744,7 @@
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/embeddings": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
                 "phpstan/extension-installer": "^1.2",
@@ -747,6 +752,9 @@
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
                 "rector/rector": "^0.18.1"
+            },
+            "suggest": {
+                "modelflow-ai/embeddings": "To use the embeddings."
             },
             "type": "library",
             "autoload": {
@@ -813,7 +821,7 @@
                 "ollama"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -823,7 +831,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/openai-adapter",
-                "reference": "d451ef67622b07128d3ab0ac34cb91e524329066"
+                "reference": "5ec60d8227782e4fdeeebb9564cafa37fc7c9ed4"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -834,6 +842,7 @@
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/embeddings": "^0.2",
                 "modelflow-ai/image": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
@@ -846,6 +855,10 @@
                 "rector/rector": "^0.18.1",
                 "symfony/console": "^7.1",
                 "symfony/dotenv": "^7.1"
+            },
+            "suggest": {
+                "modelflow-ai/embeddings": "To use the embeddings.",
+                "modelflow-ai/image": "To use the image generation."
             },
             "type": "library",
             "autoload": {
@@ -912,7 +925,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -922,7 +935,7 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/prompt-template",
-                "reference": "b3eb4afb92ccd8d13dafe51ed244a683e232fe5f"
+                "reference": "b0c1be371931b49ede3c8981230acdd4204132d8"
             },
             "require": {
                 "modelflow-ai/core": "^0.2",
@@ -1001,7 +1014,7 @@
                 "template"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },

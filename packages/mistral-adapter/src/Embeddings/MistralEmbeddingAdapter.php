@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\MistralAdapter\Embeddings;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
 

@@ -50,14 +50,14 @@
             "type": "path",
             "url": "./../../packages/*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         },
         {
             "type": "path",
             "url": "./../../integrations/*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],

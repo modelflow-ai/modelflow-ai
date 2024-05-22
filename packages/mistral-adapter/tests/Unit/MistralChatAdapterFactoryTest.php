@@ -11,17 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter\Tests\Unit\Model;
+namespace ModelflowAi\MistralAdapter\Tests\Unit;
 
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter;
-use ModelflowAi\MistralAdapter\MistralAdapterFactory;
+use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
 use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MistralAdapterFactoryTest extends TestCase
+class MistralChatAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -29,7 +28,7 @@ class MistralAdapterFactoryTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $factory = new MistralAdapterFactory($client->reveal());
+        $factory = new MistralChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
             'model' => Model::MEDIUM->value,
@@ -38,17 +37,5 @@ class MistralAdapterFactoryTest extends TestCase
             'priority' => 0,
         ]);
         $this->assertInstanceOf(MistralChatModelAdapter::class, $adapter);
-    }
-
-    public function testCreateEmbeddingAdapter(): void
-    {
-        $client = $this->prophesize(ClientInterface::class);
-
-        $factory = new MistralAdapterFactory($client->reveal());
-
-        $adapter = $factory->createEmbeddingAdapter([
-            'model' => Model::EMBED->value,
-        ]);
-        $this->assertInstanceOf(MistralEmbeddingAdapter::class, $adapter);
     }
 }

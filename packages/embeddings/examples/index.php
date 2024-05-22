@@ -22,7 +22,7 @@ use ModelflowAi\Ollama\Ollama;
 use ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once \dirname(__DIR__) . '/vendor/autoload.php';
 require_once __DIR__ . '/ExampleEmbedding.php';
 
 $client = Ollama::client();

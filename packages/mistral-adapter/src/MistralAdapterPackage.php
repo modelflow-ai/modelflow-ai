@@ -11,12 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Core\Embeddings;
+namespace ModelflowAi\MistralAdapter;
 
-interface EmbeddingAdapterInterface
+/**
+ * @internal
+ */
+final class MistralAdapterPackage
 {
-    /**
-     * @return float[]
-     */
-    public function embedText(string $text): array;
+    private function __construct()
+    {
+    }
 }

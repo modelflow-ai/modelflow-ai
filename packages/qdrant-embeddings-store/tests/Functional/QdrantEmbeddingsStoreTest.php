@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Embeddings\Store\Qdrant\Tests\Functional;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Embeddings\Model\EmbeddingInterface;
 use ModelflowAi\Embeddings\Model\EmbeddingTrait;
 use ModelflowAi\Embeddings\Store\Qdrant\QdrantEmbeddingsStore;

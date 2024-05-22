@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter\Embeddings;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use OpenAI\Contracts\ClientContract;
 
 final readonly class OpenaiEmbeddingAdapter implements EmbeddingAdapterInterface

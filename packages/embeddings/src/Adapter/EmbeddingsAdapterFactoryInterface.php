@@ -11,9 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Rector\Config\RectorConfig;
+namespace ModelflowAi\Embeddings\Adapter;
 
-return static function (RectorConfig $rectorConfig): void {
-    $config = require __DIR__ . '/../../rector.php';
-    $config($rectorConfig, __DIR__);
-};
+interface EmbeddingsAdapterFactoryInterface
+{
+    /**
+     * @param array{
+     *     model: string,
+     * } $options
+     */
+    public function createEmbeddingAdapter(array $options): EmbeddingAdapterInterface;
+}

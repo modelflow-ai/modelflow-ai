@@ -13,28 +13,17 @@ declare(strict_types=1);
 
 namespace ModelflowAi\MistralAdapter;
 
-use ModelflowAi\Core\Embeddings\EmbeddingAdapterInterface;
-use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
-use ModelflowAi\Core\Factory\EmbeddingAdapterFactoryInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
+use ModelflowAi\Embeddings\Adapter\EmbeddingsAdapterFactoryInterface;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter;
-use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
 
-final readonly class MistralAdapterFactory implements ChatAdapterFactoryInterface, EmbeddingAdapterFactoryInterface
+final readonly class MistralEmbeddingsAdapterFactory implements EmbeddingsAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,
     ) {
-    }
-
-    public function createChatAdapter(array $options): AIModelAdapterInterface
-    {
-        return new MistralChatModelAdapter(
-            $this->client,
-            Model::from($options['model']),
-        );
     }
 
     public function createEmbeddingAdapter(array $options): EmbeddingAdapterInterface
