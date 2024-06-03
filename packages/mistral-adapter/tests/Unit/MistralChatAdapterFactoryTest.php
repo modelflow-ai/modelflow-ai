@@ -16,7 +16,7 @@ namespace ModelflowAi\MistralAdapter\Tests\Unit;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
-use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
+use ModelflowAi\MistralAdapter\Model\MistralChatAdapter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
@@ -36,6 +36,6 @@ class MistralChatAdapterFactoryTest extends TestCase
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(MistralChatModelAdapter::class, $adapter);
+        $this->assertInstanceOf(MistralChatAdapter::class, $adapter);
     }
 }

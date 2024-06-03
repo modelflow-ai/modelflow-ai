@@ -52,10 +52,10 @@ $client = Mistral::client('your-api-key');
 Then, you can use the `MistralChatModelAdapter`:
 
 ```php
-use ModelflowAi\Core\AIRequestHandler;
+use ModelflowAi\Chat\AIChatRequestHandler;
 use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
 
@@ -63,10 +63,9 @@ $modelAdapter = new MistralChatModelAdapter($client, Model::LARGE);
 $decisionTree = new DecisionTree([
     new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
 ]]);
-$handler = new AIRequestHandler($decisionTree);
+$handler = new AIChatRequestHandler($decisionTree);
 
-/** @var AIChatResponse $response */
-$response = $handler->createChatRequest(
+$response = $handler->createRequest(
     ...ChatPromptTemplate::create(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),

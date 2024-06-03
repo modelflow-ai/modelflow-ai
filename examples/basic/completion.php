@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace App;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
-use ModelflowAi\Core\Response\AICompletionResponse;
+use ModelflowAi\Completion\AICompletionRequestHandlerInterface;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\PromptTemplate\PromptTemplate;
 
-/** @var AIRequestHandlerInterface $handler */
-$handler = require_once __DIR__ . '/bootstrap.php';
+/** @var AICompletionRequestHandlerInterface $handler */
+$handler = require_once __DIR__ . '/bootstrap-completion.php';
 
-/** @var AICompletionResponse $response */
-$response = $handler->createCompletionRequest(PromptTemplate::create('Hello {where}!')->format(['where' => 'world']))
+$response = $handler->createRequest(PromptTemplate::create('Hello {where}!')->format(['where' => 'world']))
     ->addCriteria(PrivacyCriteria::HIGH)
     ->build()
     ->execute();

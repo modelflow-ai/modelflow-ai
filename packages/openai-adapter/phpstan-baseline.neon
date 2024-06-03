@@ -1,12 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIModelAdapterInterface\\.$#"
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIChatAdapterInterface\\.$#"
 			count: 1
 			path: examples/chat/bootstrap.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIRequestInterface\\.$#"
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIChatRequest\\.$#"
 			count: 1
 			path: examples/chat/bootstrap.php
 
@@ -16,7 +16,7 @@ parameters:
 			path: examples/chat/bootstrap.php
 
 		-
-			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Core\\\\AIRequestHandler constructor expects ModelflowAi\\\\DecisionTree\\\\DecisionTreeInterface\\<ModelflowAi\\\\Core\\\\Request\\\\AIRequestInterface, ModelflowAi\\\\Core\\\\Model\\\\AIModelAdapterInterface\\>, DecisionTreeInterface\\<AIRequestInterface, AIModelAdapterInterface\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Chat\\\\AIChatRequestHandler constructor expects ModelflowAi\\\\DecisionTree\\\\DecisionTreeInterface\\<ModelflowAi\\\\Chat\\\\Request\\\\AIChatRequest, ModelflowAi\\\\Chat\\\\Adapter\\\\AIChatAdapterInterface\\>, DecisionTreeInterface\\<AIChatRequest, AIChatAdapterInterface\\> given\\.$#"
 			count: 1
 			path: examples/chat/bootstrap.php
 

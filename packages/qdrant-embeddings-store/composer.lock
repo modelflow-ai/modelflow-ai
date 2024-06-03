@@ -387,206 +387,19 @@
             "time": "2023-12-28T06:57:21+00:00"
         },
         {
-            "name": "modelflow-ai/core",
-            "version": "0.2.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../core",
-                "reference": "332c2e6dce0e37c6d1e0570185cc65272dd0d834"
-            },
-            "require": {
-                "ext-fileinfo": "*",
-                "modelflow-ai/decision-tree": "^0.2",
-                "php": "^8.2",
-                "webmozart/assert": "^1.11"
-            },
-            "require-dev": {
-                "jangregor/phpstan-prophecy": "^1.0",
-                "php-cs-fixer/shim": "^3.15",
-                "phpspec/prophecy-phpunit": "^2.1@stable",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10, <1.10.55",
-                "phpstan/phpstan-phpunit": "^1.3@stable",
-                "phpunit/phpunit": "^10.3@stable",
-                "rector/rector": "^0.18.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ModelflowAi\\Core\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "ModelflowAi\\Core\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test-with-coverage": [
-                    "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml"
-                ],
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes Wachter",
-                    "email": "johannes@sulu.io"
-                }
-            ],
-            "description": "Abstraction of different ai ecosystems and their models.",
-            "keywords": [
-                "abstraction",
-                "ai",
-                "gpt3.5",
-                "gpt4",
-                "llama2",
-                "mistral",
-                "ollama",
-                "openai"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
-            "name": "modelflow-ai/decision-tree",
-            "version": "0.2.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "./../decision-tree",
-                "reference": "e0dfb232a35d764719dd5c86319fdd7ab568828c"
-            },
-            "require": {
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "jangregor/phpstan-prophecy": "^1.0",
-                "php-cs-fixer/shim": "^3.15",
-                "phpspec/prophecy-phpunit": "^2.1@stable",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.10, <1.10.55",
-                "phpstan/phpstan-phpunit": "^1.3@stable",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^0.18.1",
-                "symfony/console": "^7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ModelflowAi\\DecisionTree\\": "src/"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "ModelflowAi\\DecisionTree\\Tests\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test-with-coverage": [
-                    "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml"
-                ],
-                "test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "vendor/bin/phpunit"
-                ],
-                "phpstan": [
-                    "@php vendor/bin/phpstan analyze"
-                ],
-                "lint-rector": [
-                    "@php vendor/bin/rector process --dry-run"
-                ],
-                "lint-php-cs": [
-                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
-                ],
-                "lint": [
-                    "@phpstan",
-                    "@lint-php-cs",
-                    "@lint-rector",
-                    "@lint-composer"
-                ],
-                "lint-composer": [
-                    "@composer validate --strict"
-                ],
-                "rector": [
-                    "@php vendor/bin/rector process"
-                ],
-                "php-cs-fix": [
-                    "@php vendor/bin/php-cs-fixer fix"
-                ],
-                "fix": [
-                    "@rector",
-                    "@php-cs-fix"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes Wachter",
-                    "email": "johannes@sulu.io"
-                }
-            ],
-            "description": "Decision tree implementation for the modelflow ai library",
-            "keywords": [
-                "decision-tree"
-            ],
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
-        },
-        {
             "name": "modelflow-ai/embeddings",
             "version": "0.2.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./../embeddings",
-                "reference": "cc2a8abea67e182e88f719fea44bf653b6389ae8"
+                "reference": "8258dcee9e68a02217c1f94047ee9be529b59d12"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "php": "^8.2",
                 "psr/cache": "^3.0@dev",
                 "symfony/property-access": "^6.4 || ^7.0"
             },
             "require-dev": {
-                "modelflow-ai/ollama-adapter": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.10, <1.10.55",
@@ -2142,16 +1955,17 @@
             "dist": {
                 "type": "path",
                 "url": "./../ollama-adapter",
-                "reference": "3a813e6b3cc30012b0af5d9e1daffa64dad039af"
+                "reference": "1cc62be8d15b46e99c92829328811cc5a9de4637"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "modelflow-ai/ollama": "^0.2",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/chat": "^0.2",
+                "modelflow-ai/completion": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -3201,12 +3015,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "13c33b5e7e4ee04f5e6c9b55e34beacb2bdafd8d"
+                "reference": "d7f6c8f8c13ca45661872198fa6e282c1f7db6fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/13c33b5e7e4ee04f5e6c9b55e34beacb2bdafd8d",
-                "reference": "13c33b5e7e4ee04f5e6c9b55e34beacb2bdafd8d",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/d7f6c8f8c13ca45661872198fa6e282c1f7db6fb",
+                "reference": "d7f6c8f8c13ca45661872198fa6e282c1f7db6fb",
                 "shasum": ""
             },
             "require": {
@@ -3286,7 +3100,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-20T21:19:49+00:00"
+            "time": "2024-05-27T22:02:01+00:00"
         },
         {
             "name": "rector/rector",
@@ -4273,12 +4087,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "0573ff42c24bb1b1b688d5a0c4aced5e70957385"
+                "reference": "c36a10e6456b32e40d1ef516b3a2749883f9117b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/0573ff42c24bb1b1b688d5a0c4aced5e70957385",
-                "reference": "0573ff42c24bb1b1b688d5a0c4aced5e70957385",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/c36a10e6456b32e40d1ef516b3a2749883f9117b",
+                "reference": "c36a10e6456b32e40d1ef516b3a2749883f9117b",
                 "shasum": ""
             },
             "require": {
@@ -4362,7 +4176,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-17T18:46:25+00:00"
+            "time": "2024-05-28T08:39:33+00:00"
         },
         {
             "name": "symfony/cache-contracts",

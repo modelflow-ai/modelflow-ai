@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Experts\Expert;
 use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Experts\ThreadFactory;
 
-/** @var AIRequestHandlerInterface $handler */
-$handler = require_once __DIR__ . '/bootstrap.php';
+/** @var AIChatRequestHandlerInterface $handler */
+$handler = require_once __DIR__ . '/bootstrap-chat.php';
 
 $expert = new Expert(
     'SEO-Expert',

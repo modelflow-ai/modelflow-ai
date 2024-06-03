@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 
 class ThreadFactory implements ThreadFactoryInterface
 {
     public function __construct(
-        private readonly AIRequestHandlerInterface $requestHandler,
+        private readonly AIChatRequestHandlerInterface $requestHandler,
     ) {
     }
 

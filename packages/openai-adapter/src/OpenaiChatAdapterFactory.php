@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter;
 
-use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
+use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
+use ModelflowAi\OpenaiAdapter\Model\OpenaiChatAdapter;
 use OpenAI\Contracts\ClientContract;
 
-final readonly class OpenaiChatAdapterFactory implements ChatAdapterFactoryInterface
+final readonly class OpenaiChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientContract $client,
     ) {
     }
 
-    public function createChatAdapter(array $options): AIModelAdapterInterface
+    public function createChatAdapter(array $options): AIChatAdapterInterface
     {
-        $model = \str_replace('gpt', 'gpt-', $options['model']);
+        $model = \str_replace('gpt', 'gpt-', (string) $options['model']);
 
-        return new OpenaiChatModelAdapter(
+        return new OpenaiChatAdapter(
             $this->client,
             $model,
         );

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Request;
 
-use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
 use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
+use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use ModelflowAi\Image\Request\Value\OutputFormat;
@@ -31,7 +31,7 @@ class AIImageRequest implements CriteriaBehaviour
         public readonly AIImageRequestActionInterface $action,
         public readonly ImageFormat $imageFormat,
         public readonly OutputFormat $outputFormat,
-        public readonly AIRequestCriteriaCollection $criteriaCollection,
+        public readonly CriteriaCollection $criteriaCollection,
         callable $requestHandler,
     ) {
         $this->requestHandler = $requestHandler;

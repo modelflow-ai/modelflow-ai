@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Request\Builder;
 
-use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
+use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\AIImageRequest;
@@ -22,7 +22,7 @@ use ModelflowAi\Image\Request\Value\OutputFormat;
 
 final class AIImageRequestBuilder
 {
-    private AIRequestCriteriaCollection $criteriaCollection;
+    private CriteriaCollection $criteriaCollection;
 
     private ImageFormat $imageFormat = ImageFormat::PNG;
 
@@ -38,7 +38,7 @@ final class AIImageRequestBuilder
     ) {
         $this->requestHandler = $requestHandler;
 
-        $this->criteriaCollection = new AIRequestCriteriaCollection();
+        $this->criteriaCollection = new CriteriaCollection();
     }
 
     public static function create(\Closure $handler): self
@@ -60,7 +60,7 @@ final class AIImageRequestBuilder
     {
         $criteria = \is_array($criteria) ? $criteria : [$criteria];
 
-        $this->criteriaCollection = new AIRequestCriteriaCollection(
+        $this->criteriaCollection = new CriteriaCollection(
             \array_merge($this->criteriaCollection->all, $criteria),
         );
 

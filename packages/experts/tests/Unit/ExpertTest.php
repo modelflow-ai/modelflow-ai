@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use PHPUnit\Framework\TestCase;
 

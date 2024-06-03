@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91008786b0fa9db8ce2099f94ea2fef1",
+    "content-hash": "eeddf4f27f611c11891b9dc600548c88",
     "packages": [
         {
             "name": "brick/math",
@@ -710,16 +710,16 @@
         },
         {
             "name": "doctrine/event-manager",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/event-manager.git",
-                "reference": "750671534e0241a7c50ea5b43f67e23eb5c96f32"
+                "reference": "b680156fa328f1dfd874fd48c7026c41570b9c6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/750671534e0241a7c50ea5b43f67e23eb5c96f32",
-                "reference": "750671534e0241a7c50ea5b43f67e23eb5c96f32",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/b680156fa328f1dfd874fd48c7026c41570b9c6e",
+                "reference": "b680156fa328f1dfd874fd48c7026c41570b9c6e",
                 "shasum": ""
             },
             "require": {
@@ -729,10 +729,10 @@
                 "doctrine/common": "<2.9"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^10",
+                "doctrine/coding-standard": "^12",
                 "phpstan/phpstan": "^1.8.8",
-                "phpunit/phpunit": "^9.5",
-                "vimeo/psalm": "^4.28"
+                "phpunit/phpunit": "^10.5",
+                "vimeo/psalm": "^5.24"
             },
             "type": "library",
             "autoload": {
@@ -781,7 +781,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/event-manager/issues",
-                "source": "https://github.com/doctrine/event-manager/tree/2.0.0"
+                "source": "https://github.com/doctrine/event-manager/tree/2.0.1"
             },
             "funding": [
                 {
@@ -797,7 +797,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-12T20:59:15+00:00"
+            "time": "2024-05-22T20:47:39+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1565,15 +1565,15 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/anthropic-adapter",
-                "reference": "ffe563f5f438c06f85d2bd637d337c43a8d53a80"
+                "reference": "ebc38674e438bca929b83acb9b2e95c70738f6e3"
             },
             "require": {
                 "modelflow-ai/anthropic": "^0.2",
-                "modelflow-ai/core": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -1743,12 +1743,12 @@
             }
         },
         {
-            "name": "modelflow-ai/core",
+            "name": "modelflow-ai/chat",
             "version": "0.2.x-dev",
             "dist": {
                 "type": "path",
-                "url": "./../../packages/core",
-                "reference": "332c2e6dce0e37c6d1e0570185cc65272dd0d834"
+                "url": "./../../packages/chat",
+                "reference": "567e55cb88d988f370980f3a7f4e87fe093b6889"
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -1769,12 +1769,12 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\": "src/"
+                    "ModelflowAi\\Chat\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\Tests\\": "tests/"
+                    "ModelflowAi\\Chat\\Tests\\": "tests/"
                 }
             },
             "scripts": {
@@ -1823,7 +1823,7 @@
                     "email": "johannes@sulu.io"
                 }
             ],
-            "description": "Abstraction of different ai ecosystems and their models.",
+            "description": "Provides a chat abstraction for the Modelflow AI",
             "keywords": [
                 "abstraction",
                 "ai",
@@ -1933,10 +1933,10 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/image",
-                "reference": "4e4c46dbb95f899ab9134125022562ee352fc61e"
+                "reference": "becce90b841a76a2fc51e956ccf04253de5c5aad"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
+                "modelflow-ai/decision-tree": "^0.2",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
@@ -2123,15 +2123,15 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/mistral-adapter",
-                "reference": "a5d3f1270b1461cf5c25b23ac6b8f7c1d11de073"
+                "reference": "474c26ee71abd07c6dbd850b4aefdd2df9b53a9f"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "modelflow-ai/mistral": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
@@ -2312,16 +2312,17 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/ollama-adapter",
-                "reference": "3a813e6b3cc30012b0af5d9e1daffa64dad039af"
+                "reference": "1cc62be8d15b46e99c92829328811cc5a9de4637"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "modelflow-ai/ollama": "^0.2",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/chat": "^0.2",
+                "modelflow-ai/completion": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -2409,10 +2410,9 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/openai-adapter",
-                "reference": "c32e356b690bd067c236a0398e84e5fed5508e66"
+                "reference": "d8863dd9fbcf56e8c9f17376240078a940e1f02f"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "nyholm/psr7": "^1.8",
                 "openai-php/client": "^0.8",
                 "php": "^8.2",
@@ -2420,6 +2420,7 @@
             },
             "require-dev": {
                 "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
                 "modelflow-ai/image": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
@@ -2513,10 +2514,9 @@
             "dist": {
                 "type": "path",
                 "url": "./../../integrations/symfony",
-                "reference": "72ff560dbcad3e1ebcefad81eb1dffb898d7d819"
+                "reference": "6364ba66d272a1d57061ed8e75c99fd3271e4b19"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "php": "^8.2",
                 "symfony/config": "^6.2 | ^7.0",
                 "symfony/console": "^6.2 | ^7.0",
@@ -2526,6 +2526,8 @@
             },
             "require-dev": {
                 "modelflow-ai/anthropic-adapter": "^0.2",
+                "modelflow-ai/chat": "^0.2",
+                "modelflow-ai/completion": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
                 "modelflow-ai/experts": "^0.2",
                 "modelflow-ai/image": "^0.2",
@@ -2544,6 +2546,8 @@
             },
             "suggest": {
                 "modelflow-ai/anthropic-adapter": "Adapter to interact with anthropic models.",
+                "modelflow-ai/chat": "Library to handle chat requests.",
+                "modelflow-ai/completion": "Library to handle completion requests.",
                 "modelflow-ai/embeddings": "Library to manage embeddings.",
                 "modelflow-ai/experts": "Library that provide experts.",
                 "modelflow-ai/image": "Library to generate and manipulate images.",
@@ -2629,10 +2633,9 @@
             "dist": {
                 "type": "path",
                 "url": "./../../packages/tools",
-                "reference": "db5fa082f78646ff6eda76bcc4efc850d5e25861"
+                "reference": "e8dc06afe2540ce795eccb5b33b9984788674ac5"
             },
             "require": {
-                "modelflow-ai/core": "^0.2",
                 "php": "^8.2",
                 "symfony/http-client": "^6.4 || ^7.0"
             },

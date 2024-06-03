@@ -15,20 +15,20 @@ namespace ModelflowAi\AnthropicAdapter;
 
 use ModelflowAi\Anthropic\ClientInterface;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
-use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\AnthropicAdapter\Model\AnthropicChatAdapter;
+use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 
-final readonly class AnthropicChatAdapterFactory implements ChatAdapterFactoryInterface
+final readonly class AnthropicChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,
     ) {
     }
 
-    public function createChatAdapter(array $options): AIModelAdapterInterface
+    public function createChatAdapter(array $options): AIChatAdapterInterface
     {
-        return new AnthropicChatModelAdapter(
+        return new AnthropicChatAdapter(
             $this->client,
             Model::from($options['model']),
         );

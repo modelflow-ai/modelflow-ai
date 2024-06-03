@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\PromptTemplate;
 
-use ModelflowAi\Core\Request\Message\AIChatMessage;
-use ModelflowAi\Core\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\TextPart;
 
 readonly class ChatPromptTemplate
 {

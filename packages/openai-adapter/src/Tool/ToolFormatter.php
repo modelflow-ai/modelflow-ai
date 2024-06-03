@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter\Tool;
 
-use ModelflowAi\Core\ToolInfo\Parameter;
-use ModelflowAi\Core\ToolInfo\ToolInfo;
+use ModelflowAi\Chat\ToolInfo\Parameter;
+use ModelflowAi\Chat\ToolInfo\ToolInfo;
 
 final class ToolFormatter
 {

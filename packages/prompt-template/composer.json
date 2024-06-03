@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/core": "^0.2"
+        "modelflow-ai/chat": "^0.2"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.15",

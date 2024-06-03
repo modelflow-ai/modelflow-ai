@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 $handler = require_once __DIR__ . '/bootstrap.php';
 
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter\Tests\Unit\Tool;
 
-use ModelflowAi\Core\ToolInfo\ToolInfoBuilder;
+use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\OpenaiAdapter\Tool\ToolFormatter;
 use PHPUnit\Framework\TestCase;
 

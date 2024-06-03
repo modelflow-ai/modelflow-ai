@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace ModelflowAi\OllamaAdapter\Tests\Unit;
 
 use ModelflowAi\Ollama\ClientInterface;
-use ModelflowAi\OllamaAdapter\Model\OllamaCompletionModelAdapter;
+use ModelflowAi\OllamaAdapter\Model\OllamaCompletionAdapter;
 use ModelflowAi\OllamaAdapter\OllamaCompletionAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -35,6 +35,6 @@ class OllamaCompletionAdapterFactoryTest extends TestCase
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(OllamaCompletionModelAdapter::class, $adapter);
+        $this->assertInstanceOf(OllamaCompletionAdapter::class, $adapter);
     }
 }

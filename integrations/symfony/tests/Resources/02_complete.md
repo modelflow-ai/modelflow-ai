@@ -56,79 +56,80 @@ bundles:
     - ModelflowAi\Integration\Symfony\ModelflowAiBundle
 
 services:
-    modelflow_ai.request_handler: ~
-    modelflow_ai.request_handler.decision_tree: ~
+    modelflow_ai.chat_request_handler: ~
+    modelflow_ai.chat_request_handler.decision_tree: ~
     modelflow_ai.command.chat:
         tags:
             - { name: console.command, command: modelflow-ai:chat }
     modelflow_ai.chat_adapter.gpt3.5.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.gpt3.5.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.gpt4.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.gpt4.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.llama2.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.llama2.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.llava.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.llava.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.mistral_medium.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.mistral_medium.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.mistral_small.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.mistral_small.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.mistral_tiny.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.mistral_tiny.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
     modelflow_ai.chat_adapter.nexusraven.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
+        class: ModelflowAi\Chat\Adapter\AIChatAdapterInterface
     modelflow_ai.chat_adapter.nexusraven.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
-    modelflow_ai.text_adapter.llama2.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
-    modelflow_ai.text_adapter.llama2.rule:
+
+    modelflow_ai.completion_adapter.llama2.adapter:
+        class: ModelflowAi\Completion\Adapter\AICompletionAdapterInterface
+    modelflow_ai.completion_adapter.llama2.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
-    modelflow_ai.text_adapter.llava.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
-    modelflow_ai.text_adapter.llava.rule:
+    modelflow_ai.completion_adapter.llava.adapter:
+        class: ModelflowAi\Completion\Adapter\AICompletionAdapterInterface
+    modelflow_ai.completion_adapter.llava.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
-    modelflow_ai.text_adapter.nexusraven.adapter:
-        class: ModelflowAi\Core\Model\AIModelAdapterInterface
-    modelflow_ai.text_adapter.nexusraven.rule:
+    modelflow_ai.completion_adapter.nexusraven.adapter:
+        class: ModelflowAi\Completion\Adapter\AICompletionAdapterInterface
+    modelflow_ai.completion_adapter.nexusraven.rule:
         class: ModelflowAi\DecisionTree\DecisionRule
         tags:
             - { name: "modelflow_ai.decision_tree.rule" }
         
 aliases:
-    ModelflowAi\DecisionTree\DecisionTreeInterface: modelflow_ai.request_handler.decision_tree
-    ModelflowAi\Core\AIRequestHandlerInterface: modelflow_ai.request_handler
+    ModelflowAi\DecisionTree\DecisionTreeInterface: modelflow_ai.chat_request_handler.decision_tree
+    ModelflowAi\Chat\AIChatRequestHandlerInterface: modelflow_ai.chat_request_handler
 ```

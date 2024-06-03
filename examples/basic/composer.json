@@ -5,7 +5,8 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
-        "modelflow-ai/core": "^0.2",
+        "modelflow-ai/chat": "^0.2",
+        "modelflow-ai/completion": "^0.2",
         "modelflow-ai/experts": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",
         "modelflow-ai/openai-adapter": "^0.2",

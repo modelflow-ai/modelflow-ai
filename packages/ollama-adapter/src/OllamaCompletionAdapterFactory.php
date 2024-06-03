@@ -13,21 +13,21 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OllamaAdapter;
 
-use ModelflowAi\Core\Factory\CompletionAdapterFactoryInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\Completion\Adapter\AICompletionAdapterFactoryInterface;
+use ModelflowAi\Completion\Adapter\AICompletionAdapterInterface;
 use ModelflowAi\Ollama\ClientInterface;
-use ModelflowAi\OllamaAdapter\Model\OllamaCompletionModelAdapter;
+use ModelflowAi\OllamaAdapter\Model\OllamaCompletionAdapter;
 
-final readonly class OllamaCompletionAdapterFactory implements CompletionAdapterFactoryInterface
+final readonly class OllamaCompletionAdapterFactory implements AICompletionAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,
     ) {
     }
 
-    public function createCompletionAdapter(array $options): AIModelAdapterInterface
+    public function createCompletionAdapter(array $options): AICompletionAdapterInterface
     {
-        return new OllamaCompletionModelAdapter(
+        return new OllamaCompletionAdapter(
             $this->client,
             $options['model'],
         );

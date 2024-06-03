@@ -13,7 +13,6 @@
         "modelflow-ai/anthropic": "^0.2",
         "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/api-client": "^0.2",
-        "modelflow-ai/core": "^0.2",
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/experts": "^0.2",
@@ -33,6 +32,9 @@
         "schranz/mono": "^2.0.1",
         "symfony/dotenv": "^7.1",
         "twig/twig": "^3.0"
+    },
+    "conflict": {
+        "modelflow-ai/core": "*"
     },
     "scripts": {
         "post-install-cmd": "@php vendor/bin/mono run composer install",

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OllamaAdapter\Tests\Unit\Image;
 
-use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
+use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Action\TextToImageAction;
 use ModelflowAi\Image\Request\AIImageRequest;
@@ -50,7 +50,7 @@ final class OpenaiImageAdapterTest extends TestCase
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::BASE64,
-            new AIRequestCriteriaCollection([]),
+            new CriteriaCollection([]),
             fn () => null,
         ));
 
@@ -82,7 +82,7 @@ final class OpenaiImageAdapterTest extends TestCase
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::STREAM,
-            new AIRequestCriteriaCollection([]),
+            new CriteriaCollection([]),
             fn () => null,
         ));
 
@@ -113,14 +113,14 @@ final class OpenaiImageAdapterTest extends TestCase
             $this->prophesize(AIImageRequestActionInterface::class)->reveal(),
             ImageFormat::JPEG,
             OutputFormat::STREAM,
-            new AIRequestCriteriaCollection([]),
+            new CriteriaCollection([]),
             fn () => null,
         )));
         $this->assertTrue($adapter->supports(new AIImageRequest(
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::STREAM,
-            new AIRequestCriteriaCollection([]),
+            new CriteriaCollection([]),
             fn () => null,
         )));
     }

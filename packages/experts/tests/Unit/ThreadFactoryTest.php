@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -24,13 +24,13 @@ class ThreadFactoryTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var ObjectProphecy<AIRequestHandlerInterface>
+     * @var ObjectProphecy<AIChatRequestHandlerInterface>
      */
     private ObjectProphecy $requestHandler;
 
     protected function setUp(): void
     {
-        $this->requestHandler = $this->prophesize(AIRequestHandlerInterface::class);
+        $this->requestHandler = $this->prophesize(AIChatRequestHandlerInterface::class);
     }
 
     public function testCreate(): void

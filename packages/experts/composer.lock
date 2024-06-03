@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "224386fdf349ab69cd9bacb75d03be49",
+    "content-hash": "824b31c19a0ded03b1dcca0ec7287f0d",
     "packages": [
         {
-            "name": "modelflow-ai/core",
+            "name": "modelflow-ai/chat",
             "version": "0.2.x-dev",
             "dist": {
                 "type": "path",
-                "url": "./../core",
-                "reference": "332c2e6dce0e37c6d1e0570185cc65272dd0d834"
+                "url": "./../chat",
+                "reference": "567e55cb88d988f370980f3a7f4e87fe093b6889"
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -33,12 +33,12 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\": "src/"
+                    "ModelflowAi\\Chat\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\Tests\\": "tests/"
+                    "ModelflowAi\\Chat\\Tests\\": "tests/"
                 }
             },
             "scripts": {
@@ -87,7 +87,7 @@
                     "email": "johannes@sulu.io"
                 }
             ],
-            "description": "Abstraction of different ai ecosystems and their models.",
+            "description": "Provides a chat abstraction for the Modelflow AI",
             "keywords": [
                 "abstraction",
                 "ai",
@@ -844,12 +844,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "483fb7fe262607b0a5ec32f99bdc42e2212b22fe"
+                "reference": "eee054a3d40f09920f5b27c9b09a6483f88d9d24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/483fb7fe262607b0a5ec32f99bdc42e2212b22fe",
-                "reference": "483fb7fe262607b0a5ec32f99bdc42e2212b22fe",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/eee054a3d40f09920f5b27c9b09a6483f88d9d24",
+                "reference": "eee054a3d40f09920f5b27c9b09a6483f88d9d24",
                 "shasum": ""
             },
             "require": {
@@ -895,7 +895,7 @@
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
                 "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.x"
             },
-            "time": "2024-03-29T20:21:22+00:00"
+            "time": "2024-05-24T14:24:30+00:00"
         },
         {
             "name": "phpspec/prophecy",

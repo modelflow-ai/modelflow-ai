@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace ModelflowAi\OllamaAdapter\Tests\Unit;
 
 use ModelflowAi\Ollama\ClientInterface;
-use ModelflowAi\OllamaAdapter\Model\OllamaChatModelAdapter;
+use ModelflowAi\OllamaAdapter\Model\OllamaChatAdapter;
 use ModelflowAi\OllamaAdapter\OllamaChatAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -35,6 +35,6 @@ class OllamaChatAdapterFactoryTest extends TestCase
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(OllamaChatModelAdapter::class, $adapter);
+        $this->assertInstanceOf(OllamaChatAdapter::class, $adapter);
     }
 }

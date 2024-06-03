@@ -11,25 +11,23 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\Builder\AIChatRequestBuilder;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
-use ModelflowAi\Core\Request\Message\AIChatMessage;
-use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\Core\Request\Message\ToolCallsPart;
-use ModelflowAi\Core\Response\AIChatResponseStream;
-use ModelflowAi\Core\ToolInfo\ToolChoiceEnum;
-use ModelflowAi\Core\ToolInfo\ToolExecutor;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
+use ModelflowAi\Chat\ToolInfo\ToolExecutor;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 
 require_once __DIR__ . '/WeatherTool.php';
 
-/** @var AIRequestHandlerInterface $handler */
+/** @var AIChatRequestHandlerInterface $handler */
 $handler = require_once __DIR__ . '/bootstrap.php';
 
 $toolExecutor = new ToolExecutor();
 
-/** @var AIChatRequestBuilder $builder */
-$builder = $handler->createChatRequest()
+$builder = $handler->createRequest()
     ->addUserMessage('How is the weather in hohenems and vienna?')
     ->tool('get_current_weather', new WeatherTool(), 'getCurrentWeather')
     ->toolChoice(ToolChoiceEnum::AUTO)

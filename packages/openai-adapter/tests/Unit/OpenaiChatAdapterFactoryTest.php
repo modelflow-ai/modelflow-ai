@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter\Tests\Unit;
 
-use ModelflowAi\OpenaiAdapter\Model\OpenaiChatModelAdapter;
+use ModelflowAi\OpenaiAdapter\Model\OpenaiChatAdapter;
 use ModelflowAi\OpenaiAdapter\OpenaiChatAdapterFactory;
 use OpenAI\Contracts\ClientContract;
 use PHPUnit\Framework\TestCase;
@@ -35,6 +35,6 @@ class OpenaiChatAdapterFactoryTest extends TestCase
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(OpenaiChatModelAdapter::class, $adapter);
+        $this->assertInstanceOf(OpenaiChatAdapter::class, $adapter);
     }
 }

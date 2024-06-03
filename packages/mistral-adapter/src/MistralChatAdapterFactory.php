@@ -13,22 +13,22 @@ declare(strict_types=1);
 
 namespace ModelflowAi\MistralAdapter;
 
-use ModelflowAi\Core\Factory\ChatAdapterFactoryInterface;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
+use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
+use ModelflowAi\MistralAdapter\Model\MistralChatAdapter;
 
-final readonly class MistralChatAdapterFactory implements ChatAdapterFactoryInterface
+final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,
     ) {
     }
 
-    public function createChatAdapter(array $options): AIModelAdapterInterface
+    public function createChatAdapter(array $options): AIChatAdapterInterface
     {
-        return new MistralChatModelAdapter(
+        return new MistralChatAdapter(
             $this->client,
             Model::from($options['model']),
         );

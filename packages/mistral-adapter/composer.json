@@ -26,10 +26,10 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/core": "^0.2",
         "modelflow-ai/mistral": "^0.2"
     },
     "require-dev": {
+        "modelflow-ai/chat": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "php-cs-fixer/shim": "^3.15",
         "phpstan/extension-installer": "^1.2",

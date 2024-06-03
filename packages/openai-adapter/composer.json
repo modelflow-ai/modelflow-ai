@@ -27,12 +27,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/core": "^0.2",
         "openai-php/client": "^0.8",
         "symfony/http-client": "^6.4 || ^7.0",
         "nyholm/psr7": "^1.8"
     },
     "require-dev": {
+        "modelflow-ai/chat": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/image": "^0.2",
         "modelflow-ai/prompt-template": "^0.2",

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace App;
 
-use ModelflowAi\Core\Request\Criteria\FlagCriteriaTrait;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\DecisionTree\Criteria\FlagCriteriaTrait;
 
 enum ProviderCriteria: string implements CriteriaInterface
 {

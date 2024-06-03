@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace ModelflowAi\OpenaiAdapter;
 
+use ModelflowAi\Image\Adapter\AIImageAdapterFactoryInterface;
 use ModelflowAi\Image\Adapter\AIImageAdapterInterface;
-use ModelflowAi\Image\Adapter\ImageAdapterFactoryInterface;
 use ModelflowAi\OpenaiAdapter\Image\OpenAIImageGenerationAdapter;
 use OpenAI\Contracts\ClientContract;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final readonly class OpenaiImageAdapterFactory implements ImageAdapterFactoryInterface
+final readonly class OpenaiImageAdapterFactory implements AIImageAdapterFactoryInterface
 {
     public function __construct(
         private HttpClientInterface $httpClient,
