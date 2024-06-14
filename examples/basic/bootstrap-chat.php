@@ -26,10 +26,10 @@ use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Mistral\Mistral;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Model\MistralChatAdapter;
+use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 use ModelflowAi\Ollama\Ollama;
-use ModelflowAi\OllamaAdapter\Model\OllamaChatAdapter;
-use ModelflowAi\OpenaiAdapter\Model\OpenaiChatAdapter;
+use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter;
+use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');

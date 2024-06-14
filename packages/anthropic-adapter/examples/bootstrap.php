@@ -17,7 +17,7 @@ require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
 use ModelflowAi\Anthropic\Anthropic;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\AnthropicAdapter\Model\AnthropicChatAdapter;
+use ModelflowAi\AnthropicAdapter\Chat\AnthropicChatAdapter;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\AIChatRequestHandler;
 use ModelflowAi\Chat\Request\AIChatRequest;

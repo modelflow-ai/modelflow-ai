@@ -11,31 +11,30 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter\Tests\Unit;
+namespace ModelflowAi\OpenaiAdapter\Tests\Unit\Chat;
 
-use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapter;
+use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapterFactory;
+use OpenAI\Contracts\ClientContract;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MistralChatAdapterFactoryTest extends TestCase
+class OpenaiChatAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
     public function testCreateChatAdapter(): void
     {
-        $client = $this->prophesize(ClientInterface::class);
+        $client = $this->prophesize(ClientContract::class);
 
-        $factory = new MistralChatAdapterFactory($client->reveal());
+        $factory = new OpenaiChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
-            'model' => Model::MEDIUM->value,
+            'model' => 'gpt-4',
             'image_to_text' => true,
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(MistralChatAdapter::class, $adapter);
+        $this->assertInstanceOf(OpenaiChatAdapter::class, $adapter);
     }
 }

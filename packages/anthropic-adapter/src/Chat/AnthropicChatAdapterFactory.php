@@ -11,15 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter;
+namespace ModelflowAi\AnthropicAdapter\Chat;
 
+use ModelflowAi\Anthropic\ClientInterface;
+use ModelflowAi\Anthropic\Model;
 use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
-use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 
-final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryInterface
+final readonly class AnthropicChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
     public function __construct(
         private ClientInterface $client,
@@ -28,7 +27,7 @@ final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryIn
 
     public function createChatAdapter(array $options): AIChatAdapterInterface
     {
-        return new MistralChatAdapter(
+        return new AnthropicChatAdapter(
             $this->client,
             Model::from($options['model']),
         );

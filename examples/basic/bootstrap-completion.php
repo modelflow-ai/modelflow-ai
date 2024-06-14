@@ -24,7 +24,7 @@ use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Ollama\Ollama;
-use ModelflowAi\OllamaAdapter\Model\OllamaCompletionAdapter;
+use ModelflowAi\OllamaAdapter\Chat\OllamaCompletionAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');

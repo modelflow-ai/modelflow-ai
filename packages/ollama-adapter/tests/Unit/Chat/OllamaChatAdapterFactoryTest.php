@@ -11,16 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter\Tests\Unit;
+namespace ModelflowAi\OllamaAdapter\Tests\Unit\Chat;
 
-use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use ModelflowAi\Ollama\ClientInterface;
+use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter;
+use ModelflowAi\OllamaAdapter\OllamaChatAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MistralChatAdapterFactoryTest extends TestCase
+class OllamaChatAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -28,14 +27,14 @@ class MistralChatAdapterFactoryTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $factory = new MistralChatAdapterFactory($client->reveal());
+        $factory = new OllamaChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
-            'model' => Model::MEDIUM->value,
+            'model' => 'llama2',
             'image_to_text' => true,
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(MistralChatAdapter::class, $adapter);
+        $this->assertInstanceOf(OllamaChatAdapter::class, $adapter);
     }
 }

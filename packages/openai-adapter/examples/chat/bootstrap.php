@@ -20,7 +20,7 @@ use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
-use ModelflowAi\OpenaiAdapter\Model\OpenaiChatAdapter;
+use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapter;
 
 $adapter = [];
 

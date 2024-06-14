@@ -24,7 +24,7 @@ use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Mistral\Mistral;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Model\MistralChatAdapter;
+use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');

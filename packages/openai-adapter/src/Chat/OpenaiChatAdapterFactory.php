@@ -11,26 +11,26 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter;
+namespace ModelflowAi\OpenaiAdapter\Chat;
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
-use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use OpenAI\Contracts\ClientContract;
 
-final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryInterface
+final readonly class OpenaiChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
     public function __construct(
-        private ClientInterface $client,
+        private ClientContract $client,
     ) {
     }
 
     public function createChatAdapter(array $options): AIChatAdapterInterface
     {
-        return new MistralChatAdapter(
+        $model = \str_replace('gpt', 'gpt-', (string) $options['model']);
+
+        return new OpenaiChatAdapter(
             $this->client,
-            Model::from($options['model']),
+            $model,
         );
     }
 }

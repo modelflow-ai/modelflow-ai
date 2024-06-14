@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter\Tests\Unit;
+namespace ModelflowAi\AnthropicAdapter\Tests\Unit\Chat;
 
-use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use ModelflowAi\Anthropic\ClientInterface;
+use ModelflowAi\Anthropic\Model;
+use ModelflowAi\AnthropicAdapter\Chat\AnthropicChatAdapter;
+use ModelflowAi\AnthropicAdapter\Chat\AnthropicChatAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MistralChatAdapterFactoryTest extends TestCase
+class AnthropicChatAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -28,14 +28,14 @@ class MistralChatAdapterFactoryTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $factory = new MistralChatAdapterFactory($client->reveal());
+        $factory = new AnthropicChatAdapterFactory($client->reveal());
 
         $adapter = $factory->createChatAdapter([
-            'model' => Model::MEDIUM->value,
+            'model' => Model::CLAUDE_3_SONNET->value,
             'image_to_text' => true,
             'functions' => true,
             'priority' => 0,
         ]);
-        $this->assertInstanceOf(MistralChatAdapter::class, $adapter);
+        $this->assertInstanceOf(AnthropicChatAdapter::class, $adapter);
     }
 }

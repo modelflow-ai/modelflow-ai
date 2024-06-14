@@ -1,4 +1,4 @@
-- [ ] Move Adapters into their own namespace (eg. ModelflowAi\OllamaAdapter\Model\OllamaChatAdapter => ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter)
+- [x] Move Adapters into their own namespace (eg. ModelflowAi\OllamaAdapter\Model\OllamaChatAdapter => ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter)
 - [ ] Ollama examples
 - [ ] Symfony configurations (chat/completion) with own handlers
 - [ ] Split basic example into the packages
