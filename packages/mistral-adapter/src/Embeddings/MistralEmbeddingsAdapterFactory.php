@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter;
+namespace ModelflowAi\MistralAdapter\Embeddings;
 
 use ModelflowAi\Embeddings\Adapter\EmbeddingAdapterInterface;
 use ModelflowAi\Embeddings\Adapter\EmbeddingsAdapterFactoryInterface;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter;
 
 final readonly class MistralEmbeddingsAdapterFactory implements EmbeddingsAdapterFactoryInterface
 {

@@ -44,7 +44,7 @@
         "symfony/dotenv": "^7.1"
     },
     "conflict": {
-        "hkulekci/qdrant": "0.5.3"
+        "hkulekci/qdrant": ">=0.5.3, <0.6"
     },
     "scripts": {
         "test-with-coverage": "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml",

@@ -95,7 +95,7 @@
             "type": "path",
             "url": "./../../packages/*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],

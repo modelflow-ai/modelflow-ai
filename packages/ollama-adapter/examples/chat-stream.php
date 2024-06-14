@@ -16,20 +16,29 @@ namespace App;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
 /** @var AIChatRequestHandlerInterface $handler */
-$handler = require_once __DIR__ . '/bootstrap-chat.php';
+$handler = require_once __DIR__ . '/bootstrap.php';
 
+/** @var AIChatResponseStream $response */
 $response = $handler->createRequest(
     ...ChatPromptTemplate::create(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->addCriteria(CapabilityCriteria::BASIC)
+    ->addCriteria(PrivacyCriteria::HIGH)
+    ->streamed()
     ->build()
     ->execute();
 
-echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);
+foreach ($response->getMessageStream() as $index => $message) {
+    if (0 === $index) {
+        echo $message->role->value . ': ';
+    }
+
+    echo $message->content;
+}

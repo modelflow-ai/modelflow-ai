@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace App;
 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/ProviderCriteria.php';
+require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\AIChatRequestHandler;
@@ -29,38 +28,17 @@ use ModelflowAi\Mistral\Model;
 use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 use ModelflowAi\Ollama\Ollama;
 use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter;
-use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
 
 $adapter = [];
 
-$mistralApiKey = $_ENV['MISTRAL_API_KEY'];
-if ($mistralApiKey) {
-    $mistralClient = Mistral::client($mistralApiKey);
-    $mistralChatAdapter = new MistralChatAdapter($mistralClient, Model::LARGE);
-
-    /** @var DecisionRule<AIChatRequest, AIChatAdapterInterface> $rule */
-    $rule = new DecisionRule($mistralChatAdapter, [ProviderCriteria::MISTRAL, PrivacyCriteria::MEDIUM]);
-    $adapter[] = $rule;
-}
-
-$openaiApiKey = $_ENV['OPENAI_API_KEY'];
-if ($openaiApiKey) {
-    $openAiClient = \OpenAI::client($openaiApiKey);
-    $gpt4Adapter = new OpenaiChatAdapter($openAiClient, 'gpt-3.5-turbo-0125');
-
-    /** @var DecisionRule<AIChatRequest, AIChatAdapterInterface> $rule */
-    $rule = new DecisionRule($gpt4Adapter, [ProviderCriteria::OPENAI, PrivacyCriteria::LOW, CapabilityCriteria::SMART]);
-    $adapter[] = $rule;
-}
-
 $client = Ollama::client();
-$llama2ChatAdapter = new OllamaChatAdapter($client);
+$llama2Adapter = new OllamaChatAdapter($client, 'llama2');
 
 /** @var DecisionRule<AIChatRequest, AIChatAdapterInterface> $rule */
-$rule = new DecisionRule($llama2ChatAdapter, [ProviderCriteria::OLLAMA, PrivacyCriteria::HIGH]);
+$rule = new DecisionRule($llama2Adapter, [PrivacyCriteria::HIGH]);
 $adapter[] = $rule;
 
 /** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */

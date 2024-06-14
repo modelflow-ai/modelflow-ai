@@ -59,7 +59,7 @@ final class MistralChatAdapterTest extends TestCase
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
         ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
+            'test' => fn (string $required, string $optional = ''): string => $this->toolMethod($required, $optional),
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], [], fn () => null);
@@ -76,7 +76,7 @@ final class MistralChatAdapterTest extends TestCase
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
         ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
+            'test' => fn (string $required, string $optional = ''): string => $this->toolMethod($required, $optional),
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], [], fn () => null);
@@ -365,7 +365,7 @@ final class MistralChatAdapterTest extends TestCase
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
         ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
+            'test' => fn (string $required, string $optional = ''): string => $this->toolMethod($required, $optional),
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
@@ -494,7 +494,7 @@ final class MistralChatAdapterTest extends TestCase
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
         ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
+            'test' => fn (string $required, string $optional = ''): string => $this->toolMethod($required, $optional),
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], ['streamed' => true], fn () => null);

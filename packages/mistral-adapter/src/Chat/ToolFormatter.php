@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter\Tool;
+namespace ModelflowAi\MistralAdapter\Chat;
 
 use ModelflowAi\Chat\ToolInfo\Parameter;
 use ModelflowAi\Chat\ToolInfo\ToolInfo;

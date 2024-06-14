@@ -15,27 +15,24 @@ namespace ModelflowAi\MistralAdapter\Tests\Unit;
 
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\MistralChatAdapterFactory;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingAdapter;
+use ModelflowAi\MistralAdapter\Embeddings\MistralEmbeddingsAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class MistralChatAdapterFactoryTest extends TestCase
+class MistralEmbeddingsAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 
-    public function testCreateChatAdapter(): void
+    public function testCreateEmbeddingAdapter(): void
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $factory = new MistralChatAdapterFactory($client->reveal());
+        $factory = new MistralEmbeddingsAdapterFactory($client->reveal());
 
-        $adapter = $factory->createChatAdapter([
-            'model' => Model::MEDIUM->value,
-            'image_to_text' => true,
-            'functions' => true,
-            'priority' => 0,
+        $adapter = $factory->createEmbeddingAdapter([
+            'model' => Model::EMBED->value,
         ]);
-        $this->assertInstanceOf(MistralChatAdapter::class, $adapter);
+        $this->assertInstanceOf(MistralEmbeddingAdapter::class, $adapter);
     }
 }

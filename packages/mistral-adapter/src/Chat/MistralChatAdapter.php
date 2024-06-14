@@ -26,7 +26,6 @@ use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
 use ModelflowAi\Mistral\Responses\Chat\CreateResponseToolCall;
 use ModelflowAi\Mistral\Responses\Chat\CreateStreamedResponse;
-use ModelflowAi\MistralAdapter\Tool\ToolFormatter;
 use Webmozart\Assert\Assert;
 
 final readonly class MistralChatAdapter implements AIChatAdapterInterface

@@ -11,13 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\MistralAdapter;
+namespace ModelflowAi\MistralAdapter\Chat;
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 
 final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryInterface
 {

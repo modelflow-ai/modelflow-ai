@@ -13,14 +13,24 @@ declare(strict_types=1);
 
 namespace App;
 
+use ModelflowAi\Chat\Adapter\Fake\FakeChatAdapter;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
 /** @var AIChatRequestHandlerInterface $handler */
-$handler = require_once __DIR__ . '/bootstrap-chat.php';
+/** @var FakeChatAdapter $adapter */
+[$adapter, $handler] = require_once __DIR__ . '/bootstrap.php';
+
+$adapter->addMessage([
+    new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, 'LEAVE '),
+    new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, 'ME '),
+    new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, 'ALONE'),
+]);
 
 /** @var AIChatResponseStream $response */
 $response = $handler->createRequest(
@@ -29,7 +39,7 @@ $response = $handler->createRequest(
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->addCriteria(ProviderCriteria::OLLAMA)
+    ->addCriteria(PrivacyCriteria::HIGH)
     ->streamed()
     ->build()
     ->execute();
