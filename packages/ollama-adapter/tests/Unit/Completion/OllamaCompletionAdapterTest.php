@@ -20,7 +20,7 @@ use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\Ollama\ClientInterface;
 use ModelflowAi\Ollama\Resources\CompletionInterface;
 use ModelflowAi\Ollama\Responses\Completion\CreateResponse;
-use ModelflowAi\OllamaAdapter\Chat\OllamaCompletionAdapter;
+use ModelflowAi\OllamaAdapter\Completion\OllamaCompletionAdapter;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 

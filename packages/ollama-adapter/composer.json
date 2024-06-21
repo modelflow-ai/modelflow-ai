@@ -41,7 +41,8 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^0.18.1",
         "jangregor/phpstan-prophecy": "^1.0",
-        "phpspec/prophecy-phpunit": "^2.1@stable"
+        "phpspec/prophecy-phpunit": "^2.1@stable",
+        "symfony/dotenv": "7.2.x-dev"
     },
     "suggest": {
         "modelflow-ai/embeddings": "To use the embeddings."

@@ -15,7 +15,7 @@ namespace ModelflowAi\OllamaAdapter\Tests\Unit\Embeddings;
 
 use ModelflowAi\Ollama\ClientInterface;
 use ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingAdapter;
-use ModelflowAi\OllamaAdapter\OllamaEmbeddingsAdapterFactory;
+use ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingsAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 

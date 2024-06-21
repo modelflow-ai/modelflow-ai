@@ -15,7 +15,7 @@ namespace ModelflowAi\OllamaAdapter\Tests\Unit\Chat;
 
 use ModelflowAi\Ollama\ClientInterface;
 use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter;
-use ModelflowAi\OllamaAdapter\OllamaChatAdapterFactory;
+use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
