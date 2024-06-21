@@ -13,13 +13,30 @@ declare(strict_types=1);
 
 namespace App;
 
+use ModelflowAi\Chat\Adapter\Fake\FakeChatAdapter;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\Experts\Expert;
 use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Experts\ThreadFactory;
 
 /** @var AIChatRequestHandlerInterface $handler */
-$handler = require_once __DIR__ . '/bootstrap-chat.php';
+/** @var FakeChatAdapter $adapter */
+[$adapter, $handler] = require_once __DIR__ . '/bootstrap.php';
+
+$adapter->addMessage(new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, \json_encode([
+    'title' => 'Drop Big Beats',
+    'description' => 'Her finger on the pulse of dance and electronic music. Usually she is not listening to the music filled up with crazy beats.',
+    'keywords' => [
+        'big beats',
+        'dance music',
+        'electronic music',
+        'Charlotte Merana',
+        'International Talents',
+    ],
+])));
 
 $expert = new Expert(
     'SEO-Expert',
@@ -36,7 +53,7 @@ Given the content of a webpage, your role is to:
 3. Generate a list of keywords that are closely related to the webpage's content. These keywords should be specific and targeted, representing the primary topics or themes discussed on the page. They play a crucial role in improving the webpage's search engine rankings for those terms.
 PROMPT,
     [
-        ProviderCriteria::OLLAMA,
+        PrivacyCriteria::HIGH,
     ],
     new JsonSchemaResponseFormat([
         'type' => 'object',
