@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace ModelflowAi\OpenaiAdapter\Tests\Unit\Chat;
 
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
-use ModelflowAi\OpenaiAdapter\Tool\ToolFormatter;
+use ModelflowAi\OpenaiAdapter\Chat\ToolFormatter;
 use PHPUnit\Framework\TestCase;
 
 class ToolFormatterTest extends TestCase

@@ -35,6 +35,8 @@
         "symfony/property-access": "^6.4 || ^7.0"
     },
     "require-dev": {
+        "asapo/remove-vendor-plugin": "^0.1",
+        "modelflow-ai/ollama-adapter": "^0.2",
         "php-cs-fixer/shim": "^3.15",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.10, <1.10.55",
@@ -75,7 +77,7 @@
             "type": "path",
             "url": "./../*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],
@@ -83,7 +85,13 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "asapo/remove-vendor-plugin": true
         }
+    },
+    "extra": {
+        "remove-folders": [
+            "modelflow-ai/*/vendor"
+        ]
     }
 }

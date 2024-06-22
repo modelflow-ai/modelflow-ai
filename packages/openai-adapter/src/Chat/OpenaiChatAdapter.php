@@ -22,7 +22,6 @@ use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
-use ModelflowAi\OpenaiAdapter\Tool\ToolFormatter;
 use OpenAI\Contracts\ClientContract;
 use OpenAI\Responses\Chat\CreateResponseToolCall;
 use OpenAI\Responses\Chat\CreateStreamedResponse;

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46b2fc51a52dd5b4df31f3a94aede90c",
+    "content-hash": "b6815227b6157a26552b1c9a81c1f856",
     "packages": [
         {
             "name": "elastic/transport",
@@ -505,7 +505,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/anthropic",
-                "reference": "f11c4dc017cd0cf8b2a23fe3efd17fba041e4e1a"
+                "reference": "ed39ade8037efe6044cd4d45f796db9d661f1f04"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.2",
@@ -513,6 +513,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -524,6 +525,11 @@
                 "symfony/dotenv": "^6.4 || ^7.0"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Anthropic\\": "src/"
@@ -588,7 +594,7 @@
                 "client"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -598,13 +604,14 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/anthropic-adapter",
-                "reference": "ebc38674e438bca929b83acb9b2e95c70738f6e3"
+                "reference": "cfa7234aaba22715660cc01277f1272cd73b81d0"
             },
             "require": {
                 "modelflow-ai/anthropic": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/prompt-template": "^0.2",
@@ -618,6 +625,11 @@
                 "symfony/dotenv": "7.1.x-dev"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\AnthropicAdapter\\": "src/"
@@ -681,7 +693,7 @@
                 "modelflow-ai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -691,7 +703,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/api-client",
-                "reference": "0b55d0b46e7c51a4e32952814d95478b723a3194"
+                "reference": "9277d852246611dd0b97dfe457b0f852dc765c71"
             },
             "require": {
                 "php": "^8.2",
@@ -699,6 +711,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.0@dev",
@@ -709,6 +722,11 @@
                 "rector/rector": "^0.18.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\ApiClient\\": "src/"
@@ -771,7 +789,7 @@
                 "client"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -781,7 +799,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/chat",
-                "reference": "e5be569294138f10dd9bdcc7e3d23dc91784c6d8"
+                "reference": "8010b5b839f62752203de1aefc72484aa931e8fa"
             },
             "require": {
                 "ext-fileinfo": "*",
@@ -791,6 +809,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -799,9 +818,14 @@
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3@stable",
                 "rector/rector": "^0.18.1",
-                "symfony/dotenv": "7.2.x-dev"
+                "symfony/dotenv": "^7.2"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Chat\\": "src/"
@@ -870,7 +894,112 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
+                "relative": true
+            }
+        },
+        {
+            "name": "modelflow-ai/completion",
+            "version": "0.2.x-dev",
+            "dist": {
+                "type": "path",
+                "url": "./packages/completion",
+                "reference": "fb4835fd5852289fbb91624b20e13368d5cf41b7"
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "modelflow-ai/decision-tree": "^0.2",
+                "php": "^8.2",
+                "webmozart/assert": "^1.11"
+            },
+            "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
+                "jangregor/phpstan-prophecy": "^1.0",
+                "modelflow-ai/prompt-template": "^0.2",
+                "php-cs-fixer/shim": "^3.15",
+                "phpspec/prophecy-phpunit": "^2.1@stable",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10, <1.10.55",
+                "phpstan/phpstan-phpunit": "^1.3@stable",
+                "phpunit/phpunit": "^10.3@stable",
+                "rector/rector": "^0.18.1",
+                "symfony/dotenv": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "ModelflowAi\\Completion\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "ModelflowAi\\Completion\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test-with-coverage": [
+                    "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml"
+                ],
+                "test": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "vendor/bin/phpunit"
+                ],
+                "phpstan": [
+                    "@php vendor/bin/phpstan analyze"
+                ],
+                "lint-rector": [
+                    "@php vendor/bin/rector process --dry-run"
+                ],
+                "lint-php-cs": [
+                    "@php vendor/bin/php-cs-fixer fix --verbose --diff --dry-run"
+                ],
+                "lint": [
+                    "@phpstan",
+                    "@lint-php-cs",
+                    "@lint-rector",
+                    "@lint-composer"
+                ],
+                "lint-composer": [
+                    "@composer validate --strict"
+                ],
+                "rector": [
+                    "@php vendor/bin/rector process"
+                ],
+                "php-cs-fix": [
+                    "@php vendor/bin/php-cs-fixer fix"
+                ],
+                "fix": [
+                    "@rector",
+                    "@php-cs-fix"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Johannes Wachter",
+                    "email": "johannes@sulu.io"
+                }
+            ],
+            "description": "Provides a completion abstraction for the Modelflow AI",
+            "keywords": [
+                "abstraction",
+                "ai",
+                "gpt3.5",
+                "gpt4",
+                "llama2",
+                "mistral",
+                "ollama",
+                "openai"
+            ],
+            "transport-options": {
+                "symlink": false,
                 "relative": true
             }
         },
@@ -880,12 +1009,13 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/decision-tree",
-                "reference": "e0dfb232a35d764719dd5c86319fdd7ab568828c"
+                "reference": "f1d05c89f39ad20f8b6a6ab7caf56073a30ae485"
             },
             "require": {
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -897,6 +1027,11 @@
                 "symfony/console": "^7.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\DecisionTree\\": "src/"
@@ -958,7 +1093,7 @@
                 "decision-tree"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -968,7 +1103,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/elasticsearch-embeddings-store",
-                "reference": "3895f33b06f8a9445768b40ed5821289021cf80f"
+                "reference": "3b6afdac9c924b0e2596462752c0c7df83318391"
             },
             "require": {
                 "elasticsearch/elasticsearch": "^8.13.0",
@@ -976,6 +1111,7 @@
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "guzzlehttp/psr7": "^2.0",
                 "modelflow-ai/ollama": "^0.2",
                 "modelflow-ai/ollama-adapter": "^0.2",
@@ -990,6 +1126,11 @@
                 "symfony/dotenv": "^7.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Embeddings\\Store\\Elasticsearch\\": "src/"
@@ -1053,7 +1194,7 @@
                 "embeddings"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1063,7 +1204,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/embeddings",
-                "reference": "8258dcee9e68a02217c1f94047ee9be529b59d12"
+                "reference": "d11b34771d67c777596849705ff5008696faaae4"
             },
             "require": {
                 "php": "^8.2",
@@ -1071,6 +1212,8 @@
                 "symfony/property-access": "^6.4 || ^7.0"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
+                "modelflow-ai/ollama-adapter": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.10, <1.10.55",
@@ -1084,6 +1227,11 @@
                 "modelflow-ai/qdrant-embeddings-store": "Embeddings store using Qdrant"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Embeddings\\": "src/"
@@ -1152,7 +1300,7 @@
                 "redis"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1162,13 +1310,14 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/experts",
-                "reference": "42f4431c4bdbbb8f537512708c8c4793c0c9a760"
+                "reference": "44daedb2055af3d343ab1263230eabd28ce7bea3"
             },
             "require": {
                 "modelflow-ai/chat": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -1176,9 +1325,15 @@
                 "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^0.18.1"
+                "rector/rector": "^0.18.1",
+                "symfony/dotenv": "^7.2"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Experts\\": "src/"
@@ -1247,7 +1402,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1257,7 +1412,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/image",
-                "reference": "becce90b841a76a2fc51e956ccf04253de5c5aad"
+                "reference": "1b551cf650000781868a7fe9e58ce9f94933136f"
             },
             "require": {
                 "modelflow-ai/decision-tree": "^0.2",
@@ -1265,6 +1420,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -1280,6 +1436,11 @@
                 "modelflow-ai/stability-adapter": "Adapter to integrate stability ai"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Image\\": "src/"
@@ -1344,7 +1505,7 @@
                 "stability"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1354,7 +1515,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/mistral",
-                "reference": "366141a8d17e9d51559a98447c535cd38a9df807"
+                "reference": "e34029d6fd9e02487342e5a49ddf211d54696857"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.2",
@@ -1362,6 +1523,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -1373,6 +1535,11 @@
                 "symfony/dotenv": "^6.4 || ^7.0"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Mistral\\": "src/"
@@ -1437,7 +1604,7 @@
                 "mistral"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1447,13 +1614,14 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/mistral-adapter",
-                "reference": "474c26ee71abd07c6dbd850b4aefdd2df9b53a9f"
+                "reference": "db3cbf8fc135ded8d802e12a1fa326bbc9b77184"
             },
             "require": {
                 "modelflow-ai/mistral": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
@@ -1471,6 +1639,11 @@
                 "modelflow-ai/embeddings": "To use the embeddings."
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\MistralAdapter\\": "src/"
@@ -1534,7 +1707,7 @@
                 "modelflow-ai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1544,7 +1717,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ollama",
-                "reference": "63fb8f187231f1ed69dcaf7df21584d0f628606b"
+                "reference": "b2e1360c734f813ab4b6b096642f70b5b15b0966"
             },
             "require": {
                 "modelflow-ai/api-client": "^0.2",
@@ -1552,6 +1725,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -1562,6 +1736,11 @@
                 "rector/rector": "^0.18.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Ollama\\": "src/"
@@ -1626,7 +1805,7 @@
                 "ollama"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1636,7 +1815,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/ollama-adapter",
-                "reference": "1cc62be8d15b46e99c92829328811cc5a9de4637"
+                "reference": "555347c848ba786eec47e35bbcd650787797ff30"
             },
             "require": {
                 "modelflow-ai/ollama": "^0.2",
@@ -1644,6 +1823,7 @@
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/completion": "^0.2",
@@ -1654,12 +1834,18 @@
                 "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^0.18.1"
+                "rector/rector": "^0.18.1",
+                "symfony/dotenv": "^7.2"
             },
             "suggest": {
                 "modelflow-ai/embeddings": "To use the embeddings."
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\OllamaAdapter\\": "src/"
@@ -1724,7 +1910,7 @@
                 "ollama"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1734,7 +1920,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/openai-adapter",
-                "reference": "d8863dd9fbcf56e8c9f17376240078a940e1f02f"
+                "reference": "00fcd6786c35a8d5aa1b4702d5e105dc76403aa0"
             },
             "require": {
                 "nyholm/psr7": "^1.8",
@@ -1743,6 +1929,7 @@
                 "symfony/http-client": "^6.4 || ^7.0"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/embeddings": "^0.2",
@@ -1764,6 +1951,11 @@
                 "modelflow-ai/image": "To use the image generation."
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\OpenaiAdapter\\": "src/"
@@ -1828,7 +2020,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1838,13 +2030,14 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/prompt-template",
-                "reference": "fb65b0d33bd864f5bf12f899b0b0c5bca658a61c"
+                "reference": "dcd24576254d7d632d1ae255d0edc5e22f802d4a"
             },
             "require": {
                 "modelflow-ai/chat": "^0.2",
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "php-cs-fixer/shim": "^3.15",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.10, <1.10.55",
@@ -1853,6 +2046,11 @@
                 "rector/rector": "^0.18.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\PromptTemplate\\": "src/"
@@ -1917,7 +2115,7 @@
                 "template"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -1927,7 +2125,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/qdrant-embeddings-store",
-                "reference": "18c88fa1d14024a14cdcaf5db7e9a9d2de7feb4c"
+                "reference": "8d42c9a52f0cf7b3b93758d416c43828cd501cd3"
             },
             "require": {
                 "hkulekci/qdrant": "^0.5",
@@ -1939,6 +2137,7 @@
                 "hkulekci/qdrant": ">=0.5.3, <0.6"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "modelflow-ai/ollama": "^0.2",
                 "modelflow-ai/ollama-adapter": "^0.2",
                 "php-cs-fixer/shim": "^3.15",
@@ -1952,6 +2151,11 @@
                 "symfony/dotenv": "^7.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Embeddings\\Store\\Qdrant\\": "src/"
@@ -2015,7 +2219,7 @@
                 "qdrant"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -2025,7 +2229,7 @@
             "dist": {
                 "type": "path",
                 "url": "./integrations/symfony",
-                "reference": "7e841092089a07553ced90cb19b0359618c9cd36"
+                "reference": "4f0ae039d38e9f885fde0c50a640d3b36267757d"
             },
             "require": {
                 "php": "^8.2",
@@ -2036,6 +2240,7 @@
                 "symfony/http-kernel": "^6.2 | ^7.0"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "modelflow-ai/anthropic-adapter": "^0.2",
                 "modelflow-ai/chat": "^0.2",
                 "modelflow-ai/completion": "^0.2",
@@ -2067,6 +2272,11 @@
                 "modelflow-ai/openai-adapter": "Adapter to interact with openai models."
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\Integration\\Symfony\\": "src/"
@@ -2134,7 +2344,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -2980,12 +3190,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "0c28d17fafe33900e122e6d6d7604272d61a331d"
+                "reference": "360e65cff267446280ea2626f61403471dcc040d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/0c28d17fafe33900e122e6d6d7604272d61a331d",
-                "reference": "0c28d17fafe33900e122e6d6d7604272d61a331d",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/360e65cff267446280ea2626f61403471dcc040d",
+                "reference": "360e65cff267446280ea2626f61403471dcc040d",
                 "shasum": ""
             },
             "require": {
@@ -3069,7 +3279,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-05T14:03:55+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -3154,12 +3364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "2210fc99fa42a259eb6c89d1f724ce0c4d62d5d2"
+                "reference": "02457f4379704eb8bc88426402151995beb25fe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/2210fc99fa42a259eb6c89d1f724ce0c4d62d5d2",
-                "reference": "2210fc99fa42a259eb6c89d1f724ce0c4d62d5d2",
+                "url": "https://api.github.com/repos/symfony/config/zipball/02457f4379704eb8bc88426402151995beb25fe4",
+                "reference": "02457f4379704eb8bc88426402151995beb25fe4",
                 "shasum": ""
             },
             "require": {
@@ -3221,7 +3431,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T14:57:53+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/console",
@@ -3229,12 +3439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "aaef070e842055d8223ec431b4f58b02f884407d"
+                "reference": "d4f689163104d1f2fbbdd78923b36e6ca8c501de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/aaef070e842055d8223ec431b4f58b02f884407d",
-                "reference": "aaef070e842055d8223ec431b4f58b02f884407d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/d4f689163104d1f2fbbdd78923b36e6ca8c501de",
+                "reference": "d4f689163104d1f2fbbdd78923b36e6ca8c501de",
                 "shasum": ""
             },
             "require": {
@@ -3314,7 +3524,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-03T06:08:06+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3322,12 +3532,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "87d55ef99f6daef9cf821a0b7c76f21c94869682"
+                "reference": "2da3b51e582b72bdc2ca6ca7776c5ec7a1c58ada"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/87d55ef99f6daef9cf821a0b7c76f21c94869682",
-                "reference": "87d55ef99f6daef9cf821a0b7c76f21c94869682",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/2da3b51e582b72bdc2ca6ca7776c5ec7a1c58ada",
+                "reference": "2da3b51e582b72bdc2ca6ca7776c5ec7a1c58ada",
                 "shasum": ""
             },
             "require": {
@@ -3394,7 +3604,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-05T21:29:31+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3470,12 +3680,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "477d911900bf32fc43a675f78d4cbaedbb78378f"
+                "reference": "64908ae925a52b500fcd1106858a68d163cc07f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/477d911900bf32fc43a675f78d4cbaedbb78378f",
-                "reference": "477d911900bf32fc43a675f78d4cbaedbb78378f",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/64908ae925a52b500fcd1106858a68d163cc07f1",
+                "reference": "64908ae925a52b500fcd1106858a68d163cc07f1",
                 "shasum": ""
             },
             "require": {
@@ -3521,7 +3731,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v7.1.0-RC1"
+                "source": "https://github.com/symfony/error-handler/tree/7.2"
             },
             "funding": [
                 {
@@ -3537,7 +3747,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-17T10:55:18+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -3545,12 +3755,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "522d2772d6c7bab843b0c52466dc7844622bacc2"
+                "reference": "8191468929f47b4598e9592aff2853b196f537a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/522d2772d6c7bab843b0c52466dc7844622bacc2",
-                "reference": "522d2772d6c7bab843b0c52466dc7844622bacc2",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8191468929f47b4598e9592aff2853b196f537a9",
+                "reference": "8191468929f47b4598e9592aff2853b196f537a9",
                 "shasum": ""
             },
             "require": {
@@ -3601,7 +3811,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v7.1.0-RC1"
+                "source": "https://github.com/symfony/event-dispatcher/tree/7.2"
             },
             "funding": [
                 {
@@ -3617,7 +3827,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -3702,12 +3912,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "802e87002f919296c9f606457d9fa327a0b3d6b2"
+                "reference": "49519d96d2a6b1670f92eee981156ba0287e906f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/802e87002f919296c9f606457d9fa327a0b3d6b2",
-                "reference": "802e87002f919296c9f606457d9fa327a0b3d6b2",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/49519d96d2a6b1670f92eee981156ba0287e906f",
+                "reference": "49519d96d2a6b1670f92eee981156ba0287e906f",
                 "shasum": ""
             },
             "require": {
@@ -3760,7 +3970,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T14:57:53+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/finder",
@@ -3768,12 +3978,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "d4c47dbdc7876d063dfac11c79e2e66a4aea4039"
+                "reference": "8fef79d4180b41abb27545debe7597b18ef763b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/d4c47dbdc7876d063dfac11c79e2e66a4aea4039",
-                "reference": "d4c47dbdc7876d063dfac11c79e2e66a4aea4039",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/8fef79d4180b41abb27545debe7597b18ef763b5",
+                "reference": "8fef79d4180b41abb27545debe7597b18ef763b5",
                 "shasum": ""
             },
             "require": {
@@ -3824,7 +4034,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-01T06:13:40+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -3832,12 +4042,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "0100795d2977ee4aa650f85531236bc0872f5038"
+                "reference": "daad23a33e372d9898641f48c6c05eec06b20ade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/0100795d2977ee4aa650f85531236bc0872f5038",
-                "reference": "0100795d2977ee4aa650f85531236bc0872f5038",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/daad23a33e372d9898641f48c6c05eec06b20ade",
+                "reference": "daad23a33e372d9898641f48c6c05eec06b20ade",
                 "shasum": ""
             },
             "require": {
@@ -3971,7 +4181,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-04T06:40:25+00:00"
+            "time": "2024-06-22T16:01:40+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -3979,12 +4189,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "cb1de10f9530332b68136cf59a45efd573c9bfc0"
+                "reference": "f53dab37bd1810cbe9ff8cf67ba167488150f35e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/cb1de10f9530332b68136cf59a45efd573c9bfc0",
-                "reference": "cb1de10f9530332b68136cf59a45efd573c9bfc0",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/f53dab37bd1810cbe9ff8cf67ba167488150f35e",
+                "reference": "f53dab37bd1810cbe9ff8cf67ba167488150f35e",
                 "shasum": ""
             },
             "require": {
@@ -4065,7 +4275,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-03T05:56:02+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -4152,12 +4362,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "8d43e176428abdc3a6eeffec0793d61ce5a166c3"
+                "reference": "044d55526b302250b8c3bd1985124dcdca0f8518"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/8d43e176428abdc3a6eeffec0793d61ce5a166c3",
-                "reference": "8d43e176428abdc3a6eeffec0793d61ce5a166c3",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/044d55526b302250b8c3bd1985124dcdca0f8518",
+                "reference": "044d55526b302250b8c3bd1985124dcdca0f8518",
                 "shasum": ""
             },
             "require": {
@@ -4221,7 +4431,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-03T05:56:02+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -4229,12 +4439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "6f5c02d79e19879de817aadbd05d7f16632bc302"
+                "reference": "c307b0c1b7b8613ca03526ab9f430c71e80749c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/6f5c02d79e19879de817aadbd05d7f16632bc302",
-                "reference": "6f5c02d79e19879de817aadbd05d7f16632bc302",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/c307b0c1b7b8613ca03526ab9f430c71e80749c0",
+                "reference": "c307b0c1b7b8613ca03526ab9f430c71e80749c0",
                 "shasum": ""
             },
             "require": {
@@ -4335,7 +4545,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-03T10:49:08+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -4399,7 +4609,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -4423,12 +4633,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "0a1df740cbb01859ce1bac85b0ad58ffe02f69b6"
+                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/0a1df740cbb01859ce1bac85b0ad58ffe02f69b6",
-                "reference": "0a1df740cbb01859ce1bac85b0ad58ffe02f69b6",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/64647a7c30b2283f5d49b874d84a18fc22054b7a",
+                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a",
                 "shasum": ""
             },
             "require": {
@@ -4478,7 +4688,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -4494,7 +4704,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-19T06:31:17+00:00"
+            "time": "2024-05-31T15:07:36+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
@@ -4560,7 +4770,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/1.x"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.30.0"
             },
             "funding": [
                 {
@@ -4584,12 +4794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "098e36a5b73de12beeb5ac17e80abf3696f7ad5f"
+                "reference": "8740a072b86292957feb42703edde77fcfca84fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/098e36a5b73de12beeb5ac17e80abf3696f7ad5f",
-                "reference": "098e36a5b73de12beeb5ac17e80abf3696f7ad5f",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/8740a072b86292957feb42703edde77fcfca84fb",
+                "reference": "8740a072b86292957feb42703edde77fcfca84fb",
                 "shasum": ""
             },
             "require": {
@@ -4657,88 +4867,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php80",
-            "version": "1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php80\\": ""
-                },
-                "classmap": [
-                    "Resources/stubs"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ion Bazan",
-                    "email": "ion.bazan@gmail.com"
-                },
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/1.x"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-06-20T08:18:00+00:00"
         },
         {
             "name": "symfony/polyfill-php83",
@@ -4746,17 +4875,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php83.git",
-                "reference": "4647bfa0d26a05ad2a936667c70986b5c5933517"
+                "reference": "2954fcffd79c04a3c5f50665aafb5f99c25a9d18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/4647bfa0d26a05ad2a936667c70986b5c5933517",
-                "reference": "4647bfa0d26a05ad2a936667c70986b5c5933517",
+                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/2954fcffd79c04a3c5f50665aafb5f99c25a9d18",
+                "reference": "2954fcffd79c04a3c5f50665aafb5f99c25a9d18",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
-                "symfony/polyfill-php80": "^1.14"
+                "php": ">=7.1"
             },
             "default-branch": true,
             "type": "library",
@@ -4816,7 +4944,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-06-20T08:18:00+00:00"
         },
         {
             "name": "symfony/property-access",
@@ -4824,12 +4952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "1e8c1e6ac1b19cf945d8094a0ee50296872c4cb2"
+                "reference": "5aae1c8c2ba7b2a1f52fe6b102eb0446ac812c16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/1e8c1e6ac1b19cf945d8094a0ee50296872c4cb2",
-                "reference": "1e8c1e6ac1b19cf945d8094a0ee50296872c4cb2",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/5aae1c8c2ba7b2a1f52fe6b102eb0446ac812c16",
+                "reference": "5aae1c8c2ba7b2a1f52fe6b102eb0446ac812c16",
                 "shasum": ""
             },
             "require": {
@@ -4876,7 +5004,7 @@
                 "reflection"
             ],
             "support": {
-                "source": "https://github.com/symfony/property-access/tree/v7.1.0-RC1"
+                "source": "https://github.com/symfony/property-access/tree/7.2"
             },
             "funding": [
                 {
@@ -4892,7 +5020,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/property-info",
@@ -4900,12 +5028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "f7167d90303a911fc73e6168c6a88e69e34e19d2"
+                "reference": "c2c008c2668093f9b3796c76916eb88d84734950"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/f7167d90303a911fc73e6168c6a88e69e34e19d2",
-                "reference": "f7167d90303a911fc73e6168c6a88e69e34e19d2",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/c2c008c2668093f9b3796c76916eb88d84734950",
+                "reference": "c2c008c2668093f9b3796c76916eb88d84734950",
                 "shasum": ""
             },
             "require": {
@@ -4976,7 +5104,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-03T05:56:02+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/routing",
@@ -4984,12 +5112,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "0ec2f36fbd769467f98c9c02cea1b76ed117115d"
+                "reference": "1052e00471d27e1c0710c4e4f31f1f9a72e1d659"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/0ec2f36fbd769467f98c9c02cea1b76ed117115d",
-                "reference": "0ec2f36fbd769467f98c9c02cea1b76ed117115d",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/1052e00471d27e1c0710c4e4f31f1f9a72e1d659",
+                "reference": "1052e00471d27e1c0710c4e4f31f1f9a72e1d659",
                 "shasum": ""
             },
             "require": {
@@ -5041,7 +5169,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/7.1"
+                "source": "https://github.com/symfony/routing/tree/7.2"
             },
             "funding": [
                 {
@@ -5057,7 +5185,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-28T06:54:05+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -5149,12 +5277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "60bc311c74e0af215101235aa6f471bcbc032df2"
+                "reference": "adfa98a608104d8f6b4d008d144523f8b79f0016"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/60bc311c74e0af215101235aa6f471bcbc032df2",
-                "reference": "60bc311c74e0af215101235aa6f471bcbc032df2",
+                "url": "https://api.github.com/repos/symfony/string/zipball/adfa98a608104d8f6b4d008d144523f8b79f0016",
+                "reference": "adfa98a608104d8f6b4d008d144523f8b79f0016",
                 "shasum": ""
             },
             "require": {
@@ -5212,7 +5340,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/7.1"
+                "source": "https://github.com/symfony/string/tree/7.2"
             },
             "funding": [
                 {
@@ -5228,7 +5356,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-04T06:40:14+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/type-info",
@@ -5236,12 +5364,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/type-info.git",
-                "reference": "b429d0710588fc396ba5def5329cf637d9861f9f"
+                "reference": "7f11dd268ae6048dcc6cefbc542a464702523fae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/type-info/zipball/b429d0710588fc396ba5def5329cf637d9861f9f",
-                "reference": "b429d0710588fc396ba5def5329cf637d9861f9f",
+                "url": "https://api.github.com/repos/symfony/type-info/zipball/7f11dd268ae6048dcc6cefbc542a464702523fae",
+                "reference": "7f11dd268ae6048dcc6cefbc542a464702523fae",
                 "shasum": ""
             },
             "require": {
@@ -5294,7 +5422,7 @@
                 "type"
             ],
             "support": {
-                "source": "https://github.com/symfony/type-info/tree/v7.1.0-RC1"
+                "source": "https://github.com/symfony/type-info/tree/7.2"
             },
             "funding": [
                 {
@@ -5310,7 +5438,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-02T10:19:13+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -5318,12 +5446,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "2c26a607e1cc6dece18b8f3b4a8c7dab38772ef1"
+                "reference": "ad0dc85b934f2b916827a0b1b41c95220f29aee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/2c26a607e1cc6dece18b8f3b4a8c7dab38772ef1",
-                "reference": "2c26a607e1cc6dece18b8f3b4a8c7dab38772ef1",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ad0dc85b934f2b916827a0b1b41c95220f29aee8",
+                "reference": "ad0dc85b934f2b916827a0b1b41c95220f29aee8",
                 "shasum": ""
             },
             "require": {
@@ -5393,7 +5521,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-05T21:29:31+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "symfony/var-exporter",
@@ -5401,12 +5529,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "353688d70dcd43e8f7a5cc13b9afba49d4946c39"
+                "reference": "ada3dfce54e48bf2a791be6e132b4b15ec82d1a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/353688d70dcd43e8f7a5cc13b9afba49d4946c39",
-                "reference": "353688d70dcd43e8f7a5cc13b9afba49d4946c39",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/ada3dfce54e48bf2a791be6e132b4b15ec82d1a2",
+                "reference": "ada3dfce54e48bf2a791be6e132b4b15ec82d1a2",
                 "shasum": ""
             },
             "require": {
@@ -5453,7 +5581,7 @@
                 "serialize"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-exporter/tree/7.1"
+                "source": "https://github.com/symfony/var-exporter/tree/7.2"
             },
             "funding": [
                 {
@@ -5469,7 +5597,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-22T10:14:54+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -5585,12 +5713,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "9955122a490d18ce723cf9014b196c126222c180"
+                "reference": "0dfb69d79d0964b8a80bfa92c07f50e3e8d73542"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/9955122a490d18ce723cf9014b196c126222c180",
-                "reference": "9955122a490d18ce723cf9014b196c126222c180",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0dfb69d79d0964b8a80bfa92c07f50e3e8d73542",
+                "reference": "0dfb69d79d0964b8a80bfa92c07f50e3e8d73542",
                 "shasum": ""
             },
             "require": {
@@ -5648,7 +5776,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-05T15:09:38+00:00"
+            "time": "2024-06-20T19:34:15+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -6564,12 +6692,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1d079a3dc5204367f82cdc95451e11162a2624fe"
+                "reference": "5f124e3e3e561006047b532fd0431bf5bb6b9015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1d079a3dc5204367f82cdc95451e11162a2624fe",
-                "reference": "1d079a3dc5204367f82cdc95451e11162a2624fe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5f124e3e3e561006047b532fd0431bf5bb6b9015",
+                "reference": "5f124e3e3e561006047b532fd0431bf5bb6b9015",
                 "shasum": ""
             },
             "require": {
@@ -6657,7 +6785,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-14T16:22:53+00:00"
+            "time": "2024-06-20T13:09:54+00:00"
         },
         {
             "name": "schranz/mono",
@@ -7631,12 +7759,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "83026885fde02508235fc9dd175f227290542c99"
+                "reference": "f38d8a3f812819671b6fc52c3c2392be8a4bfeac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/83026885fde02508235fc9dd175f227290542c99",
-                "reference": "83026885fde02508235fc9dd175f227290542c99",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/f38d8a3f812819671b6fc52c3c2392be8a4bfeac",
+                "reference": "f38d8a3f812819671b6fc52c3c2392be8a4bfeac",
                 "shasum": ""
             },
             "require": {
@@ -7681,7 +7809,7 @@
                 "environment"
             ],
             "support": {
-                "source": "https://github.com/symfony/dotenv/tree/v7.1.0-RC1"
+                "source": "https://github.com/symfony/dotenv/tree/7.2"
             },
             "funding": [
                 {
@@ -7697,7 +7825,165 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-02T08:41:59+00:00"
+            "time": "2024-06-20T15:52:34+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php80",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php80.git",
+                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
+                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php80\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ion Bazan",
+                    "email": "ion.bazan@gmail.com"
+                },
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-05-31T15:07:36+00:00"
+        },
+        {
+            "name": "symfony/polyfill-php81",
+            "version": "1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-php81.git",
+                "reference": "3fb075789fb91f9ad9af537c4012d523085bd5af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php81/zipball/3fb075789fb91f9ad9af537c4012d523085bd5af",
+                "reference": "3fb075789fb91f9ad9af537c4012d523085bd5af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "name": "symfony/polyfill",
+                    "url": "https://github.com/symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Php81\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting some PHP 8.1+ features to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php81/tree/v1.30.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-06-19T12:30:46+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -7755,12 +8041,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ab071efe3b2d5caf2c662c9d018d9eacc76058d9"
+                "reference": "045f5adec773f6430676fdda078b2fa393391938"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ab071efe3b2d5caf2c662c9d018d9eacc76058d9",
-                "reference": "ab071efe3b2d5caf2c662c9d018d9eacc76058d9",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/045f5adec773f6430676fdda078b2fa393391938",
+                "reference": "045f5adec773f6430676fdda078b2fa393391938",
                 "shasum": ""
             },
             "require": {
@@ -7768,7 +8054,8 @@
                 "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php80": "^1.22"
+                "symfony/polyfill-php80": "^1.22",
+                "symfony/polyfill-php81": "^1.29"
             },
             "require-dev": {
                 "psr/container": "^1.0|^2.0",
@@ -7827,7 +8114,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:05:59+00:00"
+            "time": "2024-06-22T17:49:10+00:00"
         }
     ],
     "aliases": [],

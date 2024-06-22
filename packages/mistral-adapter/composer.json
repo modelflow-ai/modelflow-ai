@@ -40,7 +40,8 @@
         "phpspec/prophecy-phpunit": "^2.1@stable",
         "jangregor/phpstan-prophecy": "^1.0",
         "symfony/dotenv": "7.1.x-dev",
-        "modelflow-ai/prompt-template": "^0.2"
+        "modelflow-ai/prompt-template": "^0.2",
+        "asapo/remove-vendor-plugin": "^0.1"
     },
     "suggest": {
         "modelflow-ai/embeddings": "To use the embeddings."
@@ -73,14 +74,20 @@
             "type": "path",
             "url": "./../*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],
     "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "asapo/remove-vendor-plugin": true
         }
+    },
+    "extra": {
+        "remove-folders": [
+            "modelflow-ai/*/vendor"
+        ]
     }
 }

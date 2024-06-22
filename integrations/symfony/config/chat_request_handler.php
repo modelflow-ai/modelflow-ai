@@ -17,7 +17,6 @@ use ModelflowAi\Chat\AIChatRequestHandler;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\ToolInfo\ToolExecutor;
 use ModelflowAi\Chat\ToolInfo\ToolExecutorInterface;
-use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Integration\Symfony\DecisionTree\DecisionTreeDecorator;
 use ModelflowAi\Integration\Symfony\ModelflowAiBundle;
 
@@ -29,8 +28,7 @@ return static function (ContainerConfigurator $container) {
         ->set('modelflow_ai.chat_request_handler.decision_tree', DecisionTreeDecorator::class)
         ->args([
             tagged_iterator(ModelflowAiBundle::TAG_CHAT_DECISION_TREE_RULE),
-        ])
-        ->alias(DecisionTreeInterface::class, 'modelflow_ai.chat_request_handler.decision_tree');
+        ]);
 
     $container->services()
         ->set('modelflow_ai.chat_request_handler', AIChatRequestHandler::class)

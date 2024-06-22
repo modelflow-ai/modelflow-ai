@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App;
 
 use ModelflowAi\Embeddings\Adapter\Cache\CacheEmbeddingAdapter;
-use ModelflowAi\Embeddings\Adapter\Fake\FakeAdapter;
 use ModelflowAi\Embeddings\Formatter\EmbeddingFormatter;
 use ModelflowAi\Embeddings\Generator\EmbeddingGenerator;
 use ModelflowAi\Embeddings\Splitter\EmbeddingSplitter;
 use ModelflowAi\Embeddings\Store\Filesystem\FilesystemEmbeddingsStore;
+use ModelflowAi\Ollama\Ollama;
+use ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 require_once \dirname(__DIR__) . '/vendor/autoload.php';
@@ -27,7 +28,7 @@ require_once __DIR__ . '/ExampleEmbedding.php';
 $embeddingSplitter = new EmbeddingSplitter(500);
 $embeddingFormatter = new EmbeddingFormatter();
 $embeddingAdapter = new CacheEmbeddingAdapter(
-    new FakeAdapter([]),
+    new OllamaEmbeddingAdapter(Ollama::client(), 'all-minilm'),
     new FilesystemAdapter('ollama', 0, __DIR__ . '/var/cache'),
 );
 $embeddingGenerator = new EmbeddingGenerator($embeddingSplitter, $embeddingFormatter, $embeddingAdapter);

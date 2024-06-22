@@ -13,6 +13,8 @@
         "modelflow-ai/anthropic": "^0.2",
         "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/api-client": "^0.2",
+        "modelflow-ai/chat": "^0.2",
+        "modelflow-ai/completion": "^0.2",
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/experts": "^0.2",
@@ -61,14 +63,14 @@
             "type": "path",
             "url": "./packages/*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         },
         {
             "type": "path",
             "url": "./integrations/*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],

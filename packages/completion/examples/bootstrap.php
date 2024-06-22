@@ -15,29 +15,30 @@ namespace App;
 
 require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
-use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
-use ModelflowAi\Chat\AIChatRequestHandler;
-use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Completion\Adapter\AICompletionAdapterInterface;
+use ModelflowAi\Completion\Adapter\Fake\FakeCompletionAdapter;
+use ModelflowAi\Completion\AICompletionRequestHandler;
+use ModelflowAi\Completion\Request\AICompletionRequest;
 use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
-use ModelflowAi\Ollama\Ollama;
-use ModelflowAi\OllamaAdapter\Chat\OllamaChatAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
 
 $adapter = [];
 
-$client = Ollama::client();
-$llama2Adapter = new OllamaChatAdapter($client, 'llama2');
+$fakeAdapter = new FakeCompletionAdapter();
 
-/** @var DecisionRule<AIChatRequest, AIChatAdapterInterface> $rule */
-$rule = new DecisionRule($llama2Adapter, [PrivacyCriteria::HIGH]);
+/** @var DecisionRule<AICompletionRequest, AICompletionAdapterInterface> $rule */
+$rule = new DecisionRule($fakeAdapter, [PrivacyCriteria::HIGH]);
 $adapter[] = $rule;
 
-/** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
+/** @var DecisionTreeInterface<AICompletionRequest, AICompletionAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree($adapter);
 
-return new AIChatRequestHandler($decisionTree);
+return [
+    $fakeAdapter,
+    new AICompletionRequestHandler($decisionTree),
+];

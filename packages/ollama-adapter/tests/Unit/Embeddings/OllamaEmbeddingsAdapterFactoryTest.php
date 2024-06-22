@@ -19,8 +19,7 @@ use ModelflowAi\OllamaAdapter\Embeddings\OllamaEmbeddingsAdapterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class
-OllamaEmbeddingsAdapterFactoryTest extends TestCase
+class OllamaEmbeddingsAdapterFactoryTest extends TestCase
 {
     use ProphecyTrait;
 

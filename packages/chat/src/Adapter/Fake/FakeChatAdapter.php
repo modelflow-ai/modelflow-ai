@@ -49,6 +49,8 @@ class FakeChatAdapter implements AIChatAdapterInterface
             return new AIChatResponseStream($request, $this->stream($message));
         }
 
+        Assert::isInstanceOf($message, AIChatResponseMessage::class);
+
         return new AIChatResponse($request, $message);
     }
 
@@ -57,6 +59,11 @@ class FakeChatAdapter implements AIChatAdapterInterface
         return $request instanceof AIChatRequest;
     }
 
+    /**
+     * @param AIChatResponseMessage[] $messages
+     *
+     * @return \Generator<int, AIChatResponseMessage>
+     */
     public function stream(array $messages): \Generator
     {
         foreach ($messages as $message) {
