@@ -52,17 +52,24 @@ $client = Mistral::client('your-api-key');
 Then, you can use the `MistralChatModelAdapter`:
 
 ```php
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\AIChatRequestHandler;
+use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\DecisionTree\DecisionTree;
-use ModelflowAi\DecisionTree\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
+use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
+use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
-$modelAdapter = new MistralChatModelAdapter($client, Model::LARGE);
+$modelAdapter = new MistralChatAdapter($client, Model::LARGE);
+
+/** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree([
     new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
-]]);
+]);
 $handler = new AIChatRequestHandler($decisionTree);
 
 $response = $handler->createRequest(
@@ -71,7 +78,7 @@ $response = $handler->createRequest(
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->addCriteria(PrivacyCriteria::MEDIUM)
+    ->addCriteria(CapabilityCriteria::SMART)
     ->build()
     ->execute();
 

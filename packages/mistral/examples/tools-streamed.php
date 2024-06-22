@@ -62,7 +62,6 @@ $tools = [
                     ],
                 ],
             ],
-            'required' => ['location'],
         ],
     ],
 ];

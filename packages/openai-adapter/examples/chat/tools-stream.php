@@ -28,7 +28,7 @@ $handler = require_once __DIR__ . '/bootstrap.php';
 $toolExecutor = new ToolExecutor();
 
 $builder = $handler->createRequest()
-    ->addUserMessage('How is the weather in hohenems and vienna?')
+    ->addUserMessage('How is the weather in hohenems?')
     ->tool('get_current_weather', new WeatherTool(), 'getCurrentWeather')
     ->toolChoice(ToolChoiceEnum::AUTO)
     ->addCriteria(CapabilityCriteria::SMART)

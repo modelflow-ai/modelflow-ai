@@ -40,7 +40,7 @@
         "phpspec/prophecy-phpunit": "^2.1@stable",
         "jangregor/phpstan-prophecy": "^1.0",
         "symfony/dotenv": "7.1.x-dev",
-        "modelflow-ai/prompt-template": "^0.2",
+        "modelflow-ai/prompt-template": "0.2.x-dev",
         "asapo/remove-vendor-plugin": "^0.1"
     },
     "suggest": {

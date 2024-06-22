@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66c1b7a1afa759842eb26f27cf86cb63",
+    "content-hash": "170c51b85f3b1bd3176fdc94fd458398",
     "packages": [
         {
             "name": "modelflow-ai/api-client",
