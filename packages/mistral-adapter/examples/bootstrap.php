@@ -15,16 +15,16 @@ namespace App;
 
 require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
-use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
+use ModelflowAi\Chat\AIChatRequestHandler;
+use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use ModelflowAi\Mistral\Mistral;
 use ModelflowAi\Mistral\Model;
-use ModelflowAi\MistralAdapter\Model\MistralChatModelAdapter;
+use ModelflowAi\MistralAdapter\Chat\MistralChatAdapter;
 use Symfony\Component\Dotenv\Dotenv;
 
 (new Dotenv())->bootEnv(__DIR__ . '/.env');
@@ -38,17 +38,17 @@ if (!$mistralApiKey) {
 
 $mistralClient = Mistral::client($mistralApiKey);
 
-$largeAdapter = new MistralChatModelAdapter($mistralClient, Model::LARGE);
-$mediumAdapter = new MistralChatModelAdapter($mistralClient, Model::MEDIUM);
-$smallAdapter = new MistralChatModelAdapter($mistralClient, Model::SMALL);
-$tinyAdapter = new MistralChatModelAdapter($mistralClient, Model::TINY);
+$largeAdapter = new MistralChatAdapter($mistralClient, Model::LARGE);
+$mediumAdapter = new MistralChatAdapter($mistralClient, Model::MEDIUM);
+$smallAdapter = new MistralChatAdapter($mistralClient, Model::SMALL);
+$tinyAdapter = new MistralChatAdapter($mistralClient, Model::TINY);
 
 $adapter[] = new DecisionRule($largeAdapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($mediumAdapter, [CapabilityCriteria::ADVANCED]);
 $adapter[] = new DecisionRule($smallAdapter, [CapabilityCriteria::INTERMEDIATE]);
 $adapter[] = new DecisionRule($tinyAdapter, [CapabilityCriteria::BASIC]);
 
-/** @var DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
+/** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree($adapter);
 
-return new AIRequestHandler($decisionTree);
+return new AIChatRequestHandler($decisionTree);

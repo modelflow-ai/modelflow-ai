@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 $handler = require_once __DIR__ . '/bootstrap.php';
 
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Image\Request\Value\ImageFormat;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,9 +21,9 @@ use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 
 $definition = new InputDefinition([
-    new InputArgument('prompt', InputArgument::REQUIRED, 'The prompt to generate an image for'),
+    new InputArgument('prompt', InputArgument::OPTIONAL, 'The prompt to generate an image for', 'cute dog'),
     new InputArgument('file', InputArgument::OPTIONAL, 'The filename without extension to save the image to', 'tmp'),
-    new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'The format of the image', 'jpeg'),
+    new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'The format of the image', 'png'),
     new InputOption('base64', 'b', InputOption::VALUE_NONE, 'Whether to return the image as a base64 string'),
     new InputOption('capability', 'c', InputOption::VALUE_REQUIRED, 'Which level of capability to use', 1),
 ]);

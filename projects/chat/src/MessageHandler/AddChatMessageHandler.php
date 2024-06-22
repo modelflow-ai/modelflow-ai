@@ -7,16 +7,15 @@ use App\Entity\Chat;
 use App\Entity\ChatMessage;
 use App\Message\AddChatMessage;
 use App\Repository\ChatRepository;
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\Builder\AIChatRequestBuilder;
-use ModelflowAi\Core\Request\Message\AIChatMessage;
-use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\Core\Request\Message\ImageBase64Part;
-use ModelflowAi\Core\Request\Message\TextPart;
-use ModelflowAi\Core\Request\Message\ToolCallsPart;
-use ModelflowAi\Core\Response\AIChatResponse;
-use ModelflowAi\Core\Response\AIChatResponseStream;
-use ModelflowAi\Core\ToolInfo\ToolExecutorInterface;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\ToolInfo\ToolExecutorInterface;
 use ModelflowAi\Integration\Symfony\Criteria\ModelCriteria;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Mercure\HubInterface;
@@ -32,7 +31,7 @@ class AddChatMessageHandler
      */
     public function __construct(
         private ChatRepository $repository,
-        private AIRequestHandlerInterface $aiRequestHandler,
+        private AIChatRequestHandlerInterface $aiRequestHandler,
         private ToolExecutorInterface $toolExecutor,
         private HubInterface $hub,
         private Environment $twig,
@@ -75,7 +74,7 @@ class AddChatMessageHandler
         }
 
         /** @var AIChatRequestBuilder $requestBuilder */
-        $requestBuilder = $this->aiRequestHandler->createChatRequest(
+        $requestBuilder = $this->aiRequestHandler->createRequest(
             ...$messages,
         )
             ->addCriteria(ModelCriteria::from($chat->getModel()))
@@ -104,8 +103,7 @@ class AddChatMessageHandler
             return;
         }
 
-        /** @var AIChatResponse $response */
-        $response = $this->aiRequestHandler->createChatRequest(...[
+        $response = $this->aiRequestHandler->createRequest(...[
             ...$messages,
             new AIChatMessage(
                 AIChatMessageRoleEnum::SYSTEM,

@@ -58,11 +58,13 @@ $client = Anthropic::client('your-api-key');
 The Chat resource allows you to create chat conversations and get chat completions.
 
 ```php
+use ModelflowAi\Anthropic\Model;
+
 $chat = $client->chat();
 
 // Create a chat conversation
 $parameters = [
-    'model' => Model::CLAUDE_3_OPUS,
+    'model' => Model::CLAUDE_3_OPUS->value,
     'messages' => [
         [
             'role' => 'system',

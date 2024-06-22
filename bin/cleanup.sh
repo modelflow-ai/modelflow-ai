@@ -10,8 +10,7 @@ find . -type f -name composer.lock -exec rm -f {} +
 find . -type d -name cache -path '*/var/*' -exec sh -c 'rm -rf "{}"/*' \;
 
 # Find and remove .phpunit.cache files
-find . -type f -name .phpunit.cache -exec rm -f {} +
+find . -type d -name .phpunit.cache -exec rm -rf {} +
 
 # Find and remove .php-cs-fixer.cache files
 find . -type f -name .php-cs-fixer.cache -exec rm -f {} +
-

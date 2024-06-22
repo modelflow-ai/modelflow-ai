@@ -31,7 +31,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/core": "^0.2"
+        "modelflow-ai/chat": "^0.2"
     },
     "require-dev": {
         "php-cs-fixer/shim": "^3.15",
@@ -41,7 +41,9 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^0.18.1",
         "phpspec/prophecy-phpunit": "^2.1@stable",
-        "jangregor/phpstan-prophecy": "^1.0"
+        "jangregor/phpstan-prophecy": "^1.0",
+        "symfony/dotenv": "^7.2",
+        "asapo/remove-vendor-plugin": "^0.1"
     },
     "scripts": {
         "test-with-coverage": "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml",
@@ -71,7 +73,7 @@
             "type": "path",
             "url": "./../*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],
@@ -79,7 +81,13 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "asapo/remove-vendor-plugin": true
         }
+    },
+    "extra": {
+        "remove-folders": [
+            "modelflow-ai/*/vendor"
+        ]
     }
 }

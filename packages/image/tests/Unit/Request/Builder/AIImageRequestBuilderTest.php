@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Tests\Unit\Request\Builder;
 
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Image\Request\Action\AIImageRequestActionInterface;
 use ModelflowAi\Image\Request\Action\TextToImageAction;
 use ModelflowAi\Image\Request\Builder\AIImageRequestBuilder;

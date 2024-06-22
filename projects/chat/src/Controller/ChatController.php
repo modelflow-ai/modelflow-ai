@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Chat;
 use App\Message\AddChatMessage;
 use App\Repository\ChatRepository;
-use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;

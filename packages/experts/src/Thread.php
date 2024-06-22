@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\Builder\AIChatRequestBuilder;
-use ModelflowAi\Core\Request\Message\AIChatMessage;
-use ModelflowAi\Core\Response\AIChatResponse;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Response\AIChatResponse;
 
 class Thread implements ThreadInterface
 {
@@ -31,7 +30,7 @@ class Thread implements ThreadInterface
     private array $messages = [];
 
     public function __construct(
-        private readonly AIRequestHandlerInterface $requestHandler,
+        private readonly AIChatRequestHandlerInterface $requestHandler,
         private readonly Expert $expert,
     ) {
     }
@@ -62,8 +61,7 @@ class Thread implements ThreadInterface
 
     public function run(): AIChatResponse
     {
-        /** @var AIChatRequestBuilder $builder */
-        $builder = $this->requestHandler->createChatRequest()
+        $builder = $this->requestHandler->createRequest()
             ->addSystemMessage($this->expert->instructions)
             ->addCriteria($this->expert->criteria)
             ->asJson();

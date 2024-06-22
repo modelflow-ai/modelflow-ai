@@ -16,9 +16,14 @@
             "target": "git@github.com:modelflow-ai/api-client.git"
         },
         {
-            "name": "Core",
-            "directory": "packages/core",
-            "target": "git@github.com:modelflow-ai/core.git"
+            "name": "Chat",
+            "directory": "packages/chat",
+            "target": "git@github.com:modelflow-ai/chat.git"
+        },
+        {
+            "name": "Completion",
+            "directory": "packages/completion",
+            "target": "git@github.com:modelflow-ai/completion.git"
         },
         {
             "name": "DecisionTree",

@@ -52,27 +52,33 @@ $client = Anthropic::client('your-api-key');
 Then, you can use the `AnthropicChatModelAdapter`:
 
 ```php
-use ModelflowAi\Core\AIRequestHandler;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
+use ModelflowAi\Chat\AIChatRequestHandler;
+use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\DecisionTree\DecisionTree;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
+use ModelflowAi\AnthropicAdapter\Chat\AnthropicChatAdapter;
+use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
-$modelAdapter = new AnthropicChatModelAdapter($client, Model::LARGE);
+$modelAdapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU);
+
+/** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree([
     new DecisionRule($modelAdapter, [CapabilityCriteria::SMART]),
-]]);
-$handler = new AIRequestHandler($decisionTree);
+]);
+$handler = new AIChatRequestHandler($decisionTree);
 
-/** @var AIChatResponse $response */
-$response = $handler->createChatRequest(
+$response = $handler->createRequest(
     ...ChatPromptTemplate::create(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->addCriteria(PrivacyCriteria::MEDIUM)
+    ->addCriteria(CapabilityCriteria::SMART)
     ->build()
     ->execute();
 

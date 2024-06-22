@@ -2,7 +2,7 @@
 
 namespace App\Message;
 
-use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final readonly class AddChatMessage

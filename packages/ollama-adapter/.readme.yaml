@@ -1,3 +1,4 @@
 title: Ollama Adapter
 description: The adapter integrates Ollama models into Modelflow AI.
 shortDescription: The adapter for the Ollama API client.
+examples: true

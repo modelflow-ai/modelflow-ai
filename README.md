@@ -32,7 +32,8 @@ interface. It is written in PHP and uses Composer for dependency management.
 This repository consists of several packages, each residing in its own directory under the `packages/` directory:
 
 - **Anthropic Adapter**: The adapter for the Anthropic API client. [More Info](https://github.com/modelflow-ai/anthropic-adapter)
-- **Core**: The core functionalities of Modelflow AI. [More Info](https://github.com/modelflow-ai/core)
+- **Chat**: Chat functionalities for Modelflow AI. [More Info](https://github.com/modelflow-ai/chat)
+- **Completion**: Completion functionalities for Modelflow AI. [More Info](https://github.com/modelflow-ai/completion)
 - **Decision Tree**: A decision tree represents a series of decisions and the possible outcome of those decisions. [More Info](https://github.com/modelflow-ai/decision-tree)
 - **Elasticsearch Embeddings Store**: This package stores embeddings in Elasticsearch. [More Info](https://github.com/modelflow-ai/elasticsearch-embeddings-store)
 - **Embeddings**: Handles the embeddings for the AI models. [More Info](https://github.com/modelflow-ai/embeddings)

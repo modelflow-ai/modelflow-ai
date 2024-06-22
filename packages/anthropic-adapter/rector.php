@@ -21,10 +21,10 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip([
         CallableThisArrayToAnonymousFunctionRector::class => [
-            __DIR__ . '/tests/Unit/Model/AnthropicChatModelAdapterTest.php',
+            __DIR__ . '/tests/Unit/Chat/AnthropicChatAdapterTest.php',
         ],
         FirstClassCallableRector::class => [
-            __DIR__ . '/tests/Unit/Model/AnthropicChatModelAdapterTest.php',
+            __DIR__ . '/tests/Unit/Chat/AnthropicChatAdapterTest.php',
         ],
     ]);
 };

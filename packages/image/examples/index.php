@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use ModelflowAi\Core\Request\Criteria\PrivacyCriteria;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
@@ -59,7 +59,7 @@ $decisionTree = new DecisionTree([
 $handler = new AIImageRequestHandler(new HandleMiddleware($decisionTree));
 
 $definition = new InputDefinition([
-    new InputArgument('prompt', InputArgument::REQUIRED, 'The prompt to generate an image for'),
+    new InputArgument('prompt', InputArgument::OPTIONAL, 'The prompt to generate an image for', 'cute dog'),
     new InputArgument('file', InputArgument::OPTIONAL, 'The filename without extension to save the image to', 'tmp'),
     new InputOption('format', 'f', InputOption::VALUE_REQUIRED, 'The format of the image', 'jpeg'),
     new InputOption('base64', 'b', InputOption::VALUE_NONE, 'Whether to return the image as a base64 string'),

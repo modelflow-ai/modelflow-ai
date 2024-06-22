@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Image\Tests\Unit\Request;
 
-use ModelflowAi\Core\Request\Criteria\AIRequestCriteriaCollection;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\Image\Request\Action\TextToImageAction;
 use ModelflowAi\Image\Request\AIImageRequest;
 use ModelflowAi\Image\Request\Value\ImageFormat;
@@ -37,7 +37,7 @@ class AIImageRequestTest extends TestCase
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::BASE64,
-            new AIRequestCriteriaCollection([CapabilityCriteria::BASIC]),
+            new CriteriaCollection([CapabilityCriteria::BASIC]),
             $handler,
         );
 
@@ -61,7 +61,7 @@ class AIImageRequestTest extends TestCase
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::BASE64,
-            new AIRequestCriteriaCollection([CapabilityCriteria::ADVANCED]),
+            new CriteriaCollection([CapabilityCriteria::ADVANCED]),
             $handler,
         );
 
@@ -82,7 +82,7 @@ class AIImageRequestTest extends TestCase
             new TextToImageAction('cute cat'),
             ImageFormat::JPEG,
             OutputFormat::BASE64,
-            new AIRequestCriteriaCollection([CapabilityCriteria::BASIC]),
+            new CriteriaCollection([CapabilityCriteria::BASIC]),
             $handler,
         );
 

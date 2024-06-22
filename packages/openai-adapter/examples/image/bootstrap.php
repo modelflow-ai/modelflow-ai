@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 $openaiClient = require_once \dirname(__DIR__) . '/bootstrap.php';
 
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;

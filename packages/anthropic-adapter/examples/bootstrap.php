@@ -17,11 +17,11 @@ require_once \dirname(__DIR__) . '/vendor/autoload.php';
 
 use ModelflowAi\Anthropic\Anthropic;
 use ModelflowAi\Anthropic\Model;
-use ModelflowAi\AnthropicAdapter\Model\AnthropicChatModelAdapter;
-use ModelflowAi\Core\AIRequestHandler;
-use ModelflowAi\Core\Model\AIModelAdapterInterface;
-use ModelflowAi\Core\Request\AIRequestInterface;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
+use ModelflowAi\AnthropicAdapter\Chat\AnthropicChatAdapter;
+use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
+use ModelflowAi\Chat\AIChatRequestHandler;
+use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\DecisionRule;
 use ModelflowAi\DecisionTree\DecisionTree;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
@@ -38,15 +38,15 @@ if (!$anthropicApiKey) {
 
 $anthropicClient = Anthropic::client($anthropicApiKey);
 
-$opusAdapter = new AnthropicChatModelAdapter($anthropicClient, Model::CLAUDE_3_OPUS);
-$sonnetAdapter = new AnthropicChatModelAdapter($anthropicClient, Model::CLAUDE_3_SONNET);
-$haikuAdapter = new AnthropicChatModelAdapter($anthropicClient, Model::CLAUDE_3_HAIKU);
+$opusAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_OPUS);
+$sonnetAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_SONNET);
+$haikuAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_HAIKU);
 
 $adapter[] = new DecisionRule($opusAdapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($sonnetAdapter, [CapabilityCriteria::INTERMEDIATE]);
 $adapter[] = new DecisionRule($haikuAdapter, [CapabilityCriteria::BASIC]);
 
-/** @var DecisionTreeInterface<AIRequestInterface, AIModelAdapterInterface> $decisionTree */
+/** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree($adapter);
 
-return new AIRequestHandler($decisionTree);
+return new AIChatRequestHandler($decisionTree);

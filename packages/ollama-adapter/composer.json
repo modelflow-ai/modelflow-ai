@@ -27,11 +27,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "modelflow-ai/core": "^0.2",
         "modelflow-ai/ollama": "^0.2",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "modelflow-ai/chat": "^0.2",
+        "modelflow-ai/completion": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "php-cs-fixer/shim": "^3.15",
         "phpstan/extension-installer": "^1.2",
@@ -40,7 +41,9 @@
         "phpunit/phpunit": "^10.3",
         "rector/rector": "^0.18.1",
         "jangregor/phpstan-prophecy": "^1.0",
-        "phpspec/prophecy-phpunit": "^2.1@stable"
+        "phpspec/prophecy-phpunit": "^2.1@stable",
+        "symfony/dotenv": "^7.2",
+        "asapo/remove-vendor-plugin": "^0.1"
     },
     "suggest": {
         "modelflow-ai/embeddings": "To use the embeddings."
@@ -73,14 +76,20 @@
             "type": "path",
             "url": "./../*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],
     "minimum-stability": "dev",
     "config": {
         "allow-plugins": {
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "asapo/remove-vendor-plugin": true
         }
+    },
+    "extra": {
+        "remove-folders": [
+            "modelflow-ai/*/vendor"
+        ]
     }
 }

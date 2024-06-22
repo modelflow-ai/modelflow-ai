@@ -41,10 +41,11 @@
         "rector/rector": "^0.18.1",
         "symfony/cache": "^7.0",
         "ramsey/uuid": "^4.7",
-        "symfony/dotenv": "^7.1"
+        "symfony/dotenv": "^7.1",
+        "asapo/remove-vendor-plugin": "^0.1"
     },
     "conflict": {
-        "hkulekci/qdrant": "0.5.3"
+        "hkulekci/qdrant": ">=0.5.3, <0.6"
     },
     "scripts": {
         "test-with-coverage": "@test --coverage-php var/reports/coverage.cov --coverage-cobertura=var/cobertura-coverage.xml --coverage-html var/reports/html --log-junit var/reports/junit.xml",
@@ -74,7 +75,7 @@
             "type": "path",
             "url": "./../*",
             "options": {
-                "symlink": true
+                "symlink": false
             }
         }
     ],
@@ -82,7 +83,13 @@
     "config": {
         "allow-plugins": {
             "phpstan/extension-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "asapo/remove-vendor-plugin": true
         }
+    },
+    "extra": {
+        "remove-folders": [
+            "modelflow-ai/*/vendor"
+        ]
     }
 }

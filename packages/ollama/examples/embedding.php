@@ -22,5 +22,5 @@ $response = $client->embeddings()->create([
     'prompt' => 'You are an angry bot!',
 ]);
 
-\var_dump($response->embedding);
+\var_dump(\count($response->embedding));
 echo \PHP_EOL;

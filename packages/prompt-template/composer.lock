@@ -4,23 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89d3163b439b8d47730defb418aedaaf",
+    "content-hash": "5fffb6ae59c93d3bca3b6328b0dbbe23",
     "packages": [
         {
-            "name": "modelflow-ai/core",
+            "name": "modelflow-ai/chat",
             "version": "0.2.x-dev",
             "dist": {
                 "type": "path",
-                "url": "./../core",
-                "reference": "332c2e6dce0e37c6d1e0570185cc65272dd0d834"
+                "url": "./../chat",
+                "reference": "8010b5b839f62752203de1aefc72484aa931e8fa"
             },
             "require": {
                 "ext-fileinfo": "*",
                 "modelflow-ai/decision-tree": "^0.2",
+                "modelflow-ai/prompt-template": "0.2.x-dev",
                 "php": "^8.2",
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -28,17 +30,23 @@
                 "phpstan/phpstan": "^1.10, <1.10.55",
                 "phpstan/phpstan-phpunit": "^1.3@stable",
                 "phpunit/phpunit": "^10.3@stable",
-                "rector/rector": "^0.18.1"
+                "rector/rector": "^0.18.1",
+                "symfony/dotenv": "^7.2"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\": "src/"
+                    "ModelflowAi\\Chat\\": "src/"
                 }
             },
             "autoload-dev": {
                 "psr-4": {
-                    "ModelflowAi\\Core\\Tests\\": "tests/"
+                    "ModelflowAi\\Chat\\Tests\\": "tests/"
                 }
             },
             "scripts": {
@@ -87,7 +95,7 @@
                     "email": "johannes@sulu.io"
                 }
             ],
-            "description": "Abstraction of different ai ecosystems and their models.",
+            "description": "Provides a chat abstraction for the Modelflow AI",
             "keywords": [
                 "abstraction",
                 "ai",
@@ -99,7 +107,7 @@
                 "openai"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -109,12 +117,13 @@
             "dist": {
                 "type": "path",
                 "url": "./../decision-tree",
-                "reference": "e0dfb232a35d764719dd5c86319fdd7ab568828c"
+                "reference": "f1d05c89f39ad20f8b6a6ab7caf56073a30ae485"
             },
             "require": {
                 "php": "^8.2"
             },
             "require-dev": {
+                "asapo/remove-vendor-plugin": "^0.1",
                 "jangregor/phpstan-prophecy": "^1.0",
                 "php-cs-fixer/shim": "^3.15",
                 "phpspec/prophecy-phpunit": "^2.1@stable",
@@ -126,6 +135,11 @@
                 "symfony/console": "^7.1"
             },
             "type": "library",
+            "extra": {
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
             "autoload": {
                 "psr-4": {
                     "ModelflowAi\\DecisionTree\\": "src/"
@@ -187,7 +201,7 @@
                 "decision-tree"
             ],
             "transport-options": {
-                "symlink": true,
+                "symlink": false,
                 "relative": true
             }
         },
@@ -252,17 +266,57 @@
     ],
     "packages-dev": [
         {
+            "name": "asapo/remove-vendor-plugin",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wachterjohannes/remove-vendor-plugin.git",
+                "reference": "ea21b652bc50d84889568dff081919f5e994a0d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wachterjohannes/remove-vendor-plugin/zipball/ea21b652bc50d84889568dff081919f5e994a0d0",
+                "reference": "ea21b652bc50d84889568dff081919f5e994a0d0",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0"
+            },
+            "require-dev": {
+                "composer/composer": "^2.7"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Asapo\\RemoveVendorPlugin\\Plugin",
+                "remove-folders": [
+                    "modelflow-ai/*/vendor"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asapo\\RemoveVendorPlugin\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A Composer plugin to remove specific folders after installation or update.",
+            "support": {
+                "issues": "https://github.com/wachterjohannes/remove-vendor-plugin/issues",
+                "source": "https://github.com/wachterjohannes/remove-vendor-plugin/tree/0.1.0"
+            },
+            "time": "2024-06-21T20:10:06+00:00"
+        },
+        {
             "name": "myclabs/deep-copy",
             "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "2f5294676c802a62b0549f6bc8983f14294ce369"
+                "reference": "3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/2f5294676c802a62b0549f6bc8983f14294ce369",
-                "reference": "2f5294676c802a62b0549f6bc8983f14294ce369",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c",
+                "reference": "3a6b9a42cd8f8771bd4295d13e1423fa7f3d942c",
                 "shasum": ""
             },
             "require": {
@@ -302,7 +356,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.x"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.0"
             },
             "funding": [
                 {
@@ -310,7 +364,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-10T11:10:03+00:00"
+            "time": "2024-06-12T14:39:25+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -318,12 +372,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "d327cf2acf22ad3d1fac5a382b7420bb6fd73bb8"
+                "reference": "3ef0811e45ba7e91fb0f066af5af7d52c3b24469"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/d327cf2acf22ad3d1fac5a382b7420bb6fd73bb8",
-                "reference": "d327cf2acf22ad3d1fac5a382b7420bb6fd73bb8",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3ef0811e45ba7e91fb0f066af5af7d52c3b24469",
+                "reference": "3ef0811e45ba7e91fb0f066af5af7d52c3b24469",
                 "shasum": ""
             },
             "require": {
@@ -369,7 +423,7 @@
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
                 "source": "https://github.com/nikic/PHP-Parser/tree/master"
             },
-            "time": "2024-05-21T16:12:19+00:00"
+            "time": "2024-06-12T18:31:58+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -492,16 +546,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.57.2",
+            "version": "v3.59.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "2141067497145f224111eee89a0b4a0d0f3fe487"
+                "reference": "c855876e64de3431bc9279f27af7be40d11d7613"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/2141067497145f224111eee89a0b4a0d0f3fe487",
-                "reference": "2141067497145f224111eee89a0b4a0d0f3fe487",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/c855876e64de3431bc9279f27af7be40d11d7613",
+                "reference": "c855876e64de3431bc9279f27af7be40d11d7613",
                 "shasum": ""
             },
             "require": {
@@ -538,22 +592,22 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.57.2"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.59.3"
             },
-            "time": "2024-05-20T20:42:23+00:00"
+            "time": "2024-06-16T14:17:34+00:00"
         },
         {
             "name": "phpstan/extension-installer",
-            "version": "1.3.1",
+            "version": "1.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/extension-installer.git",
-                "reference": "f45734bfb9984c6c56c4486b71230355f066a58a"
+                "reference": "f6b87faf9fc7978eab2f7919a8760bc9f58f9203"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/f45734bfb9984c6c56c4486b71230355f066a58a",
-                "reference": "f45734bfb9984c6c56c4486b71230355f066a58a",
+                "url": "https://api.github.com/repos/phpstan/extension-installer/zipball/f6b87faf9fc7978eab2f7919a8760bc9f58f9203",
+                "reference": "f6b87faf9fc7978eab2f7919a8760bc9f58f9203",
                 "shasum": ""
             },
             "require": {
@@ -566,6 +620,7 @@
                 "php-parallel-lint/php-parallel-lint": "^1.2.0",
                 "phpstan/phpstan-strict-rules": "^0.11 || ^0.12 || ^1.0"
             },
+            "default-branch": true,
             "type": "composer-plugin",
             "extra": {
                 "class": "PHPStan\\ExtensionInstaller\\Plugin"
@@ -582,9 +637,9 @@
             "description": "Composer plugin for automatic installation of PHPStan extensions",
             "support": {
                 "issues": "https://github.com/phpstan/extension-installer/issues",
-                "source": "https://github.com/phpstan/extension-installer/tree/1.3.1"
+                "source": "https://github.com/phpstan/extension-installer/tree/1.4.1"
             },
-            "time": "2023-05-24T08:59:17+00:00"
+            "time": "2024-06-10T08:20:49+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1029,12 +1084,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e1cc389aa3cd5f50803b7fb70e870b5b7cec6732"
+                "reference": "5f124e3e3e561006047b532fd0431bf5bb6b9015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e1cc389aa3cd5f50803b7fb70e870b5b7cec6732",
-                "reference": "e1cc389aa3cd5f50803b7fb70e870b5b7cec6732",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5f124e3e3e561006047b532fd0431bf5bb6b9015",
+                "reference": "5f124e3e3e561006047b532fd0431bf5bb6b9015",
                 "shasum": ""
             },
             "require": {
@@ -1122,7 +1177,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-19T12:52:43+00:00"
+            "time": "2024-06-20T13:09:54+00:00"
         },
         {
             "name": "rector/rector",

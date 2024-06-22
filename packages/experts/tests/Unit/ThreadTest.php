@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-use ModelflowAi\Core\AIRequestHandlerInterface;
-use ModelflowAi\Core\Request\AIChatRequest;
-use ModelflowAi\Core\Request\Builder\AIChatRequestBuilder;
-use ModelflowAi\Core\Request\Criteria\CapabilityCriteria;
-use ModelflowAi\Core\Request\Message\AIChatMessage;
-use ModelflowAi\Core\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\Core\Response\AIChatResponse;
-use ModelflowAi\Core\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\AIChatRequestHandlerInterface;
+use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Response\AIChatResponse;
+use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -31,13 +31,13 @@ class ThreadTest extends TestCase
     use ProphecyTrait;
 
     /**
-     * @var ObjectProphecy<AIRequestHandlerInterface>
+     * @var ObjectProphecy<AIChatRequestHandlerInterface>
      */
     private ObjectProphecy $requestHandler;
 
     protected function setUp(): void
     {
-        $this->requestHandler = $this->prophesize(AIRequestHandlerInterface::class);
+        $this->requestHandler = $this->prophesize(AIChatRequestHandlerInterface::class);
     }
 
     public function testRun(): void
@@ -51,7 +51,7 @@ class ThreadTest extends TestCase
 
         $thread = new Thread($this->requestHandler->reveal(), $expert);
 
-        $this->requestHandler->createChatRequest()
+        $this->requestHandler->createRequest()
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
@@ -78,7 +78,7 @@ class ThreadTest extends TestCase
         $thread = new Thread($this->requestHandler->reveal(), $expert);
         $thread->addContext('key', 'value');
 
-        $this->requestHandler->createChatRequest()
+        $this->requestHandler->createRequest()
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
@@ -110,7 +110,7 @@ class ThreadTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Test Question 3'),
         ]);
 
-        $this->requestHandler->createChatRequest()
+        $this->requestHandler->createRequest()
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
@@ -163,7 +163,7 @@ class ThreadTest extends TestCase
         $thread = new Thread($this->requestHandler->reveal(), $expert);
         $thread->addContext('key', 'value');
 
-        $this->requestHandler->createChatRequest()
+        $this->requestHandler->createRequest()
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),

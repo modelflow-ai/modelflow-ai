@@ -28,15 +28,22 @@ jobs:
             directory: 'packages/api-client'
             docker: false
 
-    core:
-        name: Core
+    chat:
+        name: Chat
         uses: ./.github/workflows/test.yml
         with:
-            directory: 'packages/core'
+            directory: 'packages/chat'
+            docker: false
+
+    completion:
+        name: Completion
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/completion'
             docker: false
 
     decision-tree:
-        name: Core
+        name: DecisionTree
         uses: ./.github/workflows/test.yml
         with:
             directory: 'packages/decision-tree'
