@@ -79,6 +79,9 @@ return static function (ContainerConfigurator $container): void {
         ];
 
         $adapters = array_merge($adapters, [
+            'claude_3_5_sonnet' => [
+                'enabled' => true,
+            ],
             'claude_3_opus' => [
                 'enabled' => true,
             ],
