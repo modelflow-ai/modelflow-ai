@@ -1,0 +1,41 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIChatAdapterInterface\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AIChatRequest\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class DecisionTreeInterface\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Chat\\\\AIChatRequestHandler constructor expects ModelflowAi\\\\DecisionTree\\\\DecisionTreeInterface\\<ModelflowAi\\\\Chat\\\\Request\\\\AIChatRequest, ModelflowAi\\\\Chat\\\\Adapter\\\\AIChatAdapterInterface\\>, DecisionTreeInterface\\<AIChatRequest, AIChatAdapterInterface\\> given\\.$#"
+			count: 1
+			path: examples/chat/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AICompletionAdapterInterface\\.$#"
+			count: 1
+			path: examples/completion/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class AICompletionRequest\\.$#"
+			count: 1
+			path: examples/completion/bootstrap.php
+
+		-
+			message: "#^PHPDoc tag @var for variable \\$decisionTree contains unknown class DecisionTreeInterface\\.$#"
+			count: 1
+			path: examples/completion/bootstrap.php
+
+		-
+			message: "#^Parameter \\#1 \\$decisionTree of class ModelflowAi\\\\Completion\\\\AICompletionRequestHandler constructor expects ModelflowAi\\\\DecisionTree\\\\DecisionTreeInterface\\<ModelflowAi\\\\Completion\\\\Request\\\\AICompletionRequest, ModelflowAi\\\\Completion\\\\Adapter\\\\AICompletionAdapterInterface\\>, DecisionTreeInterface\\<AICompletionRequest, AICompletionAdapterInterface\\> given\\.$#"
+			count: 1
+			path: examples/completion/bootstrap.php

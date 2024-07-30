@@ -9,9 +9,13 @@
         "openai",
         "ollama",
         "mistral",
+        "anthropic",
+        "fireworksai",
         "llama2",
+        "llama3.1",
         "gpt4",
-        "gpt3.5"
+        "gpt3.5",
+        "mistral-large"
     ],
     "autoload": {
         "psr-4": {

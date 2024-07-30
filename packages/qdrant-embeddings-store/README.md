@@ -36,7 +36,7 @@ composer require modelflow-ai/qdrant-embeddings-store
 
 ## Examples
 
-Here are some examples of how you can use the Mistral package in your PHP applications. You can find more detailed
+Here are some examples of how you can use the Qdrant Embeddings Store in your PHP applications. You can find more detailed
 examples in the [examples directory](examples).
 
 ## Usage
