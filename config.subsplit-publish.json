@@ -53,7 +53,7 @@
         {
             "name": "FireworksAiAdapter",
             "directory": "packages/fireworksai-adapter",
-            "target": "git@github.com:modelflow-ai/mistral.git"
+            "target": "git@github.com:modelflow-ai/fireworksai-adapter.git"
         },
         {
             "name": "MistralAdapter",
