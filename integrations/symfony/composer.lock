@@ -3075,7 +3075,7 @@
             "version": "0.2.x-dev",
             "dist": {
                 "type": "path",
-                "url": "./../../packages/fireworks-adapter",
+                "url": "./../../packages/fireworksai-adapter",
                 "reference": "3054e98054dc5a96bd0029ee3439de5b7c13832e"
             },
             "require": {

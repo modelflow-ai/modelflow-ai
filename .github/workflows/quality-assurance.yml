@@ -70,8 +70,8 @@ jobs:
             directory: 'packages/experts'
             docker: false
 
-    fireworksai:
-        name: FireworksAi
+    fireworksai-adapter:
+        name: FireworksAiAdapter
         uses: ./.github/workflows/test.yml
         with:
             directory: 'packages/fireworksai-adapter'

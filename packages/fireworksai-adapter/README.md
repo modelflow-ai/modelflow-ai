@@ -31,7 +31,7 @@ To install the Fireworks.ai Adapter package, you need to have PHP 8.2 or higher 
 Then, you can add the package to your project by running the following command:
 
 ```bash
-composer require modelflow-ai/fireworks-adapter
+composer require modelflow-ai/fireworksai-adapter
 ```
 
 ## Examples
