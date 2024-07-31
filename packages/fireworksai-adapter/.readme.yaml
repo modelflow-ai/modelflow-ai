@@ -1,0 +1,4 @@
+title: Fireworks.ai Adapter
+description: The adapter integrates open-source models hosted by fireworks.ai into Modelflow AI.
+shortDescription: The adapter for integrating LLMs by fireworks.ai.
+examples: true

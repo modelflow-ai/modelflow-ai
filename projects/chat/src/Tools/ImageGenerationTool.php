@@ -15,6 +15,7 @@ namespace App\Tools;
 
 use ModelflowAi\Image\AIImageRequestHandlerInterface;
 use ModelflowAi\Image\Request\Value\ImageFormat;
+use ModelflowAi\Integration\Symfony\Criteria\ModelCriteria;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 readonly class ImageGenerationTool
@@ -34,13 +35,15 @@ readonly class ImageGenerationTool
      * TODO improve this description to be sure that the prompt will be as good as possible.
      *
      * @param string $prompt well structured prompt to generate the image from
+     * @param string $model  model to generate the image with. Possible values are: 'dall-e-2', 'dall-e-3' or 'stable-diffusion-xl-1024-v1-0'
      *
      * @return string url to the generated image
      */
-    public function generateImage(string $prompt): string
+    public function generateImage(string $prompt, string $model = 'stable-diffusion-xl-1024-v1-0'): string
     {
         $response = $this->imageRequestHandler->createRequest()
-            ->imageFormat(ImageFormat::JPEG)
+            ->addCriteria(ModelCriteria::tryFrom($model) ?? ModelCriteria::STABLE_DIFFUSSION_XL_1024_FIREWORKS)
+            ->imageFormat(ImageFormat::PNG)
             ->textToImage($prompt)
             ->asStream()
             ->build()

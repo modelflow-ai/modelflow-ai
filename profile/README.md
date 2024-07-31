@@ -38,6 +38,7 @@ This repository consists of several packages, each residing in its own directory
 - **Elasticsearch Embeddings Store**: This package stores embeddings in Elasticsearch. [More Info](https://github.com/modelflow-ai/elasticsearch-embeddings-store)
 - **Embeddings**: Handles the embeddings for the AI models. [More Info](https://github.com/modelflow-ai/embeddings)
 - **Experts**: It provides a set of tools for so called experts comparable to OpenAI GPTs or OpenGPTs. [More Info](https://github.com/modelflow-ai/experts)
+- **Fireworks.ai Adapter**: The adapter for integrating LLMs by fireworks.ai. [More Info](https://github.com/modelflow-ai/fireworksai-adapter)
 - **Image**: Handles image requests like generation or edits. [More Info](https://github.com/modelflow-ai/image)
 - **Mistral Adapter**: The adapter for the Mistral API client. [More Info](https://github.com/modelflow-ai/mistral-adapter)
 - **Ollama Adapter**: The adapter for the Ollama API client. [More Info](https://github.com/modelflow-ai/ollama-adapter)

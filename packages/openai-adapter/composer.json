@@ -50,6 +50,7 @@
         "asapo/remove-vendor-plugin": "^0.1"
     },
     "suggest": {
+        "modelflow-ai/chat": "To use the chat-completion.",
         "modelflow-ai/embeddings": "To use the embeddings.",
         "modelflow-ai/image": "To use the image generation."
     },

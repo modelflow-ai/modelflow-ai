@@ -22,6 +22,7 @@ final readonly class AnthropicChatAdapterFactory implements AIChatAdapterFactory
 {
     public function __construct(
         private ClientInterface $client,
+        private int $maxTokens = 1024,
     ) {
     }
 
@@ -30,6 +31,7 @@ final readonly class AnthropicChatAdapterFactory implements AIChatAdapterFactory
         return new AnthropicChatAdapter(
             $this->client,
             Model::from($options['model']),
+            $this->maxTokens,
         );
     }
 }

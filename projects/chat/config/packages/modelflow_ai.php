@@ -43,6 +43,9 @@ return static function (ContainerConfigurator $container): void {
             'dall_e_2' => [
                 'enabled' => true,
             ],
+            'dall_e_3' => [
+                'enabled' => true,
+            ],
         ]);
     }
 
@@ -89,6 +92,42 @@ return static function (ContainerConfigurator $container): void {
                 'enabled' => true,
             ],
             'claude_3_haiku' => [
+                'enabled' => true,
+            ],
+        ]);
+    }
+
+    if (isset($_ENV['FIREWORKSAI_API_KEY'])) {
+        $providers['fireworksai'] = [
+            'enabled' => true,
+            'credentials' => [
+                'api_key' => '%env(FIREWORKSAI_API_KEY)%',
+            ],
+        ];
+
+        $adapters = array_merge($adapters, [
+            'fireworksai_llama3_1_405b' => [
+                'enabled' => true,
+            ],
+            'fireworksai_llama3_1_70b' => [
+                'enabled' => true,
+            ],
+            'fireworksai_llama3_1_8b' => [
+                'enabled' => true,
+            ],
+            'fireworksai_llama3_70b' => [
+                'enabled' => true,
+            ],
+            'fireworksai_mixtral' => [
+                'enabled' => true,
+            ],
+            'fireworksai_firefunction_v2' => [
+                'enabled' => true,
+            ],
+            'fireworksai_llava_13b' => [
+                'enabled' => true,
+            ],
+            'stable_diffusion_xl_fireworks' => [
                 'enabled' => true,
             ],
         ]);
