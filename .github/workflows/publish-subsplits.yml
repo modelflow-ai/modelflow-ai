@@ -4,12 +4,15 @@ on:
     push:
         branches:
             - '[0-9]+.[0-9]+'
+            - 'test/**'
     create:
         tags:
             - '*'
     delete:
         tags:
             - '*'
+        branches:
+            - 'test/**'
 
 jobs:
     publish_subsplits:
