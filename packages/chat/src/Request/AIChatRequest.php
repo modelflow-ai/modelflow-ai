@@ -76,6 +76,16 @@ class AIChatRequest implements CriteriaBehaviour
         return $this->options[$key] ?? $default;
     }
 
+    public function getCriteria(): CriteriaCollection
+    {
+        return $this->criteria;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
     public function matches(array $criteria): bool
     {
         return $this->criteria->matches($criteria);

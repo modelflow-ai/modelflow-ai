@@ -30,4 +30,21 @@ final readonly class ToolInfo
         public array $requiredParameters = [],
     ) {
     }
+
+    public function toArray(): array
+    {
+        return [
+            'type' => $this->type->value,
+            'name' => $this->name,
+            'description' => $this->description,
+            'parameters' => \array_map(
+                fn (Parameter $parameter) => $parameter->toArray(),
+                $this->parameters,
+            ),
+            'requiredParameters' => \array_map(
+                fn (Parameter $parameter) => $parameter->toArray(),
+                $this->requiredParameters,
+            ),
+        ];
+    }
 }

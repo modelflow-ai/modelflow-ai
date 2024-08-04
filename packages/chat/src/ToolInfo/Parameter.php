@@ -31,4 +31,16 @@ class Parameter
         public array|string|null $itemsOrProperties = null,
     ) {
     }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'type' => $this->type,
+            'description' => $this->description,
+            'enum' => $this->enum,
+            'format' => $this->format,
+            'itemsOrProperties' => $this->itemsOrProperties,
+        ];
+    }
 }
