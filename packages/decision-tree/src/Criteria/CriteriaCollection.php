@@ -64,4 +64,23 @@ readonly class CriteriaCollection
     {
         return new self(\array_merge($this->all, $features));
     }
+
+    /**
+     * @return array<array{
+     *     name: string,
+     *     value: mixed,
+     *     class: class-string<CriteriaInterface>,
+     * }>
+     */
+    public function toArray(): array
+    {
+        return \array_map(
+            fn (CriteriaInterface $criteria) => [
+                'name' => $criteria->getName(),
+                'value' => $criteria->getValue(),
+                'class' => $criteria::class,
+            ],
+            $this->all,
+        );
+    }
 }
