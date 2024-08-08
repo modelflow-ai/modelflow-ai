@@ -13,6 +13,21 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
+use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use ModelflowAi\Experts\ResponseFormat\ResponseFormatInterface;
+
 interface ExpertInterface
 {
+    public function getName(): string;
+
+    public function getDescription(): string;
+
+    public function getInstructions(): string;
+
+    /**
+     * @return CriteriaInterface[]
+     */
+    public function getCriteria(): array;
+
+    public function getResponseFormat(): ?ResponseFormatInterface;
 }

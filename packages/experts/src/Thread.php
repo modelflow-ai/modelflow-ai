@@ -62,12 +62,12 @@ class Thread implements ThreadInterface
     public function run(): AIChatResponse
     {
         $builder = $this->requestHandler->createRequest()
-            ->addSystemMessage($this->expert->instructions)
-            ->addCriteria($this->expert->criteria)
+            ->addSystemMessage($this->expert->getInstructions())
+            ->addCriteria($this->expert->getCriteria())
             ->asJson();
 
-        if ($this->expert->responseFormat instanceof ResponseFormat\ResponseFormatInterface) {
-            $builder->addSystemMessage($this->expert->responseFormat->format());
+        if ($this->expert->getResponseFormat() instanceof ResponseFormat\ResponseFormatInterface) {
+            $builder->addSystemMessage($this->expert->getResponseFormat()->format());
         }
 
         if ([] !== $this->context) {
