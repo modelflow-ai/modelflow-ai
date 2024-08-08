@@ -15,5 +15,5 @@ namespace ModelflowAi\Experts;
 
 interface ThreadFactoryInterface
 {
-    public function createThread(Expert $expert): Thread;
+    public function createThread(ExpertInterface $expert): Thread;
 }

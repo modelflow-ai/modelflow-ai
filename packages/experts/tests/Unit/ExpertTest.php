@@ -28,11 +28,11 @@ class ExpertTest extends TestCase
             [CapabilityCriteria::SMART],
         );
 
-        $this->assertSame('name', $expert->name);
-        $this->assertSame('description', $expert->description);
-        $this->assertSame('instructions', $expert->instructions);
-        $this->assertSame([CapabilityCriteria::SMART], $expert->criteria);
-        $this->assertNull($expert->responseFormat);
+        $this->assertSame('name', $expert->getName());
+        $this->assertSame('description', $expert->getDescription());
+        $this->assertSame('instructions', $expert->getInstructions());
+        $this->assertSame([CapabilityCriteria::SMART], $expert->getCriteria());
+        $this->assertNull($expert->getResponseFormat());
     }
 
     public function testConstructWithResponseFormat(): void
@@ -45,10 +45,10 @@ class ExpertTest extends TestCase
             new JsonSchemaResponseFormat([]),
         );
 
-        $this->assertSame('name', $expert->name);
-        $this->assertSame('description', $expert->description);
-        $this->assertSame('instructions', $expert->instructions);
-        $this->assertSame([CapabilityCriteria::SMART], $expert->criteria);
-        $this->assertNotNull($expert->responseFormat);
+        $this->assertSame('name', $expert->getName());
+        $this->assertSame('description', $expert->getDescription());
+        $this->assertSame('instructions', $expert->getInstructions());
+        $this->assertSame([CapabilityCriteria::SMART], $expert->getCriteria());
+        $this->assertNotNull($expert->getResponseFormat());
     }
 }

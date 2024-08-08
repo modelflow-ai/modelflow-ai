@@ -16,17 +16,42 @@ namespace ModelflowAi\Experts;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 use ModelflowAi\Experts\ResponseFormat\ResponseFormatInterface;
 
-class Expert
+readonly class Expert implements ExpertInterface
 {
     /**
      * @param CriteriaInterface[] $criteria
      */
     public function __construct(
-        public string $name,
-        public string $description,
-        public string $instructions,
-        public array $criteria,
-        public ?ResponseFormatInterface $responseFormat = null,
+        private string $name,
+        private string $description,
+        private string $instructions,
+        private array $criteria,
+        private ?ResponseFormatInterface $responseFormat = null,
     ) {
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getInstructions(): string
+    {
+        return $this->instructions;
+    }
+
+    public function getCriteria(): array
+    {
+        return $this->criteria;
+    }
+
+    public function getResponseFormat(): ?ResponseFormatInterface
+    {
+        return $this->responseFormat;
     }
 }

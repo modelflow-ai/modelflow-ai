@@ -22,7 +22,7 @@ class ThreadFactory implements ThreadFactoryInterface
     ) {
     }
 
-    public function createThread(Expert $expert): Thread
+    public function createThread(ExpertInterface $expert): Thread
     {
         return new Thread($this->requestHandler, $expert);
     }
