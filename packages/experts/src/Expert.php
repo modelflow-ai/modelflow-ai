@@ -16,7 +16,7 @@ namespace ModelflowAi\Experts;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 use ModelflowAi\Experts\ResponseFormat\ResponseFormatInterface;
 
-class Expert
+class Expert implements ExpertInterface
 {
     /**
      * @param CriteriaInterface[] $criteria

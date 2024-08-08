@@ -31,7 +31,7 @@ class Thread implements ThreadInterface
 
     public function __construct(
         private readonly AIChatRequestHandlerInterface $requestHandler,
-        private readonly Expert $expert,
+        private readonly ExpertInterface $expert,
     ) {
     }
 

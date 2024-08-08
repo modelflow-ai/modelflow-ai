@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
-interface ThreadFactoryInterface
+interface ExpertInterface
 {
-    public function createThread(ExpertInterface $expert): Thread;
 }
