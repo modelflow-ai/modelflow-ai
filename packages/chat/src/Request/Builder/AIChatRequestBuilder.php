@@ -64,6 +64,20 @@ final class AIChatRequestBuilder
         $this->criteria = new CriteriaCollection();
     }
 
+    /**
+     * @param array{
+     *      format?: "json"|null,
+     *      streamed?: bool,
+     *      toolChoice?: ToolChoiceEnum,
+     *  } $options
+     */
+    public function addOptions(array $options): self
+    {
+        $this->options = \array_merge($this->options, $options);
+
+        return $this;
+    }
+
     public function asJson(): self
     {
         $this->options['format'] = 'json';

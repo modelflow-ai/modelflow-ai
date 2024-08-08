@@ -28,6 +28,15 @@ class AIChatRequestBuilderTest extends TestCase
 {
     use ProphecyTrait;
 
+    public function testAddOptions(): void
+    {
+        $builder = new AIChatRequestBuilder(fn () => null);
+
+        $builder->addOptions(['format' => 'json']);
+
+        $this->assertSame('json', $builder->build()->getOption('format'));
+    }
+
     public function testAsJson(): void
     {
         $builder = new AIChatRequestBuilder(fn () => null);
