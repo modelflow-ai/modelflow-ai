@@ -13,11 +13,19 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Response\AIChatResponse;
 
 interface ThreadInterface
 {
-    public function addContext(string $key, string $data): self;
+    public function addContext(string $key, mixed $data): self;
 
     public function run(): AIChatResponse;
+
+    public function addMessage(AIChatMessage $message): self;
+
+    /**
+     * @param AIChatMessage[] $messages
+     */
+    public function addMessages(array $messages): self;
 }
