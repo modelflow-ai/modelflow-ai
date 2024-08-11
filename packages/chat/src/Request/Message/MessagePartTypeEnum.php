@@ -19,4 +19,6 @@ enum MessagePartTypeEnum: string
     case BASE64_IMAGE = 'base64-image';
     case TOOL_CALLS = 'tool-calls';
     case TOOL_CALL = 'tool-call';
+
+    case CUSTOM = 'custom';
 }
