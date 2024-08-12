@@ -18,6 +18,7 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\Response\Usage;
 use Webmozart\Assert\Assert;
 
 class FakeChatAdapter implements AIChatAdapterInterface
@@ -51,7 +52,7 @@ class FakeChatAdapter implements AIChatAdapterInterface
 
         Assert::isInstanceOf($message, AIChatResponseMessage::class);
 
-        return new AIChatResponse($request, $message);
+        return new AIChatResponse($request, $message, new Usage(0, 0, 0));
     }
 
     public function supports(object $request): bool

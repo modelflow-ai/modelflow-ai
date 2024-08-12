@@ -20,6 +20,7 @@ use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\FeatureCriteria;
@@ -67,7 +68,11 @@ class AIChatRequestTest extends TestCase
         $message2 = new AIChatMessage(AIChatMessageRoleEnum::USER, 'Test content 2');
         $criteriaCollection = new CriteriaCollection();
 
-        $requestHandler = fn ($request) => new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Response content 1'));
+        $requestHandler = fn ($request) => new AIChatResponse(
+            $request,
+            new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Response content 1'),
+            new Usage(0, 0, 0),
+        );
         $request = new AIChatRequest(new AIChatMessageCollection($message1, $message2), $criteriaCollection, [], [], [], $requestHandler);
 
         $response = $request->execute();

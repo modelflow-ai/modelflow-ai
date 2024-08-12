@@ -80,6 +80,9 @@ final class OpenaiChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame("\n\nHello there, this is a fake chat response.", $result->getMessage()->content);
+        $this->assertSame(9, $result->getUsage()?->inputTokens);
+        $this->assertSame(12, $result->getUsage()->outputTokens);
+        $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestAsJson(): void
@@ -123,6 +126,9 @@ final class OpenaiChatAdapterTest extends TestCase
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(9, $result->getUsage()?->inputTokens);
+        $this->assertSame(12, $result->getUsage()->outputTokens);
+        $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestStreamed(): void
@@ -197,6 +203,9 @@ final class OpenaiChatAdapterTest extends TestCase
             'required' => 'Test required 2',
             'optional' => 'Test optional 2',
         ], $toolCall2->arguments);
+        $this->assertSame(73, $result->getUsage()?->inputTokens);
+        $this->assertSame(24, $result->getUsage()->outputTokens);
+        $this->assertSame(97, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestStreamedWithTools(): void

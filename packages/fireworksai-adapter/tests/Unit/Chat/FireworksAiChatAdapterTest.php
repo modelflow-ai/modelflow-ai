@@ -80,6 +80,9 @@ final class FireworksAiChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame("\n\nHello there, this is a fake chat response.", $result->getMessage()->content);
+        $this->assertSame(9, $result->getUsage()?->inputTokens);
+        $this->assertSame(12, $result->getUsage()->outputTokens);
+        $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestAsJson(): void
@@ -123,6 +126,9 @@ final class FireworksAiChatAdapterTest extends TestCase
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(9, $result->getUsage()?->inputTokens);
+        $this->assertSame(12, $result->getUsage()->outputTokens);
+        $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestStreamed(): void

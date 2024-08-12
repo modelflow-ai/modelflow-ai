@@ -57,7 +57,7 @@ final class OllamaChatAdapterTest extends TestCase
             'total_duration' => 6_259_208_916,
             'load_duration' => 3_882_375,
             'prompt_eval_duration' => 267_650_000,
-            'prompt_eval_count' => 0,
+            'prompt_eval_count' => 245,
             'eval_count' => 169,
             'eval_duration' => 5_981_849_000,
         ], MetaInformation::from([])));
@@ -74,6 +74,9 @@ final class OllamaChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame('Lorem Ipsum', $result->getMessage()->content);
+        $this->assertSame(245, $result->getUsage()?->inputTokens);
+        $this->assertSame(169, $result->getUsage()->outputTokens);
+        $this->assertSame(414, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestAsJson(): void

@@ -20,6 +20,7 @@ use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use PHPUnit\Framework\TestCase;
@@ -55,6 +56,7 @@ class ThreadTest extends TestCase
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
+                new Usage(0, 0, 0),
             )));
 
         $result = $thread->run();
@@ -82,6 +84,7 @@ class ThreadTest extends TestCase
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
+                new Usage(0, 0, 0),
             )));
 
         $result = $thread->run();
@@ -114,6 +117,7 @@ class ThreadTest extends TestCase
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
+                new Usage(0, 0, 0),
             )));
 
         $result = $thread->run();
@@ -167,6 +171,7 @@ class ThreadTest extends TestCase
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
                 $request,
                 new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
+                new Usage(0, 0, 0),
             )));
 
         $result = $thread->run();

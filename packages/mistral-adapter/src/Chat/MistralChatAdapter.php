@@ -20,6 +20,7 @@ use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
+use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
 use ModelflowAi\Mistral\ClientInterface;
@@ -115,6 +116,11 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
                         $choice->message->toolCalls,
                     ),
                 ),
+                new Usage(
+                    $result->usage->promptTokens,
+                    $result->usage->completionTokens ?? 0,
+                    $result->usage->totalTokens,
+                ),
             );
         }
 
@@ -123,6 +129,11 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
             new AIChatResponseMessage(
                 AIChatMessageRoleEnum::from($choice->message->role),
                 $choice->message->content ?? '',
+            ),
+            new Usage(
+                $result->usage->promptTokens,
+                $result->usage->completionTokens ?? 0,
+                $result->usage->totalTokens,
             ),
         );
     }

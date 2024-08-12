@@ -42,6 +42,18 @@ class AIChatResponseStreamTest extends TestCase
         $this->assertSame('LoremIpsum', $response->getMessage()->content);
     }
 
+    public function testGetUsage(): void
+    {
+        $request = $this->prophesize(AIChatRequest::class);
+
+        $response = new AIChatResponseStream($request->reveal(), new \ArrayIterator([
+            new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Lorem'),
+            new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Ipsum'),
+        ]));
+
+        $this->assertNull($response->getUsage());
+    }
+
     public function testGetRequest(): void
     {
         $request = $this->prophesize(AIChatRequest::class);
