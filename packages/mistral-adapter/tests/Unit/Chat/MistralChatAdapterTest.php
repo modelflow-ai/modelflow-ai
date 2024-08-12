@@ -113,7 +113,7 @@ final class MistralChatAdapterTest extends TestCase
             'usage' => [
                 'prompt_tokens' => 312,
                 'completion_tokens' => 324,
-                'total_tokens' => 336,
+                'total_tokens' => 636,
             ],
         ], MetaInformation::from([])));
 
@@ -127,6 +127,9 @@ final class MistralChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame('Lorem Ipsum', $result->getMessage()->content);
+        $this->assertSame(312, $result->getUsage()?->inputTokens);
+        $this->assertSame(324, $result->getUsage()->outputTokens);
+        $this->assertSame(636, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestAsJsonIgnoreForNonLargeModel(): void
@@ -204,7 +207,7 @@ final class MistralChatAdapterTest extends TestCase
             'usage' => [
                 'prompt_tokens' => 312,
                 'completion_tokens' => 324,
-                'total_tokens' => 336,
+                'total_tokens' => 636,
             ],
         ], MetaInformation::from([])));
 
@@ -218,6 +221,9 @@ final class MistralChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame('{"message": "Lorem Ipsum"}', $result->getMessage()->content);
+        $this->assertSame(312, $result->getUsage()?->inputTokens);
+        $this->assertSame(324, $result->getUsage()->outputTokens);
+        $this->assertSame(636, $result->getUsage()->totalTokens);
     }
 
     public function testHandleRequestStreamed(): void

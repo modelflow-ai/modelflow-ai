@@ -20,6 +20,7 @@ readonly class AIChatResponse
     public function __construct(
         private AIChatRequest $request,
         private AIChatResponseMessage $message,
+        private ?Usage $usage,
     ) {
     }
 
@@ -31,5 +32,10 @@ readonly class AIChatResponse
     public function getMessage(): AIChatResponseMessage
     {
         return $this->message;
+    }
+
+    public function getUsage(): ?Usage
+    {
+        return $this->usage;
     }
 }

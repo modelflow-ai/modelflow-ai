@@ -21,6 +21,7 @@ use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -68,6 +69,7 @@ class AIChatRequestHandlerTest extends TestCase
         $response = new AIChatResponse(
             $chatRequest,
             new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Response content'),
+            new Usage(0, 0, 0),
         );
         $this->adapter->handleRequest(Argument::type(AIChatRequest::class))->willReturn($response);
         $this->decisionTree->determineAdapter($chatRequest)->willReturn($this->adapter->reveal());

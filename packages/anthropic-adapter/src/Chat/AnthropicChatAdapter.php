@@ -26,6 +26,7 @@ use ModelflowAi\Chat\Request\Message\TextPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\Response\Usage;
 
 /**
  * @phpstan-import-type Parameters from MessagesInterface
@@ -114,6 +115,11 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
             new AIChatResponseMessage(
                 AIChatMessageRoleEnum::from($result->role),
                 $result->content[0]->text ?? '',
+            ),
+            new Usage(
+                $result->usage->promptTokens,
+                $result->usage->completionTokens ?? 0,
+                $result->usage->totalTokens,
             ),
         );
     }

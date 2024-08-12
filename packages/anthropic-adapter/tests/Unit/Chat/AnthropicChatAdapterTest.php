@@ -45,9 +45,16 @@ final class AnthropicChatAdapterTest extends TestCase
 
         $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $this->assertTrue($adapter->supports($request));
     }
@@ -58,13 +65,20 @@ final class AnthropicChatAdapterTest extends TestCase
 
         $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            [],
+            fn () => null,
+        );
 
         $this->assertFalse($adapter->supports($request));
     }
@@ -72,17 +86,33 @@ final class AnthropicChatAdapterTest extends TestCase
     public function testHandleRequest(): void
     {
         $mockResponseMatcher = new MockResponseMatcher();
-        $mockResponseMatcher->addResponse(PartialPayload::create(
-            'messages',
-            DataFixtures::MESSAGES_CREATE_REQUEST,
-        ), new ObjectResponse(DataFixtures::MESSAGES_CREATE_RESPONSE, MetaInformation::empty()));
+        $mockResponseMatcher->addResponse(
+            PartialPayload::create(
+                'messages',
+                DataFixtures::MESSAGES_CREATE_REQUEST,
+            ),
+            new ObjectResponse(DataFixtures::MESSAGES_CREATE_RESPONSE, MetaInformation::empty()),
+        );
 
         $client = new Client(new MockTransport($mockResponseMatcher));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][0]['content']),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content']),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(
+                    AIChatMessageRoleEnum::SYSTEM,
+                    DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][0]['content'],
+                ),
+                new AIChatMessage(
+                    AIChatMessageRoleEnum::USER,
+                    DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content'],
+                ),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU, 100);
         $result = $adapter->handleRequest($request);
@@ -90,6 +120,18 @@ final class AnthropicChatAdapterTest extends TestCase
         $this->assertInstanceOf(AIChatResponse::class, $result);
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $this->assertSame(DataFixtures::MESSAGES_CREATE_RESPONSE['content'][0]['text'], $result->getMessage()->content);
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['input_tokens'],
+            $result->getUsage()?->inputTokens,
+        );
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['output_tokens'],
+            $result->getUsage()->outputTokens,
+        );
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['input_tokens'] + DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['output_tokens'],
+            $result->getUsage()->totalTokens,
+        );
     }
 
     public function testHandleRequestStreamed(): void

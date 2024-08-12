@@ -20,6 +20,7 @@ use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
+use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
 use OpenAI\Contracts\ClientContract;
@@ -113,6 +114,11 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
                         $choice->message->toolCalls,
                     ),
                 ),
+                new Usage(
+                    $result->usage->promptTokens,
+                    $result->usage->completionTokens ?? 0,
+                    $result->usage->totalTokens,
+                ),
             );
         }
 
@@ -121,6 +127,11 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
             new AIChatResponseMessage(
                 AIChatMessageRoleEnum::from($choice->message->role),
                 $choice->message->content ?? '',
+            ),
+            new Usage(
+                $result->usage->promptTokens,
+                $result->usage->completionTokens ?? 0,
+                $result->usage->totalTokens,
             ),
         );
     }
@@ -152,6 +163,8 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      */
     protected function createStreamed(AIChatRequest $request, array $parameters): AIChatResponse
     {
+        $parameters['stream_options'] = ['include_usage' => true];
+
         $responses = $this->client->chat()->createStreamed($parameters);
 
         return new AIChatResponseStream(
