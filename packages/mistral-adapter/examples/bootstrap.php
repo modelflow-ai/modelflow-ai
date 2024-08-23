@@ -38,10 +38,10 @@ if (!$mistralApiKey) {
 
 $mistralClient = Mistral::client($mistralApiKey);
 
-$largeAdapter = new MistralChatAdapter($mistralClient, Model::LARGE);
-$mediumAdapter = new MistralChatAdapter($mistralClient, Model::MEDIUM);
-$smallAdapter = new MistralChatAdapter($mistralClient, Model::SMALL);
-$tinyAdapter = new MistralChatAdapter($mistralClient, Model::TINY);
+$largeAdapter = new MistralChatAdapter($mistralClient, Model::LARGE->value);
+$mediumAdapter = new MistralChatAdapter($mistralClient, Model::MEDIUM->value);
+$smallAdapter = new MistralChatAdapter($mistralClient, Model::SMALL->value);
+$tinyAdapter = new MistralChatAdapter($mistralClient, Model::TINY->value);
 
 $adapter[] = new DecisionRule($largeAdapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($mediumAdapter, [CapabilityCriteria::ADVANCED]);

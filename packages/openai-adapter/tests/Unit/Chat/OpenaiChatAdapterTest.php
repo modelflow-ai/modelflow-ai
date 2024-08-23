@@ -85,6 +85,55 @@ final class OpenaiChatAdapterTest extends TestCase
         $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
+    public function testHandleRequestWithOptions(): void
+    {
+        $chat = $this->prophesize(ChatContract::class);
+        $client = $this->prophesize(ClientContract::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $chat->create([
+            'model' => 'gpt-4',
+            'messages' => [
+                ['role' => 'system', 'content' => 'System message'],
+                ['role' => 'user', 'content' => 'User message'],
+                ['role' => 'assistant', 'content' => 'Assistant message'],
+            ],
+            'seed' => 123,
+            'temperature' => 0.5,
+        ])->willReturn(CreateResponse::from(
+            CreateResponseFixture::ATTRIBUTES,
+            MetaInformation::from([
+                'x-request-id' => ['123'],
+                'openai-model' => ['gpt-4'],
+                'openai-organization' => ['org'],
+                'openai-version' => ['2021-10-10'],
+                'openai-processing-ms' => ['123'],
+                'x-ratelimit-limit-requests' => ['123'],
+                'x-ratelimit-limit-tokens' => ['123'],
+                'x-ratelimit-remaining-requests' => ['123'],
+                'x-ratelimit-remaining-tokens' => ['123'],
+                'x-ratelimit-reset-requests' => ['123'],
+                'x-ratelimit-reset-tokens' => ['123'],
+            ]),
+        ));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+        ), new CriteriaCollection(), [], [], [
+            'seed' => 123,
+            'temperature' => 0.5,
+        ], fn () => null);
+
+        $adapter = new OpenaiChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame("\n\nHello there, this is a fake chat response.", $result->getMessage()->content);
+    }
+
     public function testHandleRequestAsJson(): void
     {
         $chat = $this->prophesize(ChatContract::class);

@@ -79,6 +79,56 @@ final class OllamaChatAdapterTest extends TestCase
         $this->assertSame(414, $result->getUsage()->totalTokens);
     }
 
+    public function testHandleRequestWithOptions(): void
+    {
+        $chat = $this->prophesize(ChatInterface::class);
+        $client = $this->prophesize(ClientInterface::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $chat->create([
+            'model' => 'llama2',
+            'messages' => [
+                ['role' => 'system', 'content' => 'System message'],
+                ['role' => 'user', 'content' => 'User message'],
+                ['role' => 'assistant', 'content' => 'Assistant message'],
+            ],
+            'options' => [
+                'seed' => 123,
+                'temperature' => 0.5,
+            ],
+        ])->willReturn(CreateResponse::from([
+            'model' => 'llama2',
+            'created_at' => '2024-01-13T12:01:31.929209Z',
+            'message' => [
+                'role' => 'assistant',
+                'content' => 'Lorem Ipsum',
+            ],
+            'done' => true,
+            'total_duration' => 6_259_208_916,
+            'load_duration' => 3_882_375,
+            'prompt_eval_duration' => 267_650_000,
+            'prompt_eval_count' => 0,
+            'eval_count' => 169,
+            'eval_duration' => 5_981_849_000,
+        ], MetaInformation::from([])));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+        ), new CriteriaCollection(), [], [], [
+            'seed' => 123,
+            'temperature' => 0.5,
+        ], fn () => null);
+
+        $adapter = new OllamaChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame('Lorem Ipsum', $result->getMessage()->content);
+    }
+
     public function testHandleRequestAsJson(): void
     {
         $chat = $this->prophesize(ChatInterface::class);

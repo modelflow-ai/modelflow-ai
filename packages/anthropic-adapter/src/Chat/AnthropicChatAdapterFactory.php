@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace ModelflowAi\AnthropicAdapter\Chat;
 
 use ModelflowAi\Anthropic\ClientInterface;
-use ModelflowAi\Anthropic\Model;
 use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 
@@ -30,7 +29,7 @@ final readonly class AnthropicChatAdapterFactory implements AIChatAdapterFactory
     {
         return new AnthropicChatAdapter(
             $this->client,
-            Model::from($options['model']),
+            $options['model'],
             $this->maxTokens,
         );
     }

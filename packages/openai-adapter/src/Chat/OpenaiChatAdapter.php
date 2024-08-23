@@ -52,6 +52,16 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
             $parameters['response_format'] = ['type' => 'json_object'];
         }
 
+        if ($seed = $request->getOption('seed')) {
+            /** @var int $seed */
+            $parameters['seed'] = $seed;
+        }
+
+        if ($temperature = $request->getOption('temperature')) {
+            /** @var float $temperature */
+            $parameters['temperature'] = $temperature;
+        }
+
         if ($request->hasTools()) {
             $parameters['tools'] = ToolFormatter::formatTools($request->getToolInfos());
             $toolChoice = $request->getOption('toolChoice');
@@ -91,6 +101,8 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      *         },
      *     }>,
      *     tool_choice?: string,
+     *     seed?: int,
+     *     temperature?: float,
      * } $parameters
      */
     protected function create(AIChatRequest $request, array $parameters): AIChatResponse
@@ -159,6 +171,8 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      *         },
      *     }>,
      *      tool_choice?: string,
+     *      seed?: int,
+     *      temperature?: float,
      * } $parameters
      */
     protected function createStreamed(AIChatRequest $request, array $parameters): AIChatResponse

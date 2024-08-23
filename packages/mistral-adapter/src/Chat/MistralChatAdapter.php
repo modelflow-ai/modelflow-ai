@@ -33,18 +33,18 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
 {
     public function __construct(
         private ClientInterface $client,
-        private Model $model = Model::TINY,
+        private string $model = Model::TINY->value,
     ) {
     }
 
     public function handleRequest(AIChatRequest $request): AIChatResponse
     {
         $parameters = [
-            'model' => $this->model->value,
+            'model' => $this->model,
             'messages' => $request->getMessages()->toArray(),
         ];
 
-        if ($this->model->jsonSupported()) {
+        if (Model::from($this->model)->jsonSupported()) {
             /** @var string|null $format */
             $format = $request->getOption('format');
             Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
@@ -61,6 +61,14 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
                 Assert::isInstanceOf($toolChoice, ToolChoiceEnum::class);
                 $parameters['tool_choice'] = $toolChoice->value;
             }
+        }
+
+        if ($seed = $request->getOption('seed')) {
+            $parameters['random_seed'] = $seed;
+        }
+
+        if ($temperature = $request->getOption('temperature')) {
+            $parameters['temperature'] = $temperature;
         }
 
         if ($request->getOption('streamed', false)) {
@@ -237,6 +245,6 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
     public function supports(object $request): bool
     {
         return $request instanceof AIChatRequest
-            && (!$request->hasTools() || $this->model->toolsSupported());
+            && (!$request->hasTools() || Model::from($this->model)->toolsSupported());
     }
 }

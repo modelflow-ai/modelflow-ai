@@ -47,6 +47,16 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
             $attributes['format'] = $format;
         }
 
+        if ($seed = $request->getOption('seed')) {
+            /** @var int $seed */
+            $attributes['options']['seed'] = $seed;
+        }
+
+        if ($temperature = $request->getOption('temperature')) {
+            /** @var float $temperature */
+            $attributes['options']['temperature'] = $temperature;
+        }
+
         if ($request->getOption('streamed', false)) {
             return $this->createStreamed($request, $attributes);
         }
@@ -62,6 +72,10 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
      *         content: string,
      *     }>,
      *     format?: "json",
+     *     options?: array{
+     *         seed?: int,
+     *         temperature?: float,
+     *     },
      * } $parameters
      */
     protected function create(AIChatRequest $request, array $parameters): AIChatResponse
@@ -90,6 +104,10 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
      *         content: string,
      *     }>,
      *     format?: "json",
+     *     options?: array{
+     *         seed?: int,
+     *         temperature?: float,
+     *     },
      * } $parameters
      */
     protected function createStreamed(AIChatRequest $request, array $parameters): AIChatResponse

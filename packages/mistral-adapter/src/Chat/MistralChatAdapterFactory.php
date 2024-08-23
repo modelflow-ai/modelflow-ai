@@ -16,7 +16,6 @@ namespace ModelflowAi\MistralAdapter\Chat;
 use ModelflowAi\Chat\Adapter\AIChatAdapterFactoryInterface;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Mistral\ClientInterface;
-use ModelflowAi\Mistral\Model;
 
 final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryInterface
 {
@@ -29,7 +28,7 @@ final readonly class MistralChatAdapterFactory implements AIChatAdapterFactoryIn
     {
         return new MistralChatAdapter(
             $this->client,
-            Model::from($options['model']),
+            $options['model'],
         );
     }
 }
