@@ -19,6 +19,7 @@ enum Model: string
     case SMALL = 'mistral-small-latest';
     case MEDIUM = 'mistral-medium-latest';
     case LARGE = 'mistral-large-latest';
+    case NEMO = 'open-mistral-nemo';
     case EMBED = 'mistral-embed';
 
     public function jsonSupported(): bool

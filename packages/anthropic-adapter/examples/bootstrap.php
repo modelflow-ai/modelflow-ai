@@ -38,9 +38,9 @@ if (!$anthropicApiKey) {
 
 $anthropicClient = Anthropic::client($anthropicApiKey);
 
-$opusAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_OPUS);
-$sonnetAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_SONNET);
-$haikuAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_HAIKU);
+$opusAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_OPUS->value);
+$sonnetAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_SONNET->value);
+$haikuAdapter = new AnthropicChatAdapter($anthropicClient, Model::CLAUDE_3_HAIKU->value);
 
 $adapter[] = new DecisionRule($opusAdapter, [CapabilityCriteria::SMART]);
 $adapter[] = new DecisionRule($sonnetAdapter, [CapabilityCriteria::INTERMEDIATE]);

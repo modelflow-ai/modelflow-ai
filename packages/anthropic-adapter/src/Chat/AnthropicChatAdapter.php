@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace ModelflowAi\AnthropicAdapter\Chat;
 
 use ModelflowAi\Anthropic\ClientInterface;
-use ModelflowAi\Anthropic\Model;
 use ModelflowAi\Anthropic\Resources\MessagesInterface;
 use ModelflowAi\Anthropic\Responses\Messages\CreateStreamedResponse;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
@@ -41,7 +40,7 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
 
     public function __construct(
         private ClientInterface $client,
-        private Model $model,
+        private string $model,
         private int $maxTokens = 1024,
     ) {
     }
@@ -50,10 +49,19 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
     {
         /** @var Parameters $parameters */
         $parameters = [
-            'model' => $this->model->value,
+            'model' => $this->model,
             'messages' => [],
             'max_tokens' => $this->maxTokens,
         ];
+
+        if ($request->getOption('seed')) {
+            @\trigger_error('Seed option is not supported by Anthropic.', \E_USER_WARNING);
+        }
+
+        if ($temperature = $request->getOption('temperature')) {
+            /** @var float $temperature */
+            $parameters['temperature'] = $temperature;
+        }
 
         $messages = [];
         /** @var AIChatMessage $aiMessage */

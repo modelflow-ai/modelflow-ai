@@ -96,6 +96,14 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
             }
         }
 
+        if ($request->getOption('seed')) {
+            @\trigger_error('Seed option is not supported by FireworksAi.', \E_USER_WARNING);
+        }
+
+        if ($temperature = $request->getOption('temperature')) {
+            $parameters['temperature'] = $temperature;
+        }
+
         if ($request->getOption('streamed', false)) {
             return $this->createStreamed($request, $parameters);
         }

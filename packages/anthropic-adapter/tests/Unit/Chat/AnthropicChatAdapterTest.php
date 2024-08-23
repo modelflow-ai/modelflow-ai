@@ -43,7 +43,7 @@ final class AnthropicChatAdapterTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET);
+        $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET->value);
 
         $request = new AIChatRequest(
             new AIChatMessageCollection(
@@ -63,7 +63,7 @@ final class AnthropicChatAdapterTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET);
+        $adapter = new AnthropicChatAdapter($client->reveal(), Model::CLAUDE_3_SONNET->value);
 
         $request = new AIChatRequest(
             new AIChatMessageCollection(
@@ -114,7 +114,36 @@ final class AnthropicChatAdapterTest extends TestCase
             fn () => null,
         );
 
-        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU, 100);
+        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame(DataFixtures::MESSAGES_CREATE_RESPONSE['content'][0]['text'], $result->getMessage()->content);
+    }
+
+    public function testHandleRequestWithOptions(): void
+    {
+        $payload = DataFixtures::MESSAGES_CREATE_REQUEST;
+        $payload['temperature'] = 0.5;
+
+        $mockResponseMatcher = new MockResponseMatcher();
+        $mockResponseMatcher->addResponse(PartialPayload::create(
+            'messages',
+            $payload,
+        ), new ObjectResponse(DataFixtures::MESSAGES_CREATE_RESPONSE, MetaInformation::empty()));
+
+        $client = new Client(new MockTransport($mockResponseMatcher));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][0]['content']),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content']),
+        ), new CriteriaCollection(), [], [], [
+            'seed' => 100,
+            'temperature' => 0.5,
+        ], fn () => null);
+
+        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
@@ -154,7 +183,7 @@ final class AnthropicChatAdapterTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::USER, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content']),
         ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
 
-        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU, 100);
+        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponseStream::class, $result);

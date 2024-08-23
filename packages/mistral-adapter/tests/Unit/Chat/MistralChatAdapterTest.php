@@ -41,7 +41,7 @@ final class MistralChatAdapterTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::TINY);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::TINY->value);
 
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
@@ -54,7 +54,7 @@ final class MistralChatAdapterTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
 
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
@@ -71,7 +71,7 @@ final class MistralChatAdapterTest extends TestCase
     {
         $client = $this->prophesize(ClientInterface::class);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::TINY);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::TINY->value);
 
         $request = new AIChatRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
@@ -130,6 +130,56 @@ final class MistralChatAdapterTest extends TestCase
         $this->assertSame(312, $result->getUsage()?->inputTokens);
         $this->assertSame(324, $result->getUsage()->outputTokens);
         $this->assertSame(636, $result->getUsage()->totalTokens);
+    }
+
+    public function testHandleRequestWithOptions(): void
+    {
+        $chat = $this->prophesize(ChatInterface::class);
+        $client = $this->prophesize(ClientInterface::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $chat->create([
+            'model' => Model::TINY->value,
+            'messages' => [
+                ['role' => 'user', 'content' => 'some text'],
+            ],
+            'random_seed' => 123,
+            'temperature' => 0.5,
+        ])->willReturn(CreateResponse::from([
+            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+            'object' => 'chat.completion',
+            'created' => 1_702_256_327,
+            'model' => Model::TINY->value,
+            'choices' => [
+                [
+                    'index' => 1,
+                    'message' => [
+                        'role' => 'assistant',
+                        'content' => 'Lorem Ipsum',
+                    ],
+                    'finish_reason' => 'testFinishReason',
+                ],
+            ],
+            'usage' => [
+                'prompt_tokens' => 312,
+                'completion_tokens' => 324,
+                'total_tokens' => 336,
+            ],
+        ], MetaInformation::from([])));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+        ), new CriteriaCollection(), [], [], [
+            'seed' => 123,
+            'temperature' => 0.5,
+        ], fn () => null);
+
+        $adapter = new MistralChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame('Lorem Ipsum', $result->getMessage()->content);
     }
 
     public function testHandleRequestAsJsonIgnoreForNonLargeModel(): void
@@ -215,7 +265,7 @@ final class MistralChatAdapterTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
         ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
@@ -376,7 +426,7 @@ final class MistralChatAdapterTest extends TestCase
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
@@ -505,7 +555,7 @@ final class MistralChatAdapterTest extends TestCase
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
         ], ['streamed' => true], fn () => null);
 
-        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE);
+        $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponseStream::class, $result);

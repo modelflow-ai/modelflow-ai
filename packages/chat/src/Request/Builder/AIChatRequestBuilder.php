@@ -69,6 +69,8 @@ final class AIChatRequestBuilder
      *      format?: "json"|null,
      *      streamed?: bool,
      *      toolChoice?: ToolChoiceEnum,
+     *      seed?: int,
+     *      temperature?: float,
      *  } $options
      */
     public function addOptions(array $options): self

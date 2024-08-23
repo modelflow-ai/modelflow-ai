@@ -29,7 +29,7 @@ final readonly class MistralEmbeddingsAdapterFactory implements EmbeddingsAdapte
     {
         return new MistralEmbeddingAdapter(
             $this->client,
-            Model::from(Model::EMBED->value),
+            Model::EMBED->value,
         );
     }
 }

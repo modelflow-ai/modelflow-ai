@@ -21,14 +21,14 @@ final readonly class MistralEmbeddingAdapter implements EmbeddingAdapterInterfac
 {
     public function __construct(
         private ClientInterface $client,
-        private Model $model = Model::EMBED,
+        private string $model = Model::EMBED->value,
     ) {
     }
 
     public function embedText(string $text): array
     {
         $response = $this->client->embeddings()->create([
-            'model' => $this->model->value,
+            'model' => $this->model,
             'input' => [$text],
         ]);
 

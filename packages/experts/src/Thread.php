@@ -63,11 +63,11 @@ class Thread implements ThreadInterface
     {
         $builder = $this->requestHandler->createRequest()
             ->addSystemMessage($this->expert->getInstructions())
-            ->addCriteria($this->expert->getCriteria())
-            ->asJson();
+            ->addCriteria($this->expert->getCriteria());
 
         if ($this->expert->getResponseFormat() instanceof ResponseFormat\ResponseFormatInterface) {
-            $builder->addSystemMessage($this->expert->getResponseFormat()->format());
+            $builder->asJson()
+                ->addSystemMessage($this->expert->getResponseFormat()->format());
         }
 
         if ([] !== $this->context) {

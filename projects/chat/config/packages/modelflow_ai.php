@@ -34,6 +34,12 @@ return static function (ContainerConfigurator $container): void {
         ];
 
         $adapters = array_merge($adapters, [
+            'gpt4o' => [
+                'enabled' => true,
+            ],
+            'gpt4o_mini' => [
+                'enabled' => true,
+            ],
             'gpt4' => [
                 'enabled' => true,
             ],
@@ -65,6 +71,9 @@ return static function (ContainerConfigurator $container): void {
                 'enabled' => true,
             ],
             'mistral_medium' => [
+                'enabled' => true,
+            ],
+            'mistral_nemo' => [
                 'enabled' => true,
             ],
             'mistral_large' => [

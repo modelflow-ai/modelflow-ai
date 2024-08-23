@@ -37,6 +37,8 @@ class AIChatRequest implements CriteriaBehaviour
      *     streamed?: boolean,
      *     format?: "json"|null,
      *     toolChoice?: ToolChoiceEnum,
+     *     seed?: int,
+     *     temperature?: float,
      * } $options
      */
     public function __construct(
@@ -69,7 +71,7 @@ class AIChatRequest implements CriteriaBehaviour
     }
 
     /**
-     * @param "format"|"streamed"|"toolChoice" $key
+     * @param "format"|"streamed"|"toolChoice"|"seed"|"temperature" $key
      */
     public function getOption(string $key, mixed $default = null): mixed
     {
@@ -86,6 +88,8 @@ class AIChatRequest implements CriteriaBehaviour
      *     streamed?: boolean,
      *     format?: "json"|null,
      *     toolChoice?: ToolChoiceEnum,
+     *     seed?: int,
+     *     temperature?: float,
      * }
      */
     public function getOptions(): array
