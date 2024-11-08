@@ -26,11 +26,13 @@ readonly class AIChatResponseStream extends AIChatResponse
     public function __construct(
         private AIChatRequest $request,
         private \Iterator $messages,
+        private array $metadata = [],
     ) {
         parent::__construct(
             $request,
             new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, ''),
             null,
+            $this->metadata,
         );
 
         $this->messageBuilder = new AIChatResponseStreamMessageBuilder();

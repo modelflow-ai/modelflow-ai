@@ -15,6 +15,8 @@ namespace ModelflowAi\Experts;
 
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\MessagePart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 
 class Thread implements ThreadInterface
@@ -29,6 +31,11 @@ class Thread implements ThreadInterface
      */
     private array $messages = [];
 
+    /**
+     * @var array<string, mixed>
+     */
+    private array $metadata = [];
+
     public function __construct(
         private readonly AIChatRequestHandlerInterface $requestHandler,
         private readonly ExpertInterface $expert,
@@ -42,11 +49,33 @@ class Thread implements ThreadInterface
         return $this;
     }
 
+    public function addMetadata(array $metadata): self
+    {
+        $this->metadata = \array_merge($this->metadata, $metadata);
+
+        return $this;
+    }
+
     public function addMessage(AIChatMessage $message): self
     {
         $this->messages[] = $message;
 
         return $this;
+    }
+
+    public function addSystemMessage(array|MessagePart|string $content): self
+    {
+        return $this->addMessage(new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, $content));
+    }
+
+    public function addAssistantMessage(array|MessagePart|string $content): self
+    {
+        return $this->addMessage(new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, $content));
+    }
+
+    public function addUserMessage(array|MessagePart|string $content): self
+    {
+        return $this->addMessage(new AIChatMessage(AIChatMessageRoleEnum::USER, $content));
     }
 
     /**
@@ -72,6 +101,9 @@ class Thread implements ThreadInterface
 
         if ([] !== $this->context) {
             $builder->addUserMessage('Context: ' . \json_encode($this->context));
+        }
+        if ([] !== $this->metadata) {
+            $builder->addMetadata($this->metadata);
         }
 
         foreach ($this->messages as $message) {

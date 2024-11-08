@@ -138,7 +138,7 @@ class AIChatRequestBuilderTest extends TestCase
         $this->assertSame(AIChatMessageRoleEnum::USER, $messages[0]->role);
     }
 
-    public function testTooChoice(): void
+    public function testToolChoice(): void
     {
         $builder = new AIChatRequestBuilder(fn () => null);
 
@@ -162,6 +162,15 @@ class AIChatRequestBuilderTest extends TestCase
         $this->assertCount(1, $toolInfos);
         $this->assertInstanceOf(ToolInfo::class, $toolInfos[0]);
         $this->assertSame('test', $toolInfos[0]->name);
+    }
+
+    public function testAddMetadata(): void
+    {
+        $builder = new AIChatRequestBuilder(fn () => null);
+
+        $builder->addMetadata(['test' => 'value']);
+
+        $this->assertSame('value', $builder->build()->getMetadata()['test']);
     }
 
     public function testBuild(): void

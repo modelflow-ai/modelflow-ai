@@ -14,15 +14,36 @@ declare(strict_types=1);
 namespace ModelflowAi\Experts;
 
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\Message\MessagePart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 
 interface ThreadInterface
 {
     public function addContext(string $key, mixed $data): self;
 
+    /**
+     * @param array<string, mixed> $metadata
+     */
+    public function addMetadata(array $metadata): self;
+
     public function run(): AIChatResponse;
 
     public function addMessage(AIChatMessage $message): self;
+
+    /**
+     * @param MessagePart[]|MessagePart|string $content
+     */
+    public function addSystemMessage(array|MessagePart|string $content): self;
+
+    /**
+     * @param MessagePart[]|MessagePart|string $content
+     */
+    public function addAssistantMessage(array|MessagePart|string $content): self;
+
+    /**
+     * @param MessagePart[]|MessagePart|string $content
+     */
+    public function addUserMessage(array|MessagePart|string $content): self;
 
     /**
      * @param AIChatMessage[] $messages

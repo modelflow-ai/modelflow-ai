@@ -40,6 +40,7 @@ class AIChatRequest implements CriteriaBehaviour
      *     seed?: int,
      *     temperature?: float,
      * } $options
+     * @param array<string, mixed> $metadata
      */
     public function __construct(
         private readonly AIChatMessageCollection $messages,
@@ -48,6 +49,7 @@ class AIChatRequest implements CriteriaBehaviour
         private readonly array $toolInfos,
         private array $options,
         callable $requestHandler,
+        private readonly array $metadata = [],
     ) {
         $features = [];
 
@@ -76,6 +78,14 @@ class AIChatRequest implements CriteriaBehaviour
     public function getOption(string $key, mixed $default = null): mixed
     {
         return $this->options[$key] ?? $default;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getMetadata(): array
+    {
+        return $this->metadata;
     }
 
     public function getCriteria(): CriteriaCollection
