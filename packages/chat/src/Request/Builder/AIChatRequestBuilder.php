@@ -56,6 +56,11 @@ final class AIChatRequestBuilder
      */
     protected array $tools = [];
 
+    /**
+     * @var array<string, mixed>
+     */
+    protected array $metadata = [];
+
     public function __construct(
         callable $requestHandler,
     ) {
@@ -76,6 +81,16 @@ final class AIChatRequestBuilder
     public function addOptions(array $options): self
     {
         $this->options = \array_merge($this->options, $options);
+
+        return $this;
+    }
+
+    /**
+     * @param array<string, mixed> $metadata
+     */
+    public function addMetadata(array $metadata): self
+    {
+        $this->metadata = \array_merge($this->metadata, $metadata);
 
         return $this;
     }
@@ -186,6 +201,7 @@ final class AIChatRequestBuilder
             $toolInfos,
             $this->options,
             $this->requestHandler,
+            $this->metadata,
         );
     }
 }

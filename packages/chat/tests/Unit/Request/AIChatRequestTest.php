@@ -106,4 +106,16 @@ class AIChatRequestTest extends TestCase
 
         $this->assertSame('json', $request->getOption('format'));
     }
+
+    public function testMetadata(): void
+    {
+        $criteria1 = CapabilityCriteria::BASIC;
+        $criteria2 = PrivacyCriteria::HIGH;
+        $criteriaCollection = new CriteriaCollection([$criteria1, $criteria2]);
+
+        $requestHandler = fn () => null;
+        $request = new AIChatRequest(new AIChatMessageCollection(), $criteriaCollection, [], [], [], $requestHandler, ['test' => 'test']);
+
+        $this->assertSame(['test' => 'test'], $request->getMetadata());
+    }
 }

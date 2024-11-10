@@ -54,6 +54,18 @@ class AIChatResponseStreamTest extends TestCase
         $this->assertNull($response->getUsage());
     }
 
+    public function testGetMetadata(): void
+    {
+        $request = $this->prophesize(AIChatRequest::class);
+
+        $response = new AIChatResponseStream($request->reveal(), new \ArrayIterator([
+            new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Lorem'),
+            new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Ipsum'),
+        ]));
+
+        $this->assertSame([], $response->getMetadata());
+    }
+
     public function testGetRequest(): void
     {
         $request = $this->prophesize(AIChatRequest::class);

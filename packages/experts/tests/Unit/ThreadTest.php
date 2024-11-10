@@ -68,6 +68,36 @@ class ThreadTest extends TestCase
         $this->assertSame(['role' => 'system', 'content' => 'instructions'], $request->getMessages()[0]?->toArray());
     }
 
+    public function testRunWithMetadata(): void
+    {
+        $expert = new Expert(
+            'name',
+            'description',
+            'instructions',
+            [CapabilityCriteria::SMART],
+        );
+
+        $thread = new Thread($this->requestHandler->reveal(), $expert);
+
+        $this->requestHandler->createRequest()
+            ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
+                $request,
+                new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test message'),
+                new Usage(0, 0, 0),
+            )));
+
+        $thread->addMetadata(['key' => 'value']);
+
+        $result = $thread->run();
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+
+        $request = $result->getRequest();
+        $this->assertInstanceOf(AIChatRequest::class, $request);
+        $this->assertCount(1, $request->getMessages());
+        $this->assertSame(['role' => 'system', 'content' => 'instructions'], $request->getMessages()[0]?->toArray());
+        $this->assertSame(['key' => 'value'], $request->getMetadata());
+    }
+
     public function testRunWithContext(): void
     {
         $expert = new Expert(
@@ -112,6 +142,9 @@ class ThreadTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Test Question 2'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Test Question 3'),
         ]);
+        $thread->addUserMessage('Test Question 4');
+        $thread->addSystemMessage('Test Question 5');
+        $thread->addAssistantMessage('Test Question 6');
 
         $this->requestHandler->createRequest()
             ->willReturn(new AIChatRequestBuilder(fn (AIChatRequest $request) => new AIChatResponse(
@@ -125,11 +158,14 @@ class ThreadTest extends TestCase
 
         $request = $result->getRequest();
         $this->assertInstanceOf(AIChatRequest::class, $request);
-        $this->assertCount(4, $request->getMessages());
+        $this->assertCount(7, $request->getMessages());
         $this->assertSame(['role' => 'system', 'content' => 'instructions'], $request->getMessages()[0]?->toArray());
         $this->assertSame(['role' => 'user', 'content' => 'Test Question 1'], $request->getMessages()[1]?->toArray());
         $this->assertSame(['role' => 'user', 'content' => 'Test Question 2'], $request->getMessages()[2]?->toArray());
         $this->assertSame(['role' => 'user', 'content' => 'Test Question 3'], $request->getMessages()[3]?->toArray());
+        $this->assertSame(['role' => 'user', 'content' => 'Test Question 4'], $request->getMessages()[4]?->toArray());
+        $this->assertSame(['role' => 'system', 'content' => 'Test Question 5'], $request->getMessages()[5]?->toArray());
+        $this->assertSame(['role' => 'assistant', 'content' => 'Test Question 6'], $request->getMessages()[6]?->toArray());
     }
 
     public function testRunWithFormat(): void

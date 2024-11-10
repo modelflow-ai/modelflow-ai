@@ -46,6 +46,16 @@ class AIChatResponseTest extends TestCase
         $this->assertSame($usage, $response->getUsage());
     }
 
+    public function testGetMetadata(): void
+    {
+        $request = $this->prophesize(AIChatRequest::class);
+
+        $message = new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Test content');
+        $response = new AIChatResponse($request->reveal(), $message, new Usage(0, 0, 0), ['test' => 'value']);
+
+        $this->assertSame(['test' => 'value'], $response->getMetadata());
+    }
+
     public function testGetRequest(): void
     {
         $request = $this->prophesize(AIChatRequest::class);

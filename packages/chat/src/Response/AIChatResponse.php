@@ -17,10 +17,14 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 
 readonly class AIChatResponse
 {
+    /**
+     * @param array<string, mixed> $metadata
+     */
     public function __construct(
         private AIChatRequest $request,
         private AIChatResponseMessage $message,
         private ?Usage $usage,
+        private array $metadata = [],
     ) {
     }
 
@@ -37,5 +41,13 @@ readonly class AIChatResponse
     public function getUsage(): ?Usage
     {
         return $this->usage;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function getMetadata(): array
+    {
+        return $this->metadata;
     }
 }
