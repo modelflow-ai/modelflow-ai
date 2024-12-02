@@ -13,6 +13,12 @@ return static function (ContainerConfigurator $container): void {
         ];
 
         $adapters = array_merge($adapters, [
+            'llama3_2' => [
+                'enabled' => true,
+            ],
+            'llama3' => [
+                'enabled' => true,
+            ],
             'llama2' => [
                 'enabled' => true,
             ],
@@ -91,13 +97,16 @@ return static function (ContainerConfigurator $container): void {
         ];
 
         $adapters = array_merge($adapters, [
-            'claude_3_5_sonnet' => [
-                'enabled' => true,
-            ],
             'claude_3_opus' => [
                 'enabled' => true,
             ],
+            'claude_3_5_sonnet' => [
+                'enabled' => true,
+            ],
             'claude_3_sonnet' => [
+                'enabled' => true,
+            ],
+            'claude_3_5_haiku' => [
                 'enabled' => true,
             ],
             'claude_3_haiku' => [
