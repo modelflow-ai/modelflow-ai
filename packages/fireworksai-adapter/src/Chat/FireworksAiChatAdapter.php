@@ -19,6 +19,8 @@ use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
@@ -68,9 +70,28 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
                             'url' => \sprintf('data:%s;base64,%s', $part->mimeType, $part->content),
                         ],
                     ];
+                } elseif ($part instanceof ToolCallsPart) {
+                    $message['tool_calls'] = \array_map(
+                        fn (AIChatToolCall $tool) => [
+                            'id' => $tool->id,
+                            'type' => $tool->type->value,
+                            'function' => [
+                                'name' => $tool->name,
+                                'arguments' => (string) \json_encode($tool->arguments),
+                            ],
+                        ],
+                        $part->toolCalls,
+                    );
+                } elseif ($part instanceof ToolCallPart) {
+                    $message['role'] = 'tool';
+                    $message['content'][] = $part->content;
                 } else {
                     throw new \Exception('Not supported message part type.');
                 }
+            }
+
+            if (1 === \count($message['content']) && \is_string($message['content'][0])) {
+                $message['content'] = $message['content'][0];
             }
 
             $messages[] = $message;
@@ -101,6 +122,8 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
         }
 
         if ($temperature = $request->getOption('temperature')) {
+            Assert::float($temperature);
+            Assert::range($temperature, 0.0, 2.0, 'Temperature must be between 0 and 2');
             $parameters['temperature'] = $temperature;
         }
 
@@ -114,18 +137,26 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
     /**
      * @param array{
      *     model: string,
-     *      messages: array<array{
-     *          role: "assistant"|"system"|"user"|"tool",
-     *          content: array<array{
-     *              type: "text",
-     *              text: string,
-     *          }|array{
-     *              type: "image_url",
-     *              image_url: array{
-     *                  url: string,
-     *              },
-     *          }>,
-     *      }>,
+     *     messages: array<array{
+     *         role: "assistant"|"system"|"user"|"tool",
+     *         content: string|array<string|array{
+     *             type: "text",
+     *             text: string,
+     *         }|array{
+     *             type: "image_url",
+     *             image_url: array{
+     *                 url: string,
+     *             },
+     *         }>,
+     *         tool_calls?: array<array{
+     *             id: string,
+     *             type: string,
+     *             function: array{
+     *                 name: string,
+     *                 arguments: string,
+     *             },
+     *         }>,
+     *     }>,
      *     response_format?: array{
      *         type: "json_object",
      *     },
@@ -136,11 +167,12 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
      *             description: string,
      *             parameters: array{
      *                 type: string,
-     *                 properties: array<string, mixed[]>,
-     *                 required: string[],
-     *            },
-     *         },
+     *                 properties: array<string, mixed>,
+     *                 required: array<string>
+     *             }
+     *         }
      *     }>,
+     *     temperature?: float,
      * } $parameters
      */
     protected function create(AIChatRequest $request, array $parameters): AIChatResponse
@@ -191,13 +223,21 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
      *     model: string,
      *     messages: array<array{
      *         role: "assistant"|"system"|"user"|"tool",
-     *         content: array<array{
+     *         content: string|array<string|array{
      *             type: "text",
      *             text: string,
      *         }|array{
      *             type: "image_url",
      *             image_url: array{
      *                 url: string,
+     *             },
+     *         }>,
+     *         tool_calls?: array<array{
+     *             id: string,
+     *             type: string,
+     *             function: array{
+     *                 name: string,
+     *                 arguments: string,
      *             },
      *         }>,
      *     }>,
@@ -211,11 +251,12 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
      *             description: string,
      *             parameters: array{
      *                 type: string,
-     *                 properties: array<string, mixed[]>,
-     *                 required: string[],
-     *            },
-     *         },
+     *                 properties: array<string, mixed>,
+     *                 required: array<string>
+     *             }
+     *         }
      *     }>,
+     *     temperature?: float,
      * } $parameters
      */
     protected function createStreamed(AIChatRequest $request, array $parameters): AIChatResponse

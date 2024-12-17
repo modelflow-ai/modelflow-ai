@@ -767,12 +767,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "5a5c19843209812d6c8cb91d30478dfce3d8bdad"
+                "reference": "e656040b5bdab9d6ca046287327bbb47c62be886"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/5a5c19843209812d6c8cb91d30478dfce3d8bdad",
-                "reference": "5a5c19843209812d6c8cb91d30478dfce3d8bdad",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/e656040b5bdab9d6ca046287327bbb47c62be886",
+                "reference": "e656040b5bdab9d6ca046287327bbb47c62be886",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +837,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-31T05:58:31+00:00"
+            "time": "2024-12-07T06:07:48+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -1090,12 +1090,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e75fd04dce45b3a064a44107d8037b411ecbd307"
+                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e75fd04dce45b3a064a44107d8037b411ecbd307",
-                "reference": "e75fd04dce45b3a064a44107d8037b411ecbd307",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/54ae58f62c551a1c73498b053bd11697aac16abe",
+                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe",
                 "shasum": ""
             },
             "require": {
@@ -1183,7 +1183,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-30T07:38:36+00:00"
+            "time": "2024-12-12T06:30:58+00:00"
         },
         {
             "name": "rector/rector",

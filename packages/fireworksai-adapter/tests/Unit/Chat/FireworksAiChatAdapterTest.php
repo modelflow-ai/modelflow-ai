@@ -44,6 +44,9 @@ final class FireworksAiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'accounts/fireworks/models/llama-v3-70b-instruct',
             'messages' => [
@@ -52,7 +55,7 @@ final class FireworksAiChatAdapterTest extends TestCase
                 ['role' => 'assistant', 'content' => [['type' => 'text', 'text' => 'Assistant message']]],
             ],
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
@@ -91,6 +94,9 @@ final class FireworksAiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'accounts/fireworks/models/llama-v3-70b-instruct',
             'messages' => [
@@ -100,7 +106,7 @@ final class FireworksAiChatAdapterTest extends TestCase
             ],
             'temperature' => 0.5,
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
@@ -139,6 +145,9 @@ final class FireworksAiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'accounts/fireworks/models/llama-v3-70b-instruct',
             'response_format' => ['type' => 'json_object'],
@@ -148,7 +157,7 @@ final class FireworksAiChatAdapterTest extends TestCase
                 ['role' => 'assistant', 'content' => [['type' => 'text', 'text' => 'Assistant message']]],
             ],
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
