@@ -44,6 +44,9 @@ final class OpenaiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'gpt-4',
             'messages' => [
@@ -52,7 +55,7 @@ final class OpenaiChatAdapterTest extends TestCase
                 ['role' => 'assistant', 'content' => 'Assistant message'],
             ],
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
@@ -91,6 +94,9 @@ final class OpenaiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'gpt-4',
             'messages' => [
@@ -101,7 +107,7 @@ final class OpenaiChatAdapterTest extends TestCase
             'seed' => 123,
             'temperature' => 0.5,
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
@@ -140,6 +146,9 @@ final class OpenaiChatAdapterTest extends TestCase
         $client = $this->prophesize(ClientContract::class);
         $client->chat()->willReturn($chat->reveal());
 
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
         $chat->create([
             'model' => 'gpt-4',
             'response_format' => ['type' => 'json_object'],
@@ -149,7 +158,7 @@ final class OpenaiChatAdapterTest extends TestCase
                 ['role' => 'assistant', 'content' => 'Assistant message'],
             ],
         ])->willReturn(CreateResponse::from(
-            CreateResponseFixture::ATTRIBUTES,
+            $attributes,
             MetaInformation::from([
                 'x-request-id' => ['123'],
                 'openai-model' => ['gpt-4'],
