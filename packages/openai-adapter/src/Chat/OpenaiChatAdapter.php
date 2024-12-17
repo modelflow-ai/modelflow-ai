@@ -249,6 +249,10 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
 
         /** @var CreateStreamedResponse $response */
         foreach ($responses as $response) {
+            if (0 === \count($response->choices)) {
+                continue;
+            }
+
             $delta = $response->choices[0]->delta;
 
             foreach ($delta->toolCalls as $toolCall) {

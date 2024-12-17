@@ -25,7 +25,7 @@ use ModelflowAi\FireworksAiAdapter\Chat\FireworksAiChatAdapter;
 
 $adapter = [];
 
-$llavaAdapter = new FireworksAiChatAdapter($fireworksAiClient, 'accounts/fireworks/models/firellava-13b');
+$llavaAdapter = new FireworksAiChatAdapter($fireworksAiClient, 'accounts/fireworks/models/phi-3-vision-128k-instruct');
 $llama3Adapter = new FireworksAiChatAdapter($fireworksAiClient, 'accounts/fireworks/models/llama-v3-70b-instruct');
 $firefunction2Adapter = new FireworksAiChatAdapter($fireworksAiClient, 'accounts/fireworks/models/firefunction-v2');
 $llama31Adapter = new FireworksAiChatAdapter($fireworksAiClient, 'accounts/fireworks/models/llama-v3p1-405b-instruct');
