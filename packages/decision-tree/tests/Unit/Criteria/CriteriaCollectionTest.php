@@ -17,6 +17,7 @@ use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 use ModelflowAi\DecisionTree\Criteria\FeatureCriteria;
+use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\DecisionTree\DecisionEnum;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
@@ -146,7 +147,12 @@ class CriteriaCollectionTest extends TestCase
             '14' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 [CapabilityCriteria::SMART],
-                false,
+                true,
+            ],
+            '15' => [
+                [CapabilityCriteria::BASIC, PrivacyCriteria::LOW],
+                [CapabilityCriteria::BASIC],
+                true,
             ],
         ];
     }

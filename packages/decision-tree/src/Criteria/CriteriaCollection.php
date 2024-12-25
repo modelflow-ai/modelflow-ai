@@ -30,26 +30,39 @@ readonly class CriteriaCollection
      */
     public function matches(array $toMatch): bool
     {
+        $matches = [];
         $sameType = [];
         $types = [];
+        $toMatchTypes = [];
         foreach ($this->all as $criteria) {
             $types[$criteria::class] ??= 0;
             ++$types[$criteria::class];
 
             foreach ($toMatch as $toMatchCriteria) {
+                $toMatchTypes[$toMatchCriteria::class] = true;
+
                 $decision = $criteria->matches($toMatchCriteria);
                 if (DecisionEnum::NO_MATCH === $decision) {
                     return false;
                 }
-                if (DecisionEnum::MATCH === $decision) {
+                if (DecisionEnum::SAME_TYPE === $decision) {
                     $sameType[$toMatchCriteria::class] ??= 0;
                     ++$sameType[$toMatchCriteria::class];
+                }
+                if (DecisionEnum::MATCH === $decision) {
+                    $matches[$toMatchCriteria::class] ??= 0;
+                    ++$matches[$toMatchCriteria::class];
                 }
             }
         }
 
         foreach ($types as $key => $value) {
-            if ($value !== ($sameType[$key] ?? 0)) {
+            $matchValue = $matches[$key] ?? null;
+            if (null === $matchValue && !($toMatchTypes[$key] ?? false)) {
+                continue;
+            }
+
+            if ($value !== $matchValue) {
                 return false;
             }
         }

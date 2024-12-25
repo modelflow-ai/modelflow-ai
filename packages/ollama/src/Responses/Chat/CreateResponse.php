@@ -46,7 +46,7 @@ final readonly class CreateResponse
      *     prompt_eval_count?: int|null,
      *     prompt_eval_duration: int,
      *     eval_count: int,
-     *     eval_duration: int,
+     *     eval_duration?: int|null,
      * } $attributes
      */
     public static function from(array $attributes, MetaInformation $meta): self
