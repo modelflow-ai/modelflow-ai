@@ -15,7 +15,12 @@ namespace ModelflowAi\MistralAdapter\Chat;
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
@@ -39,9 +44,61 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
 
     public function handleRequest(AIChatRequest $request): AIChatResponse
     {
+        $messages = [];
+
+        /** @var AIChatMessage $aiMessage */
+        foreach ($request->getMessages() as $aiMessage) {
+            $message = [
+                'role' => $aiMessage->role->value,
+                'content' => [],
+            ];
+
+            foreach ($aiMessage->parts as $part) {
+                if ($part instanceof TextPart) {
+                    $message['content'][] = [
+                        'type' => 'text',
+                        'text' => $part->text,
+                    ];
+                } elseif ($part instanceof ImageBase64Part) {
+                    $message['content'][] = [
+                        'type' => 'image_url',
+                        'image_url' => \sprintf('data:%s;base64,%s', $part->mimeType, $part->content),
+                    ];
+                } elseif ($part instanceof ToolCallsPart) {
+                    $message['tool_calls'] = \array_map(
+                        fn (AIChatToolCall $tool) => [
+                            'id' => $tool->id,
+                            'type' => $tool->type->value,
+                            'function' => [
+                                'name' => $tool->name,
+                                'arguments' => (string) \json_encode($tool->arguments),
+                            ],
+                        ],
+                        $part->toolCalls,
+                    );
+                } elseif ($part instanceof ToolCallPart) {
+                    $message['tool_call_id'] = $part->toolCallId;
+                    $message['name'] = $part->toolName;
+                    $message['content'][] = $part->content;
+                } else {
+                    throw new \Exception('Not supported message part type.');
+                }
+            }
+
+            if (1 === \count($message['content'])) {
+                if (\is_string($message['content'][0])) {
+                    $message['content'] = $message['content'][0];
+                } elseif ('text' === $message['content'][0]['type']) {
+                    $message['content'] = $message['content'][0]['text'];
+                }
+            }
+
+            $messages[] = $message;
+        }
+
         $parameters = [
             'model' => $this->model,
-            'messages' => $request->getMessages()->toArray(),
+            'messages' => $messages,
         ];
 
         if (Model::from($this->model)->jsonSupported()) {
@@ -83,7 +140,7 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
      *     model: string,
      *     messages: array<array{
      *         role: "assistant"|"system"|"user"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{type: "text", text: string}|array{type: "image_url", image_url: string}>,
      *     }>,
      *     response_format?: array{
      *         type: "json_object",
@@ -151,7 +208,7 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
      *     model: string,
      *     messages: array<array{
      *         role: "assistant"|"system"|"user"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{type: "text", text: string}|array{type: "image_url", image_url: string}>,
      *     }>,
      *     response_format?: array{
      *         type: "json_object",

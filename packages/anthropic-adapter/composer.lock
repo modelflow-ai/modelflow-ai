@@ -738,12 +738,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "67eb7938e7593456714f3d3de9df65a1a7b25c1d"
+                "reference": "7014f6c1c322bb040c7db23ed44516b9a4535d20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/67eb7938e7593456714f3d3de9df65a1a7b25c1d",
-                "reference": "67eb7938e7593456714f3d3de9df65a1a7b25c1d",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/7014f6c1c322bb040c7db23ed44516b9a4535d20",
+                "reference": "7014f6c1c322bb040c7db23ed44516b9a4535d20",
                 "shasum": ""
             },
             "require": {
@@ -753,7 +753,7 @@
                 "doctrine/coding-standard": "^9 || ^12",
                 "phpstan/phpstan": "1.4.10 || 2.0.3",
                 "phpstan/phpstan-phpunit": "^1.0 || ^2",
-                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5",
                 "psr/log": "^1 || ^2 || ^3"
             },
             "suggest": {
@@ -776,7 +776,7 @@
                 "issues": "https://github.com/doctrine/deprecations/issues",
                 "source": "https://github.com/doctrine/deprecations/tree/1.1.x"
             },
-            "time": "2024-12-16T12:46:45+00:00"
+            "time": "2024-12-20T07:18:16+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -2337,12 +2337,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe"
+                "reference": "e6ddda95af52f69c1e0c7b4f977cccb58048798c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/54ae58f62c551a1c73498b053bd11697aac16abe",
-                "reference": "54ae58f62c551a1c73498b053bd11697aac16abe",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e6ddda95af52f69c1e0c7b4f977cccb58048798c",
+                "reference": "e6ddda95af52f69c1e0c7b4f977cccb58048798c",
                 "shasum": ""
             },
             "require": {
@@ -2414,7 +2414,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.40"
             },
             "funding": [
                 {
@@ -2430,7 +2430,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-12T06:30:58+00:00"
+            "time": "2024-12-21T05:49:06+00:00"
         },
         {
             "name": "rector/rector",

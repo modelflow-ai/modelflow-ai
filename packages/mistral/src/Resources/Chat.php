@@ -90,7 +90,25 @@ final readonly class Chat implements ChatInterface
             Assert::string($message['role']);
             Assert::inArray($message['role'], ['system', 'user', 'assistant', 'tool']);
             Assert::keyExists($message, 'content');
-            Assert::string($message['content']);
+
+            if (\is_string($message['content'])) {
+                Assert::string($message['content']);
+            } elseif (\is_array($message['content'])) {
+                foreach ($message['content'] as $contentItem) {
+                    Assert::keyExists($contentItem, 'type');
+                    Assert::inArray($contentItem['type'], ['text', 'image_url']);
+
+                    if ('text' === $contentItem['type']) {
+                        Assert::keyExists($contentItem, 'text');
+                        Assert::string($contentItem['text']);
+                    } elseif ('image_url' === $contentItem['type']) {
+                        Assert::keyExists($contentItem, 'image_url');
+                        Assert::string($contentItem['image_url']);
+                    }
+                }
+            } else {
+                throw new \InvalidArgumentException('Invalid content type');
+            }
         }
 
         if (!Model::from($parameters['model'])->toolsSupported()) {
