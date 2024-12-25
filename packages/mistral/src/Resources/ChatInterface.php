@@ -23,7 +23,7 @@ interface ChatInterface
      *     model: string,
      *     messages: array<array{
      *         role: "system"|"user"|"assistant"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{type: "text", text: string}|array{type: "image_url", image_url: string}>,
      *     }>,
      *     tools?: array<array{
      *         type: string,
@@ -49,7 +49,7 @@ interface ChatInterface
      *     model: string,
      *     messages: array<array{
      *         role: "system"|"user"|"assistant"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{type: "text", text: string}|array{type: "image_url", image_url: string}>,
      *     }>,
      *     tools?: array<array{
      *         type: string,

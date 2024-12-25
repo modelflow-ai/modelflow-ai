@@ -6,7 +6,7 @@ return static function (ContainerConfigurator $container): void {
     $providers = [];
     $adapters = [];
 
-    if (isset($_ENV['OLLAMA_URL'])) {
+    if (isset($_ENV['OLLAMA_URL']) && '' !== $_ENV['OLLAMA_URL']) {
         $providers['ollama'] = [
             'enabled' => true,
             'url' => '%env(OLLAMA_URL)%',
@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $container): void {
         ]);
     }
 
-    if (isset($_ENV['OPENAI_API_KEY'])) {
+    if (isset($_ENV['OPENAI_API_KEY']) && '' !== $_ENV['OPENAI_API_KEY']) {
         $providers['openai'] = [
             'enabled' => true,
             'credentials' => [
@@ -61,7 +61,7 @@ return static function (ContainerConfigurator $container): void {
         ]);
     }
 
-    if (isset($_ENV['MISTRAL_API_KEY'])) {
+    if (isset($_ENV['MISTRAL_API_KEY']) && '' !== $_ENV['MISTRAL_API_KEY']) {
         $providers['mistral'] = [
             'enabled' => true,
             'credentials' => [
@@ -85,10 +85,13 @@ return static function (ContainerConfigurator $container): void {
             'mistral_large' => [
                 'enabled' => true,
             ],
+            'pixtral_large' => [
+                'enabled' => true,
+            ],
         ]);
     }
 
-    if (isset($_ENV['ANTHROPIC_API_KEY'])) {
+    if (isset($_ENV['ANTHROPIC_API_KEY']) && '' !== $_ENV['ANTHROPIC_API_KEY']) {
         $providers['anthropic'] = [
             'enabled' => true,
             'credentials' => [
@@ -115,7 +118,7 @@ return static function (ContainerConfigurator $container): void {
         ]);
     }
 
-    if (isset($_ENV['FIREWORKSAI_API_KEY'])) {
+    if (isset($_ENV['FIREWORKSAI_API_KEY']) && '' !== $_ENV['FIREWORKSAI_API_KEY']) {
         $providers['fireworksai'] = [
             'enabled' => true,
             'credentials' => [

@@ -20,7 +20,7 @@ class Chat
     #[ORM\Column(type: Types::GUID, unique: true, nullable: false)]
     private string $uuid;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: false)]

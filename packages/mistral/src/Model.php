@@ -21,6 +21,7 @@ enum Model: string
     case LARGE = 'mistral-large-latest';
     case NEMO = 'open-mistral-nemo';
     case EMBED = 'mistral-embed';
+    case PIXTRAL_LARGE = 'pixtral-large-latest';
 
     public function jsonSupported(): bool
     {

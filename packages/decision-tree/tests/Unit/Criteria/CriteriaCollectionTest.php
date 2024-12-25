@@ -21,7 +21,7 @@ use ModelflowAi\DecisionTree\DecisionEnum;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 
-class AIRequestCriteriaCollectionTest extends TestCase
+class CriteriaCollectionTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -73,74 +73,79 @@ class AIRequestCriteriaCollectionTest extends TestCase
     public static function provideMatches(): array
     {
         return [
-            [
+            '0' => [
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '1' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::SMART],
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::ADVANCED],
                 false,
             ],
-            [
+            '2' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::ADVANCED],
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '3' => [
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 [FeatureCriteria::STREAM],
                 false,
             ],
-            [
+            '4' => [
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 true,
             ],
-            [
+            '5' => [
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 [FeatureCriteria::STREAM],
                 false,
             ],
-            [
+            '6' => [
                 [FeatureCriteria::IMAGE_TO_TEXT],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '7' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '8' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, CapabilityCriteria::ADVANCED],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '9' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '10' => [
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, FeatureCriteria::TOOLS],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 false,
             ],
-            [
+            '11' => [
                 [CapabilityCriteria::ADVANCED],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '12' => [
                 [CapabilityCriteria::BASIC],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
                 true,
             ],
-            [
+            '13' => [
                 [CapabilityCriteria::SMART],
                 [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
+                false,
+            ],
+            '14' => [
+                [FeatureCriteria::IMAGE_TO_TEXT, FeatureCriteria::STREAM, CapabilityCriteria::ADVANCED],
+                [CapabilityCriteria::SMART],
                 false,
             ],
         ];

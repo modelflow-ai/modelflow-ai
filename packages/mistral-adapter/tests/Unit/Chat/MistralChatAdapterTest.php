@@ -18,8 +18,13 @@ use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\Response\AIChatToolCall;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
@@ -43,9 +48,16 @@ final class MistralChatAdapterTest extends TestCase
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::TINY->value);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $this->assertTrue($adapter->supports($request));
     }
@@ -56,13 +68,20 @@ final class MistralChatAdapterTest extends TestCase
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            [],
+            fn () => null,
+        );
 
         $this->assertTrue($adapter->supports($request));
     }
@@ -73,13 +92,20 @@ final class MistralChatAdapterTest extends TestCase
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::TINY->value);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            [],
+            fn () => null,
+        );
 
         $this->assertFalse($adapter->supports($request));
     }
@@ -95,31 +121,114 @@ final class MistralChatAdapterTest extends TestCase
             'messages' => [
                 ['role' => 'user', 'content' => 'some text'],
             ],
-        ])->willReturn(CreateResponse::from([
-            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
-            'object' => 'chat.completion',
-            'created' => 1_702_256_327,
-            'model' => Model::TINY->value,
-            'choices' => [
-                [
-                    'index' => 1,
-                    'message' => [
-                        'role' => 'assistant',
-                        'content' => 'Lorem Ipsum',
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::TINY->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => 'Lorem Ipsum',
+                        ],
+                        'finish_reason' => 'testFinishReason',
                     ],
-                    'finish_reason' => 'testFinishReason',
+                ],
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 636,
+                ],
+            ], MetaInformation::from([])),
+        );
+
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
+
+        $adapter = new MistralChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame('Lorem Ipsum', $result->getMessage()->content);
+        $this->assertSame(312, $result->getUsage()?->inputTokens);
+        $this->assertSame(324, $result->getUsage()->outputTokens);
+        $this->assertSame(636, $result->getUsage()->totalTokens);
+    }
+
+    public function testHandleRequestWithMultipleParts(): void
+    {
+        $chat = $this->prophesize(ChatInterface::class);
+        $client = $this->prophesize(ClientInterface::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $chat->create([
+            'model' => Model::TINY->value,
+            'messages' => [
+                [
+                    'role' => 'user',
+                    'content' => [
+                        ['type' => 'image_url', 'image_url' => 'data:base64;base64,image/png'],
+                        ['type' => 'text', 'text' => 'some text'],
+                        'result',
+                    ],
+                    'tool_calls' => [['id' => 'test-id', 'type' => 'function', 'function' => ['name' => 'test', 'arguments' => '{"test":"test"}']]],
+                    'tool_call_id' => 'test-id',
+                    'name' => 'test',
                 ],
             ],
-            'usage' => [
-                'prompt_tokens' => 312,
-                'completion_tokens' => 324,
-                'total_tokens' => 636,
-            ],
-        ], MetaInformation::from([])));
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::TINY->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => 'Lorem Ipsum',
+                        ],
+                        'finish_reason' => 'testFinishReason',
+                    ],
+                ],
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 636,
+                ],
+            ], MetaInformation::from([])),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, [
+                    new ImageBase64Part('image/png', 'base64'),
+                    new TextPart('some text'),
+                    new ToolCallsPart([
+                        new AIChatToolCall(ToolTypeEnum::FUNCTION, 'test-id', 'test', ['test' => 'test']),
+                    ]),
+                    new ToolCallPart('test-id', 'test', 'result'),
+                ]),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -145,34 +254,43 @@ final class MistralChatAdapterTest extends TestCase
             ],
             'random_seed' => 123,
             'temperature' => 0.5,
-        ])->willReturn(CreateResponse::from([
-            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
-            'object' => 'chat.completion',
-            'created' => 1_702_256_327,
-            'model' => Model::TINY->value,
-            'choices' => [
-                [
-                    'index' => 1,
-                    'message' => [
-                        'role' => 'assistant',
-                        'content' => 'Lorem Ipsum',
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::TINY->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => 'Lorem Ipsum',
+                        ],
+                        'finish_reason' => 'testFinishReason',
                     ],
-                    'finish_reason' => 'testFinishReason',
                 ],
-            ],
-            'usage' => [
-                'prompt_tokens' => 312,
-                'completion_tokens' => 324,
-                'total_tokens' => 336,
-            ],
-        ], MetaInformation::from([])));
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 336,
+                ],
+            ], MetaInformation::from([])),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], [
-            'seed' => 123,
-            'temperature' => 0.5,
-        ], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [
+                'seed' => 123,
+                'temperature' => 0.5,
+            ],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -193,31 +311,40 @@ final class MistralChatAdapterTest extends TestCase
             'messages' => [
                 ['role' => 'user', 'content' => 'some text'],
             ],
-        ])->willReturn(CreateResponse::from([
-            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
-            'object' => 'chat.completion',
-            'created' => 1_702_256_327,
-            'model' => Model::TINY->value,
-            'choices' => [
-                [
-                    'index' => 1,
-                    'message' => [
-                        'role' => 'assistant',
-                        'content' => 'Lorem Ipsum',
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::TINY->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => 'Lorem Ipsum',
+                        ],
+                        'finish_reason' => 'testFinishReason',
                     ],
-                    'finish_reason' => 'testFinishReason',
                 ],
-            ],
-            'usage' => [
-                'prompt_tokens' => 312,
-                'completion_tokens' => 324,
-                'total_tokens' => 336,
-            ],
-        ], MetaInformation::from([])));
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 336,
+                ],
+            ], MetaInformation::from([])),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['format' => 'json'],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -239,31 +366,40 @@ final class MistralChatAdapterTest extends TestCase
                 ['role' => 'user', 'content' => 'some text'],
             ],
             'response_format' => ['type' => 'json_object'],
-        ])->willReturn(CreateResponse::from([
-            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
-            'object' => 'chat.completion',
-            'created' => 1_702_256_327,
-            'model' => Model::LARGE->value,
-            'choices' => [
-                [
-                    'index' => 1,
-                    'message' => [
-                        'role' => 'assistant',
-                        'content' => '{"message": "Lorem Ipsum"}',
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::LARGE->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => '{"message": "Lorem Ipsum"}',
+                        ],
+                        'finish_reason' => 'testFinishReason',
                     ],
-                    'finish_reason' => 'testFinishReason',
                 ],
-            ],
-            'usage' => [
-                'prompt_tokens' => 312,
-                'completion_tokens' => 324,
-                'total_tokens' => 636,
-            ],
-        ], MetaInformation::from([])));
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 636,
+                ],
+            ], MetaInformation::from([])),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'some text'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['format' => 'json'],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);
@@ -289,48 +425,57 @@ final class MistralChatAdapterTest extends TestCase
                 ['role' => 'user', 'content' => 'User message'],
                 ['role' => 'assistant', 'content' => 'Assistant message'],
             ],
-        ])->willReturn(new \ArrayIterator([
-            CreateStreamedResponse::from(0, [
-                'id' => '123-123-123',
-                'model' => 'mistral-tiny',
-                'object' => 'chat.completion',
-                'created' => 1_702_256_327,
-                'choices' => [
-                    [
-                        'index' => 1,
-                        'delta' => [
-                            'role' => 'assistant',
-                            'content' => 'Lorem',
+        ])->willReturn(
+            new \ArrayIterator([
+                CreateStreamedResponse::from(0, [
+                    'id' => '123-123-123',
+                    'model' => 'mistral-tiny',
+                    'object' => 'chat.completion',
+                    'created' => 1_702_256_327,
+                    'choices' => [
+                        [
+                            'index' => 1,
+                            'delta' => [
+                                'role' => 'assistant',
+                                'content' => 'Lorem',
+                            ],
+                            'finish_reason' => null,
                         ],
-                        'finish_reason' => null,
                     ],
-                ],
-                'usage' => null,
-            ], MetaInformation::from([])),
-            CreateStreamedResponse::from(1, [
-                'id' => '123-123-123',
-                'model' => 'mistral-tiny',
-                'object' => 'chat.completion',
-                'created' => 1_702_256_327,
-                'choices' => [
-                    [
-                        'index' => 1,
-                        'delta' => [
-                            'role' => 'assistant',
-                            'content' => 'Ipsum',
+                    'usage' => null,
+                ], MetaInformation::from([])),
+                CreateStreamedResponse::from(1, [
+                    'id' => '123-123-123',
+                    'model' => 'mistral-tiny',
+                    'object' => 'chat.completion',
+                    'created' => 1_702_256_327,
+                    'choices' => [
+                        [
+                            'index' => 1,
+                            'delta' => [
+                                'role' => 'assistant',
+                                'content' => 'Ipsum',
+                            ],
+                            'finish_reason' => null,
                         ],
-                        'finish_reason' => null,
                     ],
-                ],
-                'usage' => null,
-            ], MetaInformation::from([])),
-        ], ));
+                    'usage' => null,
+                ], MetaInformation::from([])),
+            ], ),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['streamed' => true],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -378,53 +523,62 @@ final class MistralChatAdapterTest extends TestCase
                     ],
                 ],
             ],
-        ])->willReturn(CreateResponse::from([
-            'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
-            'object' => 'chat.completion',
-            'created' => 1_702_256_327,
-            'model' => Model::LARGE->value,
-            'choices' => [
-                [
-                    'index' => 1,
-                    'message' => [
-                        'role' => 'assistant',
-                        'content' => null,
-                        'tool_calls' => [
-                            [
-                                'id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
-                                'type' => 'function',
-                                'function' => [
-                                    'name' => 'test',
-                                    'arguments' => '{"required":"Test required 1","optional":"Test optional 1"}',
+        ])->willReturn(
+            CreateResponse::from([
+                'id' => 'cmpl-e5cc70bb28c444948073e77776eb30ef',
+                'object' => 'chat.completion',
+                'created' => 1_702_256_327,
+                'model' => Model::LARGE->value,
+                'choices' => [
+                    [
+                        'index' => 1,
+                        'message' => [
+                            'role' => 'assistant',
+                            'content' => null,
+                            'tool_calls' => [
+                                [
+                                    'id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
+                                    'type' => 'function',
+                                    'function' => [
+                                        'name' => 'test',
+                                        'arguments' => '{"required":"Test required 1","optional":"Test optional 1"}',
+                                    ],
                                 ],
-                            ],
-                            [
-                                'id' => 'call_1Ue9UPErEy4dz56T3znEoBO2',
-                                'type' => 'function',
-                                'function' => [
-                                    'name' => 'test',
-                                    'arguments' => '{"required":"Test required 2","optional":"Test optional 2"}',
+                                [
+                                    'id' => 'call_1Ue9UPErEy4dz56T3znEoBO2',
+                                    'type' => 'function',
+                                    'function' => [
+                                        'name' => 'test',
+                                        'arguments' => '{"required":"Test required 2","optional":"Test optional 2"}',
+                                    ],
                                 ],
                             ],
                         ],
+                        'finish_reason' => 'testFinishReason',
                     ],
-                    'finish_reason' => 'testFinishReason',
                 ],
-            ],
-            'usage' => [
-                'prompt_tokens' => 312,
-                'completion_tokens' => 324,
-                'total_tokens' => 336,
-            ],
-        ], MetaInformation::from([])));
+                'usage' => [
+                    'prompt_tokens' => 312,
+                    'completion_tokens' => 324,
+                    'total_tokens' => 336,
+                ],
+            ], MetaInformation::from([])),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            ['toolChoice' => ToolChoiceEnum::AUTO],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);
@@ -490,70 +644,79 @@ final class MistralChatAdapterTest extends TestCase
                     ],
                 ],
             ],
-        ])->willReturn(new \ArrayIterator([
-            CreateStreamedResponse::from(0, [
-                'id' => '123-123-123',
-                'model' => Model::LARGE->value,
-                'object' => 'chat.completion',
-                'created' => 1_702_256_327,
-                'choices' => [
-                    [
-                        'index' => 1,
-                        'delta' => [
-                            'role' => 'assistant',
-                            'content' => null,
-                            'tool_calls' => [
-                                [
-                                    'id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
-                                    'type' => 'function',
-                                    'function' => [
-                                        'name' => 'test',
-                                        'arguments' => '{"required":"Test required 1","optional":"Test optional 1"}',
+        ])->willReturn(
+            new \ArrayIterator([
+                CreateStreamedResponse::from(0, [
+                    'id' => '123-123-123',
+                    'model' => Model::LARGE->value,
+                    'object' => 'chat.completion',
+                    'created' => 1_702_256_327,
+                    'choices' => [
+                        [
+                            'index' => 1,
+                            'delta' => [
+                                'role' => 'assistant',
+                                'content' => null,
+                                'tool_calls' => [
+                                    [
+                                        'id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
+                                        'type' => 'function',
+                                        'function' => [
+                                            'name' => 'test',
+                                            'arguments' => '{"required":"Test required 1","optional":"Test optional 1"}',
+                                        ],
                                     ],
                                 ],
                             ],
+                            'finish_reason' => null,
                         ],
-                        'finish_reason' => null,
                     ],
-                ],
-                'usage' => null,
-            ], MetaInformation::from([])),
-            CreateStreamedResponse::from(1, [
-                'id' => '123-123-123',
-                'model' => Model::LARGE->value,
-                'object' => 'chat.completion',
-                'created' => 1_702_256_327,
-                'choices' => [
-                    [
-                        'index' => 1,
-                        'delta' => [
-                            'role' => 'assistant',
-                            'content' => null,
-                            'tool_calls' => [
-                                [
-                                    'id' => 'call_1Ue9UPErEy4dz56T3znEoBO2',
-                                    'type' => 'function',
-                                    'function' => [
-                                        'name' => 'test',
-                                        'arguments' => '{"required":"Test required 2","optional":"Test optional 2"}',
+                    'usage' => null,
+                ], MetaInformation::from([])),
+                CreateStreamedResponse::from(1, [
+                    'id' => '123-123-123',
+                    'model' => Model::LARGE->value,
+                    'object' => 'chat.completion',
+                    'created' => 1_702_256_327,
+                    'choices' => [
+                        [
+                            'index' => 1,
+                            'delta' => [
+                                'role' => 'assistant',
+                                'content' => null,
+                                'tool_calls' => [
+                                    [
+                                        'id' => 'call_1Ue9UPErEy4dz56T3znEoBO2',
+                                        'type' => 'function',
+                                        'function' => [
+                                            'name' => 'test',
+                                            'arguments' => '{"required":"Test required 2","optional":"Test optional 2"}',
+                                        ],
                                     ],
                                 ],
                             ],
+                            'finish_reason' => null,
                         ],
-                        'finish_reason' => null,
                     ],
-                ],
-                'usage' => null,
-            ], MetaInformation::from([])),
-        ], ));
+                    'usage' => null,
+                ], MetaInformation::from([])),
+            ], ),
+        );
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['streamed' => true], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            ['streamed' => true],
+            fn () => null,
+        );
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
         $result = $adapter->handleRequest($request);

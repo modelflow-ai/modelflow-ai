@@ -27,6 +27,19 @@ final class DataFixtures
             ['role' => 'system', 'content' => 'System message'],
             ['role' => 'user', 'content' => 'User message'],
             ['role' => 'assistant', 'content' => 'Assistant message'],
+            [
+                'role' => 'user',
+                'content' => [
+                    [
+                        'type' => 'text',
+                        'text' => 'Which color is on the image?',
+                    ],
+                    [
+                        'type' => 'image_url',
+                        'image_url' => 'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mNkYPhfz0AEYBxVSF+FAP5FDvcfRYWgAAAAAElFTkSuQmCC',
+                    ],
+                ],
+            ],
         ],
         'temperature' => 0.8,
         'top_p' => 0.9,

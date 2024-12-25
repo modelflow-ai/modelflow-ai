@@ -20,7 +20,7 @@ use Symfony\Component\Uid\Uuid;
 
 class ChatController extends AbstractController
 {
-    public const DEFAULT_MODEL = 'llama2';
+    public const DEFAULT_MODEL = 'llama3';
 
     public function __construct(
         private readonly MessageBusInterface $messageBus,

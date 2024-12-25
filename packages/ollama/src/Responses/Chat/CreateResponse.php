@@ -59,7 +59,7 @@ final readonly class CreateResponse
             $attributes['total_duration'],
             $attributes['load_duration'],
             $attributes['prompt_eval_duration'],
-            $attributes['eval_duration'],
+            $attributes['eval_duration'] ?? 0,
             Usage::from([
                 'prompt_tokens' => $attributes['prompt_eval_count'] ?? 0,
                 'completion_tokens' => $attributes['eval_count'],
