@@ -46,6 +46,11 @@
             "target": "git@github.com:modelflow-ai/experts.git"
         },
         {
+            "name": "GoogleGeminiAdapter",
+            "directory": "packages/google-gemini-adapter",
+            "target": "git@github.com:modelflow-ai/google-gemini-adapter.git"
+        },
+        {
             "name": "Mistral",
             "directory": "packages/mistral",
             "target": "git@github.com:modelflow-ai/mistral.git"

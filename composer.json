@@ -18,6 +18,8 @@
         "modelflow-ai/elasticsearch-embeddings-store": "^0.2",
         "modelflow-ai/embeddings": "^0.2",
         "modelflow-ai/experts": "^0.2",
+        "modelflow-ai/fireworksai-adapter": "^0.2",
+        "modelflow-ai/google-gemini-adapter": "^0.2",
         "modelflow-ai/image": "^0.2",
         "modelflow-ai/mistral": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",

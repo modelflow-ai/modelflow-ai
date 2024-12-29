@@ -18,9 +18,9 @@ interface AIChatAdapterFactoryInterface
     /**
      * @param array{
      *     model: string,
-     *     image_to_text: bool,
-     *     functions: bool,
-     *     priority: int,
+     *     image_to_text?: bool,
+     *     functions?: bool,
+     *     priority?: int,
      * } $options
      */
     public function createChatAdapter(array $options): AIChatAdapterInterface;

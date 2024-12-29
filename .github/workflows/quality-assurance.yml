@@ -77,6 +77,13 @@ jobs:
             directory: 'packages/fireworksai-adapter'
             docker: false
 
+    google-gemini-adapter:
+        name: GoogleGeminiAdapter
+        uses: ./.github/workflows/test.yml
+        with:
+            directory: 'packages/google-gemini-adapter'
+            docker: false
+
     image:
         name: Image
         uses: ./.github/workflows/test.yml
