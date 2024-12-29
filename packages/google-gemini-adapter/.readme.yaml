@@ -1,0 +1,4 @@
+title: Google Gemini Adapter
+description: The adapter integrates Google Gemini AI models into Modelflow AI.
+shortDescription: The adapter for the Google Gemini API.
+examples: true
