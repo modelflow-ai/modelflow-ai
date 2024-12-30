@@ -154,6 +154,24 @@ return static function (ContainerConfigurator $container): void {
         ]);
     }
 
+    if (isset($_ENV['GOOGLE_GEMINI_API_KEY']) && '' !== $_ENV['GOOGLE_GEMINI_API_KEY']) {
+        $providers['google_gemini'] = [
+            'enabled' => true,
+            'credentials' => [
+                'api_key' => '%env(GOOGLE_GEMINI_API_KEY)%',
+            ],
+        ];
+
+        $adapters = array_merge($adapters, [
+            'gemini_1_5_pro' => [
+                'enabled' => true,
+            ],
+            'gemini_1_5_flash' => [
+                'enabled' => true,
+            ],
+        ]);
+    }
+
     $container->extension('modelflow_ai', [
         'providers' => $providers,
         'adapters' => $adapters,

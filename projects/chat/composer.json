@@ -13,6 +13,7 @@
         "modelflow-ai/anthropic-adapter": "^0.2",
         "modelflow-ai/chat": "^0.2",
         "modelflow-ai/fireworksai-adapter": "^0.2",
+        "modelflow-ai/google-gemini-adapter": "^0.2",
         "modelflow-ai/image": "^0.2",
         "modelflow-ai/mistral-adapter": "^0.2",
         "modelflow-ai/ollama-adapter": "^0.2",
