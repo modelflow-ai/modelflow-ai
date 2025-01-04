@@ -15,7 +15,12 @@ namespace ModelflowAi\OpenaiAdapter\Chat;
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
@@ -43,11 +48,67 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
         $format = $request->getOption('format');
         Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
 
+        $messages = [];
+
+        /** @var AIChatMessage $aiMessage */
+        foreach ($request->getMessages() as $aiMessage) {
+            $message = [
+                'role' => $aiMessage->role->value,
+                'content' => [],
+            ];
+
+            foreach ($aiMessage->parts as $part) {
+                if ($part instanceof TextPart) {
+                    $message['content'][] = [
+                        'type' => 'text',
+                        'text' => $part->text,
+                    ];
+                } elseif ($part instanceof ImageBase64Part) {
+                    $message['content'][] = [
+                        'type' => 'image_url',
+                        'image_url' => [
+                            'url' => \sprintf('data:%s;base64,%s', $part->mimeType, $part->content),
+                        ],
+                    ];
+                } elseif ($part instanceof ToolCallsPart) {
+                    $message['tool_calls'] = \array_map(
+                        fn (AIChatToolCall $tool) => [
+                            'id' => $tool->id,
+                            'type' => $tool->type->value,
+                            'function' => [
+                                'name' => $tool->name,
+                                'arguments' => (string) \json_encode($tool->arguments),
+                            ],
+                        ],
+                        $part->toolCalls,
+                    );
+                } elseif ($part instanceof ToolCallPart) {
+                    $message['tool_call_id'] = $part->toolCallId;
+                    $message['name'] = $part->toolName;
+                    $message['content'][] = $part->content;
+                } else {
+                    throw new \InvalidArgumentException(\sprintf(
+                        'Unsupported message part type: %s. Supported types are: %s',
+                        $part::class,
+                        \implode(', ', [
+                            TextPart::class,
+                            ImageBase64Part::class,
+                            ToolCallsPart::class,
+                            ToolCallPart::class,
+                        ]),
+                    ));
+                }
+            }
+
+            $message['content'] = $this->normalizeMessageContent($message['content']);
+
+            $messages[] = $message;
+        }
+
         $parameters = [
             'model' => $this->model,
-            'messages' => $request->getMessages()->toArray(),
+            'messages' => $messages,
         ];
-
         if ('json' === $format) {
             $parameters['response_format'] = ['type' => 'json_object'];
         }
@@ -79,11 +140,65 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
     }
 
     /**
+     * @param array<string|array{
+     *              type: "text",
+     *              text: string,
+     *          }|array{
+     *              type: "image_url",
+     *              image_url: array{
+     *                  url: string,
+     *              },
+     *          }> $content
+     *
+     * @return string|array<string|array{
+     *              type: "text",
+     *              text: string,
+     *          }|array{
+     *              type: "image_url",
+     *              image_url: array{
+     *                  url: string,
+     *              },
+     *          }>
+     */
+    private function normalizeMessageContent(array $content): string|array
+    {
+        if (1 !== \count($content)) {
+            return $content;
+        }
+
+        if (\is_string($content[0])) {
+            return $content[0];
+        }
+
+        if ('text' === $content[0]['type']) {
+            return $content[0]['text'];
+        }
+
+        return $content;
+    }
+
+    /**
      * @param array{
      *     model: string,
      *     messages: array<array{
      *         role: "assistant"|"system"|"user"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{
+     *             type: "text",
+     *             text: string,
+     *         }|array{
+     *             type: "image_url",
+     *             image_url: array{
+     *                 url: string,
+     *             },
+     *         }>,
+     *         tool_calls?: array<array{
+     *             id: string,
+     *             type: string,
+     *             function: array{
+     *                 name: string,
+     *                 arguments: string,
+     *             },
+     *         }>,
      *     }>,
      *     response_format?: array{
      *         type: "json_object",
@@ -153,7 +268,23 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      *     model: string,
      *     messages: array<array{
      *         role: "assistant"|"system"|"user"|"tool",
-     *         content: string,
+     *         content: string|array<string|array{
+     *             type: "text",
+     *             text: string,
+     *         }|array{
+     *             type: "image_url",
+     *             image_url: array{
+     *                 url: string,
+     *             },
+     *         }>,
+     *         tool_calls?: array<array{
+     *             id: string,
+     *             type: string,
+     *             function: array{
+     *                 name: string,
+     *                 arguments: string,
+     *             },
+     *         }>,
      *     }>,
      *     response_format?: array{
      *         type: "json_object",

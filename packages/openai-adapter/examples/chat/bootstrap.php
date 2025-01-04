@@ -24,11 +24,11 @@ use ModelflowAi\OpenaiAdapter\Chat\OpenaiChatAdapter;
 
 $adapter = [];
 
+$gpt4oAdapter = new OpenaiChatAdapter($openaiClient, 'gpt-4o');
 $gpt4Adapter = new OpenaiChatAdapter($openaiClient, 'gpt-4');
-$gpt35Adapter = new OpenaiChatAdapter($openaiClient, 'gpt-3.5');
 
-$adapter[] = new DecisionRule($gpt4Adapter, [CapabilityCriteria::SMART]);
-$adapter[] = new DecisionRule($gpt35Adapter, [CapabilityCriteria::BASIC]);
+$adapter[] = new DecisionRule($gpt4oAdapter, [CapabilityCriteria::SMART]);
+$adapter[] = new DecisionRule($gpt4Adapter, [CapabilityCriteria::BASIC]);
 
 /** @var DecisionTreeInterface<AIChatRequest, AIChatAdapterInterface> $decisionTree */
 $decisionTree = new DecisionTree($adapter);
