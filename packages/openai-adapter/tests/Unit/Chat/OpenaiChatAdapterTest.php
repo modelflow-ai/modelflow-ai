@@ -17,8 +17,13 @@ use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\Message\TextPart;
+use ModelflowAi\Chat\Request\Message\ToolCallPart;
+use ModelflowAi\Chat\Request\Message\ToolCallsPart;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
+use ModelflowAi\Chat\Response\AIChatToolCall;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
@@ -75,6 +80,89 @@ final class OpenaiChatAdapterTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+        ), new CriteriaCollection(), [], [], [], fn () => null);
+
+        $adapter = new OpenaiChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame("\n\nHello there, this is a fake chat response.", $result->getMessage()->content);
+        $this->assertSame(9, $result->getUsage()?->inputTokens);
+        $this->assertSame(12, $result->getUsage()->outputTokens);
+        $this->assertSame(21, $result->getUsage()->totalTokens);
+    }
+
+    public function testHandleRequestWithMultipleParts(): void
+    {
+        $chat = $this->prophesize(ChatContract::class);
+        $client = $this->prophesize(ClientContract::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
+        $chat->create([
+            'model' => 'gpt-4',
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => [
+                        [
+                            'type' => 'text',
+                            'text' => 'System message',
+                        ],
+                        [
+                            'type' => 'image_url',
+                            'image_url' => [
+                                'url' => \sprintf('data:%s;base64,%s', 'image/jpeg', 'base64'),
+                            ],
+                        ],
+                        'Test result 1',
+                    ],
+                    'tool_calls' => [
+                        [
+                            'id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
+                            'type' => 'function',
+                            'function' => [
+                                'name' => 'test',
+                                'arguments' => '{"required":"Test required 1","optional":"Test optional 1"}',
+                            ],
+                        ],
+                    ],
+                    'tool_call_id' => 'call_1Ue9UPErEy4dz56T3znEoBO1',
+                    'name' => 'test',
+                ],
+            ],
+        ])->willReturn(CreateResponse::from(
+            $attributes,
+            MetaInformation::from([
+                'x-request-id' => ['123'],
+                'openai-model' => ['gpt-4'],
+                'openai-organization' => ['org'],
+                'openai-version' => ['2021-10-10'],
+                'openai-processing-ms' => ['123'],
+                'x-ratelimit-limit-requests' => ['123'],
+                'x-ratelimit-limit-tokens' => ['123'],
+                'x-ratelimit-remaining-requests' => ['123'],
+                'x-ratelimit-remaining-tokens' => ['123'],
+                'x-ratelimit-reset-requests' => ['123'],
+                'x-ratelimit-reset-tokens' => ['123'],
+            ]),
+        ));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, [
+                TextPart::create('System message'),
+                new ImageBase64Part('base64', 'image/jpeg'),
+                ToolCallsPart::create([
+                    new AIChatToolCall(ToolTypeEnum::FUNCTION, 'call_1Ue9UPErEy4dz56T3znEoBO1', 'test', [
+                        'required' => 'Test required 1',
+                        'optional' => 'Test optional 1',
+                    ]),
+                ]),
+                ToolCallPart::create('call_1Ue9UPErEy4dz56T3znEoBO1', 'test', 'Test result 1'),
+            ]),
         ), new CriteriaCollection(), [], [], [], fn () => null);
 
         $adapter = new OpenaiChatAdapter($client->reveal());
