@@ -15,10 +15,14 @@ namespace ModelflowAi\Chat\Tests\Unit;
 
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\AIChatRequestHandler;
+use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
+use ModelflowAi\Chat\Request\ResponseFormat\SupportsResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\Usage;
@@ -77,5 +81,197 @@ class AIChatRequestHandlerTest extends TestCase
         $result = $chatRequest->execute();
 
         $this->assertSame($response, $result);
+    }
+
+    public function testHandleWithoutResponseFormat(): void
+    {
+        // Arrange
+        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
+        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
+
+        $mockDecisionTree
+            ->method('determineAdapter')
+            ->willReturn($mockAdapter);
+
+        $mockAdapter
+            ->method('handleRequest')
+            ->willReturnCallback(
+                fn (AIChatRequest $request) => new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'No format'), null),
+            );
+
+        $handler = new AIChatRequestHandler($mockDecisionTree);
+
+        // Create a request builder and build a request without responseFormat
+        $requestBuilder = $handler->createRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, how are you?'),
+        );
+        $request = $requestBuilder->build(); // Typically calls the builder's internal closure
+
+        // Act
+        $response = $request->execute();
+
+        // Assert
+        $this->assertInstanceOf(AIChatResponse::class, $response);
+        $this->assertSame('No format', $response->getMessage()->content);
+    }
+
+    public function testHandleWithResponseFormatAdapterSupports(): void
+    {
+        // Arrange
+        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
+        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
+
+        // Make our adapter implement the SupportsResponseFormatInterface
+        $mockSupportedAdapter = new class($mockAdapter) implements AIChatAdapterInterface, SupportsResponseFormatInterface {
+            public function __construct(
+                private readonly AIChatAdapterInterface $wrapped,
+            ) {
+            }
+
+            public function handleRequest(AIChatRequest $request): AIChatResponse
+            {
+                return $this->wrapped->handleRequest($request);
+            }
+
+            public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool
+            {
+                // For this scenario, we simulate that the adapter DOES support the format
+                return true;
+            }
+
+            public function supports(object $request): bool
+            {
+                return true;
+            }
+        };
+
+        $mockDecisionTree
+            ->method('determineAdapter')
+            ->willReturn($mockSupportedAdapter);
+
+        $mockAdapter
+            ->method('handleRequest')
+            ->willReturnCallback(
+                fn (AIChatRequest $request) => new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Supported'), null),
+            );
+
+        $handler = new AIChatRequestHandler($mockDecisionTree);
+
+        $mockResponseFormat = $this->createMock(JsonSchemaResponseFormat::class);
+
+        // Create a request with a response format
+        $requestBuilder = $handler->createRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, do you support JSON?'),
+        )->asJson($mockResponseFormat);
+        $request = $requestBuilder->build();
+
+        // Act
+        $response = $request->execute();
+
+        // Assert
+        $this->assertInstanceOf(AIChatResponse::class, $response);
+        $this->assertSame('Supported', $response->getMessage()->content);
+    }
+
+    public function testHandleWithResponseFormatAdapterDoesNotSupport(): void
+    {
+        // Arrange
+        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
+        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
+
+        // Make our adapter implement the SupportsResponseFormatInterface
+        $mockUnsupportedAdapter = new class($mockAdapter) implements AIChatAdapterInterface, SupportsResponseFormatInterface {
+            public function __construct(
+                private readonly AIChatAdapterInterface $wrapped,
+            ) {
+            }
+
+            public function handleRequest(AIChatRequest $request): AIChatResponse
+            {
+                return $this->wrapped->handleRequest($request);
+            }
+
+            public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool
+            {
+                // For this scenario, we simulate that the adapter DOES NOT support the format
+                return false;
+            }
+
+            public function supports(object $request): bool
+            {
+                return true;
+            }
+        };
+
+        $mockDecisionTree
+            ->method('determineAdapter')
+            ->willReturn($mockUnsupportedAdapter);
+
+        // Here we’ll track if the adapter is called
+        $mockAdapter
+            ->method('handleRequest')
+            ->willReturnCallback(
+                fn (AIChatRequest $request) => new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Not supported'), null),
+            );
+
+        $handler = new AIChatRequestHandler($mockDecisionTree);
+
+        // We’ll create a mock ResponseFormatInterface
+        $mockResponseFormat = $this->createMock(JsonSchemaResponseFormat::class);
+        $mockResponseFormat
+            ->method('asString')
+            ->willReturn('JSON schema content');
+
+        // Create a request with a response format
+        $requestBuilder = $handler->createRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, do you support the new format?'),
+        )->asJson($mockResponseFormat);
+        $request = $requestBuilder->build();
+
+        // Act
+        $response = $request->execute();
+
+        // Assert
+        $this->assertInstanceOf(AIChatResponse::class, $response);
+        $this->assertSame('Not supported', $response->getMessage()->content);
+
+        // Check that the request messages have a new system message added for the format
+        $messagesCollection = $request->getMessages();
+        $this->assertInstanceOf(AIChatMessageCollection::class, $messagesCollection);
+
+        $allMessages = $messagesCollection->toArray();
+        // Expect at least 2 messages: the original user message + the new "SYSTEM" message for the format
+        $this->assertCount(2, $allMessages);
+
+        $this->assertSame(AIChatMessageRoleEnum::SYSTEM->value, $allMessages[0]['role']); // The inserted "SYSTEM" message describing the format
+        $this->assertSame(AIChatMessageRoleEnum::USER->value, $allMessages[1]['role']); // Original message
+        $this->assertStringContainsString('JSON schema content', $allMessages[0]['content']);
+    }
+
+    public function testHandleInvalidResponseFormatType(): void
+    {
+        // Arrange
+        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
+        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
+
+        $mockDecisionTree
+            ->method('determineAdapter')
+            ->willReturn($mockAdapter);
+
+        $handler = new AIChatRequestHandler($mockDecisionTree);
+
+        // Provide a non-ResponseFormatInterface object
+        $this->expectException(\InvalidArgumentException::class);
+
+        $requestBuilder = $handler->createRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'This test should throw an exception'),
+        )->addOptions([ // @phpstan-ignore-line
+            'responseFormat' => new \stdClass(),
+        ]);
+
+        // Once we build the request and call it, it should trigger the error
+        $requestBuilder
+            ->build()
+            ->execute();
     }
 }

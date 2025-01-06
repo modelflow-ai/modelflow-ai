@@ -11,10 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Experts;
+namespace ModelflowAi\Experts\Tests\Unit;
 
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
+use ModelflowAi\Experts\Expert;
+use ModelflowAi\Experts\Thread;
+use ModelflowAi\Experts\ThreadFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;

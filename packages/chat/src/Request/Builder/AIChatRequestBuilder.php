@@ -18,10 +18,13 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\MessagePart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
+use Webmozart\Assert\Assert;
 
 final class AIChatRequestBuilder
 {
@@ -35,6 +38,7 @@ final class AIChatRequestBuilder
     /**
      * @var array{
      *     format?: "json"|null,
+     *     schema?: ResponseFormatInterface,
      *     streamed?: bool,
      *     toolChoice?: ToolChoiceEnum,
      * }
@@ -71,11 +75,12 @@ final class AIChatRequestBuilder
 
     /**
      * @param array{
-     *      format?: "json"|null,
-     *      streamed?: bool,
-     *      toolChoice?: ToolChoiceEnum,
-     *      seed?: int,
-     *      temperature?: float,
+     *     format?: "json"|null,
+     *     responseFormat?: ResponseFormatInterface,
+     *     streamed?: bool,
+     *     toolChoice?: ToolChoiceEnum,
+     *     seed?: int,
+     *     temperature?: float,
      *  } $options
      */
     public function addOptions(array $options): self
@@ -95,9 +100,14 @@ final class AIChatRequestBuilder
         return $this;
     }
 
-    public function asJson(): self
+    public function asJson(?ResponseFormatInterface $responseFormat = null): self
     {
         $this->options['format'] = 'json';
+        if ($responseFormat instanceof ResponseFormatInterface) {
+            Assert::isInstanceOf($responseFormat, JsonSchemaResponseFormat::class);
+
+            $this->options['responseFormat'] = $responseFormat;
+        }
 
         return $this;
     }

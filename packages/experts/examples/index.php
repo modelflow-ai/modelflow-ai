@@ -16,10 +16,10 @@ namespace App;
 use ModelflowAi\Chat\Adapter\Fake\FakeChatAdapter;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\Experts\Expert;
-use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Experts\ThreadFactory;
 
 /** @var AIChatRequestHandlerInterface $handler */
@@ -61,12 +61,10 @@ PROMPT,
             'title' => [
                 'type' => 'string',
                 'description' => 'The title of the webpage, important for SEO and the browser tab',
-                'required' => true,
             ],
             'description' => [
                 'type' => 'string',
                 'description' => 'A brief description of the webpage content, important for search engine listings',
-                'required' => true,
             ],
             'keywords' => [
                 'type' => 'array',

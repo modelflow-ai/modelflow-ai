@@ -11,10 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Experts;
+namespace ModelflowAi\Experts\Tests\Unit;
 
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
-use ModelflowAi\Experts\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Experts\Expert;
 use PHPUnit\Framework\TestCase;
 
 class ExpertTest extends TestCase
@@ -42,7 +43,19 @@ class ExpertTest extends TestCase
             'description',
             'instructions',
             [CapabilityCriteria::SMART],
-            new JsonSchemaResponseFormat([]),
+            new JsonSchemaResponseFormat([
+                'type' => 'object',
+                'properties' => [
+                    'name' => [
+                        'type' => 'string',
+                        'description' => 'The name of the user',
+                    ],
+                    'age' => [
+                        'type' => 'integer',
+                        'description' => 'The age of the user',
+                    ],
+                ],
+            ]),
         );
 
         $this->assertSame('name', $expert->getName());

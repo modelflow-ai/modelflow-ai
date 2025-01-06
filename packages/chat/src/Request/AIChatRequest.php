@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace ModelflowAi\Chat\Request;
 
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfo;
@@ -36,6 +37,7 @@ class AIChatRequest implements CriteriaBehaviour
      * @param array{
      *     streamed?: boolean,
      *     format?: "json"|null,
+     *     responseFormat?: ResponseFormatInterface,
      *     toolChoice?: ToolChoiceEnum,
      *     seed?: int,
      *     temperature?: float,
@@ -73,7 +75,7 @@ class AIChatRequest implements CriteriaBehaviour
     }
 
     /**
-     * @param "format"|"streamed"|"toolChoice"|"seed"|"temperature" $key
+     * @param "format"|"responseFormat"|"streamed"|"toolChoice"|"seed"|"temperature" $key
      */
     public function getOption(string $key, mixed $default = null): mixed
     {
@@ -97,6 +99,7 @@ class AIChatRequest implements CriteriaBehaviour
      * @return array{
      *     streamed?: boolean,
      *     format?: "json"|null,
+     *     responseFormat?: ResponseFormatInterface,
      *     toolChoice?: ToolChoiceEnum,
      *     seed?: int,
      *     temperature?: float,

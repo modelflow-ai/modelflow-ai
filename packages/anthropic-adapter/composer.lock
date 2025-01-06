@@ -1447,16 +1447,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.66.0",
+            "version": "v3.66.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "6824b91b16d2e123afed9bf9c96ec283882346c9"
+                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/6824b91b16d2e123afed9bf9c96ec283882346c9",
-                "reference": "6824b91b16d2e123afed9bf9c96ec283882346c9",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
+                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
                 "shasum": ""
             },
             "require": {
@@ -1493,9 +1493,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.0"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.1"
             },
-            "time": "2024-12-29T13:46:48+00:00"
+            "time": "2025-01-05T14:43:53+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -2339,12 +2339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c18388d13bb5c973e012317ab56f9361817f7371"
+                "reference": "e299d616898088b84a8d2f9efff276c805ce61db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c18388d13bb5c973e012317ab56f9361817f7371",
-                "reference": "c18388d13bb5c973e012317ab56f9361817f7371",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e299d616898088b84a8d2f9efff276c805ce61db",
+                "reference": "e299d616898088b84a8d2f9efff276c805ce61db",
                 "shasum": ""
             },
             "require": {
@@ -2432,7 +2432,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-02T09:08:43+00:00"
+            "time": "2025-01-05T09:50:42+00:00"
         },
         {
             "name": "rector/rector",

@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Experts\ResponseFormat;
+namespace ModelflowAi\Chat\Request\ResponseFormat;
 
 interface ResponseFormatInterface
 {
-    public function format(): string;
+    public function asString(): string;
 }

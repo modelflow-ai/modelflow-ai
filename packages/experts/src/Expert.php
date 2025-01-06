@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace ModelflowAi\Experts;
 
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
-use ModelflowAi\Experts\ResponseFormat\ResponseFormatInterface;
 
 readonly class Expert implements ExpertInterface
 {

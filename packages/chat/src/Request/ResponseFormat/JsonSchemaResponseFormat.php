@@ -11,22 +11,33 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Experts\ResponseFormat;
+namespace ModelflowAi\Chat\Request\ResponseFormat;
 
 class JsonSchemaResponseFormat implements ResponseFormatInterface
 {
     /**
      * @param array{
-     *     properties?: array<string, array{type: string, description: string}>,
+     *     name?: string,
+     *     description?: string,
+     *     type: "object",
+     *     properties?: array<string, array{
+     *         type: string,
+     *         description?: string,
+     *         items?: array{type: string},
+     *     }>,
      *     required?: array<string>,
      * } $schema
      */
     public function __construct(
         public array $schema,
     ) {
+        // @phpstan-ignore-next-line
+        if (($schema['type'] ?? null) !== 'object') {
+            throw new \InvalidArgumentException('JsonOutputSchema requires "type" to be "object".');
+        }
     }
 
-    public function format(): string
+    public function asString(): string
     {
         $lines = [
             'Produce a JSON object that includes:',

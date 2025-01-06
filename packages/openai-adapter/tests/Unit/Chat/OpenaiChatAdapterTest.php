@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\OllamaAdapter\Tests\Unit\Chat;
+namespace ModelflowAi\OpenaiAdapter\Tests\Unit\Chat;
 
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
@@ -21,6 +21,8 @@ use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Request\Message\TextPart;
 use ModelflowAi\Chat\Request\Message\ToolCallPart;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
@@ -76,11 +78,18 @@ final class OpenaiChatAdapterTest extends TestCase
             ]),
         ));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -151,19 +160,26 @@ final class OpenaiChatAdapterTest extends TestCase
             ]),
         ));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, [
-                TextPart::create('System message'),
-                new ImageBase64Part('base64', 'image/jpeg'),
-                ToolCallsPart::create([
-                    new AIChatToolCall(ToolTypeEnum::FUNCTION, 'call_1Ue9UPErEy4dz56T3znEoBO1', 'test', [
-                        'required' => 'Test required 1',
-                        'optional' => 'Test optional 1',
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, [
+                    TextPart::create('System message'),
+                    new ImageBase64Part('base64', 'image/jpeg'),
+                    ToolCallsPart::create([
+                        new AIChatToolCall(ToolTypeEnum::FUNCTION, 'call_1Ue9UPErEy4dz56T3znEoBO1', 'test', [
+                            'required' => 'Test required 1',
+                            'optional' => 'Test optional 1',
+                        ]),
                     ]),
+                    ToolCallPart::create('call_1Ue9UPErEy4dz56T3znEoBO1', 'test', 'Test result 1'),
                 ]),
-                ToolCallPart::create('call_1Ue9UPErEy4dz56T3znEoBO1', 'test', 'Test result 1'),
-            ]),
-        ), new CriteriaCollection(), [], [], [], fn () => null);
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -211,14 +227,21 @@ final class OpenaiChatAdapterTest extends TestCase
             ]),
         ));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], [
-            'seed' => 123,
-            'temperature' => 0.5,
-        ], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            [
+                'seed' => 123,
+                'temperature' => 0.5,
+            ],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -262,11 +285,18 @@ final class OpenaiChatAdapterTest extends TestCase
             ]),
         ));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['format' => 'json'],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -277,20 +307,93 @@ final class OpenaiChatAdapterTest extends TestCase
         $this->assertSame(21, $result->getUsage()->totalTokens);
     }
 
+    public function testHandleRequestAsJsonWithResponseFormat(): void
+    {
+        $chat = $this->prophesize(ChatContract::class);
+        $client = $this->prophesize(ClientContract::class);
+        $client->chat()->willReturn($chat->reveal());
+
+        $attributes = CreateResponseFixture::ATTRIBUTES;
+        $attributes['system_fingerprint'] = '123-123-123';
+
+        $chat->create([
+            'model' => 'gpt-4',
+            'response_format' => ['type' => 'json_schema', 'json_schema' => [
+                'name' => 'response',
+                'strict' => true,
+                'schema' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'dummy' => ['type' => 'string'],
+                    ],
+                ],
+            ], ],
+            'messages' => [
+                ['role' => 'system', 'content' => 'System message'],
+                ['role' => 'user', 'content' => 'User message'],
+                ['role' => 'assistant', 'content' => 'Assistant message'],
+            ],
+        ])->willReturn(CreateResponse::from(
+            $attributes,
+            MetaInformation::from([
+                'x-request-id' => ['123'],
+                'openai-model' => ['gpt-4'],
+                'openai-organization' => ['org'],
+                'openai-version' => ['2021-10-10'],
+                'openai-processing-ms' => ['123'],
+                'x-ratelimit-limit-requests' => ['123'],
+                'x-ratelimit-limit-tokens' => ['123'],
+                'x-ratelimit-remaining-requests' => ['123'],
+                'x-ratelimit-remaining-tokens' => ['123'],
+                'x-ratelimit-reset-requests' => ['123'],
+                'x-ratelimit-reset-tokens' => ['123'],
+            ]),
+        ));
+
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['format' => 'json', 'responseFormat' => new JsonSchemaResponseFormat([
+                'type' => 'object',
+                'properties' => [
+                    'dummy' => ['type' => 'string'],
+                ],
+            ])],
+            fn () => null,
+        );
+
+        $adapter = new OpenaiChatAdapter($client->reveal());
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+    }
+
     public function testHandleRequestStreamed(): void
     {
         /** @var resource $resource */
         $resource = \fopen(__DIR__ . '/resources/stream.txt', 'r');
-
         $client = new ClientFake([
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [],
+            [],
+            ['streamed' => true],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client);
         $result = $adapter->handleRequest($request);
@@ -311,21 +414,27 @@ final class OpenaiChatAdapterTest extends TestCase
             CreateResponse::fake($contents),
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            ['toolChoice' => ToolChoiceEnum::AUTO],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client);
         $result = $adapter->handleRequest($request);
 
         $this->assertInstanceOf(AIChatResponse::class, $result);
-
         $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
         $toolCalls = $result->getMessage()->toolCalls;
 
@@ -349,6 +458,7 @@ final class OpenaiChatAdapterTest extends TestCase
             'required' => 'Test required 2',
             'optional' => 'Test optional 2',
         ], $toolCall2->arguments);
+
         $this->assertSame(73, $result->getUsage()?->inputTokens);
         $this->assertSame(24, $result->getUsage()->outputTokens);
         $this->assertSame(97, $result->getUsage()->totalTokens);
@@ -358,20 +468,26 @@ final class OpenaiChatAdapterTest extends TestCase
     {
         /** @var resource $resource */
         $resource = \fopen(__DIR__ . '/resources/tools-stream.txt', 'r');
-
         $client = new ClientFake([
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
-            new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [
-            'test' => [$this, 'toolMethod'],
-        ], [
-            ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['streamed' => true], fn () => null);
+        $request = new AIChatRequest(
+            new AIChatMessageCollection(
+                new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
+                new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
+                new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
+            ),
+            new CriteriaCollection(),
+            [
+                'test' => [$this, 'toolMethod'],
+            ],
+            [
+                ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
+            ],
+            ['streamed' => true],
+            fn () => null,
+        );
 
         $adapter = new OpenaiChatAdapter($client);
         $result = $adapter->handleRequest($request);
@@ -407,6 +523,26 @@ final class OpenaiChatAdapterTest extends TestCase
             $this->assertSame($contents[$i]['name'], $toolCall->name);
             $this->assertSame($contents[$i]['arguments'], $toolCall->arguments);
         }
+    }
+
+    public function testSupportResponseFormatWithSupportedInstance(): void
+    {
+        $client = $this->createMock(ClientContract::class);
+        $unsupportedFormat = $this->createMock(JsonSchemaResponseFormat::class);
+
+        $adapter = new OpenaiChatAdapter($client);
+
+        $this->assertTrue($adapter->supportResponseFormat($unsupportedFormat));
+    }
+
+    public function testSupportResponseFormatWithUnsupportedInstance(): void
+    {
+        $client = $this->createMock(ClientContract::class);
+        $unsupportedFormat = $this->createMock(ResponseFormatInterface::class);
+
+        $adapter = new OpenaiChatAdapter($client);
+
+        $this->assertFalse($adapter->supportResponseFormat($unsupportedFormat));
     }
 
     /**

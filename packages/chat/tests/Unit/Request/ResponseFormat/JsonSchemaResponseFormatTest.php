@@ -11,15 +11,25 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace ModelflowAi\Experts\ResponseFormat;
+namespace ModelflowAi\Chat\Tests\Unit\Request\ResponseFormat;
 
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use PHPUnit\Framework\TestCase;
 
 class JsonSchemaResponseFormatTest extends TestCase
 {
-    public function testFormat(): void
+    public function testConstructorInvalidSchema(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        // @phpstan-ignore-next-line
+        new JsonSchemaResponseFormat([]);
+    }
+
+    public function testAsString(): void
     {
         $responseFormat = new JsonSchemaResponseFormat([
+            'type' => 'object',
             'properties' => [
                 'name' => [
                     'type' => 'string',
@@ -40,6 +50,6 @@ Properties:
 - age (Type: integer): The age of the user
 Required properties: name
 It's crucial that your output is a clean JSON object, presented without any additional formatting, annotations, or explanatory content. The response should be ready to use as-is for a system to store it in the database or to process it further.
-Format, $responseFormat->format());
+Format, $responseFormat->asString());
     }
 }
