@@ -45,6 +45,24 @@ class AIChatMessageCollectionTest extends TestCase
         $this->assertSame($expected, $collection->toArray());
     }
 
+    public function testAddResponseFormat(): void
+    {
+        $formatMock = $this->prophesize(ResponseFormatInterface::class);
+        $formatMock->asString()->willReturn('mocked-schema');
+
+        $collection = new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'Existing system message'),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello'),
+        );
+
+        $this->assertCount(2, $collection, 'Collection should have two messages to start.');
+        $collection->addResponseFormat($formatMock->reveal());
+
+        $this->assertCount(3, $collection, 'A system message should be inserted before the first non-system message.');
+        $this->assertSame(AIChatMessageRoleEnum::SYSTEM, $collection[1]?->role, 'The newly added system message should appear at index 1.');
+        $this->assertSame('mocked-schema', $collection[1]->toArray()['content'], 'Ensure the new system message contains the correct content.');
+    }
+
     public function testAddResponseFormatOnEmptyCollection(): void
     {
         $formatMock = $this->prophesize(ResponseFormatInterface::class);
@@ -79,21 +97,19 @@ class AIChatMessageCollectionTest extends TestCase
         $this->assertSame('Hi!', $collection[2]?->toArray()['content']);
     }
 
-    public function testNoSystemMessageAddedIfFirstMessageAlreadySystem(): void
+    public function testAddResponseFormatThrowsExceptionWhenAlreadySet(): void
     {
         $formatMock = $this->prophesize(ResponseFormatInterface::class);
         $formatMock->asString()->willReturn('mocked-schema');
 
         $collection = new AIChatMessageCollection(
-            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'Existing system message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello'),
         );
 
-        $this->assertCount(2, $collection, 'Collection should have two messages to start.');
         $collection->addResponseFormat($formatMock->reveal());
 
-        $this->assertCount(3, $collection, 'A system message will still be inserted before the first non-system message after the existing system one.');
-        $this->assertSame(AIChatMessageRoleEnum::SYSTEM, $collection[1]?->role, 'The newly added system message should appear at index 1.');
-        $this->assertSame('mocked-schema', $collection[1]->toArray()['content'], 'Ensure the new system message contains the correct content.');
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Response format already set.');
+        $collection->addResponseFormat($formatMock->reveal());
     }
 }

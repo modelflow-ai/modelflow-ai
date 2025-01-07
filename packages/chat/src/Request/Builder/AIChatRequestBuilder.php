@@ -24,8 +24,10 @@ use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
-use Webmozart\Assert\Assert;
 
+/**
+ * @phpstan-import-type Schema from JsonSchemaResponseFormat
+ */
 final class AIChatRequestBuilder
 {
     public static function create(callable $requestHandler): self
@@ -100,13 +102,14 @@ final class AIChatRequestBuilder
         return $this;
     }
 
-    public function asJson(?ResponseFormatInterface $responseFormat = null): self
+    /**
+     * @param Schema|null $jsonSchema
+     */
+    public function asJson(?array $jsonSchema = null): self
     {
         $this->options['format'] = 'json';
-        if ($responseFormat instanceof ResponseFormatInterface) {
-            Assert::isInstanceOf($responseFormat, JsonSchemaResponseFormat::class);
-
-            $this->options['responseFormat'] = $responseFormat;
+        if (null !== $jsonSchema) {
+            $this->options['responseFormat'] = new JsonSchemaResponseFormat($jsonSchema);
         }
 
         return $this;

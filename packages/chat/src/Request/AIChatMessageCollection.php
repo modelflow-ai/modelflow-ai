@@ -22,6 +22,8 @@ use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
  */
 class AIChatMessageCollection extends \ArrayObject
 {
+    private ?ResponseFormatInterface $responseFormat = null;
+
     public function __construct(
         AIChatMessage ...$messages,
     ) {
@@ -54,6 +56,12 @@ class AIChatMessageCollection extends \ArrayObject
 
     public function addResponseFormat(ResponseFormatInterface $responseFormat): void
     {
+        if ($this->responseFormat instanceof ResponseFormatInterface) {
+            throw new \RuntimeException('Response format already set.');
+        }
+
+        $this->responseFormat = $responseFormat;
+
         if (0 === $this->count()) {
             $this->exchangeArray([
                 new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, $responseFormat->asString()),

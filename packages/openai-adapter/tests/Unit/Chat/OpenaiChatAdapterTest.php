@@ -324,8 +324,13 @@ final class OpenaiChatAdapterTest extends TestCase
                 'schema' => [
                     'type' => 'object',
                     'properties' => [
-                        'dummy' => ['type' => 'string'],
+                        'dummy' => [
+                            'type' => 'string',
+                            'description' => '',
+                        ],
                     ],
+                    'description' => '',
+                    'additionalProperties' => false,
                 ],
             ], ],
             'messages' => [

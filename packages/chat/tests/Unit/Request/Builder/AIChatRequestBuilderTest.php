@@ -17,7 +17,6 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfo;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
@@ -66,13 +65,16 @@ class AIChatRequestBuilderTest extends TestCase
             'required' => ['foo'],
         ];
 
-        $responseFormat = new JsonSchemaResponseFormat($schema);
-        $builder->asJson($responseFormat);
+        $builder->asJson($schema);
 
         $request = $builder->build();
 
+        $expected = [...$schema];
+        $expected['additionalProperties'] = false;
+        $expected['properties']['foo']['description'] = '';
+
         $this->assertSame('json', $request->getOption('format'));
-        $this->assertSame($responseFormat, $request->getOption('responseFormat'));
+        $this->assertSame($expected, $request->getOption('responseFormat')->schema); // @phpstan-ignore-line
     }
 
     public function testStreamed(): void

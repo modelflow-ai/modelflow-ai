@@ -17,7 +17,7 @@ use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\MessagePart;
-use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponse;
 
 class Thread implements ThreadInterface
@@ -95,8 +95,8 @@ class Thread implements ThreadInterface
             ->addSystemMessage($this->expert->getInstructions())
             ->addCriteria($this->expert->getCriteria());
 
-        if ($this->expert->getResponseFormat() instanceof ResponseFormatInterface) {
-            $builder->asJson($this->expert->getResponseFormat());
+        if ($this->expert->getResponseFormat() instanceof JsonSchemaResponseFormat) {
+            $builder->asJson($this->expert->getResponseFormat()->schema);
         }
 
         if ([] !== $this->context) {

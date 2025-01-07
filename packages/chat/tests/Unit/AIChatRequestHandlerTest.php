@@ -157,12 +157,22 @@ class AIChatRequestHandlerTest extends TestCase
 
         $handler = new AIChatRequestHandler($mockDecisionTree);
 
-        $mockResponseFormat = $this->createMock(JsonSchemaResponseFormat::class);
+        $schema = [
+            'name' => 'TestObject',
+            'description' => 'A schema description',
+            'type' => 'object',
+            'properties' => [
+                'foo' => [
+                    'type' => 'string',
+                ],
+            ],
+            'required' => ['foo'],
+        ];
 
         // Create a request with a response format
         $requestBuilder = $handler->createRequest(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, do you support JSON?'),
-        )->asJson($mockResponseFormat);
+        )->asJson($schema);
         $request = $requestBuilder->build();
 
         // Act
@@ -216,16 +226,23 @@ class AIChatRequestHandlerTest extends TestCase
 
         $handler = new AIChatRequestHandler($mockDecisionTree);
 
-        // We’ll create a mock ResponseFormatInterface
-        $mockResponseFormat = $this->createMock(JsonSchemaResponseFormat::class);
-        $mockResponseFormat
-            ->method('asString')
-            ->willReturn('JSON schema content');
+        $schema = [
+            'name' => 'TestObject',
+            'description' => 'A schema description',
+            'type' => 'object',
+            'properties' => [
+                'foo' => [
+                    'type' => 'string',
+                ],
+            ],
+            'required' => ['foo'],
+        ];
+        $mockResponseFormat = new JsonSchemaResponseFormat($schema);
 
         // Create a request with a response format
         $requestBuilder = $handler->createRequest(
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, do you support the new format?'),
-        )->asJson($mockResponseFormat);
+        )->asJson($schema);
         $request = $requestBuilder->build();
 
         // Act
@@ -245,7 +262,7 @@ class AIChatRequestHandlerTest extends TestCase
 
         $this->assertSame(AIChatMessageRoleEnum::SYSTEM->value, $allMessages[0]['role']); // The inserted "SYSTEM" message describing the format
         $this->assertSame(AIChatMessageRoleEnum::USER->value, $allMessages[1]['role']); // Original message
-        $this->assertStringContainsString('JSON schema content', $allMessages[0]['content']);
+        $this->assertStringContainsString($mockResponseFormat->asString(), $allMessages[0]['content']);
     }
 
     public function testHandleInvalidResponseFormatType(): void

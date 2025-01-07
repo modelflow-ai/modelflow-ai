@@ -215,7 +215,7 @@ class ThreadTest extends TestCase
 
         $request = $result->getRequest();
         $this->assertInstanceOf(AIChatRequest::class, $request);
-        $this->assertSame($expert->getResponseFormat(), $request->getOption('responseFormat'));
+        $this->assertSame($expert->getResponseFormat()->schema, $request->getOption('responseFormat')->schema); // @phpstan-ignore-line
         $this->assertCount(2, $request->getMessages());
         $this->assertSame(['role' => 'system', 'content' => 'instructions'], $request->getMessages()[0]?->toArray());
         $this->assertSame(['role' => 'user', 'content' => 'Context: {"key":"value"}'], $request->getMessages()[1]?->toArray());
