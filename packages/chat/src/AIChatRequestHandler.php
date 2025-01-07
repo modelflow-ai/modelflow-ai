@@ -17,6 +17,8 @@ use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
+use ModelflowAi\Chat\Request\ResponseFormat\SupportsResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use Webmozart\Assert\Assert;
@@ -34,6 +36,17 @@ final readonly class AIChatRequestHandler implements AIChatRequestHandlerInterfa
     private function handle(AIChatRequest $request): AIChatResponse
     {
         $adapter = $this->decisionTree->determineAdapter($request);
+
+        $responseFormat = $request->getOption('responseFormat');
+        if ($responseFormat) {
+            Assert::isInstanceOf($responseFormat, ResponseFormatInterface::class);
+
+            if (!$adapter instanceof SupportsResponseFormatInterface
+                || !$adapter->supportsResponseFormat($responseFormat)
+            ) {
+                $request->getMessages()->addResponseFormat($responseFormat);
+            }
+        }
 
         return $adapter->handleRequest($request);
     }

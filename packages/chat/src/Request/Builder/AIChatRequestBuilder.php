@@ -18,11 +18,16 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\MessagePart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 
+/**
+ * @phpstan-import-type Schema from JsonSchemaResponseFormat
+ */
 final class AIChatRequestBuilder
 {
     public static function create(callable $requestHandler): self
@@ -35,6 +40,7 @@ final class AIChatRequestBuilder
     /**
      * @var array{
      *     format?: "json"|null,
+     *     schema?: ResponseFormatInterface,
      *     streamed?: bool,
      *     toolChoice?: ToolChoiceEnum,
      * }
@@ -71,11 +77,12 @@ final class AIChatRequestBuilder
 
     /**
      * @param array{
-     *      format?: "json"|null,
-     *      streamed?: bool,
-     *      toolChoice?: ToolChoiceEnum,
-     *      seed?: int,
-     *      temperature?: float,
+     *     format?: "json"|null,
+     *     responseFormat?: ResponseFormatInterface,
+     *     streamed?: bool,
+     *     toolChoice?: ToolChoiceEnum,
+     *     seed?: int,
+     *     temperature?: float,
      *  } $options
      */
     public function addOptions(array $options): self
@@ -95,9 +102,15 @@ final class AIChatRequestBuilder
         return $this;
     }
 
-    public function asJson(): self
+    /**
+     * @param Schema|null $jsonSchema
+     */
+    public function asJson(?array $jsonSchema = null): self
     {
         $this->options['format'] = 'json';
+        if (null !== $jsonSchema) {
+            $this->options['responseFormat'] = new JsonSchemaResponseFormat($jsonSchema);
+        }
 
         return $this;
     }

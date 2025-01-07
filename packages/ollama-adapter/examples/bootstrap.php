@@ -31,7 +31,7 @@ use Symfony\Component\Dotenv\Dotenv;
 $adapter = [];
 
 $client = Ollama::client();
-$llama2Adapter = new OllamaChatAdapter($client, 'llama2');
+$llama2Adapter = new OllamaChatAdapter($client, 'llama3.2');
 
 /** @var DecisionRule<AIChatRequest, AIChatAdapterInterface> $rule */
 $rule = new DecisionRule($llama2Adapter, [PrivacyCriteria::HIGH]);

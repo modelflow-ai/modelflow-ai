@@ -21,6 +21,9 @@ use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Request\Message\TextPart;
 use ModelflowAi\Chat\Request\Message\ToolCallPart;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
+use ModelflowAi\Chat\Request\ResponseFormat\SupportsResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
@@ -34,8 +37,12 @@ use OpenAI\Responses\Chat\CreateStreamedResponse;
 use OpenAI\Responses\StreamResponse;
 use Webmozart\Assert\Assert;
 
-final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
+final readonly class OpenaiChatAdapter implements AIChatAdapterInterface, SupportsResponseFormatInterface
 {
+    private const FORMAT_JSON = 'json';
+    private const RESPONSE_TYPE_JSON_OBJECT = 'json_object';
+    private const RESPONSE_TYPE_JSON_SCHEMA = 'json_schema';
+
     public function __construct(
         private ClientContract $client,
         private string $model = 'gpt-4',
@@ -47,6 +54,25 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
         /** @var string|null $format */
         $format = $request->getOption('format');
         Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
+
+        $parameters = [
+            'model' => $this->model,
+        ];
+        if (self::FORMAT_JSON === $format) {
+            $schema = $request->getOption('responseFormat');
+            if (!$schema instanceof JsonSchemaResponseFormat) {
+                $parameters['response_format'] = ['type' => self::RESPONSE_TYPE_JSON_OBJECT];
+            } else {
+                $parameters['response_format'] = [
+                    'type' => self::RESPONSE_TYPE_JSON_SCHEMA,
+                    'json_schema' => [
+                        'name' => 'response',
+                        'strict' => true,
+                        'schema' => $schema->schema,
+                    ],
+                ];
+            }
+        }
 
         $messages = [];
 
@@ -105,13 +131,7 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
             $messages[] = $message;
         }
 
-        $parameters = [
-            'model' => $this->model,
-            'messages' => $messages,
-        ];
-        if ('json' === $format) {
-            $parameters['response_format'] = ['type' => 'json_object'];
-        }
+        $parameters['messages'] = $messages;
 
         if ($seed = $request->getOption('seed')) {
             /** @var int $seed */
@@ -141,24 +161,24 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
 
     /**
      * @param array<string|array{
-     *              type: "text",
-     *              text: string,
-     *          }|array{
-     *              type: "image_url",
-     *              image_url: array{
-     *                  url: string,
-     *              },
-     *          }> $content
+     *     type: "text",
+     *     text: string,
+     * }|array{
+     *     type: "image_url",
+     *     image_url: array{
+     *         url: string,
+     *     },
+     * }> $content
      *
      * @return string|array<string|array{
-     *              type: "text",
-     *              text: string,
-     *          }|array{
-     *              type: "image_url",
-     *              image_url: array{
-     *                  url: string,
-     *              },
-     *          }>
+     *     type: "text",
+     *     text: string,
+     * }|array{
+     *     type: "image_url",
+     *     image_url: array{
+     *         url: string,
+     *     },
+     * }>
      */
     private function normalizeMessageContent(array $content): string|array
     {
@@ -202,6 +222,13 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      *     }>,
      *     response_format?: array{
      *         type: "json_object",
+     *     }|array{
+     *         type: "json_schema",
+     *         json_schema?: array{
+     *             name: string,
+     *             strict: bool,
+     *             schema: array<string, mixed>,
+     *         },
      *     },
      *     tools?: array<array{
      *         type: string,
@@ -288,6 +315,13 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
      *     }>,
      *     response_format?: array{
      *         type: "json_object",
+     *     }|array{
+     *         type: "json_schema",
+     *         json_schema?: array{
+     *             name: string,
+     *             strict: bool,
+     *             schema: array<string, mixed>,
+     *         },
      *     },
      *     tools?: array<array{
      *         type: string,
@@ -443,5 +477,10 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface
     public function supports(object $request): bool
     {
         return $request instanceof AIChatRequest;
+    }
+
+    public function supportsResponseFormat(ResponseFormatInterface $responseFormat): bool
+    {
+        return $responseFormat instanceof JsonSchemaResponseFormat;
     }
 }

@@ -37,13 +37,44 @@ class AIChatRequestBuilderTest extends TestCase
         $this->assertSame('json', $builder->build()->getOption('format'));
     }
 
-    public function testAsJson(): void
+    public function testAsJsonWithoutResponseFormat(): void
     {
-        $builder = new AIChatRequestBuilder(fn () => null);
+        $builder = AIChatRequestBuilder::create(static fn () => null);
 
         $builder->asJson();
 
-        $this->assertSame('json', $builder->build()->getOption('format'));
+        $request = $builder->build();
+
+        $this->assertSame('json', $request->getOption('format'));
+        $this->assertArrayNotHasKey('responseFormat', $request->getOptions());
+    }
+
+    public function testAsJsonWithResponseFormat(): void
+    {
+        $builder = AIChatRequestBuilder::create(static fn () => null);
+
+        $schema = [
+            'name' => 'TestObject',
+            'description' => 'A schema description',
+            'type' => 'object',
+            'properties' => [
+                'foo' => [
+                    'type' => 'string',
+                ],
+            ],
+            'required' => ['foo'],
+        ];
+
+        $builder->asJson($schema);
+
+        $request = $builder->build();
+
+        $expected = [...$schema];
+        $expected['additionalProperties'] = false;
+        $expected['properties']['foo']['description'] = '';
+
+        $this->assertSame('json', $request->getOption('format'));
+        $this->assertSame($expected, $request->getOption('responseFormat')->schema); // @phpstan-ignore-line
     }
 
     public function testStreamed(): void
