@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0fbd7794f560ab8e6c60b001abb0bf6",
+    "content-hash": "5239fd12a2887dce1cf1d8bd59999f84",
     "packages": [
         {
             "name": "psr/cache",
@@ -566,12 +566,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "c3ad427e59f152d096db2914e0dc62eb735cf55c"
+                "reference": "6a20779ac9f60cf1a99d0ebcd8fd0d79e85a2cca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/c3ad427e59f152d096db2914e0dc62eb735cf55c",
-                "reference": "c3ad427e59f152d096db2914e0dc62eb735cf55c",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/6a20779ac9f60cf1a99d0ebcd8fd0d79e85a2cca",
+                "reference": "6a20779ac9f60cf1a99d0ebcd8fd0d79e85a2cca",
                 "shasum": ""
             },
             "require": {
@@ -638,7 +638,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-06T08:14:37+00:00"
+            "time": "2025-01-07T10:50:58+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1076,12 +1076,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "b67010785788ca19137b05e176fcf8530bad7358"
+                "reference": "d9bdbaeb91161f1418d8b6b52102c9b47d03d860"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/b67010785788ca19137b05e176fcf8530bad7358",
-                "reference": "b67010785788ca19137b05e176fcf8530bad7358",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/d9bdbaeb91161f1418d8b6b52102c9b47d03d860",
+                "reference": "d9bdbaeb91161f1418d8b6b52102c9b47d03d860",
                 "shasum": ""
             },
             "require": {
@@ -1220,7 +1220,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-06T15:32:21+00:00"
+            "time": "2025-01-07T11:34:44+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -4485,16 +4485,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.66.1",
+            "version": "v3.66.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07"
+                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
-                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
+                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
                 "shasum": ""
             },
             "require": {
@@ -4531,9 +4531,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.1"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.2"
             },
-            "time": "2025-01-05T14:43:53+00:00"
+            "time": "2025-01-07T09:22:24+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -6405,12 +6405,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "a70ca84460e5455ea68293c242e19224eace6b14"
+                "reference": "116502e77e34df741fd60a771e5536f218a6157c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/a70ca84460e5455ea68293c242e19224eace6b14",
-                "reference": "a70ca84460e5455ea68293c242e19224eace6b14",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/116502e77e34df741fd60a771e5536f218a6157c",
+                "reference": "116502e77e34df741fd60a771e5536f218a6157c",
                 "shasum": ""
             },
             "require": {
@@ -6492,7 +6492,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-02T15:06:18+00:00"
+            "time": "2025-01-06T14:31:52+00:00"
         },
         {
             "name": "symfony/http-client-contracts",
@@ -6572,6 +6572,84 @@
                 }
             ],
             "time": "2024-12-11T15:34:14+00:00"
+        },
+        {
+            "name": "symfony/json-encoder",
+            "version": "7.3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/json-encoder.git",
+                "reference": "1cc9903b6e9640cbf86283de39db580cec2cddd8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/json-encoder/zipball/1cc9903b6e9640cbf86283de39db580cec2cddd8",
+                "reference": "1cc9903b6e9640cbf86283de39db580cec2cddd8",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.3",
+                "php": ">=8.2",
+                "psr/container": "^1.1|^2.0",
+                "psr/log": "^1|^2|^3",
+                "symfony/filesystem": "^7.2",
+                "symfony/type-info": "^7.2",
+                "symfony/var-exporter": "^7.2"
+            },
+            "require-dev": {
+                "phpstan/phpdoc-parser": "^1.0",
+                "symfony/dependency-injection": "^7.2",
+                "symfony/http-kernel": "^7.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\JsonEncoder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathias Arlaud",
+                    "email": "mathias.arlaud@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides powerful methods to encode/decode data structures into/from JSON.",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "decoding",
+                "encoding",
+                "json"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/json-encoder/tree/7.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-01-07T10:33:19+00:00"
         },
         {
             "name": "symfony/property-access",
@@ -6990,7 +7068,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "symfony/json-encoder": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

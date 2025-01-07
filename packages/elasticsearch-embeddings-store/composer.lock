@@ -562,12 +562,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opentelemetry-php/api.git",
-                "reference": "04c85a1e41a3d59fa9bdc801a5de1df6624b95ed"
+                "reference": "a860bd482404d6757da72c3b40e7c9627fb01c39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/04c85a1e41a3d59fa9bdc801a5de1df6624b95ed",
-                "reference": "04c85a1e41a3d59fa9bdc801a5de1df6624b95ed",
+                "url": "https://api.github.com/repos/opentelemetry-php/api/zipball/a860bd482404d6757da72c3b40e7c9627fb01c39",
+                "reference": "a860bd482404d6757da72c3b40e7c9627fb01c39",
                 "shasum": ""
             },
             "require": {
@@ -625,7 +625,7 @@
                 "issues": "https://github.com/open-telemetry/opentelemetry-php/issues",
                 "source": "https://github.com/open-telemetry/opentelemetry-php"
             },
-            "time": "2024-11-16T04:32:30+00:00"
+            "time": "2025-01-07T10:18:52+00:00"
         },
         {
             "name": "open-telemetry/context",
@@ -2672,16 +2672,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.66.1",
+            "version": "v3.66.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07"
+                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
-                "reference": "5e56b2f7a19b1a88f745bbbc6be452bb5336eb07",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
+                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
                 "shasum": ""
             },
             "require": {
@@ -2718,9 +2718,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.1"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.2"
             },
-            "time": "2025-01-05T14:43:53+00:00"
+            "time": "2025-01-07T09:22:24+00:00"
         },
         {
             "name": "phpstan/extension-installer",
@@ -4724,12 +4724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "a70ca84460e5455ea68293c242e19224eace6b14"
+                "reference": "116502e77e34df741fd60a771e5536f218a6157c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/a70ca84460e5455ea68293c242e19224eace6b14",
-                "reference": "a70ca84460e5455ea68293c242e19224eace6b14",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/116502e77e34df741fd60a771e5536f218a6157c",
+                "reference": "116502e77e34df741fd60a771e5536f218a6157c",
                 "shasum": ""
             },
             "require": {
@@ -4811,7 +4811,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-02T15:06:18+00:00"
+            "time": "2025-01-06T14:31:52+00:00"
         },
         {
             "name": "symfony/http-client-contracts",

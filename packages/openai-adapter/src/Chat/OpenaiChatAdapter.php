@@ -479,7 +479,7 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface, Suppor
         return $request instanceof AIChatRequest;
     }
 
-    public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool
+    public function supportsResponseFormat(ResponseFormatInterface $responseFormat): bool
     {
         return $responseFormat instanceof JsonSchemaResponseFormat;
     }

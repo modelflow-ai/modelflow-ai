@@ -41,8 +41,8 @@ final readonly class AIChatRequestHandler implements AIChatRequestHandlerInterfa
         if ($responseFormat) {
             Assert::isInstanceOf($responseFormat, ResponseFormatInterface::class);
 
-            if ($adapter instanceof SupportsResponseFormatInterface
-                && !$adapter->supportResponseFormat($responseFormat)
+            if (!$adapter instanceof SupportsResponseFormatInterface
+                || !$adapter->supportsResponseFormat($responseFormat)
             ) {
                 $request->getMessages()->addResponseFormat($responseFormat);
             }

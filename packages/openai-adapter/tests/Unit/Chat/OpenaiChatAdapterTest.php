@@ -537,7 +537,7 @@ final class OpenaiChatAdapterTest extends TestCase
 
         $adapter = new OpenaiChatAdapter($client);
 
-        $this->assertTrue($adapter->supportResponseFormat($unsupportedFormat));
+        $this->assertTrue($adapter->supportsResponseFormat($unsupportedFormat));
     }
 
     public function testSupportResponseFormatWithUnsupportedInstance(): void
@@ -547,7 +547,7 @@ final class OpenaiChatAdapterTest extends TestCase
 
         $adapter = new OpenaiChatAdapter($client);
 
-        $this->assertFalse($adapter->supportResponseFormat($unsupportedFormat));
+        $this->assertFalse($adapter->supportsResponseFormat($unsupportedFormat));
     }
 
     /**

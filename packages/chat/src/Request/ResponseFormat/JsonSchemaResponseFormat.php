@@ -119,13 +119,15 @@ class JsonSchemaResponseFormat implements ResponseFormatInterface
         $lastKey = \array_key_last($properties);
 
         foreach ($properties as $property => $details) {
+            $type = $details['type'] ?? 'string'; // @phpstan-ignore-line
+
             $line = $indent . '"' . $property . '": ';
 
-            if ('object' === $details['type']) {
+            if ('object' === $type) {
                 $lines[] = $line . '{';
                 $this->describeProperties($details['properties'] ?? [], $lines, $depth + 1); // @phpstan-ignore-line
                 $lines[] = $indent . '}' . ($property === $lastKey ? '' : ',');
-            } elseif ('array' === $details['type']) {
+            } elseif ('array' === $type && isset($details['items'])) {
                 $lines[] = $line . '[';
                 if (isset($details['items']['type'])) {
                     if ('object' === $details['items']['type']) {
@@ -151,17 +153,18 @@ class JsonSchemaResponseFormat implements ResponseFormatInterface
     {
         $indent = \str_repeat('  ', $depth);
         foreach ($properties as $property => $details) {
+            $type = $details['type'] ?? 'string'; // @phpstan-ignore-line
             $fullName = '' !== $prefix && '0' !== $prefix ? $prefix . '.' . $property : $property;
-            $lines[] = $indent . '- ' . $fullName . ' (' . $details['type'] . '): ' . ($details['description'] ?? 'No description provided.');
+            $lines[] = $indent . '- ' . $fullName . ' (' . $type . '): ' . ($details['description'] ?? 'No description provided.');
 
-            if ('object' === $details['type']) {
+            if ('object' === $type) {
                 if (isset($details['required']) && \is_array($details['required'])) { // @phpstan-ignore-line
                     $lines[] = $indent . '  Required sub-properties: ' . \implode(', ', $details['required']);
                 }
                 if (isset($details['properties'])) {
                     $this->describePropertyDetails($details['properties'], $lines, $fullName, $depth + 1); // @phpstan-ignore-line
                 }
-            } elseif ('array' === $details['type'] && isset($details['items'])) {
+            } elseif ('array' === $type && isset($details['items'])) {
                 $lines[] = $indent . '  Array items:';
                 if ('object' === $details['items']['type']) {
                     if (isset($details['items']['required']) && \is_array($details['items']['required'])) {

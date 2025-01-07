@@ -15,5 +15,5 @@ namespace ModelflowAi\Chat\Request\ResponseFormat;
 
 interface SupportsResponseFormatInterface
 {
-    public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool;
+    public function supportsResponseFormat(ResponseFormatInterface $responseFormat): bool;
 }

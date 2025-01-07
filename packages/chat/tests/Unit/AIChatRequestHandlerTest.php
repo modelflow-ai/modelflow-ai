@@ -133,7 +133,7 @@ class AIChatRequestHandlerTest extends TestCase
                 return $this->wrapped->handleRequest($request);
             }
 
-            public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool
+            public function supportsResponseFormat(ResponseFormatInterface $responseFormat): bool
             {
                 // For this scenario, we simulate that the adapter DOES support the format
                 return true;
@@ -201,10 +201,86 @@ class AIChatRequestHandlerTest extends TestCase
                 return $this->wrapped->handleRequest($request);
             }
 
-            public function supportResponseFormat(ResponseFormatInterface $responseFormat): bool
+            public function supportsResponseFormat(ResponseFormatInterface $responseFormat): bool
             {
                 // For this scenario, we simulate that the adapter DOES NOT support the format
                 return false;
+            }
+
+            public function supports(object $request): bool
+            {
+                return true;
+            }
+        };
+
+        $mockDecisionTree
+            ->method('determineAdapter')
+            ->willReturn($mockUnsupportedAdapter);
+
+        // Here we’ll track if the adapter is called
+        $mockAdapter
+            ->method('handleRequest')
+            ->willReturnCallback(
+                fn (AIChatRequest $request) => new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Not supported'), null),
+            );
+
+        $handler = new AIChatRequestHandler($mockDecisionTree);
+
+        $schema = [
+            'name' => 'TestObject',
+            'description' => 'A schema description',
+            'type' => 'object',
+            'properties' => [
+                'foo' => [
+                    'type' => 'string',
+                ],
+            ],
+            'required' => ['foo'],
+        ];
+        $mockResponseFormat = new JsonSchemaResponseFormat($schema);
+
+        // Create a request with a response format
+        $requestBuilder = $handler->createRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello, do you support the new format?'),
+        )->asJson($schema);
+        $request = $requestBuilder->build();
+
+        // Act
+        $response = $request->execute();
+
+        // Assert
+        $this->assertInstanceOf(AIChatResponse::class, $response);
+        $this->assertSame('Not supported', $response->getMessage()->content);
+
+        // Check that the request messages have a new system message added for the format
+        $messagesCollection = $request->getMessages();
+        $this->assertInstanceOf(AIChatMessageCollection::class, $messagesCollection);
+
+        $allMessages = $messagesCollection->toArray();
+        // Expect at least 2 messages: the original user message + the new "SYSTEM" message for the format
+        $this->assertCount(2, $allMessages);
+
+        $this->assertSame(AIChatMessageRoleEnum::SYSTEM->value, $allMessages[0]['role']); // The inserted "SYSTEM" message describing the format
+        $this->assertSame(AIChatMessageRoleEnum::USER->value, $allMessages[1]['role']); // Original message
+        $this->assertStringContainsString($mockResponseFormat->asString(), $allMessages[0]['content']);
+    }
+
+    public function testHandleWithResponseFormatAdapterDoesNotImplementInterface(): void
+    {
+        // Arrange
+        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
+        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
+
+        // Make our adapter implement the SupportsResponseFormatInterface
+        $mockUnsupportedAdapter = new class($mockAdapter) implements AIChatAdapterInterface {
+            public function __construct(
+                private readonly AIChatAdapterInterface $wrapped,
+            ) {
+            }
+
+            public function handleRequest(AIChatRequest $request): AIChatResponse
+            {
+                return $this->wrapped->handleRequest($request);
             }
 
             public function supports(object $request): bool
