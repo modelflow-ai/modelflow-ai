@@ -19,6 +19,7 @@ use Gemini\Responses\GenerativeModel\GenerateContentResponse;
 use Gemini\Testing\ClientFake;
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Response\AIChatResponse;
@@ -162,7 +163,7 @@ final class GoogleGeminiChatAdapterTest extends TestCase
             GenerateContentResponse::fakeStream(\fopen(__DIR__ . '/Fixtures/stream.json', 'r')), // @phpstan-ignore-line
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
+        $request = new AIChatStreamedRequest(new AIChatMessageCollection(
             new AIChatMessage(
                 AIChatMessageRoleEnum::SYSTEM,
                 'Hello',
@@ -171,7 +172,7 @@ final class GoogleGeminiChatAdapterTest extends TestCase
                 AIChatMessageRoleEnum::USER,
                 'World!',
             ),
-        ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null);
 
         $adapter = new GoogleGeminiChatAdapter($client, ModelType::GEMINI_FLASH->value);
         $result = $adapter->handleRequest($request);

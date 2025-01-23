@@ -104,7 +104,7 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
 
         $parameters['messages'] = $messages;
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $parameters);
         }
 

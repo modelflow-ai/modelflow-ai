@@ -26,6 +26,7 @@ use ModelflowAi\ApiClient\Transport\Testing\PartialPayload;
 use ModelflowAi\ApiClient\Transport\Testing\StreamedResponse;
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Response\AIChatResponse;
@@ -178,10 +179,10 @@ final class AnthropicChatAdapterTest extends TestCase
             DataFixtures::MESSAGES_CREATE_STREAMED_REQUEST,
         ), new StreamedResponse($responseChunks, MetaInformation::empty()));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
+        $request = new AIChatStreamedRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][0]['content']),
             new AIChatMessage(AIChatMessageRoleEnum::USER, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content']),
-        ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null);
 
         $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
         $result = $adapter->handleRequest($request);

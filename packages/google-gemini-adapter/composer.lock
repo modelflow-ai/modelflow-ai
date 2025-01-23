@@ -613,12 +613,13 @@
             "dist": {
                 "type": "path",
                 "url": "./../chat",
-                "reference": "c0d5398dc07cf45f68f9050f5e602a4f56f86fe7"
+                "reference": "96ecb2f649587d134dacf0696a27e28f23ed9420"
             },
             "require": {
                 "ext-fileinfo": "*",
                 "modelflow-ai/decision-tree": "^0.2",
                 "php": "^8.2",
+                "symfony/deprecation-contracts": "^3.6",
                 "webmozart/assert": "^1.11"
             },
             "require-dev": {
@@ -1147,16 +1148,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.66.2",
+            "version": "v3.68.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92"
+                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
-                "reference": "d24d43bfb31e6010bdb5fcfcbfb2c37ab9e1df92",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/eca7a809b6b5d35d0a033c63a14881107e22a7b6",
+                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6",
                 "shasum": ""
             },
             "require": {
@@ -1193,9 +1194,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.66.2"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.68.1"
             },
-            "time": "2025-01-07T09:22:24+00:00"
+            "time": "2025-01-17T09:21:08+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -1554,12 +1555,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "04c8de0d350731bccfa216a5b5e9b3e1c26e4e24"
+                "reference": "7adaab73e4dd25461b8195dae8360b3ee8648cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/04c8de0d350731bccfa216a5b5e9b3e1c26e4e24",
-                "reference": "04c8de0d350731bccfa216a5b5e9b3e1c26e4e24",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7adaab73e4dd25461b8195dae8360b3ee8648cec",
+                "reference": "7adaab73e4dd25461b8195dae8360b3ee8648cec",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1595,7 @@
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.x"
             },
-            "time": "2024-11-07T10:15:44+00:00"
+            "time": "2025-01-15T08:36:59+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1794,12 +1795,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "ce330164ad665e0cac2823f2f00c2ba7bac0fe55"
+                "reference": "a0b641ac6e8afac78b8624153ebf4ff5c3a77e7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/ce330164ad665e0cac2823f2f00c2ba7bac0fe55",
-                "reference": "ce330164ad665e0cac2823f2f00c2ba7bac0fe55",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/a0b641ac6e8afac78b8624153ebf4ff5c3a77e7b",
+                "reference": "a0b641ac6e8afac78b8624153ebf4ff5c3a77e7b",
                 "shasum": ""
             },
             "require": {
@@ -1847,7 +1848,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-01T09:40:38+00:00"
+            "time": "2025-01-15T13:38:08+00:00"
         },
         {
             "name": "phpunit/php-invoker",
@@ -2039,12 +2040,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "eae886b1e73503a5fa9aefb72beb6c2a92a5e34e"
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/eae886b1e73503a5fa9aefb72beb6c2a92a5e34e",
-                "reference": "eae886b1e73503a5fa9aefb72beb6c2a92a5e34e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
+                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
                 "shasum": ""
             },
             "require": {
@@ -2132,7 +2133,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-06T08:27:54+00:00"
+            "time": "2025-01-22T12:27:30+00:00"
         },
         {
             "name": "psr/container",
@@ -3367,12 +3368,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "116502e77e34df741fd60a771e5536f218a6157c"
+                "reference": "542cbd21d3c327482119041e222b027b3e3daab7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/116502e77e34df741fd60a771e5536f218a6157c",
-                "reference": "116502e77e34df741fd60a771e5536f218a6157c",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/542cbd21d3c327482119041e222b027b3e3daab7",
+                "reference": "542cbd21d3c327482119041e222b027b3e3daab7",
                 "shasum": ""
             },
             "require": {
@@ -3454,7 +3455,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-06T14:31:52+00:00"
+            "time": "2025-01-17T11:48:14+00:00"
         },
         {
             "name": "symfony/http-client-contracts",

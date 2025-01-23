@@ -97,7 +97,7 @@ final readonly class GoogleGeminiChatAdapter implements AIChatAdapterInterface
             $model = $model->withGenerationConfig($config);
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $messages, $model);
         }
 

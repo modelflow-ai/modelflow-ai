@@ -18,7 +18,6 @@ use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
-use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\DecisionTree\Criteria\PrivacyCriteria;
 use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
@@ -32,16 +31,13 @@ $adapter->addMessage([
     new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, 'ALONE'),
 ]);
 
-/** @var AIChatResponseStream $response */
-$response = $handler->createRequest(
+$response = $handler->createStreamedRequest(
     ...ChatPromptTemplate::create(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
     ->addCriteria(PrivacyCriteria::HIGH)
-    ->streamed()
-    ->build()
     ->execute();
 
 foreach ($response->getMessageStream() as $index => $message) {

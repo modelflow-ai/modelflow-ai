@@ -29,7 +29,6 @@ use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
 use ModelflowAi\Chat\Response\Usage;
-use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
 use OpenAI\Contracts\ClientContract;
 use OpenAI\Responses\Chat\CreateResponseToolCall;
@@ -39,7 +38,6 @@ use Webmozart\Assert\Assert;
 
 final readonly class OpenaiChatAdapter implements AIChatAdapterInterface, SupportsResponseFormatInterface
 {
-    private const FORMAT_JSON = 'json';
     private const RESPONSE_TYPE_JSON_OBJECT = 'json_object';
     private const RESPONSE_TYPE_JSON_SCHEMA = 'json_schema';
 
@@ -52,14 +50,14 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface, Suppor
     public function handleRequest(AIChatRequest $request): AIChatResponse
     {
         /** @var string|null $format */
-        $format = $request->getOption('format');
-        Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
+        $format = $request->getFormat();
+        Assert::inArray($format, [null, 'json', 'json_schema'], \sprintf('Invalid format "%s" given.', $format));
 
         $parameters = [
             'model' => $this->model,
         ];
-        if (self::FORMAT_JSON === $format) {
-            $schema = $request->getOption('responseFormat');
+        if (null !== $format) {
+            $schema = $request->getResponseFormat();
             if (!$schema instanceof JsonSchemaResponseFormat) {
                 $parameters['response_format'] = ['type' => self::RESPONSE_TYPE_JSON_OBJECT];
             } else {
@@ -145,14 +143,11 @@ final readonly class OpenaiChatAdapter implements AIChatAdapterInterface, Suppor
 
         if ($request->hasTools()) {
             $parameters['tools'] = ToolFormatter::formatTools($request->getToolInfos());
-            $toolChoice = $request->getOption('toolChoice');
-            if (null !== $toolChoice) {
-                Assert::isInstanceOf($toolChoice, ToolChoiceEnum::class);
-                $parameters['tool_choice'] = $toolChoice->value;
-            }
+            $toolChoice = $request->getToolChoice();
+            $parameters['tool_choice'] = $toolChoice->value;
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $parameters);
         }
 

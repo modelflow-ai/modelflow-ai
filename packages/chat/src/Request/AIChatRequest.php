@@ -21,9 +21,12 @@ use ModelflowAi\Chat\ToolInfo\ToolInfo;
 use ModelflowAi\DecisionTree\Behaviour\CriteriaBehaviour;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\FeatureCriteria;
+use Webmozart\Assert\Assert;
 
 class AIChatRequest implements CriteriaBehaviour
 {
+    final public const OPTIONS_KEYS = ['seed', 'temperature'];
+
     private readonly CriteriaCollection $criteria;
 
     /**
@@ -35,10 +38,6 @@ class AIChatRequest implements CriteriaBehaviour
      * @param array<string, array{0: object, 1: string}> $tools
      * @param ToolInfo[] $toolInfos
      * @param array{
-     *     streamed?: boolean,
-     *     format?: "json"|null,
-     *     responseFormat?: ResponseFormatInterface,
-     *     toolChoice?: ToolChoiceEnum,
      *     seed?: int,
      *     temperature?: float,
      * } $options
@@ -52,7 +51,13 @@ class AIChatRequest implements CriteriaBehaviour
         private array $options,
         callable $requestHandler,
         private readonly array $metadata = [],
+        private readonly ?ResponseFormatInterface $responseFormat = null,
+        private readonly ToolChoiceEnum $toolChoice = ToolChoiceEnum::AUTO,
     ) {
+        foreach (\array_keys($options) as $key) {
+            Assert::oneOf($key, self::OPTIONS_KEYS);
+        }
+
         $features = [];
 
         $latest = $this->messages->latest();
@@ -62,11 +67,7 @@ class AIChatRequest implements CriteriaBehaviour
             }
         }
 
-        if ($this->getOption('streamed', false)) {
-            $features[] = FeatureCriteria::STREAM;
-        }
-
-        if ([] !== $this->tools && ToolChoiceEnum::AUTO === $this->getOption('toolChoice', ToolChoiceEnum::AUTO)) {
+        if ([] !== $this->tools && ToolChoiceEnum::AUTO === $this->getToolChoice()) {
             $features[] = FeatureCriteria::TOOLS;
         }
 
@@ -75,10 +76,12 @@ class AIChatRequest implements CriteriaBehaviour
     }
 
     /**
-     * @param "format"|"responseFormat"|"streamed"|"toolChoice"|"seed"|"temperature" $key
+     * @param "seed"|"temperature" $key
      */
     public function getOption(string $key, mixed $default = null): mixed
     {
+        Assert::oneOf($key, self::OPTIONS_KEYS);
+
         return $this->options[$key] ?? $default;
     }
 
@@ -97,10 +100,6 @@ class AIChatRequest implements CriteriaBehaviour
 
     /**
      * @return array{
-     *     streamed?: boolean,
-     *     format?: "json"|null,
-     *     responseFormat?: ResponseFormatInterface,
-     *     toolChoice?: ToolChoiceEnum,
      *     seed?: int,
      *     temperature?: float,
      * }
@@ -139,6 +138,26 @@ class AIChatRequest implements CriteriaBehaviour
     public function getToolInfos(): array
     {
         return $this->toolInfos;
+    }
+
+    public function getToolChoice(): ToolChoiceEnum
+    {
+        return $this->toolChoice;
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->responseFormat?->getType();
+    }
+
+    public function getResponseFormat(): ?ResponseFormatInterface
+    {
+        return $this->responseFormat;
+    }
+
+    public function isStreamed(): bool
+    {
+        return false;
     }
 
     public function execute(): AIChatResponse

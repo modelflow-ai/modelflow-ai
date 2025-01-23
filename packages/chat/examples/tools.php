@@ -15,7 +15,6 @@ namespace App;
 
 use ModelflowAi\Chat\Adapter\Fake\FakeChatAdapter;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
-use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
@@ -39,15 +38,13 @@ $adapter->addMessage(new AIChatResponseMessage(AIChatMessageRoleEnum::SYSTEM, 'T
 
 $toolExecutor = new ToolExecutor();
 
-/** @var AIChatRequestBuilder $builder */
 $builder = $handler->createRequest()
     ->addUserMessage('How is the weather in hohenems?')
     ->tool('get_current_weather', new WeatherTool(), 'getCurrentWeather')
     ->toolChoice(ToolChoiceEnum::AUTO)
     ->addCriteria(PrivacyCriteria::HIGH);
 
-$request = $builder->build();
-$response = $request->execute();
+$response = $builder->execute();
 
 do {
     $toolCalls = $response->getMessage()->toolCalls;
@@ -58,7 +55,7 @@ do {
 
         foreach ($toolCalls as $toolCall) {
             $builder->addMessage(
-                $toolExecutor->execute($request, $toolCall),
+                $toolExecutor->execute($response->getRequest(), $toolCall),
             );
         }
 

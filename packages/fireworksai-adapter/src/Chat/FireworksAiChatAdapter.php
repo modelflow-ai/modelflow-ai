@@ -44,9 +44,8 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
 
     public function handleRequest(AIChatRequest $request): AIChatResponse
     {
-        /** @var string|null $format */
-        $format = $request->getOption('format');
-        Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
+        $format = $request->getFormat();
+        Assert::inArray($format, [null, 'json', 'json_schema'], \sprintf('Invalid format "%s" given.', $format));
 
         $messages = [];
 
@@ -102,18 +101,15 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
             'messages' => $messages,
         ];
 
-        if ('json' === $format) {
+        if (null !== $format) {
             $parameters['response_format'] = ['type' => 'json_object'];
         }
 
         if ($request->hasTools()) {
             $parameters['tools'] = ToolFormatter::formatTools($request->getToolInfos());
-            $toolChoice = $request->getOption('toolChoice');
-            if (null !== $toolChoice) {
-                Assert::isInstanceOf($toolChoice, ToolChoiceEnum::class);
-                if (ToolChoiceEnum::NONE === $toolChoice) {
-                    unset($parameters['tools']);
-                }
+            $toolChoice = $request->getToolChoice();
+            if (ToolChoiceEnum::NONE === $toolChoice) {
+                unset($parameters['tools']);
             }
         }
 
@@ -127,7 +123,7 @@ final readonly class FireworksAiChatAdapter implements AIChatAdapterInterface
             $parameters['temperature'] = $temperature;
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $parameters);
         }
 

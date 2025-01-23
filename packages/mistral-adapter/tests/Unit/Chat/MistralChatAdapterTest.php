@@ -16,12 +16,14 @@ namespace ModelflowAi\MistralAdapter\Tests\Unit\Chat;
 use ModelflowAi\ApiClient\Responses\MetaInformation;
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Request\Message\TextPart;
 use ModelflowAi\Chat\Request\Message\ToolCallPart;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
@@ -342,8 +344,9 @@ final class MistralChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['format' => 'json'],
+            [],
             fn () => null,
+            responseFormat: new JsonResponseFormat(),
         );
 
         $adapter = new MistralChatAdapter($client->reveal());
@@ -397,8 +400,10 @@ final class MistralChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['format' => 'json'],
+            [],
             fn () => null,
+            [],
+            new JsonResponseFormat(),
         );
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
@@ -464,7 +469,7 @@ final class MistralChatAdapterTest extends TestCase
             ], ),
         );
 
-        $request = new AIChatRequest(
+        $request = new AIChatStreamedRequest(
             new AIChatMessageCollection(
                 new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
                 new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
@@ -473,7 +478,7 @@ final class MistralChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['streamed' => true],
+            [],
             fn () => null,
         );
 
@@ -576,8 +581,9 @@ final class MistralChatAdapterTest extends TestCase
             [
                 ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
             ],
-            ['toolChoice' => ToolChoiceEnum::AUTO],
+            [],
             fn () => null,
+            toolChoice: ToolChoiceEnum::AUTO,
         );
 
         $adapter = new MistralChatAdapter($client->reveal(), Model::LARGE->value);
@@ -621,6 +627,7 @@ final class MistralChatAdapterTest extends TestCase
             'messages' => [
                 ['role' => 'user', 'content' => 'User message'],
             ],
+            'tool_choice' => 'auto',
             'tools' => [
                 [
                     'type' => 'function',
@@ -703,7 +710,7 @@ final class MistralChatAdapterTest extends TestCase
             ], ),
         );
 
-        $request = new AIChatRequest(
+        $request = new AIChatStreamedRequest(
             new AIChatMessageCollection(
                 new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             ),
@@ -714,7 +721,7 @@ final class MistralChatAdapterTest extends TestCase
             [
                 ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
             ],
-            ['streamed' => true],
+            [],
             fn () => null,
         );
 

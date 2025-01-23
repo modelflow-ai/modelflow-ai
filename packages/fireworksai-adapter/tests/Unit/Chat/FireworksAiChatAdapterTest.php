@@ -15,8 +15,10 @@ namespace ModelflowAi\FireworksAiAdapter\Tests\Unit\Chat;
 
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
@@ -177,7 +179,7 @@ final class FireworksAiChatAdapterTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null, [], new JsonResponseFormat());
 
         $adapter = new FireworksAiChatAdapter($client->reveal(), 'accounts/fireworks/models/llama-v3-70b-instruct');
         $result = $adapter->handleRequest($request);
@@ -197,11 +199,11 @@ final class FireworksAiChatAdapterTest extends TestCase
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
+        $request = new AIChatStreamedRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['streamed' => true], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null);
 
         $adapter = new FireworksAiChatAdapter($client);
         $result = $adapter->handleRequest($request);
@@ -230,7 +232,7 @@ final class FireworksAiChatAdapterTest extends TestCase
             'test' => [$this, 'toolMethod'],
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['toolChoice' => ToolChoiceEnum::AUTO], fn () => null);
+        ], [], fn () => null, [], null, ToolChoiceEnum::AUTO);
 
         $adapter = new FireworksAiChatAdapter($client);
         $result = $adapter->handleRequest($request);
@@ -271,7 +273,7 @@ final class FireworksAiChatAdapterTest extends TestCase
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
+        $request = new AIChatStreamedRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
@@ -279,7 +281,7 @@ final class FireworksAiChatAdapterTest extends TestCase
             'test' => [$this, 'toolMethod'],
         ], [
             ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
-        ], ['streamed' => true], fn () => null);
+        ], [], fn () => null);
 
         $adapter = new FireworksAiChatAdapter($client);
         $result = $adapter->handleRequest($request);

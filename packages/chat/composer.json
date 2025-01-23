@@ -39,7 +39,8 @@
         "php": "^8.2",
         "ext-fileinfo": "*",
         "modelflow-ai/decision-tree": "^0.2",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "^1.11",
+        "symfony/deprecation-contracts": "^3.6"
     },
     "require-dev": {
         "modelflow-ai/prompt-template": "^0.2",

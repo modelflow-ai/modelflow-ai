@@ -14,9 +14,12 @@ declare(strict_types=1);
 namespace ModelflowAi\Chat;
 
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
+use ModelflowAi\Chat\Request\Builder\AIChatStreamedRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 
 interface AIChatRequestHandlerInterface
 {
     public function createRequest(AIChatMessage ...$messages): AIChatRequestBuilder;
+
+    public function createStreamedRequest(AIChatMessage ...$messages): AIChatStreamedRequestBuilder;
 }

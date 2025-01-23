@@ -15,6 +15,8 @@ namespace ModelflowAi\Chat;
 
 /**
  * @internal
+ *
+ * @codeCoverageIgnore
  */
 final class ChatPackage
 {
