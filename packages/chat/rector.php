@@ -22,9 +22,11 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         CallableThisArrayToAnonymousFunctionRector::class => [
             __DIR__ . '/tests/Unit/ToolInfo/ToolExecutorTest.php',
+            __DIR__ . '/tests/Unit/Request/AIChatRequestTest.php',
         ],
         FirstClassCallableRector::class => [
             __DIR__ . '/tests/Unit/ToolInfo/ToolExecutorTest.php',
+            __DIR__ . '/tests/Unit/Request/AIChatRequestTest.php',
         ],
     ]);
 };

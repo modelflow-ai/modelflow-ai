@@ -16,10 +16,12 @@ namespace ModelflowAi\Chat;
 use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
+use ModelflowAi\Chat\Request\Builder\AIChatStreamedRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\Request\ResponseFormat\SupportsResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,8 +39,8 @@ final readonly class AIChatRequestHandler implements AIChatRequestHandlerInterfa
     {
         $adapter = $this->decisionTree->determineAdapter($request);
 
-        $responseFormat = $request->getOption('responseFormat');
-        if ($responseFormat) {
+        $responseFormat = $request->getResponseFormat();
+        if ($responseFormat instanceof ResponseFormatInterface) {
             Assert::isInstanceOf($responseFormat, ResponseFormatInterface::class);
 
             if (!$adapter instanceof SupportsResponseFormatInterface
@@ -56,6 +58,16 @@ final readonly class AIChatRequestHandler implements AIChatRequestHandlerInterfa
         return AIChatRequestBuilder::create(function (AIChatRequest $request): AIChatResponse {
             $response = $this->handle($request);
             Assert::isInstanceOf($response, AIChatResponse::class);
+
+            return $response;
+        })->addMessages($messages);
+    }
+
+    public function createStreamedRequest(AIChatMessage ...$messages): AIChatStreamedRequestBuilder
+    {
+        return AIChatStreamedRequestBuilder::create(function (AIChatRequest $request): AIChatResponseStream {
+            $response = $this->handle($request);
+            Assert::isInstanceOf($response, AIChatResponseStream::class);
 
             return $response;
         })->addMessages($messages);

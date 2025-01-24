@@ -26,7 +26,6 @@ use ModelflowAi\Chat\Response\AIChatResponseMessage;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\AIChatToolCall;
 use ModelflowAi\Chat\Response\Usage;
-use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolTypeEnum;
 use ModelflowAi\Mistral\ClientInterface;
 use ModelflowAi\Mistral\Model;
@@ -102,22 +101,18 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
         ];
 
         if (Model::from($this->model)->jsonSupported()) {
-            /** @var string|null $format */
-            $format = $request->getOption('format');
-            Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
+            $format = $request->getFormat();
+            Assert::inArray($format, [null, 'json', 'json_schema'], \sprintf('Invalid format "%s" given.', $format));
 
-            if ('json' === $format) {
+            if ('json' === $format || 'json_schema' === $format) {
                 $parameters['response_format'] = ['type' => 'json_object'];
             }
         }
 
         if ($request->hasTools()) {
             $parameters['tools'] = ToolFormatter::formatTools($request->getToolInfos());
-            $toolChoice = $request->getOption('toolChoice');
-            if (null !== $toolChoice) {
-                Assert::isInstanceOf($toolChoice, ToolChoiceEnum::class);
-                $parameters['tool_choice'] = $toolChoice->value;
-            }
+            $toolChoice = $request->getToolChoice();
+            $parameters['tool_choice'] = $toolChoice->value;
         }
 
         if ($seed = $request->getOption('seed')) {
@@ -128,7 +123,7 @@ final readonly class MistralChatAdapter implements AIChatAdapterInterface
             $parameters['temperature'] = $temperature;
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $parameters);
         }
 

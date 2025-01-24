@@ -25,11 +25,12 @@ use Webmozart\Assert\Assert;
  *     additionalProperties?: bool,
  * }
  * @phpstan-type Schema array{
+ *     name?: string,
+ *     description?: string,
  *     type: string,
  *     properties?: array<string, SchemaProperty>,
  *     required?: array<string>,
  *     additionalProperties?: bool,
- *     description?: string,
  * }
  */
 class JsonSchemaResponseFormat implements ResponseFormatInterface
@@ -44,6 +45,11 @@ class JsonSchemaResponseFormat implements ResponseFormatInterface
         Assert::same($schema['type'] ?? null, 'object', 'JsonOutputSchema requires "type" to be "object".');
 
         $this->schema = $this->processSchema($this->schema);
+    }
+
+    public function getType(): string
+    {
+        return 'json_schema';
     }
 
     /**

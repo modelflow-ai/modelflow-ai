@@ -15,5 +15,7 @@ namespace ModelflowAi\Chat\Request\ResponseFormat;
 
 interface ResponseFormatInterface
 {
+    public function getType(): string;
+
     public function asString(): string;
 }

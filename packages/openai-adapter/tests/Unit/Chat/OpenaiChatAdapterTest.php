@@ -15,12 +15,14 @@ namespace ModelflowAi\OpenaiAdapter\Tests\Unit\Chat;
 
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
 use ModelflowAi\Chat\Request\Message\TextPart;
 use ModelflowAi\Chat\Request\Message\ToolCallPart;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
@@ -294,8 +296,10 @@ final class OpenaiChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['format' => 'json'],
+            [],
             fn () => null,
+            [],
+            new JsonResponseFormat(),
         );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
@@ -364,13 +368,15 @@ final class OpenaiChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['format' => 'json', 'responseFormat' => new JsonSchemaResponseFormat([
+            [],
+            fn () => null,
+            [],
+            new JsonSchemaResponseFormat([
                 'type' => 'object',
                 'properties' => [
                     'dummy' => ['type' => 'string'],
                 ],
-            ])],
-            fn () => null,
+            ]),
         );
 
         $adapter = new OpenaiChatAdapter($client->reveal());
@@ -387,7 +393,7 @@ final class OpenaiChatAdapterTest extends TestCase
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(
+        $request = new AIChatStreamedRequest(
             new AIChatMessageCollection(
                 new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
                 new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
@@ -396,7 +402,7 @@ final class OpenaiChatAdapterTest extends TestCase
             new CriteriaCollection(),
             [],
             [],
-            ['streamed' => true],
+            [],
             fn () => null,
         );
 
@@ -432,8 +438,11 @@ final class OpenaiChatAdapterTest extends TestCase
             [
                 ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
             ],
-            ['toolChoice' => ToolChoiceEnum::AUTO],
+            [],
             fn () => null,
+            [],
+            null,
+            ToolChoiceEnum::NONE,
         );
 
         $adapter = new OpenaiChatAdapter($client);
@@ -477,7 +486,7 @@ final class OpenaiChatAdapterTest extends TestCase
             CreateStreamedResponse::fake($resource),
         ]);
 
-        $request = new AIChatRequest(
+        $request = new AIChatStreamedRequest(
             new AIChatMessageCollection(
                 new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
                 new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
@@ -490,7 +499,7 @@ final class OpenaiChatAdapterTest extends TestCase
             [
                 ToolInfoBuilder::buildToolInfo($this, 'toolMethod', 'test'),
             ],
-            ['streamed' => true],
+            [],
             fn () => null,
         );
 

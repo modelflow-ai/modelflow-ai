@@ -15,12 +15,16 @@ namespace ModelflowAi\Chat\Request\Builder;
 
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\MessagePart;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
 use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
+use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
+use ModelflowAi\Chat\ToolInfo\ToolInfo;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
 use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
@@ -28,21 +32,22 @@ use ModelflowAi\DecisionTree\Criteria\CriteriaInterface;
 /**
  * @phpstan-import-type Schema from JsonSchemaResponseFormat
  */
-final class AIChatRequestBuilder
+class AIChatRequestBuilder
 {
-    public static function create(callable $requestHandler): self
+    public static function create(callable $requestHandler): static
     {
-        return new self($requestHandler);
+        return new static($requestHandler);
     }
 
     protected CriteriaCollection $criteria;
 
     /**
      * @var array{
-     *     format?: "json"|null,
-     *     schema?: ResponseFormatInterface,
      *     streamed?: bool,
+     *     responseFormat?: ResponseFormatInterface,
      *     toolChoice?: ToolChoiceEnum,
+     *     seed?: int,
+     *     temperature?: float,
      * }
      */
     protected array $options = [];
@@ -67,7 +72,7 @@ final class AIChatRequestBuilder
      */
     protected array $metadata = [];
 
-    public function __construct(
+    final public function __construct(
         callable $requestHandler,
     ) {
         $this->requestHandler = $requestHandler;
@@ -77,15 +82,11 @@ final class AIChatRequestBuilder
 
     /**
      * @param array{
-     *     format?: "json"|null,
-     *     responseFormat?: ResponseFormatInterface,
-     *     streamed?: bool,
-     *     toolChoice?: ToolChoiceEnum,
      *     seed?: int,
      *     temperature?: float,
      *  } $options
      */
-    public function addOptions(array $options): self
+    public function addOptions(array $options): static
     {
         $this->options = \array_merge($this->options, $options);
 
@@ -95,7 +96,7 @@ final class AIChatRequestBuilder
     /**
      * @param array<string, mixed> $metadata
      */
-    public function addMetadata(array $metadata): self
+    public function addMetadata(array $metadata): static
     {
         $this->metadata = \array_merge($this->metadata, $metadata);
 
@@ -105,18 +106,26 @@ final class AIChatRequestBuilder
     /**
      * @param Schema|null $jsonSchema
      */
-    public function asJson(?array $jsonSchema = null): self
+    public function asJson(?array $jsonSchema = null): static
     {
-        $this->options['format'] = 'json';
         if (null !== $jsonSchema) {
             $this->options['responseFormat'] = new JsonSchemaResponseFormat($jsonSchema);
+
+            return $this;
         }
+
+        $this->options['responseFormat'] = new JsonResponseFormat();
 
         return $this;
     }
 
-    public function streamed(): self
+    /**
+     * @deprecated use AIChatRequestBuilder::createStreamedRequest instead
+     */
+    public function streamed(): static
     {
+        trigger_deprecation('modelflow-ai/chat', '0.3.0', 'Use AIChatRequestBuilder::createStreamedRequest instead.');
+
         $this->options['streamed'] = true;
 
         return $this;
@@ -125,7 +134,7 @@ final class AIChatRequestBuilder
     /**
      * @param CriteriaInterface|CriteriaInterface[] $criteria
      */
-    public function addCriteria(CriteriaInterface|array $criteria): self
+    public function addCriteria(CriteriaInterface|array $criteria): static
     {
         $criteria = \is_array($criteria) ? $criteria : [$criteria];
 
@@ -136,7 +145,7 @@ final class AIChatRequestBuilder
         return $this;
     }
 
-    public function addMessage(AIChatMessage $message): self
+    public function addMessage(AIChatMessage $message): static
     {
         $this->messages[] = $message;
 
@@ -146,7 +155,7 @@ final class AIChatRequestBuilder
     /**
      * @param AIChatMessage[] $messages
      */
-    public function addMessages(array $messages): self
+    public function addMessages(array $messages): static
     {
         foreach ($messages as $message) {
             $this->addMessage($message);
@@ -158,7 +167,7 @@ final class AIChatRequestBuilder
     /**
      * @param MessagePart[]|MessagePart|string $content
      */
-    public function addSystemMessage(array|MessagePart|string $content): self
+    public function addSystemMessage(array|MessagePart|string $content): static
     {
         $this->messages[] = new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, $content);
 
@@ -168,7 +177,7 @@ final class AIChatRequestBuilder
     /**
      * @param MessagePart[]|MessagePart|string $content
      */
-    public function addAssistantMessage(array|MessagePart|string $content): self
+    public function addAssistantMessage(array|MessagePart|string $content): static
     {
         $this->messages[] = new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, $content);
 
@@ -178,43 +187,82 @@ final class AIChatRequestBuilder
     /**
      * @param MessagePart[]|MessagePart|string $content
      */
-    public function addUserMessage(array|MessagePart|string $content): self
+    public function addUserMessage(array|MessagePart|string $content): static
     {
         $this->messages[] = new AIChatMessage(AIChatMessageRoleEnum::USER, $content);
 
         return $this;
     }
 
-    public function toolChoice(ToolChoiceEnum $toolChoice): self
+    public function toolChoice(ToolChoiceEnum $toolChoice): static
     {
         $this->options['toolChoice'] = $toolChoice;
 
         return $this;
     }
 
-    public function tool(string $name, object $instance, ?string $method = null): self
+    public function tool(string $name, object $instance, ?string $method = null): static
     {
         $this->tools[$name] = [$instance, $method ?? $name];
 
         return $this;
     }
 
-    public function build(): AIChatRequest
+    /**
+     * @return ToolInfo[]
+     */
+    protected function buildToolInfos(): array
     {
-        $toolInfos = \array_map(
+        return \array_map(
             fn (string $name, array $tool) => ToolInfoBuilder::buildToolInfo($tool[0], $tool[1], $name),
             \array_keys($this->tools),
             $this->tools,
         );
+    }
+
+    /**
+     * @deprecated use AIChatRequestBuilder::execute instead
+     */
+    public function build(): AIChatRequest
+    {
+        trigger_deprecation('modelflow-ai/chat', '0.3.0', 'Use AIChatRequestBuilder::execute instead.');
+
+        $toolChoice = $this->options['toolChoice'] ?? ToolChoiceEnum::AUTO;
+        $responseFormat = $this->options['responseFormat'] ?? null;
+        $streamed = $this->options['streamed'] ?? false;
+
+        $options = $this->options;
+        unset($options['toolChoice'], $options['responseFormat'], $options['streamed']);
+
+        if ($streamed) {
+            return new AIChatStreamedRequest(
+                new AIChatMessageCollection(...$this->messages),
+                $this->criteria,
+                $this->tools,
+                $this->buildToolInfos(),
+                $options,
+                $this->requestHandler,
+                $this->metadata,
+                $responseFormat,
+                $toolChoice,
+            );
+        }
 
         return new AIChatRequest(
             new AIChatMessageCollection(...$this->messages),
             $this->criteria,
             $this->tools,
-            $toolInfos,
-            $this->options,
+            $this->buildToolInfos(),
+            $options,
             $this->requestHandler,
             $this->metadata,
+            $responseFormat,
+            $toolChoice,
         );
+    }
+
+    public function execute(): AIChatResponse
+    {
+        return $this->build()->execute();
     }
 }

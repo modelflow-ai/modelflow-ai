@@ -26,6 +26,21 @@ class JsonSchemaResponseFormatTest extends TestCase
         new JsonSchemaResponseFormat([]);
     }
 
+    public function testType(): void
+    {
+        $responseFormat = new JsonSchemaResponseFormat([
+            'type' => 'object',
+            'properties' => [
+                'name' => [
+                    'type' => 'string',
+                    'description' => 'The name of the user',
+                ],
+            ],
+        ]);
+
+        $this->assertSame('json_schema', $responseFormat->getType());
+    }
+
     public function testAsString(): void
     {
         $responseFormat = new JsonSchemaResponseFormat([

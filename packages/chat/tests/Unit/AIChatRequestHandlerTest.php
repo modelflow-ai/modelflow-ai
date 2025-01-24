@@ -17,6 +17,7 @@ use ModelflowAi\Chat\Adapter\AIChatAdapterInterface;
 use ModelflowAi\Chat\AIChatRequestHandler;
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
@@ -25,6 +26,7 @@ use ModelflowAi\Chat\Request\ResponseFormat\ResponseFormatInterface;
 use ModelflowAi\Chat\Request\ResponseFormat\SupportsResponseFormatInterface;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\Response\Usage;
 use ModelflowAi\DecisionTree\DecisionTreeInterface;
 use PHPUnit\Framework\TestCase;
@@ -76,6 +78,24 @@ class AIChatRequestHandlerTest extends TestCase
             new Usage(0, 0, 0),
         );
         $this->adapter->handleRequest(Argument::type(AIChatRequest::class))->willReturn($response);
+        $this->decisionTree->determineAdapter($chatRequest)->willReturn($this->adapter->reveal());
+
+        $result = $chatRequest->execute();
+
+        $this->assertSame($response, $result);
+    }
+
+    public function testHandleChatStreamedRequest(): void
+    {
+        $chatRequest = $this->aiRequestHandler->createStreamedRequest(
+            new AIChatMessage(AIChatMessageRoleEnum::USER, 'Test content'),
+        )->build();
+
+        $response = new AIChatResponseStream(
+            $chatRequest,
+            new \ArrayIterator([]),
+        );
+        $this->adapter->handleRequest(Argument::type(AIChatStreamedRequest::class))->willReturn($response);
         $this->decisionTree->determineAdapter($chatRequest)->willReturn($this->adapter->reveal());
 
         $result = $chatRequest->execute();
@@ -339,32 +359,5 @@ class AIChatRequestHandlerTest extends TestCase
         $this->assertSame(AIChatMessageRoleEnum::SYSTEM->value, $allMessages[0]['role']); // The inserted "SYSTEM" message describing the format
         $this->assertSame(AIChatMessageRoleEnum::USER->value, $allMessages[1]['role']); // Original message
         $this->assertStringContainsString($mockResponseFormat->asString(), $allMessages[0]['content']);
-    }
-
-    public function testHandleInvalidResponseFormatType(): void
-    {
-        // Arrange
-        $mockDecisionTree = $this->createMock(DecisionTreeInterface::class);
-        $mockAdapter = $this->createMock(AIChatAdapterInterface::class);
-
-        $mockDecisionTree
-            ->method('determineAdapter')
-            ->willReturn($mockAdapter);
-
-        $handler = new AIChatRequestHandler($mockDecisionTree);
-
-        // Provide a non-ResponseFormatInterface object
-        $this->expectException(\InvalidArgumentException::class);
-
-        $requestBuilder = $handler->createRequest(
-            new AIChatMessage(AIChatMessageRoleEnum::USER, 'This test should throw an exception'),
-        )->addOptions([ // @phpstan-ignore-line
-            'responseFormat' => new \stdClass(),
-        ]);
-
-        // Once we build the request and call it, it should trigger the error
-        $requestBuilder
-            ->build()
-            ->execute();
     }
 }

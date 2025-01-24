@@ -14,9 +14,14 @@ declare(strict_types=1);
 namespace ModelflowAi\Chat\Tests\Unit\Request\Builder;
 
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Builder\AIChatRequestBuilder;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonSchemaResponseFormat;
+use ModelflowAi\Chat\Response\AIChatResponse;
+use ModelflowAi\Chat\Response\AIChatResponseMessage;
+use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolInfo;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
@@ -32,9 +37,9 @@ class AIChatRequestBuilderTest extends TestCase
     {
         $builder = new AIChatRequestBuilder(fn () => null);
 
-        $builder->addOptions(['format' => 'json']);
+        $builder->addOptions(['seed' => 12_345_678]);
 
-        $this->assertSame('json', $builder->build()->getOption('format'));
+        $this->assertSame(12_345_678, $builder->build()->getOption('seed'));
     }
 
     public function testAsJsonWithoutResponseFormat(): void
@@ -45,8 +50,7 @@ class AIChatRequestBuilderTest extends TestCase
 
         $request = $builder->build();
 
-        $this->assertSame('json', $request->getOption('format'));
-        $this->assertArrayNotHasKey('responseFormat', $request->getOptions());
+        $this->assertSame('json', $request->getResponseFormat()?->getType());
     }
 
     public function testAsJsonWithResponseFormat(): void
@@ -69,12 +73,25 @@ class AIChatRequestBuilderTest extends TestCase
 
         $request = $builder->build();
 
-        $expected = [...$schema];
-        $expected['additionalProperties'] = false;
-        $expected['properties']['foo']['description'] = '';
+        $expected = [
+            'name' => 'TestObject',
+            'description' => 'A schema description',
+            'type' => 'object',
+            'properties' => [
+                'foo' => [
+                    'type' => 'string',
+                    'description' => '',
+                ],
+            ],
+            'required' => ['foo'],
+            'additionalProperties' => false,
+        ];
 
-        $this->assertSame('json', $request->getOption('format'));
-        $this->assertSame($expected, $request->getOption('responseFormat')->schema); // @phpstan-ignore-line
+        $actual = $request->getResponseFormat();
+        $this->assertInstanceOf(JsonSchemaResponseFormat::class, $actual);
+
+        $this->assertSame('json_schema', $actual->getType());
+        $this->assertSame($expected, $actual->schema);
     }
 
     public function testStreamed(): void
@@ -83,7 +100,9 @@ class AIChatRequestBuilderTest extends TestCase
 
         $builder->streamed();
 
-        $this->assertTrue($builder->build()->getOption('streamed'));
+        $request = $builder->build();
+        $this->assertInstanceOf(AIChatStreamedRequest::class, $request);
+        $this->assertTrue($request->isStreamed());
     }
 
     public function testAddCriteria(): void
@@ -173,9 +192,16 @@ class AIChatRequestBuilderTest extends TestCase
     {
         $builder = new AIChatRequestBuilder(fn () => null);
 
-        $builder->toolChoice(ToolChoiceEnum::AUTO);
+        $builder->toolChoice(ToolChoiceEnum::NONE);
 
-        $this->assertSame(ToolChoiceEnum::AUTO, $builder->build()->getOption('toolChoice'));
+        $this->assertSame(ToolChoiceEnum::NONE, $builder->build()->getToolChoice());
+    }
+
+    public function testDefaultToolChoice(): void
+    {
+        $builder = new AIChatRequestBuilder(fn () => null);
+
+        $this->assertSame(ToolChoiceEnum::AUTO, $builder->build()->getToolChoice());
     }
 
     public function testAddTool(): void
@@ -215,6 +241,35 @@ class AIChatRequestBuilderTest extends TestCase
             AIChatRequest::class,
             $builder->build(),
         );
+    }
+
+    public function testExecute(): void
+    {
+        $mockFunction = function (object $request) {
+            $this->assertInstanceOf(AIChatRequest::class, $request);
+
+            return new AIChatResponse($request, new AIChatResponseMessage(AIChatMessageRoleEnum::ASSISTANT, 'Response content 1'), null);
+        };
+
+        $builder = new AIChatRequestBuilder($mockFunction);
+
+        $response = $builder->execute();
+        $this->assertInstanceOf(AIChatResponse::class, $response);
+    }
+
+    public function testExecuteStreamed(): void
+    {
+        $mockFunction = function (object $request) {
+            $this->assertInstanceOf(AIChatStreamedRequest::class, $request);
+
+            return new AIChatResponseStream($request, new \ArrayIterator([]));
+        };
+
+        $builder = new AIChatRequestBuilder($mockFunction);
+        $builder->streamed();
+
+        $response = $builder->execute();
+        $this->assertInstanceOf(AIChatResponseStream::class, $response);
     }
 
     public function toolMethod(string $test): string

@@ -34,9 +34,8 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
 
     public function handleRequest(AIChatRequest $request): AIChatResponse
     {
-        /** @var "json"|null $format */
-        $format = $request->getOption('format');
-        Assert::inArray($format, [null, 'json'], \sprintf('Invalid format "%s" given.', $format));
+        $format = $request->getFormat();
+        Assert::inArray($format, [null, 'json', 'json_schema'], \sprintf('Invalid format "%s" given.', $format));
 
         $attributes = [
             'model' => $this->model,
@@ -44,7 +43,7 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
         ];
 
         if ($format) {
-            $attributes['format'] = $format;
+            $attributes['format'] = 'json';
         }
 
         if ($seed = $request->getOption('seed')) {
@@ -57,7 +56,7 @@ final readonly class OllamaChatAdapter implements AIChatAdapterInterface
             $attributes['options']['temperature'] = $temperature;
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $attributes);
         }
 

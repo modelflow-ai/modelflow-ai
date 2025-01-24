@@ -42,7 +42,7 @@ class FakeChatAdapter implements AIChatAdapterInterface
         $message = \array_shift($this->messages);
         Assert::notNull($message);
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             if (!\is_array($message)) {
                 $message = [$message];
             }

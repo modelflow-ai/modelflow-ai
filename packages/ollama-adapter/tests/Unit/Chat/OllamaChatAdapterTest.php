@@ -16,8 +16,10 @@ namespace ModelflowAi\OllamaAdapter\Tests\Unit\Chat;
 use ModelflowAi\ApiClient\Responses\MetaInformation;
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\DecisionTree\Criteria\CriteriaCollection;
@@ -163,7 +165,7 @@ final class OllamaChatAdapterTest extends TestCase
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json'], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null, [], new JsonResponseFormat());
 
         $adapter = new OllamaChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);
@@ -206,11 +208,11 @@ final class OllamaChatAdapterTest extends TestCase
             ], MetaInformation::from([])),
         ], ));
 
-        $request = new AIChatRequest(new AIChatMessageCollection(
+        $request = new AIChatStreamedRequest(new AIChatMessageCollection(
             new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'System message'),
             new AIChatMessage(AIChatMessageRoleEnum::USER, 'User message'),
             new AIChatMessage(AIChatMessageRoleEnum::ASSISTANT, 'Assistant message'),
-        ), new CriteriaCollection(), [], [], ['format' => 'json', 'streamed' => true], fn () => null);
+        ), new CriteriaCollection(), [], [], [], fn () => null, [], new JsonResponseFormat());
 
         $adapter = new OllamaChatAdapter($client->reveal());
         $result = $adapter->handleRequest($request);

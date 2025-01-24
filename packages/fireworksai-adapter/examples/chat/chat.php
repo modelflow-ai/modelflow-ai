@@ -27,7 +27,6 @@ $response = $handler->createRequest(
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
     ->addCriteria(CapabilityCriteria::BASIC)
-    ->build()
     ->execute();
 
 echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);

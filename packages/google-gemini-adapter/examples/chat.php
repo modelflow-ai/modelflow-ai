@@ -26,8 +26,6 @@ $response = $handler->createRequest(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
-)
-    ->build()
-    ->execute();
+)->execute();
 
 echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);

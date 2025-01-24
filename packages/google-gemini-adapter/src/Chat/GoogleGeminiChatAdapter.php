@@ -97,7 +97,7 @@ final readonly class GoogleGeminiChatAdapter implements AIChatAdapterInterface
             $model = $model->withGenerationConfig($config);
         }
 
-        if ($request->getOption('streamed', false)) {
+        if ($request->isStreamed()) {
             return $this->createStreamed($request, $messages, $model);
         }
 
@@ -119,6 +119,10 @@ final readonly class GoogleGeminiChatAdapter implements AIChatAdapterInterface
                 code: $exception->getCode(),
                 previous: $exception,
             );
+        }
+
+        if (\str_starts_with($text, '```json') && \str_ends_with($text, '```')) {
+            $text = \substr($text, 7, -3);
         }
 
         return new AIChatResponse(
