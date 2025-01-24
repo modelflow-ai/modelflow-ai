@@ -28,7 +28,8 @@ $response = $handler->createRequest(
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->addCriteria(PrivacyCriteria::MEDIUM)
+    ->addCriteria(PrivacyCriteria::HIGH)
+    ->asJson()
     ->execute();
 
 echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);

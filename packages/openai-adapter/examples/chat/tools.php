@@ -32,8 +32,7 @@ $builder = $handler->createRequest()
     ->toolChoice(ToolChoiceEnum::AUTO)
     ->addCriteria(CapabilityCriteria::BASIC);
 
-$request = $builder->build();
-$response = $request->execute();
+$response = $builder->execute();
 
 do {
     $toolCalls = $response->getMessage()->toolCalls;
@@ -44,7 +43,7 @@ do {
 
         foreach ($toolCalls as $toolCall) {
             $builder->addMessage(
-                $toolExecutor->execute($request, $toolCall),
+                $toolExecutor->execute($response->getRequest(), $toolCall),
             );
         }
 

@@ -104,6 +104,18 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
 
         $parameters['messages'] = $messages;
 
+        if ('json' === $request->getFormat()) {
+            $parameters['messages'][] = [
+                'role' => 'assistant',
+                'content' => [
+                    [
+                        'type' => 'text',
+                        'text' => '{',
+                    ],
+                ],
+            ];
+        }
+
         if ($request->isStreamed()) {
             return $this->createStreamed($request, $parameters);
         }
@@ -118,11 +130,16 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
     {
         $result = $this->client->messages()->create($parameters);
 
+        $content = $result->content[0]->text ?? '';
+        if ('json' === $request->getFormat() && \str_ends_with($content, '}')) {
+            $content = '{' . $content;
+        }
+
         return new AIChatResponse(
             $request,
             new AIChatResponseMessage(
                 AIChatMessageRoleEnum::from($result->role),
-                $result->content[0]->text ?? '',
+                $content,
             ),
             new Usage(
                 $result->usage->promptTokens,
@@ -141,7 +158,7 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
 
         return new AIChatResponseStream(
             $request,
-            $this->createStreamedMessages($responses),
+            $this->createStreamedMessages($responses, 'json' === $request->getFormat() ? '{' : ''),
         );
     }
 
@@ -150,7 +167,7 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
      *
      * @return \Iterator<int, AIChatResponseMessage>
      */
-    protected function createStreamedMessages(\Iterator $responses): \Iterator
+    protected function createStreamedMessages(\Iterator $responses, string $prefix): \Iterator
     {
         $role = null;
 
@@ -159,6 +176,9 @@ final readonly class AnthropicChatAdapter implements AIChatAdapterInterface
 
             if (!$role instanceof AIChatMessageRoleEnum) {
                 $role = AIChatMessageRoleEnum::from($response->role ?? 'assistant');
+                if ('' !== $prefix) {
+                    yield new AIChatResponseMessage($role, $prefix);
+                }
             }
 
             $text = $delta->text ?? '';

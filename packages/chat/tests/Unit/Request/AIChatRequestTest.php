@@ -15,6 +15,7 @@ namespace ModelflowAi\Chat\Tests\Unit\Request;
 
 use ModelflowAi\Chat\Request\AIChatMessageCollection;
 use ModelflowAi\Chat\Request\AIChatRequest;
+use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ImageBase64Part;
@@ -62,10 +63,9 @@ class AIChatRequestTest extends TestCase
         $criteria = new CriteriaCollection();
         $requestHandler = fn ($request) => null;
 
-        $request = new AIChatRequest($messages, $criteria, [], [], [], $requestHandler);
+        $request = new AIChatStreamedRequest($messages, $criteria, [], [], [], $requestHandler);
 
-        // FIXME WHY?
-        $this->assertFalse($request->matches([FeatureCriteria::STREAM]));
+        $this->assertTrue($request->matches([FeatureCriteria::STREAM]));
     }
 
     public function testExecute(): void

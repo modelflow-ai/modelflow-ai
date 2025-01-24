@@ -29,6 +29,7 @@ use ModelflowAi\Chat\Request\AIChatRequest;
 use ModelflowAi\Chat\Request\AIChatStreamedRequest;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
+use ModelflowAi\Chat\Request\ResponseFormat\JsonResponseFormat;
 use ModelflowAi\Chat\Response\AIChatResponse;
 use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\ToolInfo\ToolInfoBuilder;
@@ -143,6 +144,49 @@ final class AnthropicChatAdapterTest extends TestCase
             'seed' => 100,
             'temperature' => 0.5,
         ], fn () => null);
+
+        $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
+        $result = $adapter->handleRequest($request);
+
+        $this->assertInstanceOf(AIChatResponse::class, $result);
+        $this->assertSame(AIChatMessageRoleEnum::ASSISTANT, $result->getMessage()->role);
+        $this->assertSame(DataFixtures::MESSAGES_CREATE_RESPONSE['content'][0]['text'], $result->getMessage()->content);
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['input_tokens'],
+            $result->getUsage()?->inputTokens,
+        );
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['output_tokens'],
+            $result->getUsage()->outputTokens,
+        );
+        $this->assertSame(
+            DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['input_tokens'] + DataFixtures::MESSAGES_CREATE_RESPONSE['usage']['output_tokens'],
+            $result->getUsage()->totalTokens,
+        );
+    }
+
+    public function testHandleRequestWithJson(): void
+    {
+        $payload = DataFixtures::MESSAGES_CREATE_REQUEST;
+        $payload['messages'][] = ['role' => 'assistant', 'content' => [
+            [
+                'type' => 'text',
+                'text' => '{',
+            ],
+        ]];
+
+        $mockResponseMatcher = new MockResponseMatcher();
+        $mockResponseMatcher->addResponse(PartialPayload::create(
+            'messages',
+            $payload,
+        ), new ObjectResponse(DataFixtures::MESSAGES_CREATE_RESPONSE, MetaInformation::empty()));
+
+        $client = new Client(new MockTransport($mockResponseMatcher));
+
+        $request = new AIChatRequest(new AIChatMessageCollection(
+            new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][0]['content']),
+            new AIChatMessage(AIChatMessageRoleEnum::USER, DataFixtures::MESSAGES_CREATE_REQUEST_RAW['messages'][1]['content']),
+        ), new CriteriaCollection(), [], [], [], fn () => null, responseFormat: new JsonResponseFormat());
 
         $adapter = new AnthropicChatAdapter($client, Model::CLAUDE_3_HAIKU->value, 100);
         $result = $adapter->handleRequest($request);

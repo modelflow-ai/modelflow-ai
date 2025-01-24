@@ -29,7 +29,6 @@ $response = $handler->createRequest(
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
     ->addCriteria(PrivacyCriteria::HIGH)
-    ->build()
     ->execute();
 
 echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);

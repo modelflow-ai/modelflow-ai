@@ -51,7 +51,6 @@ $response = $handler->createRequest(
         'required' => ['bestIdeaTitle', 'projects'],
     ])
     ->addCriteria(CapabilityCriteria::BASIC)
-    ->build()
     ->execute();
 
 /**

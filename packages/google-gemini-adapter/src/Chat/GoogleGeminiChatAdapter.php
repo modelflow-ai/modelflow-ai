@@ -121,6 +121,10 @@ final readonly class GoogleGeminiChatAdapter implements AIChatAdapterInterface
             );
         }
 
+        if (\str_starts_with($text, '```json') && \str_ends_with($text, '```')) {
+            $text = \substr($text, 7, -3);
+        }
+
         return new AIChatResponse(
             $request,
             new AIChatResponseMessage(

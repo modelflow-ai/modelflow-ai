@@ -22,34 +22,7 @@ $handler = require_once __DIR__ . '/bootstrap.php';
 $response = $handler->createRequest(
     new AIChatMessage(AIChatMessageRoleEnum::USER, 'You are a BOT that help me to generate ideas for my project.'),
 )
-    ->asJson([
-        'type' => 'object',
-        'properties' => [
-            'bestIdeaTitle' => [
-                'type' => 'string',
-                'description' => 'Title of the best idea (should not be empty)',
-            ],
-            'projects' => [
-                'type' => 'array',
-                'description' => 'Should contains 5 projects',
-                'items' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'title' => [
-                            'type' => 'string',
-                            'description' => 'Title of the project (should not be empty)',
-                        ],
-                        'description' => [
-                            'type' => 'string',
-                            'description' => 'Description of the project',
-                        ],
-                    ],
-                    'required' => ['title', 'description'],
-                ],
-            ],
-        ],
-        'required' => ['bestIdeaTitle', 'projects'],
-    ])
+    ->asJson()
     ->addCriteria(CapabilityCriteria::BASIC)
     ->execute();
 
@@ -73,8 +46,9 @@ function formatOutput(array $data, int $indent = 0): string
     return $output;
 }
 
-$content = \json_decode($response->getMessage()->content, true, 512, \JSON_THROW_ON_ERROR);
 try {
+    $content = \json_decode($response->getMessage()->content, true, 512, \JSON_THROW_ON_ERROR);
+
     /** @var array<string, mixed>|null $content */
     if (null === $content) {
         throw new RuntimeException('Failed to decode JSON response');

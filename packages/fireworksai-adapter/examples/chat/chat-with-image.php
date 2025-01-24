@@ -25,7 +25,6 @@ $response = $handler->createRequest(
     new AIChatMessage(AIChatMessageRoleEnum::USER, [TextPart::create('What is on this image!'), ImageBase64Part::create(__DIR__ . '/test_image.jpg')]),
 )
     ->addCriteria(CapabilityCriteria::BASIC)
-    ->build()
     ->execute();
 
 echo \sprintf('%s: %s', $response->getMessage()->role->value, $response->getMessage()->content);

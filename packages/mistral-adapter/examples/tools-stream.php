@@ -17,7 +17,6 @@ use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
 use ModelflowAi\Chat\Request\Message\ToolCallsPart;
-use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\Chat\ToolInfo\ToolChoiceEnum;
 use ModelflowAi\Chat\ToolInfo\ToolExecutor;
 use ModelflowAi\DecisionTree\Criteria\CapabilityCriteria;
@@ -29,17 +28,13 @@ $handler = require_once __DIR__ . '/bootstrap.php';
 
 $toolExecutor = new ToolExecutor();
 
-$builder = $handler->createRequest()
+$builder = $handler->createStreamedRequest()
     ->addUserMessage('How is the weather in hohenems and vienna?')
     ->tool('get_current_weather', new WeatherTool(), 'getCurrentWeather')
     ->toolChoice(ToolChoiceEnum::AUTO)
-    ->addCriteria(CapabilityCriteria::SMART)
-    ->streamed();
+    ->addCriteria(CapabilityCriteria::SMART);
 
-$request = $builder->build();
-
-/** @var AIChatResponseStream $response */
-$response = $request->execute();
+$response = $builder->execute();
 
 foreach ($response->getMessageStream() as $message) {
     $toolCalls = $message->toolCalls;
@@ -50,14 +45,13 @@ foreach ($response->getMessageStream() as $message) {
 
         foreach ($toolCalls as $toolCall) {
             $builder->addMessage(
-                $toolExecutor->execute($request, $toolCall),
+                $toolExecutor->execute($response->getRequest(), $toolCall),
             );
         }
     }
 }
 
-/** @var AIChatResponseStream $response */
-$response = $builder->build()->execute();
+$response = $builder->execute();
 foreach ($response->getMessageStream() as $index => $message) {
     if (0 === $index) {
         echo $message->role->value . ': ';

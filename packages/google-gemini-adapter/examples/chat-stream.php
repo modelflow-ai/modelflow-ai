@@ -16,19 +16,16 @@ namespace App;
 use ModelflowAi\Chat\AIChatRequestHandlerInterface;
 use ModelflowAi\Chat\Request\Message\AIChatMessage;
 use ModelflowAi\Chat\Request\Message\AIChatMessageRoleEnum;
-use ModelflowAi\Chat\Response\AIChatResponseStream;
 use ModelflowAi\PromptTemplate\ChatPromptTemplate;
 
 /** @var AIChatRequestHandlerInterface $handler */ $handler = require_once __DIR__ . '/bootstrap.php';
 
-/** @var AIChatResponseStream $response */ $response = $handler->createRequest(
+$response = $handler->createStreamedRequest(
     ...ChatPromptTemplate::create(
         new AIChatMessage(AIChatMessageRoleEnum::SYSTEM, 'You are an {feeling} bot'),
         new AIChatMessage(AIChatMessageRoleEnum::USER, 'Hello {where}!'),
     )->format(['where' => 'world', 'feeling' => 'angry']),
 )
-    ->streamed()
-    ->build()
     ->execute();
 
 foreach ($response->getMessageStream() as $index => $message) {
