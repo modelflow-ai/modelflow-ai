@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "554a9cef272e2910dfde04626708b07c",
+    "content-hash": "a8656d35688eb10f9a0976cd1c6f2908",
     "packages": [
         {
             "name": "modelflow-ai/decision-tree",
