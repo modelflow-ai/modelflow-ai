@@ -99,12 +99,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "139dfa4ac9355bc99d37ae9f94c268f3bcb0c8c1"
+                "reference": "a7d5c0d97495de8ffb1a8f057377e96c0c9df675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/139dfa4ac9355bc99d37ae9f94c268f3bcb0c8c1",
-                "reference": "139dfa4ac9355bc99d37ae9f94c268f3bcb0c8c1",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/a7d5c0d97495de8ffb1a8f057377e96c0c9df675",
+                "reference": "a7d5c0d97495de8ffb1a8f057377e96c0c9df675",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-16T19:06:38+00:00"
+            "time": "2025-01-25T00:52:04+00:00"
         },
         {
             "name": "jangregor/phpstan-prophecy",
@@ -462,16 +462,16 @@
         },
         {
             "name": "php-cs-fixer/shim",
-            "version": "v3.68.1",
+            "version": "v3.68.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/shim.git",
-                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6"
+                "reference": "125e3d3b018ef753a9533d1712891e3c6067f0e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/eca7a809b6b5d35d0a033c63a14881107e22a7b6",
-                "reference": "eca7a809b6b5d35d0a033c63a14881107e22a7b6",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/shim/zipball/125e3d3b018ef753a9533d1712891e3c6067f0e4",
+                "reference": "125e3d3b018ef753a9533d1712891e3c6067f0e4",
                 "shasum": ""
             },
             "require": {
@@ -508,9 +508,9 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/shim/issues",
-                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.68.1"
+                "source": "https://github.com/PHP-CS-Fixer/shim/tree/v3.68.3"
             },
-            "time": "2025-01-17T09:21:08+00:00"
+            "time": "2025-01-27T16:38:03+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -869,12 +869,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "7adaab73e4dd25461b8195dae8360b3ee8648cec"
+                "reference": "81de606627b438a92020bc3465beaeaf6abac179"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7adaab73e4dd25461b8195dae8360b3ee8648cec",
-                "reference": "7adaab73e4dd25461b8195dae8360b3ee8648cec",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/81de606627b438a92020bc3465beaeaf6abac179",
+                "reference": "81de606627b438a92020bc3465beaeaf6abac179",
                 "shasum": ""
             },
             "require": {
@@ -909,7 +909,7 @@
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
                 "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.x"
             },
-            "time": "2025-01-15T08:36:59+00:00"
+            "time": "2025-01-28T09:25:56+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -1354,12 +1354,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae"
+                "reference": "be5aa22d7ef91920e527fbca23481ea5cad54a35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
-                "reference": "d9daa4a87dcf01e1ca230ec2736b31d3737ec4ae",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be5aa22d7ef91920e527fbca23481ea5cad54a35",
+                "reference": "be5aa22d7ef91920e527fbca23481ea5cad54a35",
                 "shasum": ""
             },
             "require": {
@@ -1447,7 +1447,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-22T12:27:30+00:00"
+            "time": "2025-01-30T07:07:58+00:00"
         },
         {
             "name": "psr/container",
@@ -2488,12 +2488,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1"
+                "reference": "12b71ff91b978d6db0215b49cc3eedb287585c2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
-                "reference": "164fa2c4ee382c7de84f0b7c66c9d07087bedda1",
+                "url": "https://api.github.com/repos/symfony/console/zipball/12b71ff91b978d6db0215b49cc3eedb287585c2e",
+                "reference": "12b71ff91b978d6db0215b49cc3eedb287585c2e",
                 "shasum": ""
             },
             "require": {
@@ -2574,7 +2574,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-20T13:23:14+00:00"
+            "time": "2025-01-23T02:13:10+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
